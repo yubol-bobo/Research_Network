@@ -15,6 +15,8 @@ let cachedImportData = null;
 let currentGeoData = null;   // raw { "pubIdx_citIdx": { country, institution } }
 let currentGlobePoints = null; // aggregated points for globe
 let currentGlobeStats = null;
+let currentThemes = {};      // { pubTitle: { theme, color } }
+let currentSummaries = {};   // { pubTitle: summary }
 let currentView = 'network'; // 'network' | 'globe'
 
 // ── DOM Refs ──
@@ -46,6 +48,45 @@ const viewToggle = document.getElementById('viewToggle');
 // ── Init ──
 initSettingsModal();
 initGraph(graphContainer);
+autoLoadSnapshot();
+
+// ── Auto-load snapshot (data/network.json) ──
+async function autoLoadSnapshot() {
+    try {
+        const resp = await fetch('data/network.json');
+        if (!resp.ok) return; // no snapshot file, that's fine
+        const data = await resp.json();
+        if (!data.publications || data.publications.length === 0) return;
+
+        currentPublications = data.publications;
+        updateStats(currentPublications);
+
+        // Restore geo data
+        if (data.geoData && Object.keys(data.geoData).length > 0) {
+            currentGeoData = data.geoData;
+            const agg = aggregateGeoData(currentGeoData);
+            currentGlobePoints = agg.points;
+            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
+        }
+
+        // Restore themes and summaries if present
+        const themes = data.themes || {};
+        const summaries = data.summaries || {};
+
+        // Build network
+        const cfg = loadConfig();
+        const name = data.researcher || cfg.researcherName || 'Researcher';
+        currentNetwork = buildNetwork(name, currentPublications, themes, summaries);
+
+        emptyState.style.display = 'none';
+        btnExport.disabled = false;
+        renderCurrentNetwork();
+
+        console.log(`Loaded snapshot: ${currentPublications.length} publications`);
+    } catch (e) {
+        // No snapshot or failed to load — silent, user will configure manually
+    }
+}
 
 // ── View Toggle ──
 viewToggle.addEventListener('click', (e) => {
@@ -235,6 +276,10 @@ btnRefresh.addEventListener('click', async () => {
             }
         }
 
+        // Save themes/summaries for export
+        currentThemes = themes;
+        currentSummaries = summaries;
+
         // Build network
         currentNetwork = buildNetwork(cfg.researcherName, currentPublications, themes, summaries);
 
@@ -264,6 +309,8 @@ btnExport.addEventListener('click', () => {
         researcher: cfg.researcherName,
         publications: currentPublications,
         geoData: currentGeoData || {},
+        themes: currentThemes || {},
+        summaries: currentSummaries || {},
     }, cfg.scholarId);
 });
 

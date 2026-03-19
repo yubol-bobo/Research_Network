@@ -107,7 +107,31 @@ Scraping uses API credits and takes time. Use **Export/Import** to cache your da
 2. Next time → click **Import** → load that file
 3. Click **Refresh** → only fetches *new* publications not in the cache
 
-The exported JSON includes all publications, citations, and geolocation data.
+The exported JSON includes publications, citations, themes, summaries, and geolocation data.
+
+---
+
+## Sharing Your Results (No Keys Needed for Viewers)
+
+Want to share your generated network with others? Just commit the exported JSON to the repo — visitors will see your results instantly, no API keys or setup required.
+
+### How to share:
+
+1. **Generate your data** — configure keys, click Refresh, wait for it to finish
+2. **Export** — click the Export button, which downloads a `.json` file
+3. **Rename and move** the file:
+   ```bash
+   mv ~/Downloads/*_network.json data/network.json
+   ```
+4. **Commit and push**:
+   ```bash
+   git add data/network.json
+   git commit -m "Add pre-generated network snapshot"
+   git push
+   ```
+5. **Share the link** — anyone who opens your GitHub Pages URL will see the full network graph and globe automatically. No keys, no refresh, no setup.
+
+> The app checks for `data/network.json` on page load. If it exists, it renders everything immediately. Visitors can still use their own keys to refresh if they want.
 
 ---
 
