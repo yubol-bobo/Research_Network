@@ -203,6 +203,23 @@ function toggleCitations(pubNode) {
 }
 
 // ── Render ──
+// ── Render whichever view is currently active ──
+function renderActiveView() {
+    btnExport.disabled = !currentPublications || currentPublications.length === 0;
+
+    if (currentView === 'network') {
+        renderCurrentNetwork();
+    } else if (currentView === 'globe') {
+        if (currentGlobePoints && currentGlobePoints.length > 0) {
+            globeEmpty.style.display = 'none';
+            initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
+            renderRankings();
+        }
+    } else if (currentView === 'scholar') {
+        renderScholarData();
+    }
+}
+
 function renderCurrentNetwork() {
     if (!currentNetwork || currentNetwork.nodes.length === 0) {
         emptyState.style.display = 'flex';
@@ -298,15 +315,7 @@ btnRefresh.addEventListener('click', async () => {
 
         hideLoading();
 
-        if (currentView === 'network') {
-            renderCurrentNetwork();
-        } else {
-            if (currentGlobePoints && currentGlobePoints.length > 0) {
-                globeEmpty.style.display = 'none';
-                initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
-                renderRankings();
-            }
-        }
+        renderActiveView();
 
     } catch (err) {
         hideLoading();
@@ -360,15 +369,7 @@ btnImport.addEventListener('click', async () => {
 
     emptyState.style.display = 'none';
 
-    if (currentView === 'network') {
-        renderCurrentNetwork();
-    } else {
-        if (currentGlobePoints && currentGlobePoints.length > 0) {
-            globeEmpty.style.display = 'none';
-            initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
-            renderRankings();
-        }
-    }
+    renderActiveView();
 });
 
 // ── Filters ──
