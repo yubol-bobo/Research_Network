@@ -250,10 +250,11 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
                 let citPage = 0;
 
                 // Paginate through all "Cited by" pages (10 results per page)
-                while (citPageUrl) {
+                const maxPages = Math.ceil(pub.citationCount / 10);
+                while (citPageUrl && citPage < maxPages) {
                     citPage++;
                     if (citPage > 1) {
-                        onProgress(`Fetching citations p${citPage} for: ${truncate(pub.title, 40)}`, pct, `${i + 1}/${total}`);
+                        onProgress(`Fetching citations p${citPage}/${maxPages} for: ${truncate(pub.title, 35)}`, pct, `${i + 1}/${total}`);
                     }
                     const html = await fetchPage(citPageUrl, apiKey);
                     const doc = parseHTML(html);
@@ -261,14 +262,15 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
                     if (pageCitations.length === 0) break;
                     pub.citations = pub.citations.concat(pageCitations);
 
-                    // Check for next page link
-                    const nextLink = doc.querySelector('.gs_ico_nav_next')?.parentElement;
-                    if (nextLink && nextLink.tagName === 'A' && nextLink.href) {
-                        const nextHref = nextLink.getAttribute('href');
-                        citPageUrl = nextHref.startsWith('http') ? nextHref : `https://scholar.google.com${nextHref}`;
+                    // Build next page URL using &start= parameter
+                    if (pageCitations.length >= 10) {
+                        const startParam = citPage * 10;
+                        // Base cited-by URL may already have params
+                        const baseUrl = pub.citedByUrl.split('&start=')[0];
+                        citPageUrl = `${baseUrl}&start=${startParam}`;
                         await delay(1200);
                     } else {
-                        citPageUrl = null;
+                        citPageUrl = null; // fewer than 10 results = last page
                     }
                 }
             } catch (e) {
