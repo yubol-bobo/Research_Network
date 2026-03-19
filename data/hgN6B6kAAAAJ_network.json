@@ -1,0 +1,1077 @@
+{
+  "version": 1,
+  "exportedAt": "2026-03-19T05:15:15.180Z",
+  "scholarId": "hgN6B6kAAAAJ",
+  "researcher": "Yubo Li",
+  "publications": [
+    {
+      "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:roLk4NBRz8UC",
+      "citationCount": 0,
+      "year": 2026,
+      "citedByUrl": "",
+      "citations": []
+    },
+    {
+      "title": "SkillsBench: Benchmarking how well agent skills work across diverse tasks",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:ULOm3_A8WrAC",
+      "citationCount": 2,
+      "year": 2026,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10992550695447139378",
+      "citations": [
+        {
+          "title": "SkillsBench: Benchmarking how well agent skills work across diverse tasks",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
+          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang… - arXiv preprint arXiv …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
+          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang… - arXiv preprint arXiv …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
+          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi… - bioRxiv, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "biorxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
+          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi… - bioRxiv, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "biorxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "A Competency-Based Evaluation Framework for EHR-Integrated Clinical AI Agents",
+          "authors": "D Dasa",
+          "year": 0,
+          "link": "",
+          "venue": "researchgate.net",
+          "publisher": ""
+        },
+        {
+          "title": "A Competency-Based Evaluation Framework for EHR-Integrated Clinical AI Agents",
+          "authors": "D Dasa",
+          "year": 0,
+          "link": "",
+          "venue": "researchgate.net",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:Zph67rFs4hoC",
+      "citationCount": 0,
+      "year": 2026,
+      "citedByUrl": "",
+      "citations": []
+    },
+    {
+      "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:MXK_kJrjxJIC",
+      "citationCount": 1,
+      "year": 2026,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16564632343635855526",
+      "citations": [
+        {
+          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:3fE2CSJIrl8C",
+      "citationCount": 0,
+      "year": 2025,
+      "citedByUrl": "",
+      "citations": []
+    },
+    {
+      "title": "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:8k81kl-MbHgC",
+      "citationCount": 2,
+      "year": 2025,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16432697981458434124",
+      "citations": [
+        {
+          "title": "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
+          "authors": "C Riedl, S Savage, J Zvelebilova - arXiv preprint arXiv:2407.17489, 2024",
+          "year": 2407,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
+          "authors": "C Riedl, S Savage, J Zvelebilova - arXiv preprint arXiv:2407.17489, 2024",
+          "year": 2407,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
+          "authors": "K Srikumar - Workshop on Human-aware Embodied AI (HEAI)-IROS …",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
+          "authors": "K Srikumar - Workshop on Human-aware Embodied AI (HEAI)-IROS …",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:9yKSN-GCB0IC",
+      "citationCount": 7,
+      "year": 2025,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11247670068097555056",
+      "citations": [
+        {
+          "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "Gaps in artificial intelligence research for rural health in the United States: a scoping review",
+          "authors": "KE Brown, SE Davis - Journal of the American Medical …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Gaps in artificial intelligence research for rural health in the United States: a scoping review",
+          "authors": "KE Brown, SE Davis - Journal of the American Medical …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Artificial intelligence in nephrology: predicting CKD progression and personalizing treatment",
+          "authors": "S Yuan, L Guo, F Xu - International urology and nephrology, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Springer",
+          "publisher": ""
+        },
+        {
+          "title": "Artificial intelligence in nephrology: predicting CKD progression and personalizing treatment",
+          "authors": "S Yuan, L Guo, F Xu - International urology and nephrology, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Springer",
+          "publisher": ""
+        },
+        {
+          "title": "Early prediction of CKD from time series data using adaptive PSO optimized echo state networks",
+          "authors": "T Anbazhagan, B Rangaswamy - Scientific Reports, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "nature.com",
+          "publisher": ""
+        },
+        {
+          "title": "Early prediction of CKD from time series data using adaptive PSO optimized echo state networks",
+          "authors": "T Anbazhagan, B Rangaswamy - Scientific Reports, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "nature.com",
+          "publisher": ""
+        },
+        {
+          "title": "Digital health integration in chronic kidney disease",
+          "authors": "T Deng, Y Xue, N Methakanjanasak - Clinica Chimica Acta, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Elsevier",
+          "publisher": ""
+        },
+        {
+          "title": "Digital health integration in chronic kidney disease",
+          "authors": "T Deng, Y Xue, N Methakanjanasak - Clinica Chimica Acta, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Elsevier",
+          "publisher": ""
+        },
+        {
+          "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
+          "authors": "D Albers, K Cato, A Layton… - Journal of the American …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
+          "authors": "D Albers, K Cato, A Layton… - Journal of the American …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Evaluation of ARHGAP26 expression, prognostic significance, and immune infiltration in clear cell renal cell carcinoma",
+          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang - Journal of Genetic Engineering …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Elsevier",
+          "publisher": ""
+        },
+        {
+          "title": "Evaluation of ARHGAP26 expression, prognostic significance, and immune infiltration in clear cell renal cell carcinoma",
+          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang - Journal of Genetic Engineering …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "Elsevier",
+          "publisher": ""
+        },
+        {
+          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:UebtZRa9Y70C",
+      "citationCount": 61,
+      "year": 2025,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16719064679130771365",
+      "citations": [
+        {
+          "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
+          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo… - ACM Computing …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "dl.acm.org",
+          "publisher": ""
+        },
+        {
+          "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
+          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo… - ACM Computing …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "dl.acm.org",
+          "publisher": ""
+        },
+        {
+          "title": "Large language models meet nlp: A survey",
+          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li… - Frontiers of Computer …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "Springer",
+          "publisher": ""
+        },
+        {
+          "title": "Large language models meet nlp: A survey",
+          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li… - Frontiers of Computer …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "Springer",
+          "publisher": ""
+        },
+        {
+          "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
+          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach… - Proceedings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
+          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach… - Proceedings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "Ask patients with patience: Enabling llms for human-centric medical dialogue with grounded reasoning",
+          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu - Proceedings of the 2025 …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "Ask patients with patience: Enabling llms for human-centric medical dialogue with grounded reasoning",
+          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu - Proceedings of the 2025 …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
+          "authors": "D Dinucu-Jianu, J Macina, N Daheim… - Proceedings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
+          "authors": "D Dinucu-Jianu, J Macina, N Daheim… - Proceedings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
+          "authors": "Y Li, Y Miao, X Ding, R Krishnan… - Findings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
+          "authors": "Y Li, Y Miao, X Ding, R Krishnan… - Findings of the …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "aclanthology.org",
+          "publisher": ""
+        },
+        {
+          "title": "Get experience from practice: Llm agents with record & replay",
+          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Get experience from practice: Llm agents with record & replay",
+          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Conformal information pursuit for interactively guiding large language models",
+          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Conformal information pursuit for interactively guiding large language models",
+          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Context-aware fairness evaluation and mitigation in llms",
+          "authors": "A Nadeem, M Dras, U Naseem - arXiv preprint arXiv:2510.18914, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Context-aware fairness evaluation and mitigation in llms",
+          "authors": "A Nadeem, M Dras, U Naseem - arXiv preprint arXiv:2510.18914, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
+          "authors": "D Choudhury, S Williamson, A Goliński, N Miao… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
+          "authors": "D Choudhury, S Williamson, A Goliński, N Miao… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:Se3iqnhoufwC",
+      "citationCount": 11,
+      "year": 2025,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17444290637740509316",
+      "citations": [
+        {
+          "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
+          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
+          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Interaction Context Often Increases Sycophancy in LLMs",
+          "authors": "S Jain, C Park, MM Viana, A Wilson… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Interaction Context Often Increases Sycophancy in LLMs",
+          "authors": "S Jain, C Park, MM Viana, A Wilson… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
+          "authors": "N Lore, B Heydari - arXiv preprint arXiv:2602.06081, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
+          "authors": "N Lore, B Heydari - arXiv preprint arXiv:2602.06081, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Strategic Complexity and Behavioral Distortion: Retail Investing Under Large Language Model Augmentation",
+          "authors": "D Gimmelberg, I Ludviga - International Journal of Financial Studies, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "mdpi.com",
+          "publisher": ""
+        },
+        {
+          "title": "Strategic Complexity and Behavioral Distortion: Retail Investing Under Large Language Model Augmentation",
+          "authors": "D Gimmelberg, I Ludviga - International Journal of Financial Studies, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "mdpi.com",
+          "publisher": ""
+        },
+        {
+          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "year": 2602,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2510.02712, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2510.02712, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
+          "authors": "J He, R Ramachandran, N Ramachandran… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
+          "authors": "J He, R Ramachandran, N Ramachandran… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Representational Stability of Truth in Large Language Models",
+          "authors": "S Dies, C Maynard, G Savcisens… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Representational Stability of Truth in Large Language Models",
+          "authors": "S Dies, C Maynard, G Savcisens… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
+          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
+          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez… - arXiv preprint arXiv …, 2025",
+          "year": 2025,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Confidence as Control: A Survey of Confidence Utilization in Large Language Models",
+          "authors": "YLT Zhou, X Shen, Y Miao, RPR Krishnan",
+          "year": 0,
+          "link": "",
+          "venue": "researchgate.net",
+          "publisher": ""
+        },
+        {
+          "title": "Confidence as Control: A Survey of Confidence Utilization in Large Language Models",
+          "authors": "YLT Zhou, X Shen, Y Miao, RPR Krishnan",
+          "year": 0,
+          "link": "",
+          "venue": "researchgate.net",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:u-x6o8ySG0sC",
+      "citationCount": 3,
+      "year": 2024,
+      "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5365623749515026219",
+      "citations": [
+        {
+          "title": "Towards interpretable end-stage renal disease (ESRD) prediction: utilizing administrative...",
+          "authors": "",
+          "year": 0,
+          "link": "",
+          "venue": "",
+          "publisher": ""
+        },
+        {
+          "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
+          "authors": "Y Li, R Padman - Journal of the American Medical Informatics …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
+          "authors": "Y Li, R Padman - Journal of the American Medical Informatics …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "academic.oup.com",
+          "publisher": ""
+        },
+        {
+          "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
+          "authors": "CH Chang, M Chen, MH Tsai, YC Huang… - JMIR Medical …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "medinform.jmir.org",
+          "publisher": ""
+        },
+        {
+          "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
+          "authors": "CH Chang, M Chen, MH Tsai, YC Huang… - JMIR Medical …, 2026",
+          "year": 2026,
+          "link": "",
+          "venue": "medinform.jmir.org",
+          "publisher": ""
+        },
+        {
+          "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
+          "authors": "Y Li, X Yao, R Padman - arXiv preprint arXiv:2503.19285, 2025",
+          "year": 2503,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
+          "authors": "Y Li, X Yao, R Padman - arXiv preprint arXiv:2503.19285, 2025",
+          "year": 2503,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        },
+        {
+          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "year": 2510,
+          "link": "",
+          "venue": "arxiv.org",
+          "publisher": ""
+        }
+      ]
+    },
+    {
+      "title": "Confidence as Control: A Survey of Confidence Utilization in Large Language Models",
+      "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:YOwf2qJgpHMC",
+      "citationCount": 0,
+      "year": 0,
+      "citedByUrl": "",
+      "citations": []
+    }
+  ],
+  "geoData": {
+    "1_0": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "1_1": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "1_2": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "1_3": {
+      "country": "United States",
+      "institution": "University of Washington"
+    },
+    "1_4": {
+      "country": "United States",
+      "institution": "University of Washington"
+    },
+    "1_5": {
+      "country": "United States",
+      "institution": "Mayo Clinic"
+    },
+    "1_6": {
+      "country": "United States",
+      "institution": "Mayo Clinic"
+    },
+    "3_0": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "3_1": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "3_2": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "5_0": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "5_1": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "5_2": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "5_3": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "5_4": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "6_0": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "6_1": {
+      "country": "United States",
+      "institution": "University of Mississippi Medical Center"
+    },
+    "6_2": {
+      "country": "United States",
+      "institution": "University of Mississippi Medical Center"
+    },
+    "6_3": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "6_4": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "6_5": {
+      "country": "India",
+      "institution": "Anna University"
+    },
+    "6_6": {
+      "country": "India",
+      "institution": "Anna University"
+    },
+    "6_7": {
+      "country": "China",
+      "institution": "Sichuan University"
+    },
+    "6_8": {
+      "country": "China",
+      "institution": "Sichuan University"
+    },
+    "6_9": {
+      "country": "United States",
+      "institution": "Columbia University"
+    },
+    "6_10": {
+      "country": "United States",
+      "institution": "Columbia University"
+    },
+    "6_11": {
+      "country": "China",
+      "institution": "Sun Yat-sen University"
+    },
+    "6_12": {
+      "country": "China",
+      "institution": "Sun Yat-sen University"
+    },
+    "6_13": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "6_14": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "7_0": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_1": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_2": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_3": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_4": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_5": {
+      "country": "United States",
+      "institution": "Google DeepMind"
+    },
+    "7_6": {
+      "country": "United States",
+      "institution": "Google DeepMind"
+    },
+    "7_7": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "7_8": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "7_9": {
+      "country": "Germany",
+      "institution": "Aleph Alpha"
+    },
+    "7_10": {
+      "country": "Germany",
+      "institution": "Aleph Alpha"
+    },
+    "7_11": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "7_12": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "7_13": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_14": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_15": {
+      "country": "United States",
+      "institution": "University of Pennsylvania"
+    },
+    "7_16": {
+      "country": "United States",
+      "institution": "University of Pennsylvania"
+    },
+    "7_17": {
+      "country": "Australia",
+      "institution": "University of New South Wales"
+    },
+    "7_18": {
+      "country": "Australia",
+      "institution": "University of New South Wales"
+    },
+    "7_19": {
+      "country": "United Kingdom",
+      "institution": "University of Cambridge"
+    },
+    "7_20": {
+      "country": "United Kingdom",
+      "institution": "University of Oxford"
+    },
+    "8_0": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_1": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_2": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_3": {
+      "country": "United States",
+      "institution": "Massachusetts Institute of Technology"
+    },
+    "8_4": {
+      "country": "United States",
+      "institution": "Massachusetts Institute of Technology"
+    },
+    "8_5": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "8_6": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "8_7": {
+      "country": "United States",
+      "institution": "University of Chicago"
+    },
+    "8_8": {
+      "country": "United States",
+      "institution": "University of Chicago"
+    },
+    "8_9": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_10": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_11": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_12": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_13": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_14": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_15": {
+      "country": "United Kingdom",
+      "institution": "University of Cambridge"
+    },
+    "8_16": {
+      "country": "United Kingdom",
+      "institution": "University of Cambridge"
+    },
+    "8_17": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_18": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_19": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "8_20": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_0": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_1": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_2": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_3": {
+      "country": "China",
+      "institution": "National Taiwan University"
+    },
+    "9_4": {
+      "country": "China",
+      "institution": "National Taiwan University"
+    },
+    "9_5": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_6": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_7": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "9_8": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    }
+  }
+}
