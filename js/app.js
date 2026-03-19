@@ -1,7 +1,7 @@
 // ── Main Application Entry ──
 
 import { loadConfig, validateConfig, initSettingsModal } from './config.js';
-import { fetchScholarData, parseCoAuthors, parseCitingAuthors } from './scholar.js';
+import { fetchScholarData, parseCoAuthors, parseCitingAuthors, fetchAuthorCitations } from './scholar.js';
 import { exportNetworkJSON, importNetworkJSON, mergePublications, buildCacheMap } from './cache.js';
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
@@ -18,6 +18,7 @@ let currentGlobePoints = null; // aggregated points for globe
 let currentGlobeStats = null;
 let currentThemes = {};      // { pubTitle: { theme, color } }
 let currentSummaries = {};   // { pubTitle: summary }
+let currentAuthorCitations = {}; // { authorName: totalCitations }
 let currentView = 'network'; // 'network' | 'globe'
 
 // ── DOM Refs ──
@@ -74,9 +75,10 @@ async function autoLoadSnapshot() {
             currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
         }
 
-        // Restore themes and summaries if present
+        // Restore themes, summaries, and author citations if present
         const themes = data.themes || {};
         const summaries = data.summaries || {};
+        if (data.authorCitations) currentAuthorCitations = data.authorCitations;
 
         // Build network
         const cfg = loadConfig();
@@ -322,6 +324,7 @@ btnExport.addEventListener('click', () => {
         geoData: currentGeoData || {},
         themes: currentThemes || {},
         summaries: currentSummaries || {},
+        authorCitations: currentAuthorCitations || {},
     }, cfg.scholarId);
 });
 
@@ -343,6 +346,9 @@ btnImport.addEventListener('click', async () => {
         currentGlobePoints = agg.points;
         currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
     }
+
+    // Restore author citations if present
+    if (data.authorCitations) currentAuthorCitations = data.authorCitations;
 
     // Rebuild network from imported data
     currentNetwork = buildNetwork(
@@ -491,5 +497,38 @@ function renderScholarData() {
     const collaborators = parseCoAuthors(currentPublications, researcherName);
     const citingAuthors = parseCitingAuthors(currentPublications, currentGeoData || {});
 
-    renderScholarView(scholarContainer, collaborators, citingAuthors);
+    // Apply cached author citation counts
+    for (const author of citingAuthors) {
+        if (currentAuthorCitations[author.name]) {
+            author.authorCitations = currentAuthorCitations[author.name];
+        }
+    }
+
+    renderScholarView(scholarContainer, collaborators, citingAuthors, onFetchAuthorCitations);
+}
+
+async function onFetchAuthorCitations(authors) {
+    const cfg = loadConfig();
+    if (!cfg.scraperKey) {
+        alert('Please configure a ScraperAPI key in Settings first.');
+        return;
+    }
+
+    showLoading('Fetching author citation counts...', 0);
+    try {
+        const results = await fetchAuthorCitations(
+            authors,
+            cfg.scraperKey,
+            (msg, pct) => showLoading(msg, pct)
+        );
+        // Merge into state
+        Object.assign(currentAuthorCitations, results);
+        hideLoading();
+        // Re-render
+        renderScholarData();
+    } catch (e) {
+        hideLoading();
+        console.error('Failed to fetch author citations:', e);
+        alert(`Error: ${e.message}`);
+    }
 }

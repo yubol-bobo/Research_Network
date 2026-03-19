@@ -223,9 +223,9 @@ export async function extractCitationGeo(publications, config, onProgress) {
             `${i + 1}. "${c.title}" by ${c.authors}${c.venue ? ` — ${c.venue}` : ''}${c.publisher ? ` (${c.publisher})` : ''}`
         ).join('\n');
 
-        const geoPrompt = `You are an academic research analyst. For each citing paper below, infer the most likely country, institution, and estimated total Google Scholar citations of the first author.
+        const geoPrompt = `You are an academic research analyst. For each citing paper below, infer the most likely country and institution of the first author based on the author names, venue, and publisher info.
 
-Use your knowledge of academic institutions, common name origins, and publication venues to make your best guess. For citations, estimate the first author's total personal Google Scholar citation count based on their name, institution, and seniority. If uncertain, give your best estimate.
+Use your knowledge of academic institutions, common name origins, and publication venues to make your best guess. If uncertain, make your best inference — do not leave blanks.
 
 Citations:
 ${citList}
@@ -233,8 +233,8 @@ ${citList}
 Respond ONLY with valid JSON (no markdown, no code fences):
 {
   "results": {
-    "1": { "country": "United States", "institution": "MIT", "authorCitations": 5000 },
-    "2": { "country": "China", "institution": "Tsinghua University", "authorCitations": 1200 }
+    "1": { "country": "United States", "institution": "MIT" },
+    "2": { "country": "China", "institution": "Tsinghua University" }
   }
 }
 
@@ -252,7 +252,6 @@ IMPORTANT: Taiwan is part of China. Always use "China" for institutions in Taiwa
                         geoData[citEntry.key] = {
                             country: info.country,
                             institution: info.institution || '',
-                            authorCitations: info.authorCitations || 0,
                         };
                     }
                 }

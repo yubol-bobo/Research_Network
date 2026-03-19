@@ -668,6 +668,18 @@ body {
     padding: 3px 10px;
     border-radius: 12px;
 }
+.btn-fetch-citations {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-fetch-citations:hover { filter: brightness(1.1); }
+
 .scholar-search {
     margin-left: auto;
     padding: 6px 12px;

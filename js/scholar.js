@@ -242,6 +242,52 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
     return allPubs;
 }
 
+/**
+ * Fetch citation counts for a list of citing authors via ScraperAPI.
+ * Searches Google Scholar for each author to find their profile and total citations.
+ * @param {Array} authors - [{ name, institution, ... }]
+ * @param {string} apiKey - ScraperAPI key
+ * @param {Function} onProgress
+ * @returns {Object} { authorName: citationCount }
+ */
+export async function fetchAuthorCitations(authors, apiKey, onProgress) {
+    const results = {};
+    const total = authors.length;
+
+    for (let i = 0; i < total; i++) {
+        const author = authors[i];
+        const pct = Math.round((i / total) * 100);
+        onProgress(`Fetching citations for ${truncate(author.name, 30)} (${i + 1}/${total})`, pct);
+
+        try {
+            // Search Scholar for the author's profile
+            const query = encodeURIComponent(`author:"${author.name}"${author.institution ? ` ${author.institution}` : ''}`);
+            const searchUrl = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${query}`;
+            const html = await fetchPage(searchUrl, apiKey);
+            const doc = parseHTML(html);
+
+            // Look for the first author result
+            const profileEl = doc.querySelector('.gs_ai_t');
+            if (profileEl) {
+                // Citation count is in .gs_ai_cby: "Cited by XXXX"
+                const citedByEl = profileEl.querySelector('.gs_ai_cby');
+                if (citedByEl) {
+                    const match = citedByEl.textContent.match(/(\d[\d,]*)/);
+                    if (match) {
+                        results[author.name] = parseInt(match[1].replace(/,/g, ''));
+                    }
+                }
+            }
+        } catch (e) {
+            console.warn(`Failed to fetch citations for ${author.name}:`, e);
+        }
+
+        await delay(1000); // rate limit
+    }
+
+    return results;
+}
+
 function truncate(str, len) {
     return str.length > len ? str.slice(0, len) + '...' : str;
 }

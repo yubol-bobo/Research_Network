@@ -404,7 +404,30 @@ export function destroyGlobe() {
         if (container?._resizeHandler) {
             window.removeEventListener('resize', container._resizeHandler);
         }
-        globeInstance._destructor?.();
+
+        // Properly dispose Three.js renderer to free WebGL context
+        try {
+            const renderer = globeInstance.renderer?.();
+            if (renderer) {
+                renderer.dispose();
+                renderer.forceContextLoss();
+                const canvas = renderer.domElement;
+                if (canvas?.parentElement) canvas.parentElement.removeChild(canvas);
+            }
+            globeInstance.controls?.().dispose?.();
+            globeInstance._destructor?.();
+        } catch (e) { /* ignore cleanup errors */ }
+
+        // Clear globe container DOM (except stats overlay and empty state)
+        if (container) {
+            const children = Array.from(container.children);
+            for (const child of children) {
+                if (!child.classList.contains('globe-stats') && !child.classList.contains('globe-empty')) {
+                    child.remove();
+                }
+            }
+        }
+
         globeInstance = null;
     }
 }
