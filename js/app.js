@@ -40,8 +40,8 @@ const btnApplyFilter = document.getElementById('btnApplyFilter');
 const btnClearFilter = document.getElementById('btnClearFilter');
 const filterYearFrom = document.getElementById('filterYearFrom');
 const filterYearTo = document.getElementById('filterYearTo');
-const filterRecentN = document.getElementById('filterRecentN');
-const filterCitedN = document.getElementById('filterCitedN');
+const filterTopKMode = document.getElementById('filterTopKMode');
+const filterTopKValue = document.getElementById('filterTopKValue');
 const filterSearch = document.getElementById('filterSearch');
 
 const filterShowCitations = document.getElementById('filterShowCitations');
@@ -214,8 +214,8 @@ function applyFiltersAndRender() {
     const filters = {
         yearFrom: parseInt(filterYearFrom.value) || null,
         yearTo: parseInt(filterYearTo.value) || null,
-        recentN: parseInt(filterRecentN.value) || null,
-        citedN: parseInt(filterCitedN.value) || null,
+        recentN: filterTopKMode.value === 'recent' ? (parseInt(filterTopKValue.value) || null) : null,
+        citedN: filterTopKMode.value === 'cited' ? (parseInt(filterTopKValue.value) || null) : null,
         search: filterSearch.value.trim() || null,
     };
 
@@ -362,8 +362,8 @@ btnApplyFilter.addEventListener('click', applyFiltersAndRender);
 btnClearFilter.addEventListener('click', () => {
     filterYearFrom.value = '';
     filterYearTo.value = '';
-    filterRecentN.value = '';
-    filterCitedN.value = '';
+    filterTopKMode.value = '';
+    filterTopKValue.value = '';
     filterSearch.value = '';
     filterShowCitations.checked = true;
     if (currentNetwork) {

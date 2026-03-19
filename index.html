@@ -68,12 +68,15 @@
             </div>
         </div>
         <div class="filter-group">
-            <label>Recent Top K</label>
-            <input type="number" id="filterRecentN" placeholder="K" min="1" max="500">
-        </div>
-        <div class="filter-group">
-            <label>Most Cited Top K</label>
-            <input type="number" id="filterCitedN" placeholder="K" min="1" max="500">
+            <label>Top K By</label>
+            <div class="filter-inputs">
+                <select id="filterTopKMode">
+                    <option value="">—</option>
+                    <option value="recent">Recent</option>
+                    <option value="cited">Most Cited</option>
+                </select>
+                <input type="number" id="filterTopKValue" placeholder="K" min="1" max="500">
+            </div>
         </div>
         <div class="filter-group">
             <label>Search</label>
