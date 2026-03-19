@@ -108,12 +108,17 @@ export function parseCitingAuthors(publications, geoData = {}) {
                 authorMap[firstAuthor] = {
                     name: firstAuthor,
                     citCount: 0,
+                    authorCitations: geo.authorCitations || 0,
                     institution: geo.institution || '',
                     country: geo.country || '',
                     papers: [],
                 };
             }
             authorMap[firstAuthor].citCount++;
+            // Keep the highest authorCitations estimate
+            if (geo.authorCitations && geo.authorCitations > authorMap[firstAuthor].authorCitations) {
+                authorMap[firstAuthor].authorCitations = geo.authorCitations;
+            }
             authorMap[firstAuthor].papers.push(cit.title);
             // Update institution/country if we have it and didn't before
             if (geo.institution && !authorMap[firstAuthor].institution) {

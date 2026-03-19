@@ -732,6 +732,7 @@ body {
     width: 40px;
 }
 .td-name { font-weight: 500; }
+.td-num { text-align: right; font-weight: 600; color: var(--accent); font-size: 13px; }
 .td-text { color: var(--text-muted); font-size: 12px; }
 
 .td-bar { width: 140px; }

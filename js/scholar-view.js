@@ -49,6 +49,7 @@ export function renderScholarView(container, collaborators, citingAuthors) {
                                 <th class="th-rank">#</th>
                                 <th class="th-sortable" data-table="citing" data-key="name">Name</th>
                                 <th class="th-sortable th-num" data-table="citing" data-key="citCount">Times Cited</th>
+                                <th class="th-sortable th-num" data-table="citing" data-key="authorCitations">Total Citations</th>
                                 <th class="th-sortable" data-table="citing" data-key="institution">Institution</th>
                                 <th class="th-sortable" data-table="citing" data-key="country">Country</th>
                             </tr>
@@ -161,6 +162,7 @@ function renderCitingTable() {
                     <span class="bar-value">${d.citCount}</span>
                 </div>
             </td>
+            <td class="td-num">${d.authorCitations ? d.authorCitations.toLocaleString() : '—'}</td>
             <td class="td-text">${d.institution || '—'}</td>
             <td class="td-text">${d.country || '—'}</td>
         </tr>
