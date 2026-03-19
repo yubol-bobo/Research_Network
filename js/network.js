@@ -102,7 +102,7 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
 /**
  * Apply filters to a network, returning filtered nodes and links.
  */
-export function filterNetwork(network, { yearFrom, yearTo, recentN, search }) {
+export function filterNetwork(network, { yearFrom, yearTo, recentN, citedN, search }) {
     let pubs = network.nodes.filter(n => n.type === 'publication');
 
     if (yearFrom) pubs = pubs.filter(n => n.year >= yearFrom);
@@ -112,9 +112,17 @@ export function filterNetwork(network, { yearFrom, yearTo, recentN, search }) {
         pubs = pubs.filter(n => n.label.toLowerCase().includes(q));
     }
 
-    // Sort by year descending for "recent N"
-    pubs.sort((a, b) => (b.year || 0) - (a.year || 0));
-    if (recentN && recentN > 0) pubs = pubs.slice(0, recentN);
+    // "Recent Top K" — sort by year descending, take top K
+    if (recentN && recentN > 0) {
+        pubs.sort((a, b) => (b.year || 0) - (a.year || 0));
+        pubs = pubs.slice(0, recentN);
+    }
+
+    // "Most Cited Top K" — sort by citation count descending, take top K
+    if (citedN && citedN > 0) {
+        pubs.sort((a, b) => (b.citationCount || 0) - (a.citationCount || 0));
+        pubs = pubs.slice(0, citedN);
+    }
 
     const pubIds = new Set(pubs.map(n => n.id));
 

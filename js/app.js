@@ -41,6 +41,7 @@ const btnClearFilter = document.getElementById('btnClearFilter');
 const filterYearFrom = document.getElementById('filterYearFrom');
 const filterYearTo = document.getElementById('filterYearTo');
 const filterRecentN = document.getElementById('filterRecentN');
+const filterCitedN = document.getElementById('filterCitedN');
 const filterSearch = document.getElementById('filterSearch');
 
 const filterShowCitations = document.getElementById('filterShowCitations');
@@ -214,6 +215,7 @@ function applyFiltersAndRender() {
         yearFrom: parseInt(filterYearFrom.value) || null,
         yearTo: parseInt(filterYearTo.value) || null,
         recentN: parseInt(filterRecentN.value) || null,
+        citedN: parseInt(filterCitedN.value) || null,
         search: filterSearch.value.trim() || null,
     };
 
@@ -361,6 +363,7 @@ btnClearFilter.addEventListener('click', () => {
     filterYearFrom.value = '';
     filterYearTo.value = '';
     filterRecentN.value = '';
+    filterCitedN.value = '';
     filterSearch.value = '';
     filterShowCitations.checked = true;
     if (currentNetwork) {
