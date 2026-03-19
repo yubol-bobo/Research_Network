@@ -43,6 +43,7 @@ const filterYearTo = document.getElementById('filterYearTo');
 const filterRecentN = document.getElementById('filterRecentN');
 const filterSearch = document.getElementById('filterSearch');
 
+const filterShowCitations = document.getElementById('filterShowCitations');
 const viewToggle = document.getElementById('viewToggle');
 
 // ── Init ──
@@ -361,11 +362,33 @@ btnClearFilter.addEventListener('click', () => {
     filterYearTo.value = '';
     filterRecentN.value = '';
     filterSearch.value = '';
-    if (currentNetwork) renderCurrentNetwork();
+    filterShowCitations.checked = true;
+    if (currentNetwork) {
+        for (const node of currentNetwork.nodes) {
+            if (node.type === 'citation') node.hidden = false;
+            if (node.type === 'publication') node.childrenExpanded = true;
+        }
+        renderCurrentNetwork();
+    }
 });
 
 filterSearch.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') applyFiltersAndRender();
+});
+
+// ── Show/Hide Citations Toggle ──
+filterShowCitations.addEventListener('change', () => {
+    if (!currentNetwork) return;
+    const show = filterShowCitations.checked;
+    for (const node of currentNetwork.nodes) {
+        if (node.type === 'citation') {
+            node.hidden = !show;
+        }
+        if (node.type === 'publication') {
+            node.childrenExpanded = show;
+        }
+    }
+    applyFiltersAndRender();
 });
 
 // ── Rankings ──

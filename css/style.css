@@ -144,6 +144,23 @@ body {
 .filter-bar input[type="text"] { width: 180px; }
 .filter-bar input[type="number"] { width: 90px; }
 
+.filter-checkbox { justify-content: center; }
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
 /* ── Main ── */
 .main {
     position: relative;

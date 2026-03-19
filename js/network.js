@@ -44,7 +44,7 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
             theme: themeInfo.theme || 'Uncategorized',
             themeColor: themeInfo.color || '#6366f1',
             summary,
-            childrenExpanded: false,
+            childrenExpanded: true,
         });
 
         links.push({
@@ -78,7 +78,7 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
                     link: cit.link,
                     parentPubId: pubId,
                     parentThemeColor: themeInfo.color || '#6366f1',
-                    hidden: true, // start collapsed
+                    hidden: false, // start expanded
                 });
 
                 links.push({
