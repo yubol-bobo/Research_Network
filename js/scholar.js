@@ -235,11 +235,17 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
         const pub = allPubs[i];
         const pct = 20 + Math.round((i / total) * 70);
 
-        // Skip if already cached
+        // Skip if already cached AND citations are fully fetched
         if (cachedPubs[pub.title]) {
-            pub.citations = cachedPubs[pub.title].citations || [];
-            onProgress(`Skipping cached: ${truncate(pub.title, 50)}`, pct, `${i + 1}/${total}`);
-            continue;
+            const cached = cachedPubs[pub.title];
+            const cachedCitCount = (cached.citations || []).length;
+            // Re-fetch if cached citations are incomplete (less than expected)
+            if (cachedCitCount >= pub.citationCount || pub.citationCount === 0) {
+                pub.citations = cached.citations || [];
+                onProgress(`Skipping cached: ${truncate(pub.title, 50)}`, pct, `${i + 1}/${total}`);
+                continue;
+            }
+            // Otherwise fall through to re-fetch with pagination
         }
 
         if (pub.citedByUrl && pub.citationCount > 0) {
