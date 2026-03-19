@@ -225,12 +225,35 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
         if (pub.citedByUrl && pub.citationCount > 0) {
             onProgress(`Fetching citations for: ${truncate(pub.title, 50)}`, pct, `${i + 1}/${total}`);
             try {
-                const html = await fetchPage(pub.citedByUrl, apiKey);
-                const doc = parseHTML(html);
-                pub.citations = parseCitations(doc);
+                pub.citations = [];
+                let citPageUrl = pub.citedByUrl;
+                let citPage = 0;
+
+                // Paginate through all "Cited by" pages (10 results per page)
+                while (citPageUrl) {
+                    citPage++;
+                    if (citPage > 1) {
+                        onProgress(`Fetching citations p${citPage} for: ${truncate(pub.title, 40)}`, pct, `${i + 1}/${total}`);
+                    }
+                    const html = await fetchPage(citPageUrl, apiKey);
+                    const doc = parseHTML(html);
+                    const pageCitations = parseCitations(doc);
+                    if (pageCitations.length === 0) break;
+                    pub.citations = pub.citations.concat(pageCitations);
+
+                    // Check for next page link
+                    const nextLink = doc.querySelector('.gs_ico_nav_next')?.parentElement;
+                    if (nextLink && nextLink.tagName === 'A' && nextLink.href) {
+                        const nextHref = nextLink.getAttribute('href');
+                        citPageUrl = nextHref.startsWith('http') ? nextHref : `https://scholar.google.com${nextHref}`;
+                        await delay(1200);
+                    } else {
+                        citPageUrl = null;
+                    }
+                }
             } catch (e) {
                 console.warn(`Failed to fetch citations for "${pub.title}":`, e);
-                pub.citations = [];
+                if (!pub.citations) pub.citations = [];
             }
             await delay(1200); // rate limit between citation fetches
         } else {
