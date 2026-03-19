@@ -20,24 +20,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10992550695447139378",
       "citations": [
         {
-          "title": "SkillsBench: Benchmarking how well agent skills work across diverse tasks",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
-          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang… - arXiv preprint arXiv …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
-          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang… - arXiv preprint arXiv …, 2026",
+          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "arxiv.org",
@@ -45,26 +29,10 @@
         },
         {
           "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
-          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi… - bioRxiv, 2026",
+          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi\u2026\u00a0- bioRxiv, 2026",
           "year": 2026,
           "link": "",
           "venue": "biorxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
-          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi… - bioRxiv, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "biorxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "A Competency-Based Evaluation Framework for EHR-Integrated Clinical AI Agents",
-          "authors": "D Dasa",
-          "year": 0,
-          "link": "",
-          "venue": "researchgate.net",
           "publisher": ""
         },
         {
@@ -93,24 +61,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16564632343635855526",
       "citations": [
         {
-          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
-          "year": 2602,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2602.13093, 2026",
           "year": 2602,
           "link": "",
           "venue": "arxiv.org",
@@ -134,24 +86,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16432697981458434124",
       "citations": [
         {
-          "title": "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
-          "authors": "C Riedl, S Savage, J Zvelebilova - arXiv preprint arXiv:2407.17489, 2024",
-          "year": 2407,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
-          "authors": "C Riedl, S Savage, J Zvelebilova - arXiv preprint arXiv:2407.17489, 2024",
+          "authors": "C Riedl, S Savage, J Zvelebilova\u00a0- arXiv preprint arXiv:2407.17489, 2024",
           "year": 2407,
           "link": "",
           "venue": "arxiv.org",
@@ -159,15 +95,7 @@
         },
         {
           "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
-          "authors": "K Srikumar - Workshop on Human-aware Embodied AI (HEAI)-IROS …",
-          "year": 0,
-          "link": "",
-          "venue": "openreview.net",
-          "publisher": ""
-        },
-        {
-          "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
-          "authors": "K Srikumar - Workshop on Human-aware Embodied AI (HEAI)-IROS …",
+          "authors": "K Srikumar\u00a0- Workshop on Human-aware Embodied AI (HEAI)-IROS\u00a0\u2026",
           "year": 0,
           "link": "",
           "venue": "openreview.net",
@@ -183,24 +111,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11247670068097555056",
       "citations": [
         {
-          "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "Gaps in artificial intelligence research for rural health in the United States: a scoping review",
-          "authors": "KE Brown, SE Davis - Journal of the American Medical …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "academic.oup.com",
-          "publisher": ""
-        },
-        {
-          "title": "Gaps in artificial intelligence research for rural health in the United States: a scoping review",
-          "authors": "KE Brown, SE Davis - Journal of the American Medical …, 2026",
+          "authors": "KE Brown, SE Davis\u00a0- Journal of the American Medical\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -208,15 +120,7 @@
         },
         {
           "title": "Artificial intelligence in nephrology: predicting CKD progression and personalizing treatment",
-          "authors": "S Yuan, L Guo, F Xu - International urology and nephrology, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "Springer",
-          "publisher": ""
-        },
-        {
-          "title": "Artificial intelligence in nephrology: predicting CKD progression and personalizing treatment",
-          "authors": "S Yuan, L Guo, F Xu - International urology and nephrology, 2025",
+          "authors": "S Yuan, L Guo, F Xu\u00a0- International urology and nephrology, 2025",
           "year": 2025,
           "link": "",
           "venue": "Springer",
@@ -224,15 +128,7 @@
         },
         {
           "title": "Early prediction of CKD from time series data using adaptive PSO optimized echo state networks",
-          "authors": "T Anbazhagan, B Rangaswamy - Scientific Reports, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "nature.com",
-          "publisher": ""
-        },
-        {
-          "title": "Early prediction of CKD from time series data using adaptive PSO optimized echo state networks",
-          "authors": "T Anbazhagan, B Rangaswamy - Scientific Reports, 2025",
+          "authors": "T Anbazhagan, B Rangaswamy\u00a0- Scientific Reports, 2025",
           "year": 2025,
           "link": "",
           "venue": "nature.com",
@@ -240,15 +136,7 @@
         },
         {
           "title": "Digital health integration in chronic kidney disease",
-          "authors": "T Deng, Y Xue, N Methakanjanasak - Clinica Chimica Acta, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "Elsevier",
-          "publisher": ""
-        },
-        {
-          "title": "Digital health integration in chronic kidney disease",
-          "authors": "T Deng, Y Xue, N Methakanjanasak - Clinica Chimica Acta, 2025",
+          "authors": "T Deng, Y Xue, N Methakanjanasak\u00a0- Clinica Chimica Acta, 2025",
           "year": 2025,
           "link": "",
           "venue": "Elsevier",
@@ -256,15 +144,7 @@
         },
         {
           "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
-          "authors": "D Albers, K Cato, A Layton… - Journal of the American …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "academic.oup.com",
-          "publisher": ""
-        },
-        {
-          "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
-          "authors": "D Albers, K Cato, A Layton… - Journal of the American …, 2026",
+          "authors": "D Albers, K Cato, A Layton\u2026\u00a0- Journal of the American\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -272,15 +152,7 @@
         },
         {
           "title": "Evaluation of ARHGAP26 expression, prognostic significance, and immune infiltration in clear cell renal cell carcinoma",
-          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang - Journal of Genetic Engineering …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "Elsevier",
-          "publisher": ""
-        },
-        {
-          "title": "Evaluation of ARHGAP26 expression, prognostic significance, and immune infiltration in clear cell renal cell carcinoma",
-          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang - Journal of Genetic Engineering …, 2025",
+          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang\u00a0- Journal of Genetic Engineering\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "Elsevier",
@@ -288,15 +160,7 @@
         },
         {
           "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
-          "year": 2510,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "authors": "Y Li, R Padman\u00a0- arXiv preprint arXiv:2510.09895, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",
@@ -312,24 +176,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16719064679130771365",
       "citations": [
         {
-          "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
-          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo… - ACM Computing …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "dl.acm.org",
-          "publisher": ""
-        },
-        {
-          "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
-          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo… - ACM Computing …, 2025",
+          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo\u2026\u00a0- ACM Computing\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "dl.acm.org",
@@ -337,15 +185,7 @@
         },
         {
           "title": "Large language models meet nlp: A survey",
-          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li… - Frontiers of Computer …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "Springer",
-          "publisher": ""
-        },
-        {
-          "title": "Large language models meet nlp: A survey",
-          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li… - Frontiers of Computer …, 2026",
+          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li\u2026\u00a0- Frontiers of Computer\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "Springer",
@@ -353,15 +193,7 @@
         },
         {
           "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
-          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach… - Proceedings of the …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
-        },
-        {
-          "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
-          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach… - Proceedings of the …, 2025",
+          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach\u2026\u00a0- Proceedings of the\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "aclanthology.org",
@@ -369,15 +201,7 @@
         },
         {
           "title": "Ask patients with patience: Enabling llms for human-centric medical dialogue with grounded reasoning",
-          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu - Proceedings of the 2025 …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
-        },
-        {
-          "title": "Ask patients with patience: Enabling llms for human-centric medical dialogue with grounded reasoning",
-          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu - Proceedings of the 2025 …, 2025",
+          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu\u00a0- Proceedings of the 2025\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "aclanthology.org",
@@ -385,15 +209,7 @@
         },
         {
           "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
-          "authors": "D Dinucu-Jianu, J Macina, N Daheim… - Proceedings of the …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
-        },
-        {
-          "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
-          "authors": "D Dinucu-Jianu, J Macina, N Daheim… - Proceedings of the …, 2025",
+          "authors": "D Dinucu-Jianu, J Macina, N Daheim\u2026\u00a0- Proceedings of the\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "aclanthology.org",
@@ -401,15 +217,7 @@
         },
         {
           "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
-          "authors": "Y Li, Y Miao, X Ding, R Krishnan… - Findings of the …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
-        },
-        {
-          "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
-          "authors": "Y Li, Y Miao, X Ding, R Krishnan… - Findings of the …, 2025",
+          "authors": "Y Li, Y Miao, X Ding, R Krishnan\u2026\u00a0- Findings of the\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "aclanthology.org",
@@ -417,15 +225,7 @@
         },
         {
           "title": "Get experience from practice: Llm agents with record & replay",
-          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Get experience from practice: Llm agents with record & replay",
-          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong… - arXiv preprint arXiv …, 2025",
+          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -433,15 +233,7 @@
         },
         {
           "title": "Conformal information pursuit for interactively guiding large language models",
-          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Conformal information pursuit for interactively guiding large language models",
-          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani… - arXiv preprint arXiv …, 2025",
+          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -449,15 +241,7 @@
         },
         {
           "title": "Context-aware fairness evaluation and mitigation in llms",
-          "authors": "A Nadeem, M Dras, U Naseem - arXiv preprint arXiv:2510.18914, 2025",
-          "year": 2510,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Context-aware fairness evaluation and mitigation in llms",
-          "authors": "A Nadeem, M Dras, U Naseem - arXiv preprint arXiv:2510.18914, 2025",
+          "authors": "A Nadeem, M Dras, U Naseem\u00a0- arXiv preprint arXiv:2510.18914, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",
@@ -465,15 +249,7 @@
         },
         {
           "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
-          "authors": "D Choudhury, S Williamson, A Goliński, N Miao… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
-          "authors": "D Choudhury, S Williamson, A Goliński, N Miao… - arXiv preprint arXiv …, 2025",
+          "authors": "D Choudhury, S Williamson, A Goli\u0144ski, N Miao\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -489,24 +265,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17444290637740509316",
       "citations": [
         {
-          "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
-          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
-          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan… - arXiv preprint arXiv …, 2025",
+          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -514,15 +274,7 @@
         },
         {
           "title": "Interaction Context Often Increases Sycophancy in LLMs",
-          "authors": "S Jain, C Park, MM Viana, A Wilson… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Interaction Context Often Increases Sycophancy in LLMs",
-          "authors": "S Jain, C Park, MM Viana, A Wilson… - arXiv preprint arXiv …, 2025",
+          "authors": "S Jain, C Park, MM Viana, A Wilson\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -530,15 +282,7 @@
         },
         {
           "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
-          "authors": "N Lore, B Heydari - arXiv preprint arXiv:2602.06081, 2026",
-          "year": 2602,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
-          "authors": "N Lore, B Heydari - arXiv preprint arXiv:2602.06081, 2026",
+          "authors": "N Lore, B Heydari\u00a0- arXiv preprint arXiv:2602.06081, 2026",
           "year": 2602,
           "link": "",
           "venue": "arxiv.org",
@@ -546,15 +290,7 @@
         },
         {
           "title": "Strategic Complexity and Behavioral Distortion: Retail Investing Under Large Language Model Augmentation",
-          "authors": "D Gimmelberg, I Ludviga - International Journal of Financial Studies, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "mdpi.com",
-          "publisher": ""
-        },
-        {
-          "title": "Strategic Complexity and Behavioral Distortion: Retail Investing Under Large Language Model Augmentation",
-          "authors": "D Gimmelberg, I Ludviga - International Journal of Financial Studies, 2025",
+          "authors": "D Gimmelberg, I Ludviga\u00a0- International Journal of Financial Studies, 2025",
           "year": 2025,
           "link": "",
           "venue": "mdpi.com",
@@ -562,15 +298,7 @@
         },
         {
           "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
-          "year": 2602,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
+          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2602.13093, 2026",
           "year": 2602,
           "link": "",
           "venue": "arxiv.org",
@@ -578,15 +306,7 @@
         },
         {
           "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2510.02712, 2025",
-          "year": 2510,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
-          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2510.02712, 2025",
+          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2510.02712, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",
@@ -594,15 +314,7 @@
         },
         {
           "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
-          "authors": "J He, R Ramachandran, N Ramachandran… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
-          "authors": "J He, R Ramachandran, N Ramachandran… - arXiv preprint arXiv …, 2025",
+          "authors": "J He, R Ramachandran, N Ramachandran\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -610,15 +322,7 @@
         },
         {
           "title": "Representational Stability of Truth in Large Language Models",
-          "authors": "S Dies, C Maynard, G Savcisens… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Representational Stability of Truth in Large Language Models",
-          "authors": "S Dies, C Maynard, G Savcisens… - arXiv preprint arXiv …, 2025",
+          "authors": "S Dies, C Maynard, G Savcisens\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
@@ -626,26 +330,10 @@
         },
         {
           "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
-          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez… - arXiv preprint arXiv …, 2025",
+          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
           "year": 2025,
           "link": "",
           "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
-          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez… - arXiv preprint arXiv …, 2025",
-          "year": 2025,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Confidence as Control: A Survey of Confidence Utilization in Large Language Models",
-          "authors": "YLT Zhou, X Shen, Y Miao, RPR Krishnan",
-          "year": 0,
-          "link": "",
-          "venue": "researchgate.net",
           "publisher": ""
         },
         {
@@ -666,24 +354,8 @@
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5365623749515026219",
       "citations": [
         {
-          "title": "Towards interpretable end-stage renal disease (ESRD) prediction: utilizing administrative...",
-          "authors": "",
-          "year": 0,
-          "link": "",
-          "venue": "",
-          "publisher": ""
-        },
-        {
           "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
-          "authors": "Y Li, R Padman - Journal of the American Medical Informatics …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "academic.oup.com",
-          "publisher": ""
-        },
-        {
-          "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
-          "authors": "Y Li, R Padman - Journal of the American Medical Informatics …, 2026",
+          "authors": "Y Li, R Padman\u00a0- Journal of the American Medical Informatics\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -691,15 +363,7 @@
         },
         {
           "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
-          "authors": "CH Chang, M Chen, MH Tsai, YC Huang… - JMIR Medical …, 2026",
-          "year": 2026,
-          "link": "",
-          "venue": "medinform.jmir.org",
-          "publisher": ""
-        },
-        {
-          "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
-          "authors": "CH Chang, M Chen, MH Tsai, YC Huang… - JMIR Medical …, 2026",
+          "authors": "CH Chang, M Chen, MH Tsai, YC Huang\u2026\u00a0- JMIR Medical\u00a0\u2026, 2026",
           "year": 2026,
           "link": "",
           "venue": "medinform.jmir.org",
@@ -707,15 +371,7 @@
         },
         {
           "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
-          "authors": "Y Li, X Yao, R Padman - arXiv preprint arXiv:2503.19285, 2025",
-          "year": 2503,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
-          "authors": "Y Li, X Yao, R Padman - arXiv preprint arXiv:2503.19285, 2025",
+          "authors": "Y Li, X Yao, R Padman\u00a0- arXiv preprint arXiv:2503.19285, 2025",
           "year": 2503,
           "link": "",
           "venue": "arxiv.org",
@@ -723,15 +379,7 @@
         },
         {
           "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
-          "year": 2510,
-          "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
-        },
-        {
-          "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
+          "authors": "Y Li, R Padman\u00a0- arXiv preprint arXiv:2510.09895, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",

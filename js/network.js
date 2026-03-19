@@ -60,8 +60,11 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
             for (let j = 0; j < pub.citations.length; j++) {
                 const cit = pub.citations[j];
                 const citKey = cit.title.toLowerCase().replace(/\s+/g, ' ');
-                // Skip duplicates and self-citations
-                if (seenTitles.has(citKey) || citKey === pubTitleKey) continue;
+                // Skip duplicates and self-citations (fuzzy: prefix match for truncated titles)
+                const isSelfCite = citKey === pubTitleKey
+                    || pubTitleKey.startsWith(citKey.replace(/\.{2,}$/, '').trim())
+                    || citKey.replace(/\.{2,}$/, '').trim().startsWith(pubTitleKey.slice(0, 50));
+                if (seenTitles.has(citKey) || isSelfCite) continue;
                 seenTitles.add(citKey);
                 const citId = `cit_${i}_${j}`;
 
