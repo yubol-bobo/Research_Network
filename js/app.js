@@ -121,6 +121,7 @@ viewToggle.addEventListener('click', (e) => {
         graphContainer.style.display = 'block';
         document.getElementById('legend').style.display = currentNetwork ? 'block' : 'none';
         document.getElementById('filterBar').style.display = 'flex';
+        if (currentNetwork) renderCurrentNetwork();
     } else if (view === 'globe') {
         globeWrapper.style.display = 'block';
         if (currentGlobePoints && currentGlobePoints.length > 0) {

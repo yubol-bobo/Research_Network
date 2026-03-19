@@ -103,8 +103,19 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
 
             const geo = geoData[`${pi}_${ci}`] || {};
 
-            // Get author names to process
-            const allNames = cit.authors.split(',').map(n => n.trim()).filter(n => n && n !== '...' && n !== '…');
+            // Get author names to process — filter out non-name entries
+            const allNames = cit.authors.split(',').map(n => n.trim()).filter(n => {
+                if (!n || n === '...' || n === '…') return false;
+                // Filter out years (e.g. "2025", "2026")
+                if (/^\d{4}$/.test(n)) return false;
+                // Filter out entries containing venue/journal text
+                if (/arXiv|preprint|proceedings|journal|conference|IEEE|ACM|springer|elsevier|wiley/i.test(n)) return false;
+                // Must look like a name: at least one letter
+                if (!/[a-zA-Z]/.test(n)) return false;
+                // Filter out very long entries (likely venue text, not names)
+                if (n.length > 40) return false;
+                return true;
+            });
             const names = firstAuthorOnly ? allNames.slice(0, 1) : allNames;
 
             for (const name of names) {
@@ -165,7 +176,16 @@ function parseCitations(doc) {
 
         const authorText = authorEl?.textContent || '';
         // Format: "Authors - Journal/Venue, Year - Publisher"
-        const parts = authorText.split(' - ');
+        // Handle various dash types (hyphen, en-dash, em-dash, with optional nbsp)
+        const parts = authorText.split(/\s*[\u002D\u2010\u2011\u2012\u2013\u2014\u00A0]+-\s*|\s+-\s+|\s+\u2013\s+|\s+\u2014\s+/);
+        if (parts.length === 1) {
+            // Fallback: split by " - " with flexible whitespace
+            const fallbackParts = authorText.split(/\s*-\s*/);
+            if (fallbackParts.length > 1) {
+                parts.length = 0;
+                parts.push(...fallbackParts);
+            }
+        }
         const authors = (parts[0] || '').trim();
         const venue = (parts[1] || '').replace(/,?\s*\d{4}.*/, '').trim();
         const publisher = (parts[2] || '').trim();
