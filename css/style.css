@@ -421,6 +421,20 @@ body {
     font-weight: 600;
 }
 
+/* ── Author Mode Toggle ── */
+.author-mode-toggle select {
+    padding: 6px 10px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+}
+.author-mode-toggle select:focus { border-color: var(--accent); }
+.author-mode-toggle select option { background: #1a1a2e; }
+
 /* ── Globe ── */
 .globe-wrapper {
     width: 100%;

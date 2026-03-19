@@ -50,6 +50,7 @@ const filterSearch = document.getElementById('filterSearch');
 
 const filterShowCitations = document.getElementById('filterShowCitations');
 const viewToggle = document.getElementById('viewToggle');
+const authorModeSelect = document.getElementById('authorMode');
 
 // ── Init ──
 initSettingsModal();
@@ -495,8 +496,9 @@ function renderScholarData() {
     const cfg = loadConfig();
     const researcherName = cfg.researcherName || '';
 
+    const firstAuthorOnly = authorModeSelect.value === 'first';
     const collaborators = parseCoAuthors(currentPublications, researcherName);
-    const citingAuthors = parseCitingAuthors(currentPublications, currentGeoData || {});
+    const citingAuthors = parseCitingAuthors(currentPublications, currentGeoData || {}, firstAuthorOnly);
 
     // Apply cached author citation counts
     for (const author of citingAuthors) {
@@ -533,3 +535,12 @@ async function onFetchAuthorCitations(authors) {
         alert(`Error: ${e.message}`);
     }
 }
+
+// ── Author Mode Toggle ──
+authorModeSelect.addEventListener('change', () => {
+    if (currentView === 'scholar') {
+        renderScholarData();
+    } else if (currentView === 'globe') {
+        renderRankings();
+    }
+});

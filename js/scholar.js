@@ -87,7 +87,10 @@ export function parseCoAuthors(publications, researcherName) {
  * @param {Object} geoData - { "pubIdx_citIdx": { country, institution } }
  * @returns {Array} sorted by citCount desc: { name, citCount, institution, country, papers[] }
  */
-export function parseCitingAuthors(publications, geoData = {}) {
+/**
+ * @param {boolean} firstAuthorOnly - if true, only count first author; if false, count all authors
+ */
+export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly = true) {
     const authorMap = {};
 
     for (let pi = 0; pi < publications.length; pi++) {
@@ -98,34 +101,31 @@ export function parseCitingAuthors(publications, geoData = {}) {
             const cit = pub.citations[ci];
             if (!cit.authors) continue;
 
-            // Take first author (primary contributor)
-            const firstAuthor = cit.authors.split(',')[0].trim();
-            if (!firstAuthor || firstAuthor === '...' || firstAuthor === '…') continue;
-
             const geo = geoData[`${pi}_${ci}`] || {};
 
-            if (!authorMap[firstAuthor]) {
-                authorMap[firstAuthor] = {
-                    name: firstAuthor,
-                    citCount: 0,
-                    authorCitations: geo.authorCitations || 0,
-                    institution: geo.institution || '',
-                    country: geo.country || '',
-                    papers: [],
-                };
-            }
-            authorMap[firstAuthor].citCount++;
-            // Keep the highest authorCitations estimate
-            if (geo.authorCitations && geo.authorCitations > authorMap[firstAuthor].authorCitations) {
-                authorMap[firstAuthor].authorCitations = geo.authorCitations;
-            }
-            authorMap[firstAuthor].papers.push(cit.title);
-            // Update institution/country if we have it and didn't before
-            if (geo.institution && !authorMap[firstAuthor].institution) {
-                authorMap[firstAuthor].institution = geo.institution;
-            }
-            if (geo.country && !authorMap[firstAuthor].country) {
-                authorMap[firstAuthor].country = geo.country;
+            // Get author names to process
+            const allNames = cit.authors.split(',').map(n => n.trim()).filter(n => n && n !== '...' && n !== '…');
+            const names = firstAuthorOnly ? allNames.slice(0, 1) : allNames;
+
+            for (const name of names) {
+                if (!authorMap[name]) {
+                    authorMap[name] = {
+                        name,
+                        citCount: 0,
+                        authorCitations: 0,
+                        institution: geo.institution || '',
+                        country: geo.country || '',
+                        papers: [],
+                    };
+                }
+                authorMap[name].citCount++;
+                authorMap[name].papers.push(cit.title);
+                if (geo.institution && !authorMap[name].institution) {
+                    authorMap[name].institution = geo.institution;
+                }
+                if (geo.country && !authorMap[name].country) {
+                    authorMap[name].country = geo.country;
+                }
             }
         }
     }
