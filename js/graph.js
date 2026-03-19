@@ -174,6 +174,7 @@ function getNodeRadius(d) {
 function getNodeColor(d) {
     if (d.type === 'researcher') return '#6366f1';
     if (d.type === 'publication') return d.themeColor || '#6366f1';
+    if (d.type === 'citation') return (d.parentThemeColor || '#6366f1') + 'aa'; // parent color, slightly transparent
     return '#4a4a6a';
 }
 

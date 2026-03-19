@@ -77,6 +77,7 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
                     authors: cit.authors,
                     link: cit.link,
                     parentPubId: pubId,
+                    parentThemeColor: themeInfo.color || '#6366f1',
                     hidden: true, // start collapsed
                 });
 
