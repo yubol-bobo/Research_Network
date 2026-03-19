@@ -37,9 +37,95 @@ function parsePublications(doc) {
         const citedLink = citedEl?.getAttribute('href') || '';
         const citedByUrl = citedLink.startsWith('http') ? citedLink : (citedLink ? `https://scholar.google.com${citedLink}` : '');
 
-        pubs.push({ title, articleUrl, citationCount, year, citedByUrl });
+        // Extract co-author names from the gray line below the title
+        const grayEls = row.querySelectorAll('.gs_gray');
+        const authorsStr = grayEls[0]?.textContent?.trim() || '';
+
+        pubs.push({ title, articleUrl, citationCount, year, citedByUrl, authors: authorsStr });
     }
     return pubs;
+}
+
+/**
+ * Extract and aggregate co-authors from publications.
+ * @param {Array} publications
+ * @param {string} researcherName
+ * @returns {Array} sorted by paperCount desc: { name, paperCount, papers[] }
+ */
+export function parseCoAuthors(publications, researcherName) {
+    const coauthorMap = {};
+    const researcherParts = researcherName.toLowerCase().split(/\s+/);
+
+    for (const pub of publications) {
+        if (!pub.authors) continue;
+        const names = pub.authors.split(',').map(n => n.trim()).filter(Boolean);
+
+        for (const name of names) {
+            // Skip the researcher themselves (fuzzy match)
+            const nameLower = name.toLowerCase();
+            const isResearcher = researcherParts.every(p => nameLower.includes(p))
+                || nameLower === researcherName.toLowerCase();
+            if (isResearcher) continue;
+
+            // Skip ellipsis
+            if (name === '...' || name === '…') continue;
+
+            if (!coauthorMap[name]) {
+                coauthorMap[name] = { name, paperCount: 0, papers: [] };
+            }
+            coauthorMap[name].paperCount++;
+            coauthorMap[name].papers.push(pub.title);
+        }
+    }
+
+    return Object.values(coauthorMap).sort((a, b) => b.paperCount - a.paperCount);
+}
+
+/**
+ * Aggregate citing authors from publication citations + geoData.
+ * @param {Array} publications
+ * @param {Object} geoData - { "pubIdx_citIdx": { country, institution } }
+ * @returns {Array} sorted by citCount desc: { name, citCount, institution, country, papers[] }
+ */
+export function parseCitingAuthors(publications, geoData = {}) {
+    const authorMap = {};
+
+    for (let pi = 0; pi < publications.length; pi++) {
+        const pub = publications[pi];
+        if (!pub.citations) continue;
+
+        for (let ci = 0; ci < pub.citations.length; ci++) {
+            const cit = pub.citations[ci];
+            if (!cit.authors) continue;
+
+            // Take first author (primary contributor)
+            const firstAuthor = cit.authors.split(',')[0].trim();
+            if (!firstAuthor || firstAuthor === '...' || firstAuthor === '…') continue;
+
+            const geo = geoData[`${pi}_${ci}`] || {};
+
+            if (!authorMap[firstAuthor]) {
+                authorMap[firstAuthor] = {
+                    name: firstAuthor,
+                    citCount: 0,
+                    institution: geo.institution || '',
+                    country: geo.country || '',
+                    papers: [],
+                };
+            }
+            authorMap[firstAuthor].citCount++;
+            authorMap[firstAuthor].papers.push(cit.title);
+            // Update institution/country if we have it and didn't before
+            if (geo.institution && !authorMap[firstAuthor].institution) {
+                authorMap[firstAuthor].institution = geo.institution;
+            }
+            if (geo.country && !authorMap[firstAuthor].country) {
+                authorMap[firstAuthor].country = geo.country;
+            }
+        }
+    }
+
+    return Object.values(authorMap).sort((a, b) => b.citCount - a.citCount);
 }
 
 // Check if there's a "Show more" / next page button

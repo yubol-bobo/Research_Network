@@ -1,12 +1,13 @@
 // ── Main Application Entry ──
 
 import { loadConfig, validateConfig, initSettingsModal } from './config.js';
-import { fetchScholarData } from './scholar.js';
+import { fetchScholarData, parseCoAuthors, parseCitingAuthors } from './scholar.js';
 import { exportNetworkJSON, importNetworkJSON, mergePublications, buildCacheMap } from './cache.js';
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
 import { analyzePapers, extractCitationGeo } from './llm.js';
 import { aggregateGeoData, initGlobe, destroyGlobe } from './globe.js';
+import { renderScholarView } from './scholar-view.js';
 
 // ── State ──
 let currentPublications = [];
@@ -26,6 +27,8 @@ const globeContainer = document.getElementById('globeContainer');
 const emptyState = document.getElementById('emptyState');
 const globeEmpty = document.getElementById('globeEmpty');
 const rankingsSection = document.getElementById('rankingsSection');
+const scholarContainer = document.getElementById('scholarContainer');
+const scholarEmpty = document.getElementById('scholarEmpty');
 const loadingOverlay = document.getElementById('loadingOverlay');
 const loadingText = document.getElementById('loadingText');
 const loadingDetail = document.getElementById('loadingDetail');
@@ -103,18 +106,20 @@ viewToggle.addEventListener('click', (e) => {
     viewToggle.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
+    // Hide all views
+    graphContainer.style.display = 'none';
+    globeWrapper.style.display = 'none';
+    scholarContainer.style.display = 'none';
+    document.getElementById('legend').style.display = 'none';
+    document.getElementById('filterBar').style.display = 'none';
+    destroyGlobe();
+
     if (view === 'network') {
-        globeWrapper.style.display = 'none';
         graphContainer.style.display = 'block';
         document.getElementById('legend').style.display = currentNetwork ? 'block' : 'none';
         document.getElementById('filterBar').style.display = 'flex';
-        destroyGlobe();
-    } else {
-        graphContainer.style.display = 'none';
-        document.getElementById('legend').style.display = 'none';
-        document.getElementById('filterBar').style.display = 'none';
+    } else if (view === 'globe') {
         globeWrapper.style.display = 'block';
-
         if (currentGlobePoints && currentGlobePoints.length > 0) {
             globeEmpty.style.display = 'none';
             initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
@@ -123,6 +128,9 @@ viewToggle.addEventListener('click', (e) => {
             globeEmpty.style.display = 'flex';
             rankingsSection.style.display = 'none';
         }
+    } else if (view === 'scholar') {
+        scholarContainer.style.display = 'block';
+        renderScholarData();
     }
 });
 
@@ -468,3 +476,20 @@ function renderRankings() {
 
 rankTopKInput.addEventListener('change', renderRankings);
 rankTopKInput.addEventListener('input', renderRankings);
+
+// ── Scholar View ──
+function renderScholarData() {
+    if (!currentPublications || currentPublications.length === 0) {
+        scholarEmpty.style.display = 'flex';
+        return;
+    }
+    scholarEmpty.style.display = 'none';
+
+    const cfg = loadConfig();
+    const researcherName = cfg.researcherName || '';
+
+    const collaborators = parseCoAuthors(currentPublications, researcherName);
+    const citingAuthors = parseCitingAuthors(currentPublications, currentGeoData || {});
+
+    renderScholarView(scholarContainer, collaborators, citingAuthors);
+}
