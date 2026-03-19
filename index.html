@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Network Visualizer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="//unpkg.com/globe.gl"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#grad)" stroke-width="2">
+                    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/></linearGradient></defs>
+                    <circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                    <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+                    <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                </svg>
+                <h1>Research Network</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="stats-bar" id="statsBar">
+                <span class="stat" id="statPubs" title="Publications">📄 0</span>
+                <span class="stat" id="statCitations" title="Total Citations">📊 0</span>
+                <span class="stat" id="statHIndex" title="H-Index">📈 H: —</span>
+            </div>
+            <div class="view-toggle" id="viewToggle">
+                <button class="view-btn active" data-view="network" title="Network View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/></svg>
+                    Network
+                </button>
+                <button class="view-btn" data-view="globe" title="Globe View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                    Globe
+                </button>
+            </div>
+            <button class="btn btn-icon" id="btnImport" title="Import Network JSON">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Import
+            </button>
+            <button class="btn btn-icon" id="btnExport" title="Export Network JSON" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Export
+            </button>
+            <button class="btn btn-primary" id="btnRefresh" title="Fetch Scholar Data">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                Refresh
+            </button>
+            <button class="btn btn-icon" id="btnSettings" title="Settings">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" id="filterBar">
+        <div class="filter-group">
+            <label>Year Range</label>
+            <div class="filter-inputs">
+                <input type="number" id="filterYearFrom" placeholder="From" min="1900" max="2030">
+                <span>—</span>
+                <input type="number" id="filterYearTo" placeholder="To" min="1900" max="2030">
+            </div>
+        </div>
+        <div class="filter-group">
+            <label>Recent Publications</label>
+            <input type="number" id="filterRecentN" placeholder="Show top N" min="1" max="500">
+        </div>
+        <div class="filter-group">
+            <label>Search</label>
+            <input type="text" id="filterSearch" placeholder="Filter by keyword...">
+        </div>
+        <button class="btn btn-sm" id="btnApplyFilter">Apply</button>
+        <button class="btn btn-sm btn-ghost" id="btnClearFilter">Clear</button>
+    </div>
+
+    <!-- Main Graph Area -->
+    <main class="main">
+        <div id="graphContainer" class="graph-container">
+            <div class="empty-state" id="emptyState">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+                    <circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                    <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+                </svg>
+                <h2>No Network Data</h2>
+                <p>Configure your API keys in Settings, then click Refresh to fetch publication data.</p>
+            </div>
+        </div>
+        <!-- Globe Wrapper (scrollable) -->
+        <div id="globeWrapper" class="globe-wrapper" style="display:none;">
+            <!-- Globe Container -->
+            <div id="globeContainer" class="globe-container">
+                <div class="globe-empty" id="globeEmpty">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+                        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                    </svg>
+                    <h2>No Geolocation Data</h2>
+                    <p>Configure an LLM API key and click Refresh to extract citation geolocation data.</p>
+                </div>
+            </div>
+            <!-- Rankings Section -->
+            <div id="rankingsSection" class="rankings-section" style="display:none;">
+                <div class="rankings-header">
+                    <h2>Citation Impact Rankings</h2>
+                    <div class="rankings-controls">
+                        <label>Show top</label>
+                        <input type="number" id="rankTopK" value="10" min="1" max="100">
+                    </div>
+                </div>
+                <div class="rankings-grid">
+                    <div class="ranking-card">
+                        <h3>Top Countries</h3>
+                        <div class="ranking-list" id="rankCountries"></div>
+                    </div>
+                    <div class="ranking-card">
+                        <h3>Top Institutions</h3>
+                        <div class="ranking-list" id="rankInstitutions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Legend -->
+        <div class="legend" id="legend" style="display:none;"></div>
+        <!-- Tooltip -->
+        <div class="tooltip" id="tooltip"></div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+        <div class="loading-card">
+            <div class="spinner"></div>
+            <p id="loadingText">Fetching scholar data...</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p class="loading-detail" id="loadingDetail"></p>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-backdrop" id="settingsModal" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="btn-close" id="btnCloseSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <h3>Google Scholar</h3>
+                    <div class="form-group">
+                        <label for="cfgScholarId">Scholar ID</label>
+                        <input type="text" id="cfgScholarId" placeholder="e.g. abcDEF123gh">
+                        <small>Found in your Google Scholar profile URL</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cfgResearcherName">Researcher Name</label>
+                        <input type="text" id="cfgResearcherName" placeholder="e.g. Jane Doe">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h3>ScraperAPI</h3>
+                    <div class="form-group">
+                        <label for="cfgScraperKey">API Key</label>
+                        <input type="password" id="cfgScraperKey" placeholder="Your ScraperAPI key">
+                        <small><a href="https://www.scraperapi.com/" target="_blank" rel="noopener">Get a free key</a></small>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h3>LLM Provider</h3>
+                    <div class="form-group">
+                        <label for="cfgLlmProvider">Provider</label>
+                        <select id="cfgLlmProvider">
+                            <option value="openai">OpenAI</option>
+                            <option value="claude">Claude (Anthropic)</option>
+                            <option value="gemini">Gemini (Google)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cfgLlmKey">API Key</label>
+                        <input type="password" id="cfgLlmKey" placeholder="Your LLM API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="cfgLlmModel">Model</label>
+                        <input type="text" id="cfgLlmModel" placeholder="e.g. gpt-4o, claude-sonnet-4-20250514, gemini-pro">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="btnCancelSettings">Cancel</button>
+                <button class="btn btn-primary" id="btnSaveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="fileImport" accept=".json" style="display:none;">
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
