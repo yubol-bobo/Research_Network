@@ -118,12 +118,15 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
             });
             const names = firstAuthorOnly ? allNames.slice(0, 1) : allNames;
 
+            const profiles = cit.authorProfiles || {};
+
             for (const name of names) {
                 if (!authorMap[name]) {
                     authorMap[name] = {
                         name,
                         citCount: 0,
                         authorCitations: 0,
+                        scholarId: profiles[name] || '',
                         institution: geo.institution || '',
                         country: geo.country || '',
                         papers: [],
@@ -131,6 +134,10 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
                 }
                 authorMap[name].citCount++;
                 authorMap[name].papers.push(cit.title);
+                // Keep scholar profile ID if found
+                if (profiles[name] && !authorMap[name].scholarId) {
+                    authorMap[name].scholarId = profiles[name];
+                }
                 if (geo.institution && !authorMap[name].institution) {
                     authorMap[name].institution = geo.institution;
                 }
@@ -194,7 +201,21 @@ function parseCitations(doc) {
 
         const link = titleEl.tagName === 'A' ? titleEl.getAttribute('href') : '';
 
-        citations.push({ title, authors, year, link, venue, publisher });
+        // Extract author profile links (Scholar user IDs)
+        const authorProfiles = {};
+        if (authorEl) {
+            const profileAnchors = authorEl.querySelectorAll('a[href*="/citations?user="]');
+            for (const a of profileAnchors) {
+                const aName = a.textContent.trim();
+                const aHref = a.getAttribute('href') || '';
+                const userMatch = aHref.match(/user=([^&]+)/);
+                if (aName && userMatch) {
+                    authorProfiles[aName] = userMatch[1];
+                }
+            }
+        }
+
+        citations.push({ title, authors, year, link, venue, publisher, authorProfiles });
     }
     return citations;
 }
@@ -303,34 +324,38 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
  */
 export async function fetchAuthorCitations(authors, apiKey, onProgress) {
     const results = {};
-    const total = authors.length;
+    // Only fetch for authors with a Scholar profile ID
+    const withProfiles = authors.filter(a => a.scholarId);
+    const total = withProfiles.length;
+
+    if (total === 0) {
+        onProgress('No author profile links found. Re-scrape citations first (Refresh).', 100);
+        await delay(2000);
+        return results;
+    }
 
     for (let i = 0; i < total; i++) {
-        const author = authors[i];
+        const author = withProfiles[i];
         const pct = Math.round((i / total) * 100);
-        onProgress(`Fetching citations for ${truncate(author.name, 30)} (${i + 1}/${total})`, pct);
+        onProgress(`Fetching profile for ${truncate(author.name, 25)} (${i + 1}/${total})`, pct);
 
         try {
-            // Search Scholar for the author's profile
-            const query = encodeURIComponent(`author:"${author.name}"${author.institution ? ` ${author.institution}` : ''}`);
-            const searchUrl = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${query}`;
-            const html = await fetchPage(searchUrl, apiKey);
+            // Fetch the author's Scholar profile page directly
+            const profileUrl = `https://scholar.google.com/citations?user=${author.scholarId}&hl=en`;
+            const html = await fetchPage(profileUrl, apiKey);
             const doc = parseHTML(html);
 
-            // Look for the first author result
-            const profileEl = doc.querySelector('.gs_ai_t');
-            if (profileEl) {
-                // Citation count is in .gs_ai_cby: "Cited by XXXX"
-                const citedByEl = profileEl.querySelector('.gs_ai_cby');
-                if (citedByEl) {
-                    const match = citedByEl.textContent.match(/(\d[\d,]*)/);
-                    if (match) {
-                        results[author.name] = parseInt(match[1].replace(/,/g, ''));
-                    }
+            // Total citations from the profile stats table
+            // The stats table has cells: Citations, h-index, i10-index (All / Since 5yr)
+            const statCells = doc.querySelectorAll('#gsc_rsb_st td.gsc_rsb_std');
+            if (statCells.length > 0) {
+                const totalCit = parseInt(statCells[0]?.textContent?.replace(/,/g, '')) || 0;
+                if (totalCit > 0) {
+                    results[author.name] = totalCit;
                 }
             }
         } catch (e) {
-            console.warn(`Failed to fetch citations for ${author.name}:`, e);
+            console.warn(`Failed to fetch profile for ${author.name}:`, e);
         }
 
         await delay(1000); // rate limit
