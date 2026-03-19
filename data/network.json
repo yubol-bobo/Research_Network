@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": "2026-03-19T05:15:15.180Z",
+  "exportedAt": "2026-03-19T13:41:13.706Z",
   "scholarId": "hgN6B6kAAAAJ",
   "researcher": "Yubo Li",
   "publications": [
@@ -15,13 +15,13 @@
     {
       "title": "SkillsBench: Benchmarking how well agent skills work across diverse tasks",
       "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:ULOm3_A8WrAC",
-      "citationCount": 2,
+      "citationCount": 3,
       "year": 2026,
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10992550695447139378",
       "citations": [
         {
           "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
-          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2026",
+          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang… - arXiv preprint arXiv …, 2026",
           "year": 2026,
           "link": "",
           "venue": "arxiv.org",
@@ -29,7 +29,7 @@
         },
         {
           "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
-          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi\u2026\u00a0- bioRxiv, 2026",
+          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi… - bioRxiv, 2026",
           "year": 2026,
           "link": "",
           "venue": "biorxiv.org",
@@ -62,7 +62,7 @@
       "citations": [
         {
           "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2602.13093, 2026",
+          "authors": "Y Li, R Krishnan, R Padman - arXiv preprint arXiv:2602.13093, 2026",
           "year": 2602,
           "link": "",
           "venue": "arxiv.org",
@@ -87,7 +87,7 @@
       "citations": [
         {
           "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
-          "authors": "C Riedl, S Savage, J Zvelebilova\u00a0- arXiv preprint arXiv:2407.17489, 2024",
+          "authors": "C Riedl, S Savage, J Zvelebilova - arXiv preprint arXiv:2407.17489, 2024",
           "year": 2407,
           "link": "",
           "venue": "arxiv.org",
@@ -95,7 +95,7 @@
         },
         {
           "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
-          "authors": "K Srikumar\u00a0- Workshop on Human-aware Embodied AI (HEAI)-IROS\u00a0\u2026",
+          "authors": "K Srikumar - Workshop on Human-aware Embodied AI (HEAI)-IROS …",
           "year": 0,
           "link": "",
           "venue": "openreview.net",
@@ -112,7 +112,7 @@
       "citations": [
         {
           "title": "Gaps in artificial intelligence research for rural health in the United States: a scoping review",
-          "authors": "KE Brown, SE Davis\u00a0- Journal of the American Medical\u00a0\u2026, 2026",
+          "authors": "KE Brown, SE Davis - Journal of the American Medical …, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -120,7 +120,7 @@
         },
         {
           "title": "Artificial intelligence in nephrology: predicting CKD progression and personalizing treatment",
-          "authors": "S Yuan, L Guo, F Xu\u00a0- International urology and nephrology, 2025",
+          "authors": "S Yuan, L Guo, F Xu - International urology and nephrology, 2025",
           "year": 2025,
           "link": "",
           "venue": "Springer",
@@ -128,7 +128,7 @@
         },
         {
           "title": "Early prediction of CKD from time series data using adaptive PSO optimized echo state networks",
-          "authors": "T Anbazhagan, B Rangaswamy\u00a0- Scientific Reports, 2025",
+          "authors": "T Anbazhagan, B Rangaswamy - Scientific Reports, 2025",
           "year": 2025,
           "link": "",
           "venue": "nature.com",
@@ -136,7 +136,7 @@
         },
         {
           "title": "Digital health integration in chronic kidney disease",
-          "authors": "T Deng, Y Xue, N Methakanjanasak\u00a0- Clinica Chimica Acta, 2025",
+          "authors": "T Deng, Y Xue, N Methakanjanasak - Clinica Chimica Acta, 2025",
           "year": 2025,
           "link": "",
           "venue": "Elsevier",
@@ -144,7 +144,7 @@
         },
         {
           "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
-          "authors": "D Albers, K Cato, A Layton\u2026\u00a0- Journal of the American\u00a0\u2026, 2026",
+          "authors": "D Albers, K Cato, A Layton… - Journal of the American …, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -152,7 +152,7 @@
         },
         {
           "title": "Evaluation of ARHGAP26 expression, prognostic significance, and immune infiltration in clear cell renal cell carcinoma",
-          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang\u00a0- Journal of Genetic Engineering\u00a0\u2026, 2025",
+          "authors": "A Long, C Huang, T Li, Y Shi, C Zhang - Journal of Genetic Engineering …, 2025",
           "year": 2025,
           "link": "",
           "venue": "Elsevier",
@@ -160,7 +160,7 @@
         },
         {
           "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman\u00a0- arXiv preprint arXiv:2510.09895, 2025",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",
@@ -177,82 +177,490 @@
       "citations": [
         {
           "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
-          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo\u2026\u00a0- ACM Computing\u00a0\u2026, 2025",
+          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo…",
           "year": 2025,
           "link": "",
-          "venue": "dl.acm.org",
-          "publisher": ""
+          "venue": "ACM Computing …",
+          "publisher": "dl.acm.org"
         },
         {
           "title": "Large language models meet nlp: A survey",
-          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li\u2026\u00a0- Frontiers of Computer\u00a0\u2026, 2026",
+          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li…",
           "year": 2026,
           "link": "",
-          "venue": "Springer",
-          "publisher": ""
+          "venue": "Frontiers of Computer …",
+          "publisher": "Springer"
         },
         {
           "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
-          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach\u2026\u00a0- Proceedings of the\u00a0\u2026, 2025",
+          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach…",
           "year": 2025,
           "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
+          "venue": "Proceedings of the …",
+          "publisher": "aclanthology.org"
         },
         {
           "title": "Ask patients with patience: Enabling llms for human-centric medical dialogue with grounded reasoning",
-          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu\u00a0- Proceedings of the 2025\u00a0\u2026, 2025",
+          "authors": "J Zhu, J Pan, Y Liu, F Liu, J Wu",
           "year": 2025,
           "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
+          "venue": "Proceedings of the",
+          "publisher": "aclanthology.org"
         },
         {
           "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
-          "authors": "D Dinucu-Jianu, J Macina, N Daheim\u2026\u00a0- Proceedings of the\u00a0\u2026, 2025",
+          "authors": "D Dinucu-Jianu, J Macina, N Daheim…",
           "year": 2025,
           "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
+          "venue": "Proceedings of the …",
+          "publisher": "aclanthology.org"
         },
         {
           "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
-          "authors": "Y Li, Y Miao, X Ding, R Krishnan\u2026\u00a0- Findings of the\u00a0\u2026, 2025",
+          "authors": "Y Li, Y Miao, X Ding, R Krishnan…",
           "year": 2025,
           "link": "",
-          "venue": "aclanthology.org",
-          "publisher": ""
+          "venue": "Findings of the …",
+          "publisher": "aclanthology.org"
         },
         {
           "title": "Get experience from practice: Llm agents with record & replay",
-          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Conformal information pursuit for interactively guiding large language models",
-          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Context-aware fairness evaluation and mitigation in llms",
-          "authors": "A Nadeem, M Dras, U Naseem\u00a0- arXiv preprint arXiv:2510.18914, 2025",
+          "authors": "A Nadeem, M Dras, U Naseem",
           "year": 2510,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
-          "authors": "D Choudhury, S Williamson, A Goli\u0144ski, N Miao\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "D Choudhury, S Williamson, A Goliński, N Miao…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Visual multi-agent system: Mitigating hallucination snowballing via visual flow",
+          "authors": "X Yu, C Xu, G Zhang, Y He, Z Chen, Z Xue…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "ClarifyMT-Bench: Benchmarking and Improving Multi-Turn Clarification for Conversational Large Language Models",
+          "authors": "S Luo, Y Huang, M Li, S Meng, F Liu, Z Hu…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "FlowKV: Enhancing multi-turn conversational coherence in LLMs via isolated key-value cache management",
+          "authors": "X Liu, H Chen, X Hu, X Chu",
+          "year": 2505,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Beyond One-Way Influence: Bidirectional Opinion Dynamics in Multi-Turn Human-LLM Interactions",
+          "authors": "Y Jiang, L Guo, Y Wu, A Caliskan, T Mitra…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "A criminology of machines",
+          "authors": "GM Campedelli",
+          "year": 2511,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Higher Satisfaction, Lower Cost: A Technical Report on How LLMs Revolutionize Meituan's Intelligent Interaction Systems",
+          "authors": "X Cheng, K Zeng, Z Cao, L Dai, W Gao, F Han…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "MTRAG-UN: A Benchmark for Open Challenges in Multi-Turn RAG Conversations",
+          "authors": "S Rosenthal, Y Katsis, V Shah, L He, L Popa…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Bidirectional Intention Inference Enhances LLMs' Defense Against Multi-Turn Jailbreak Attacks",
+          "authors": "H Tong, D Zhao, G Shen, X He, D Lin, F Zhao…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "GraphIF: Enhancing Multi-Turn Instruction Following for Large Language Models with Relation Graph Prompt",
+          "authors": "Z Li, C Lin, L Zheng, WD Wei, J Liang…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Alignment Without Understanding: A Message-and Conversation-Centered Approach to Understanding AI Sycophancy",
+          "authors": "L Du, X Lyu, L Xie, B Feng",
+          "year": 2509,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "HCAttention: Extreme KV Cache Compression via Heterogeneous Attention Computing for LLMs",
+          "authors": "D Yang, Y Yang, X Yu, X Qi, R Xiao",
+          "year": 2507,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Tokenomics: Quantifying Where Tokens Are Used in Agentic Software Engineering",
+          "authors": "M Salim, J Latendresse, SH Khatoonabadi…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "KVCompose: Efficient Structured KV Cache Compression with Composite Tokens",
+          "authors": "D Akulov, M Sana, A De Domenico, TS Salem…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Graph RAG-based Fault Diagnosis for Train Bogies Using Knowledge Graphs and Large Language Model",
+          "authors": "R Miao, T Wu, Z Zhang",
+          "year": 2025,
+          "link": "",
+          "venue": "Knowledge-Based Systems",
+          "publisher": "Elsevier"
+        },
+        {
+          "title": "PromptBridge: Cross-Model Prompt Transfer for Large Language Models",
+          "authors": "Y Wang, Q Liu, Z Wang, Z Li, W Wei, Y Liu…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Unlocking the Power of Multi-Agent LLM for Reasoning: From Lazy Agents to Deliberation",
+          "authors": "Z Zhang, X Li, Y Lin, H Liu, R Chandradevan…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Digital Product Passports as Agentic Supply Chain Infrastructure: A Strategic Framework for Fashion",
+          "authors": "P Teikari, N Fuenmayor",
+          "year": 6068,
+          "link": "",
+          "venue": "Available at SSRN",
+          "publisher": "papers.ssrn.com"
+        },
+        {
+          "title": "MultiCube-RAG for Multi-hop Question Answering",
+          "authors": "J Shi, W Hu, R Tian, B Jin, W Kweon, SK Kang…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "CMT-Eval: A Novel Chinese Multi-turn Dialogue Evaluation Dataset Addressing Real-world Conversational Challenges",
+          "authors": "STKMY Wang, R Hu",
+          "year": 2025,
+          "link": "",
+          "venue": "Findings of the Association for …",
+          "publisher": "aclanthology.org"
+        },
+        {
+          "title": "Markovian Generation Chains in Large Language Models",
+          "authors": "M Geng, A Mohamed, G Shang, M Vazirgiannis…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Epistemic Agency in the Age of Large Language Models: Design Principles for Knowledge-Building AI",
+          "authors": "E Woodruff, J Hewitt",
+          "year": 2026,
+          "link": "",
+          "venue": "AI",
+          "publisher": "mdpi.com"
+        },
+        {
+          "title": "All Required, In Order: Phase-Level Evaluation for AI-Human Dialogue in Healthcare and Beyond",
+          "authors": "S Kulkarni, A Lyzhov, S Chaitanya, P Joshi",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "InfoPO: Information-Driven Policy Optimization for User-Centric Agents",
+          "authors": "F Kong, J Zhang, M Deng, C Wu, Y Luo…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "The Path to Conversational AI Tutors: Integrating Tutoring Best Practices and Targeted Technologies to Produce Scalable AI Agents",
+          "authors": "K Vanacore, RS Baker, AH Closser…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "UCO: A Multi-Turn Interactive Reinforcement Learning Method for Adaptive Teaching with Large Language Models",
+          "authors": "S Wei, M Zhang, X Lin, B Jiang, K Kuang…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "ChatThero: An LLM-Supported Chatbot for Behavior Change and Therapeutic Support in Addiction Recovery",
+          "authors": "J Wang, Z Yao, L Li, J Qian, Z Yang, H Yu",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Rethinking Text-to-SQL: Dynamic Multi-turn SQL Interaction for Real-world Database Exploration",
+          "authors": "L Sun, T Guo, H Liang, Y Li, Q Cai, J Wei, B Yu…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
+          "authors": "Y Li, R Krishnan, R Padman",
+          "year": 2602,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "CALM-IT: Generating Realistic Long-Form Motivational Interviewing Dialogues with Dual-Actor Conversational Dynamics Tracking",
+          "authors": "VC Nguyen, NY Nguyen, KA Candan, M Conlon…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "LUMINA: Long-horizon Understanding for Multi-turn Interactive Agents",
+          "authors": "A Rakhsha, T Hehn, P Mazzaglia, FV Massoli…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
+          "authors": "Y Li, R Krishnan, R Padman",
+          "year": 2510,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "LeCoDe: A Benchmark Dataset for Interactive Legal Consultation Dialogue Evaluation",
+          "authors": "W Yuan, K Song, Z Jiang, J Cao, Y Zhang, J Lin…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "MIRROR: Modular Internal Processing for Personalized Safety in LLM Dialogue",
+          "authors": "N Hsing",
+          "year": 2506,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "On Information Self-Locking in Reinforcement Learning for Active Reasoning of LLM agents",
+          "authors": "D Zou, Y Chen, F Feng, M Li, P Li, Y Gong…",
+          "year": 2026,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "MCCE: A Framework for Multi-LLM Collaborative Co-Evolution",
+          "authors": "N Ran, Z Li, Y Wang, Q Ran, X Zhang, S Feng…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": ": Reducing Belief Deviation in Reinforcement Learning for Active Reasoning",
+          "authors": "D Zou, Y Chen, J Wang, H Yang, M Li, J Cheng…",
+          "year": 2025,
+          "link": "",
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "HAVE: Head-Adaptive Gating and ValuE Calibration for Hallucination Mitigation in Large Language Models",
+          "authors": "X Tong, Z Lin, J Wang, B Jin",
+          "year": 2509,
+          "link": "",
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
+        },
+        {
+          "title": "Statistical Invariance vs. AI Safety: Why Prompt Filtering Fails Against Contextual Attacks",
+          "authors": "A Ioste, SM Peres, M Finger",
+          "year": 2026,
+          "link": "",
+          "venue": "Journal of the Brazilian …",
+          "publisher": "journals-sol.sbc.org.br"
+        },
+        {
+          "title": "Better Semantic Understanding in LLM-Based Multi-Turn Dialogues: A Survey",
+          "authors": "N Li, X Wei, N Zhang, Z Wei",
+          "year": 2025,
+          "link": "",
+          "venue": "",
+          "publisher": "ieeexplore.ieee.org"
+        },
+        {
+          "title": "Conversational Learn to Rank: Personalizing MultiTurn Shopping Dialogs with Contextual Relevance Signals",
+          "authors": "K Govardhanan",
+          "year": 2025,
+          "link": "",
+          "venue": "",
+          "publisher": "ieeexplore.ieee.org"
+        },
+        {
+          "title": "The Art of Repair in Human-Agent Conversations: A Taxonomy of Repair Strategies by Users and LLM-Based Conversational Agents",
+          "authors": "G Stevens, D Korus-Du, A Boden, P Tolmie, D Randall…",
+          "year": 2025,
+          "link": "",
+          "venue": "",
+          "publisher": "researchsquare.com"
+        },
+        {
+          "title": "The Use of Artificial Intelligence Technology in Game Development",
+          "authors": "H Wang",
+          "year": 2025,
+          "link": "",
+          "venue": "Proceedings of the",
+          "publisher": "dl.acm.org"
+        },
+        {
+          "title": "ChatThero: A Language Agent for Recovery Support",
+          "authors": "J Wang, Z Yao, L Li, J Qian, Z Yang",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "From Reactive BI to Agentic AI: The Rise of Domain Specific Autonomous Insight Systems in Enterprise Analytics",
+          "authors": "PK Satyanarayana",
+          "year": 2025,
+          "link": "",
+          "venue": "International Journal of Automation …",
+          "publisher": "researchlakejournals.com"
+        },
+        {
+          "title": "SOMA: Efficient Multi-turn LLM Serving via Small Language Model",
+          "authors": "X Cheng, Q Wu, Z Zhou, X Zhou, T Derr, Y Dong",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "Mind the Agent: A Comprehensive Survey on Large Lan-guage Model-Based Agent Safety",
+          "authors": "G Li, TW Li, X Ning",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "Examining the Vulnerability of Multi-Agent Medical Systems to Human Interventions for Clinical Reasoning",
+          "authors": "B Liu, D Mehta, R Malhotra, A Zobian, YY Tan…",
+          "year": 2025,
+          "link": "",
+          "venue": "NeurIPS",
+          "publisher": "openreview.net"
+        },
+        {
+          "title": "Beyond Sequential Context: Navigating Non-linear Flow of Multi-turn Dialogues with Dynamic Context Tree",
+          "authors": "J Hu, Y Wei, S Guo, W Liu, J Yin",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "ContextKeeper: Head-Specific KV Cache Retention for Long-Context LLM Inference",
+          "authors": "XU Tong, Q Luo",
+          "year": 0,
+          "link": "",
+          "venue": "openreview.net",
+          "publisher": ""
+        },
+        {
+          "title": "Exploring the Enhancement Path of Generative Model-Based Optimization of Natural Language Generation in Multi-Round Dialogues",
+          "authors": "N Zhang",
+          "year": 0,
+          "link": "",
+          "venue": "housingscience.org",
+          "publisher": ""
+        },
+        {
+          "title": "FROM POLICY TO PRACTICE: RESEARCH DIRECTIONS FOR TRUSTWORTHY AND RESPONSIBLE AI “BY DESIGN”",
+          "authors": "R Krishnan, JP Lalor, N Prat, A Abbasi",
+          "year": 0,
+          "link": "",
+          "venue": "ahmedabbasi.com",
           "publisher": ""
         }
       ]
@@ -266,75 +674,75 @@
       "citations": [
         {
           "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
-          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Interaction Context Often Increases Sycophancy in LLMs",
-          "authors": "S Jain, C Park, MM Viana, A Wilson\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "S Jain, C Park, MM Viana, A Wilson…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
-          "authors": "N Lore, B Heydari\u00a0- arXiv preprint arXiv:2602.06081, 2026",
+          "authors": "N Lore, B Heydari",
           "year": 2602,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Strategic Complexity and Behavioral Distortion: Retail Investing Under Large Language Model Augmentation",
-          "authors": "D Gimmelberg, I Ludviga\u00a0- International Journal of Financial Studies, 2025",
+          "authors": "D Gimmelberg, I Ludviga",
           "year": 2025,
           "link": "",
-          "venue": "mdpi.com",
-          "publisher": ""
+          "venue": "International Journal of Financial Studies",
+          "publisher": "mdpi.com"
         },
         {
           "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
-          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2602.13093, 2026",
+          "authors": "Y Li, R Krishnan, R Padman",
           "year": 2602,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks",
-          "authors": "Y Li, R Krishnan, R Padman\u00a0- arXiv preprint arXiv:2510.02712, 2025",
+          "authors": "Y Li, R Krishnan, R Padman",
           "year": 2510,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv:",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
-          "authors": "J He, R Ramachandran, N Ramachandran\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "J He, R Ramachandran, N Ramachandran…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Representational Stability of Truth in Large Language Models",
-          "authors": "S Dies, C Maynard, G Savcisens\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "S Dies, C Maynard, G Savcisens…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
-          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez\u2026\u00a0- arXiv preprint arXiv\u00a0\u2026, 2025",
+          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez…",
           "year": 2025,
           "link": "",
-          "venue": "arxiv.org",
-          "publisher": ""
+          "venue": "arXiv preprint arXiv …",
+          "publisher": "arxiv.org"
         },
         {
           "title": "Confidence as Control: A Survey of Confidence Utilization in Large Language Models",
@@ -343,19 +751,27 @@
           "link": "",
           "venue": "researchgate.net",
           "publisher": ""
+        },
+        {
+          "title": "Med-CAM: Improving Medical Question Answering with Confidence-Aware Methods",
+          "authors": "K Halevy, K Ghate, J Mun, M Diab, M Sap",
+          "year": 0,
+          "link": "",
+          "venue": "origen-workshop.github.io",
+          "publisher": ""
         }
       ]
     },
     {
       "title": "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques",
       "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=hgN6B6kAAAAJ:u-x6o8ySG0sC",
-      "citationCount": 3,
+      "citationCount": 4,
       "year": 2024,
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5365623749515026219",
       "citations": [
         {
           "title": "Enhancing end-stage renal disease outcome prediction: a multisourced data-driven approach",
-          "authors": "Y Li, R Padman\u00a0- Journal of the American Medical Informatics\u00a0\u2026, 2026",
+          "authors": "Y Li, R Padman - Journal of the American Medical Informatics …, 2026",
           "year": 2026,
           "link": "",
           "venue": "academic.oup.com",
@@ -363,7 +779,7 @@
         },
         {
           "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
-          "authors": "CH Chang, M Chen, MH Tsai, YC Huang\u2026\u00a0- JMIR Medical\u00a0\u2026, 2026",
+          "authors": "CH Chang, M Chen, MH Tsai, YC Huang… - JMIR Medical …, 2026",
           "year": 2026,
           "link": "",
           "venue": "medinform.jmir.org",
@@ -371,7 +787,7 @@
         },
         {
           "title": "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism",
-          "authors": "Y Li, X Yao, R Padman\u00a0- arXiv preprint arXiv:2503.19285, 2025",
+          "authors": "Y Li, X Yao, R Padman - arXiv preprint arXiv:2503.19285, 2025",
           "year": 2503,
           "link": "",
           "venue": "arxiv.org",
@@ -379,7 +795,7 @@
         },
         {
           "title": "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings",
-          "authors": "Y Li, R Padman\u00a0- arXiv preprint arXiv:2510.09895, 2025",
+          "authors": "Y Li, R Padman - arXiv preprint arXiv:2510.09895, 2025",
           "year": 2510,
           "link": "",
           "venue": "arxiv.org",
@@ -402,38 +818,14 @@
       "institution": "Tsinghua University"
     },
     "1_1": {
-      "country": "China",
-      "institution": "Tsinghua University"
+      "country": "United States",
+      "institution": "Stanford University"
     },
     "1_2": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "1_3": {
-      "country": "United States",
-      "institution": "University of Washington"
-    },
-    "1_4": {
-      "country": "United States",
-      "institution": "University of Washington"
-    },
-    "1_5": {
-      "country": "United States",
-      "institution": "Mayo Clinic"
-    },
-    "1_6": {
       "country": "United States",
       "institution": "Mayo Clinic"
     },
     "3_0": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "3_1": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "3_2": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
@@ -442,78 +834,34 @@
       "institution": "Northeastern University"
     },
     "5_1": {
-      "country": "United States",
-      "institution": "Northeastern University"
-    },
-    "5_2": {
-      "country": "United States",
-      "institution": "Northeastern University"
-    },
-    "5_3": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "5_4": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "country": "India",
+      "institution": "Indian Institute of Technology Madras"
     },
     "6_0": {
+      "country": "United States",
+      "institution": "University of Mississippi Medical Center"
+    },
+    "6_1": {
       "country": "China",
       "institution": "Peking University"
     },
-    "6_1": {
-      "country": "United States",
-      "institution": "University of Mississippi Medical Center"
-    },
     "6_2": {
-      "country": "United States",
-      "institution": "University of Mississippi Medical Center"
+      "country": "India",
+      "institution": "Anna University"
     },
     "6_3": {
-      "country": "China",
-      "institution": "Zhejiang University"
+      "country": "Thailand",
+      "institution": "Mahidol University"
     },
     "6_4": {
-      "country": "China",
-      "institution": "Zhejiang University"
+      "country": "United States",
+      "institution": "Columbia University"
     },
     "6_5": {
-      "country": "India",
-      "institution": "Anna University"
+      "country": "China",
+      "institution": "Sun Yat-sen University"
     },
     "6_6": {
-      "country": "India",
-      "institution": "Anna University"
-    },
-    "6_7": {
-      "country": "China",
-      "institution": "Sichuan University"
-    },
-    "6_8": {
-      "country": "China",
-      "institution": "Sichuan University"
-    },
-    "6_9": {
-      "country": "United States",
-      "institution": "Columbia University"
-    },
-    "6_10": {
-      "country": "United States",
-      "institution": "Columbia University"
-    },
-    "6_11": {
-      "country": "China",
-      "institution": "Sun Yat-sen University"
-    },
-    "6_12": {
-      "country": "China",
-      "institution": "Sun Yat-sen University"
-    },
-    "6_13": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "6_14": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
@@ -523,83 +871,243 @@
     },
     "7_1": {
       "country": "China",
-      "institution": "Harbin Institute of Technology"
+      "institution": "Tsinghua University"
     },
     "7_2": {
-      "country": "China",
-      "institution": "Harbin Institute of Technology"
+      "country": "United Kingdom",
+      "institution": "University of Oxford"
     },
     "7_3": {
       "country": "China",
-      "institution": "Harbin Institute of Technology"
+      "institution": "Fudan University"
     },
     "7_4": {
-      "country": "China",
-      "institution": "Harbin Institute of Technology"
+      "country": "Germany",
+      "institution": "Heidelberg University"
     },
     "7_5": {
       "country": "United States",
-      "institution": "Google DeepMind"
+      "institution": "Carnegie Mellon University"
     },
     "7_6": {
-      "country": "United States",
-      "institution": "Google DeepMind"
+      "country": "China",
+      "institution": "Zhejiang University"
     },
     "7_7": {
-      "country": "China",
-      "institution": "Peking University"
+      "country": "United States",
+      "institution": "University of Pennsylvania"
     },
     "7_8": {
-      "country": "China",
-      "institution": "Peking University"
+      "country": "Australia",
+      "institution": "Macquarie University"
     },
     "7_9": {
-      "country": "Germany",
-      "institution": "Aleph Alpha"
-    },
-    "7_10": {
-      "country": "Germany",
-      "institution": "Aleph Alpha"
-    },
-    "7_11": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "7_12": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "7_13": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "7_14": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "7_15": {
-      "country": "United States",
-      "institution": "University of Pennsylvania"
-    },
-    "7_16": {
-      "country": "United States",
-      "institution": "University of Pennsylvania"
-    },
-    "7_17": {
-      "country": "Australia",
-      "institution": "University of New South Wales"
-    },
-    "7_18": {
-      "country": "Australia",
-      "institution": "University of New South Wales"
-    },
-    "7_19": {
       "country": "United Kingdom",
       "institution": "University of Cambridge"
     },
+    "7_10": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_11": {
+      "country": "China",
+      "institution": "Renmin University of China"
+    },
+    "7_12": {
+      "country": "China",
+      "institution": "University of Science and Technology of China"
+    },
+    "7_13": {
+      "country": "United States",
+      "institution": "University of Washington"
+    },
+    "7_14": {
+      "country": "Italy",
+      "institution": "University of Milan"
+    },
+    "7_15": {
+      "country": "China",
+      "institution": "Meituan"
+    },
+    "7_16": {
+      "country": "United States",
+      "institution": "IBM Research"
+    },
+    "7_17": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_18": {
+      "country": "China",
+      "institution": "Beihang University"
+    },
+    "7_19": {
+      "country": "China",
+      "institution": "Peking University"
+    },
     "7_20": {
-      "country": "United Kingdom",
-      "institution": "University of Oxford"
+      "country": "China",
+      "institution": "Shanghai Jiao Tong University"
+    },
+    "7_21": {
+      "country": "United States",
+      "institution": "Microsoft Research"
+    },
+    "7_22": {
+      "country": "France",
+      "institution": "Huawei Noah's Ark Lab"
+    },
+    "7_23": {
+      "country": "China",
+      "institution": "Beijing Jiaotong University"
+    },
+    "7_24": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_25": {
+      "country": "United States",
+      "institution": "University of California, Berkeley"
+    },
+    "7_26": {
+      "country": "Finland",
+      "institution": "Aalto University"
+    },
+    "7_27": {
+      "country": "South Korea",
+      "institution": "Korea Advanced Institute of Science and Technology"
+    },
+    "7_28": {
+      "country": "China",
+      "institution": "The Chinese University of Hong Kong"
+    },
+    "7_29": {
+      "country": "France",
+      "institution": "École Polytechnique"
+    },
+    "7_30": {
+      "country": "Canada",
+      "institution": "University of Toronto"
+    },
+    "7_31": {
+      "country": "India",
+      "institution": "Indian Institute of Technology Bombay"
+    },
+    "7_32": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_33": {
+      "country": "United States",
+      "institution": "University of Pennsylvania"
+    },
+    "7_34": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "7_35": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "7_36": {
+      "country": "China",
+      "institution": "Alibaba Group"
+    },
+    "7_37": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "7_38": {
+      "country": "United States",
+      "institution": "Arizona State University"
+    },
+    "7_39": {
+      "country": "United States",
+      "institution": "University of Southern California"
+    },
+    "7_40": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "7_41": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_42": {
+      "country": "United States",
+      "institution": "Stanford University"
+    },
+    "7_43": {
+      "country": "China",
+      "institution": "Renmin University of China"
+    },
+    "7_44": {
+      "country": "China",
+      "institution": "Harbin Institute of Technology"
+    },
+    "7_45": {
+      "country": "China",
+      "institution": "Renmin University of China"
+    },
+    "7_46": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "7_47": {
+      "country": "Brazil",
+      "institution": "University of Sao Paulo"
+    },
+    "7_48": {
+      "country": "China",
+      "institution": "Beijing University of Posts and Telecommunications"
+    },
+    "7_49": {
+      "country": "India",
+      "institution": "Indian Institute of Technology Madras"
+    },
+    "7_50": {
+      "country": "Germany",
+      "institution": "University of Siegen"
+    },
+    "7_51": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_52": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "7_53": {
+      "country": "India",
+      "institution": "Indian Institute of Science"
+    },
+    "7_54": {
+      "country": "United States",
+      "institution": "University of California, Los Angeles"
+    },
+    "7_55": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_56": {
+      "country": "United States",
+      "institution": "Harvard University"
+    },
+    "7_57": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "7_58": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "7_59": {
+      "country": "China",
+      "institution": "Tsinghua University"
+    },
+    "7_60": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
     },
     "8_0": {
       "country": "United States",
@@ -607,35 +1115,35 @@
     },
     "8_1": {
       "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "institution": "University of California, Berkeley"
     },
     "8_2": {
       "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "institution": "Northeastern University"
     },
     "8_3": {
-      "country": "United States",
-      "institution": "Massachusetts Institute of Technology"
+      "country": "Sweden",
+      "institution": "Stockholm School of Economics"
     },
     "8_4": {
       "country": "United States",
-      "institution": "Massachusetts Institute of Technology"
+      "institution": "Carnegie Mellon University"
     },
     "8_5": {
       "country": "United States",
-      "institution": "Northeastern University"
+      "institution": "Carnegie Mellon University"
     },
     "8_6": {
       "country": "United States",
-      "institution": "Northeastern University"
+      "institution": "Georgia Institute of Technology"
     },
     "8_7": {
-      "country": "United States",
-      "institution": "University of Chicago"
+      "country": "Denmark",
+      "institution": "Technical University of Denmark"
     },
     "8_8": {
       "country": "United States",
-      "institution": "University of Chicago"
+      "institution": "Carnegie Mellon University"
     },
     "8_9": {
       "country": "United States",
@@ -643,83 +1151,83 @@
     },
     "8_10": {
       "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_11": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_12": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_13": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_14": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_15": {
-      "country": "United Kingdom",
-      "institution": "University of Cambridge"
-    },
-    "8_16": {
-      "country": "United Kingdom",
-      "institution": "University of Cambridge"
-    },
-    "8_17": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_18": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_19": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "8_20": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "institution": "University of Michigan"
     },
     "9_0": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
     "9_1": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "country": "China",
+      "institution": "National Taiwan University Hospital"
     },
     "9_2": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
     "9_3": {
-      "country": "China",
-      "institution": "National Taiwan University"
-    },
-    "9_4": {
-      "country": "China",
-      "institution": "National Taiwan University"
-    },
-    "9_5": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "9_6": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "9_7": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "9_8": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     }
-  }
+  },
+  "themes": {
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": {
+      "theme": "Healthcare",
+      "color": "#6366f1"
+    },
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": {
+      "theme": "Healthcare",
+      "color": "#6366f1"
+    },
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": {
+      "theme": "Healthcare",
+      "color": "#6366f1"
+    },
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": {
+      "theme": "Healthcare",
+      "color": "#6366f1"
+    },
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": {
+      "theme": "NLP",
+      "color": "#a855f7"
+    },
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
+      "theme": "NLP",
+      "color": "#a855f7"
+    },
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": {
+      "theme": "Cybersecurity",
+      "color": "#06b6d4"
+    },
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": {
+      "theme": "Cybersecurity",
+      "color": "#06b6d4"
+    },
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
+      "theme": "Human-Computer Interaction",
+      "color": "#22c55e"
+    },
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": {
+      "theme": "Human-Computer Interaction",
+      "color": "#22c55e"
+    },
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
+      "theme": "Artificial Intelligence",
+      "color": "#eab308"
+    }
+  },
+  "summaries": {
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This paper likely proposes an interpretable clinical prediction model that uses a temporal-feature cross-attention mechanism to reveal how patient variables and their timing jointly drive predictions.",
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper likely introduces SkillsBench, a benchmark for systematically evaluating how effectively reusable agent skills perform across a wide range of tasks and settings.",
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper likely studies whether large reasoning models maintain stable answers and behavior when subjected to adversarial multi-turn conversations designed to induce inconsistency.",
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper likely applies survival analysis to measure how long large language models remain robust before breaking under repeated or escalating adversarial attacks.",
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This paper likely presents a method for tracing how clinical features influence one another over time in predictive models, improving interpretability of longitudinal healthcare predictions.",
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This paper likely argues that AI alignment should be viewed as a two-way process in which both humans and AI systems adapt to each other cognitively rather than as one-sided control.",
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This paper likely develops a predictive framework for end-stage renal disease outcomes by integrating multiple data sources to improve accuracy and clinical usefulness.",
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This paper likely surveys the emerging literature on multi-turn interactions with large language models, covering capabilities, challenges, evaluation methods, and applications beyond single-turn prompting.",
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper likely evaluates whether large language models remain consistent or change their responses across sequential interactions, highlighting factors that make them stable or unreliable over time.",
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper likely explores explainable AI methods for predicting end-stage renal disease from administrative claims data, with an emphasis on making model decisions interpretable to clinicians.",
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This paper likely surveys how confidence estimates are represented and used in large language models for tasks such as calibration, decision-making, control, and uncertainty-aware interaction."
+  },
+  "authorCitations": {}
 }
