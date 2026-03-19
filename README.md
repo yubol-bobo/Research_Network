@@ -118,20 +118,20 @@ Want to share your generated network with others? Just commit the exported JSON 
 ### How to share:
 
 1. **Generate your data** — configure keys, click Refresh, wait for it to finish
-2. **Export** — click the Export button, which downloads a `.json` file
-3. **Rename and move** the file:
+2. **Export** — click the Export button, which downloads a file like `hgN6B6kAAAAJ_network.json`
+3. **Move the file** into the `data/` folder (no rename needed):
    ```bash
-   mv ~/Downloads/*_network.json data/network.json
+   mv ~/Downloads/*_network.json data/
    ```
 4. **Commit and push**:
    ```bash
-   git add data/network.json
+   git add data/
    git commit -m "Add pre-generated network snapshot"
    git push
    ```
 5. **Share the link** — anyone who opens your GitHub Pages URL will see the full network graph and globe automatically. No keys, no refresh, no setup.
 
-> The app checks for `data/network.json` on page load. If it exists, it renders everything immediately. Visitors can still use their own keys to refresh if they want.
+> The app auto-detects snapshot files in `data/`. It looks for `data/{scholarId}_network.json` first (matching the exported filename), then falls back to `data/network.json`. Visitors see results instantly. They can still use their own keys to refresh if they want.
 
 ---
 
