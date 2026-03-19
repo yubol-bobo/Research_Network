@@ -16,7 +16,7 @@ export function exportNetworkJSON(networkData, scholarId) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${scholarId}_network.json`;
+    a.download = 'network.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

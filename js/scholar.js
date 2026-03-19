@@ -55,7 +55,9 @@ function getNextPageUrl(doc, scholarId, currentStart) {
 // Parse citing articles from a "Cited by" search results page
 function parseCitations(doc) {
     const citations = [];
-    const results = doc.querySelectorAll('.gs_r.gs_or.gs_scl, .gs_ri, .gs_r');
+    const seen = new Set();
+    // Use the most specific selector to avoid duplicate matches
+    const results = doc.querySelectorAll('.gs_r.gs_or.gs_scl');
     for (const r of results) {
         const titleEl = r.querySelector('.gs_rt a, .gs_rt');
         const authorEl = r.querySelector('.gs_a');
@@ -64,6 +66,11 @@ function parseCitations(doc) {
 
         const title = titleEl.textContent.replace(/\[.*?\]\s*/g, '').trim();
         if (!title) continue;
+
+        // Deduplicate by normalized title
+        const titleKey = title.toLowerCase().replace(/\s+/g, ' ');
+        if (seen.has(titleKey)) continue;
+        seen.add(titleKey);
 
         const authorText = authorEl?.textContent || '';
         // Format: "Authors - Journal/Venue, Year - Publisher"

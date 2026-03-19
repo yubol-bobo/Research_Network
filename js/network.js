@@ -53,10 +53,16 @@ export function buildNetwork(researcherName, publications, themes = {}, summarie
             type: 'researcher-pub',
         });
 
-        // Citation nodes
+        // Citation nodes (deduplicated, skip self-citations)
         if (pub.citations && pub.citations.length > 0) {
+            const seenTitles = new Set();
+            const pubTitleKey = pub.title.toLowerCase().replace(/\s+/g, ' ');
             for (let j = 0; j < pub.citations.length; j++) {
                 const cit = pub.citations[j];
+                const citKey = cit.title.toLowerCase().replace(/\s+/g, ' ');
+                // Skip duplicates and self-citations
+                if (seenTitles.has(citKey) || citKey === pubTitleKey) continue;
+                seenTitles.add(citKey);
                 const citId = `cit_${i}_${j}`;
 
                 nodes.push({

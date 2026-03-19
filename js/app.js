@@ -50,26 +50,12 @@ initSettingsModal();
 initGraph(graphContainer);
 autoLoadSnapshot();
 
-// ── Auto-load snapshot from data/ ──
-// Tries: data/{scholarId}_network.json → data/network.json
+// ── Auto-load snapshot from data/network.json ──
 async function autoLoadSnapshot() {
     try {
-        const cfg = loadConfig();
-        const candidates = [];
-        if (cfg.scholarId) candidates.push(`data/${cfg.scholarId}_network.json`);
-        candidates.push('data/network.json');
-
-        let data = null;
-        for (const url of candidates) {
-            try {
-                const resp = await fetch(url);
-                if (resp.ok) {
-                    data = await resp.json();
-                    break;
-                }
-            } catch (e) { /* try next */ }
-        }
-        if (!data) return;
+        const resp = await fetch('data/network.json');
+        if (!resp.ok) return;
+        const data = await resp.json();
         if (!data.publications || data.publications.length === 0) return;
 
         currentPublications = data.publications;
