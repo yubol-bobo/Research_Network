@@ -4,92 +4,134 @@ Visualize the impact of your academic research — see your publications, citati
 
 ---
 
-## Quick Start
+## Use This Template
 
-### 1. Get Your API Keys
-
-| Key | Where to Get It | Required? |
-|-----|----------------|-----------|
-| **ScraperAPI** | [scraperapi.com](https://www.scraperapi.com/) (free tier: 5,000 requests) | Yes |
-| **Google Scholar ID** | Your profile URL: `scholar.google.com/citations?user=`**YOUR_ID** | Yes |
-| **LLM API Key** | [OpenAI](https://platform.openai.com/), [Anthropic](https://console.anthropic.com/), or [Google AI](https://aistudio.google.com/) | Optional |
-
-### 2. Open the App
-
-No install needed — just serve the files:
+### Step 1: Fork or Clone
 
 ```bash
-# Option A: Python
-python3 -m http.server 8080
+# Option A: Fork this repo on GitHub (click "Fork" button), then clone your fork
+git clone https://github.com/YOUR_USERNAME/Research_Network.git
 
-# Option B: Node.js
-npx serve
-
-# Option C: Just open index.html in your browser
+# Option B: Clone directly
+git clone https://github.com/yubol-bobo/Research_Network.git
+cd Research_Network
 ```
 
-### 3. Configure Settings
+### Step 2: Enable GitHub Pages
 
-Click the **gear icon** (top-right) and enter:
-- Your **Google Scholar ID**
-- Your **name** (displayed as the center node)
-- Your **ScraperAPI key**
-- (Optional) Pick an **LLM provider**, enter the API key and model name
+1. Go to your repo on GitHub
+2. Click **Settings** > **Pages** (left sidebar)
+3. Under **Source**, select **GitHub Actions**
+4. That's it — the included workflow (`.github/workflows/deploy.yml`) will auto-deploy on every push
 
-Click **Save Settings**.
+### Step 3: Push and Deploy
 
-### 4. Click Refresh
+```bash
+git push origin main
+```
 
-The app will:
-1. Fetch your publications from Google Scholar
-2. Fetch citing papers for each publication
-3. (If LLM configured) Cluster papers into research themes and generate summaries
-4. (If LLM configured) Extract citation geolocation data (countries + institutions)
-5. Render everything
+Go to the **Actions** tab in your repo — you'll see the "Deploy to GitHub Pages" workflow running. Once it finishes (usually ~30 seconds), your site is live at:
+
+```
+https://YOUR_USERNAME.github.io/Research_Network/
+```
+
+### Step 4: Configure on the Live Site
+
+1. Open your deployed site
+2. Click the **gear icon** (top-right) to open Settings
+3. Enter your API keys (see table below)
+4. Click **Save Settings** — keys are stored in your browser only, never in the repo
+5. Click **Refresh** to fetch your data
+
+---
+
+## API Keys
+
+| Key | Where to Get It | Required? | Cost |
+|-----|----------------|-----------|------|
+| **ScraperAPI** | [scraperapi.com](https://www.scraperapi.com/) | Yes | Free tier: 5,000 requests |
+| **Google Scholar ID** | Your profile URL: `scholar.google.com/citations?user=`**YOUR_ID** | Yes | Free |
+| **LLM API Key** | [OpenAI](https://platform.openai.com/), [Anthropic](https://console.anthropic.com/), or [Google AI](https://aistudio.google.com/) | Optional | Pay-per-use |
+
+> **Are my keys safe?** Yes. All keys are stored in your browser's `localStorage` — they never touch the repo, the server, or GitHub. They stay on your machine.
+
+---
+
+## How It Works
+
+1. Click **Refresh** on the live site
+2. The app fetches your Google Scholar publications via ScraperAPI
+3. For each publication, it fetches the citing papers
+4. (If LLM key set) Papers are clustered into broad research themes + summarized
+5. (If LLM key set) Citation geolocation is extracted (countries + institutions)
+6. Everything renders in the two views below
 
 ---
 
 ## Two Views
 
+Toggle between views using the **Network / Globe** buttons in the header.
+
 ### Network View
-An interactive force-directed graph showing your research network.
+Interactive force-directed graph of your research network.
 
 - **Center node** = You
-- **Level 1 nodes** = Your publications (sized by citation count, colored by theme)
-- **Level 2 nodes** = Papers that cite yours
+- **Level 1** = Your publications (sized by citation count, colored by theme)
+- **Level 2** = Papers that cite yours (click a publication to expand/collapse)
 
-**Interactions:**
-- **Hover** a node → see title, year, citations, summary
-- **Click** a publication → expand/collapse its citing papers
-- **Drag** nodes to rearrange
-- **Zoom/pan** with scroll wheel + drag
+| Action | What it does |
+|--------|-------------|
+| Hover a node | See title, year, citations, summary |
+| Click a publication | Expand/collapse its citing papers |
+| Drag a node | Rearrange the layout |
+| Scroll wheel | Zoom in/out |
 
-**Filters** (top bar):
-- Year range (from–to)
-- Recent N publications
-- Keyword search
+**Filters** (top bar): year range, recent N publications, keyword search.
 
 ### Globe View
-A 3D rotating globe showing where your citations come from.
+3D rotating globe showing where your citations come from.
 
-- Countries with citations **light up** (brighter = more citations)
+- Countries with citations **light up** — brighter = more citations
 - **Hover** a country → see citation count and top institutions
-- Globe **pauses rotation** when hovering a country
-- **Stats overlay** shows total mapped citations and country count
-
-**Below the globe:** ranked leaderboards of top countries and institutions (adjustable top-K).
+- Globe **pauses** when you hover a cited country
+- **Scroll down** for ranked leaderboards (top countries + top institutions, adjustable K)
 
 ---
 
 ## Saving & Reusing Data
 
-Scraping takes time (and API credits). Use **Export/Import** to avoid re-scraping:
+Scraping uses API credits and takes time. Use **Export/Import** to cache your data:
 
-1. After first Refresh, click **Export** → saves a `.json` file
-2. Next time, click **Import** → load that file
-3. Click **Refresh** again → only fetches *new* publications not already in the cache
+1. After first Refresh → click **Export** → saves a `.json` file to your computer
+2. Next time → click **Import** → load that file
+3. Click **Refresh** → only fetches *new* publications not in the cache
 
-The exported JSON includes publications, citations, and geolocation data.
+The exported JSON includes all publications, citations, and geolocation data.
+
+---
+
+## Running Locally
+
+No install needed — it's a static site:
+
+```bash
+# Option A: Python
+cd Research_Network
+python3 -m http.server 8080
+# Open http://localhost:8080
+
+# Option B: Node.js
+npx serve
+```
+
+---
+
+## GitHub Actions Workflow
+
+The included `.github/workflows/deploy.yml` automatically deploys to GitHub Pages on every push to `main`. No configuration needed — just enable GitHub Pages with "GitHub Actions" as the source (Step 2 above).
+
+If you want to deploy manually, go to **Actions** > **Deploy to GitHub Pages** > **Run workflow**.
 
 ---
 
@@ -97,24 +139,27 @@ The exported JSON includes publications, citations, and geolocation data.
 
 ```
 Research_Network/
-├── index.html          # Main page
-├── css/style.css       # Dark theme styles
+├── .github/workflows/
+│   └── deploy.yml        # GitHub Actions → GitHub Pages
+├── index.html            # Main page
+├── css/
+│   └── style.css         # Dark theme + glassmorphism styles
 ├── js/
-│   ├── app.js          # Main entry point
-│   ├── config.js       # Settings modal + localStorage
-│   ├── scholar.js      # Google Scholar scraping via ScraperAPI
-│   ├── llm.js          # LLM calls (OpenAI / Claude / Gemini)
-│   ├── network.js      # Build node-link data structure
-│   ├── graph.js        # D3.js force-directed graph
-│   ├── globe.js        # 3D globe (globe.gl)
-│   ├── countries.js    # Country → lat/lng mapping
-│   └── cache.js        # JSON export/import + merge
+│   ├── app.js            # Main entry, wires everything together
+│   ├── config.js         # Settings modal + localStorage
+│   ├── scholar.js        # Google Scholar scraping via ScraperAPI
+│   ├── llm.js            # LLM calls (OpenAI / Claude / Gemini)
+│   ├── network.js        # Builds node-link data structure
+│   ├── graph.js          # D3.js force-directed graph
+│   ├── globe.js          # 3D globe (globe.gl) with country highlighting
+│   ├── countries.js      # Country name → lat/lng coordinate mapping
+│   └── cache.js          # JSON export/import + merge logic
 └── README.md
 ```
 
 ## Tech Stack
 
-- Pure HTML/CSS/JS — no build step, no framework
+- Pure HTML/CSS/JS — no build step, no framework, no backend
 - [D3.js v7](https://d3js.org/) — force-directed graph
 - [globe.gl](https://globe.gl/) — 3D globe visualization
 - [ScraperAPI](https://www.scraperapi.com/) — Google Scholar access
