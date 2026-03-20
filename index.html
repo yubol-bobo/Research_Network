@@ -197,24 +197,11 @@
                     </div>
                 </div>
                 <div class="form-section">
-                    <h3>Scraping Method</h3>
+                    <h3>Scraping (Selenium)</h3>
                     <div class="form-group">
-                        <label for="cfgScrapeMethod">Method</label>
-                        <select id="cfgScrapeMethod">
-                            <option value="selenium">Selenium (local Python server, free)</option>
-                            <option value="scraperapi">ScraperAPI (cloud, needs key)</option>
-                        </select>
-                        <small id="scrapeMethodHint">Run <code>python scraper/server.py</code> locally first</small>
-                    </div>
-                    <div class="form-group" id="scraperKeyGroup">
-                        <label for="cfgScraperKey">ScraperAPI Key</label>
-                        <input type="password" id="cfgScraperKey" placeholder="Your ScraperAPI key">
-                        <small><a href="https://www.scraperapi.com/" target="_blank" rel="noopener">Get a free key</a></small>
-                    </div>
-                    <div class="form-group" id="seleniumUrlGroup">
                         <label for="cfgSeleniumUrl">Scraper Server URL</label>
                         <input type="text" id="cfgSeleniumUrl" placeholder="http://localhost:5555">
-                        <small>URL of the local scraper server</small>
+                        <small>Run <code>python scraper/server.py</code> locally first</small>
                     </div>
                 </div>
                 <div class="form-section">

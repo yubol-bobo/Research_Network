@@ -5,8 +5,6 @@ const CONFIG_KEY = 'research_network_config';
 const DEFAULTS = {
     scholarId: '',
     researcherName: '',
-    scrapeMethod: 'selenium',
-    scraperKey: '',
     seleniumUrl: 'http://localhost:5555',
     llmProvider: 'openai',
     llmKey: '',
@@ -29,7 +27,6 @@ export function validateConfig(cfg) {
     const missing = [];
     if (!cfg.scholarId.trim()) missing.push('Scholar ID');
     if (!cfg.researcherName.trim()) missing.push('Researcher Name');
-    if (cfg.scrapeMethod === 'scraperapi' && !cfg.scraperKey.trim()) missing.push('ScraperAPI Key');
     return missing;
 }
 
@@ -43,39 +40,17 @@ export function initSettingsModal() {
     const fields = {
         scholarId: document.getElementById('cfgScholarId'),
         researcherName: document.getElementById('cfgResearcherName'),
-        scrapeMethod: document.getElementById('cfgScrapeMethod'),
-        scraperKey: document.getElementById('cfgScraperKey'),
         seleniumUrl: document.getElementById('cfgSeleniumUrl'),
         llmProvider: document.getElementById('cfgLlmProvider'),
         llmKey: document.getElementById('cfgLlmKey'),
         llmModel: document.getElementById('cfgLlmModel'),
     };
 
-    const scraperKeyGroup = document.getElementById('scraperKeyGroup');
-    const seleniumUrlGroup = document.getElementById('seleniumUrlGroup');
-    const scrapeMethodHint = document.getElementById('scrapeMethodHint');
-
-    function updateMethodVisibility() {
-        const method = fields.scrapeMethod.value;
-        if (method === 'selenium') {
-            scraperKeyGroup.style.display = 'none';
-            seleniumUrlGroup.style.display = 'block';
-            scrapeMethodHint.textContent = 'Run "python scraper/server.py" locally first';
-        } else {
-            scraperKeyGroup.style.display = 'block';
-            seleniumUrlGroup.style.display = 'none';
-            scrapeMethodHint.textContent = 'Uses ScraperAPI cloud proxy';
-        }
-    }
-
-    fields.scrapeMethod.addEventListener('change', updateMethodVisibility);
-
     function populateFields() {
         const cfg = loadConfig();
         for (const [key, el] of Object.entries(fields)) {
             el.value = cfg[key] || '';
         }
-        updateMethodVisibility();
     }
 
     function openModal() {

@@ -128,7 +128,7 @@ export function renderScholarView(container, collaborators, citingAuthors, onFet
                 <div class="scholar-section-header">
                     <h2>Citing Authors</h2>
                     <span class="scholar-count">${citingAuthors.length} authors</span>
-                    <button class="btn btn-sm btn-fetch-citations" id="btnFetchCitations" title="Fetch real citation counts from Google Scholar via ScraperAPI">Fetch Citations</button>
+                    <button class="btn btn-sm btn-fetch-citations" id="btnFetchCitations" title="Fetch real citation counts from Google Scholar via Selenium">Fetch Citations</button>
                     <input type="text" class="scholar-search" id="searchCiting" placeholder="Search citing authors...">
                 </div>
                 <div class="scholar-table-wrap">

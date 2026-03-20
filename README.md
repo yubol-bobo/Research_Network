@@ -26,10 +26,6 @@ cd Research_Network
 
 ### Step 3: Scrape Your Data
 
-Two methods are available:
-
-#### Method A: Selenium (Recommended — Free)
-
 Uses a local Python + Selenium scraper to control Chrome. No API keys needed for scraping.
 
 ```bash
@@ -37,9 +33,6 @@ Uses a local Python + Selenium scraper to control Chrome. No API keys needed for
 pip install -r scraper/requirements.txt
 
 # Run the scraper (opens Chrome, scrapes your Scholar profile)
-python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
-
-# With full author names (slower, fetches each citing paper's page)
 python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
 
 # Skip full author fetch (faster)
@@ -51,7 +44,7 @@ python scraper/scholar_scraper.py YOUR_SCHOLAR_ID --headless
 
 This saves the result to `data/network.json` automatically. The scraper caches previous results — re-running only fetches new citations.
 
-**Using the web UI Refresh button with Selenium:**
+**Using the web UI Refresh button:**
 
 ```bash
 # Start the local scraper server
@@ -60,15 +53,6 @@ python scraper/server.py
 # Then open the web app and click Refresh
 # The app calls the local server which runs Selenium
 ```
-
-#### Method B: ScraperAPI (Cloud — Needs Key)
-
-Uses [ScraperAPI](https://www.scraperapi.com/) as a cloud proxy. Free tier gives 5,000 requests.
-
-1. Open the deployed site
-2. Click the **gear icon** > select **ScraperAPI** as scraping method
-3. Enter your ScraperAPI key
-4. Click **Refresh**
 
 ### Step 4: Push and Deploy
 
@@ -89,8 +73,7 @@ Anyone who opens the link sees your results — no keys or setup needed.
 | Setting | Where to Get It | Required? | Cost |
 |---------|----------------|-----------|------|
 | **Google Scholar ID** | Your profile URL: `scholar.google.com/citations?user=`**YOUR_ID** | Yes | Free |
-| **Selenium** (Python) | `pip install selenium webdriver-manager` | For Method A | Free |
-| **ScraperAPI Key** | [scraperapi.com](https://www.scraperapi.com/) | For Method B | Free tier: 5,000 requests |
+| **Selenium** (Python) | `pip install selenium webdriver-manager` | Yes | Free |
 | **LLM API Key** | [OpenAI](https://platform.openai.com/), [Anthropic](https://console.anthropic.com/), or [Google AI](https://aistudio.google.com/) | Optional | Pay-per-use |
 
 > **Are my API keys safe?** Yes. All keys entered in the web UI are stored in your browser's `localStorage` — they never touch the repo, the server, or GitHub.
@@ -193,7 +176,7 @@ Research_Network/
 ├── js/
 │   ├── app.js              # Main entry, wires everything together
 │   ├── config.js           # Settings modal + localStorage
-│   ├── scholar.js          # Google Scholar scraping via ScraperAPI
+│   ├── scholar.js          # Google Scholar data parsing & aggregation
 │   ├── llm.js              # LLM calls (OpenAI / Claude / Gemini)
 │   ├── network.js          # Builds node-link data structure
 │   ├── graph.js            # D3.js force-directed graph
@@ -216,5 +199,4 @@ Research_Network/
 - [D3.js v7](https://d3js.org/) — force-directed graph
 - [globe.gl](https://globe.gl/) — 3D globe visualization
 - [Selenium](https://www.selenium.dev/) — local Google Scholar scraping
-- [ScraperAPI](https://www.scraperapi.com/) — cloud-based Scholar access (alternative)
 - OpenAI / Claude / Gemini — paper analysis + geolocation inference

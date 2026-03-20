@@ -3,7 +3,7 @@
 Local scraper server for Research Network.
 
 Runs a tiny HTTP server so the web app's Refresh button can trigger
-Selenium scraping without needing ScraperAPI.
+Selenium scraping from the browser.
 
 Usage:
     python server.py [--port 5555]

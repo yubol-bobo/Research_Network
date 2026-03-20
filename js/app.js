@@ -1,8 +1,8 @@
 // ── Main Application Entry ──
 
 import { loadConfig, validateConfig, initSettingsModal } from './config.js';
-import { fetchScholarData, parseCoAuthors, parseCitingAuthors, fetchAuthorCitations } from './scholar.js';
-import { exportNetworkJSON, importNetworkJSON, mergePublications, buildCacheMap } from './cache.js';
+import { parseCoAuthors, parseCitingAuthors } from './scholar.js';
+import { exportNetworkJSON, importNetworkJSON } from './cache.js';
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
 import { analyzePapers, extractCitationGeo, cleanInstitutions } from './llm.js';
@@ -342,21 +342,8 @@ btnRefresh.addEventListener('click', async () => {
 
         let publications;
 
-        if (cfg.scrapeMethod === 'selenium') {
-            // Selenium mode: call local Python server
-            publications = await fetchViaSeleniumServer(cfg);
-        } else {
-            // ScraperAPI mode: browser-based scraping
-            const existingPubs = cachedImportData?.publications || currentPublications;
-            const cacheMap = buildCacheMap(existingPubs);
-            publications = await fetchScholarData(
-                cfg.scholarId,
-                cfg.scraperKey,
-                (msg, pct, detail) => showLoading(msg, pct, detail),
-                cacheMap
-            );
-            publications = mergePublications(existingPubs, publications);
-        }
+        // Selenium mode: call local Python server
+        publications = await fetchViaSeleniumServer(cfg);
 
         currentPublications = publications;
         updateStats(currentPublications);
@@ -428,7 +415,7 @@ async function fetchViaSeleniumServer(cfg) {
         throw new Error(
             `Cannot connect to scraper server at ${serverUrl}.\n\n` +
             'Start it with: python scraper/server.py\n\n' +
-            'Or switch to ScraperAPI mode in Settings.'
+            'Run: python scraper/server.py'
         );
     }
 
@@ -650,29 +637,9 @@ function renderScholarData() {
 }
 
 async function onFetchAuthorCitations(authors) {
-    const cfg = loadConfig();
-    if (!cfg.scraperKey) {
-        alert('Please configure a ScraperAPI key in Settings first.');
-        return;
-    }
-
-    showLoading('Fetching author citation counts...', 0);
-    try {
-        const results = await fetchAuthorCitations(
-            authors,
-            cfg.scraperKey,
-            (msg, pct) => showLoading(msg, pct)
-        );
-        // Merge into state
-        Object.assign(currentAuthorCitations, results);
-        hideLoading();
-        // Re-render
-        renderScholarData();
-    } catch (e) {
-        hideLoading();
-        console.error('Failed to fetch author citations:', e);
-        alert(`Error: ${e.message}`);
-    }
+    // Citation counts are already available from Scholar profiles scraped via Selenium.
+    // This button is kept for backward compatibility but no longer needs a separate fetch.
+    alert('Citation counts are already fetched from Scholar profiles during scraping. Re-run Refresh to update.');
 }
 
 // ── Author Mode Toggle ──
