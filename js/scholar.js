@@ -141,10 +141,15 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
                             country: geo.country || '',
                             isFirstAuthor: author.isFirstAuthor || false,
                             papers: [],
+                            citedPublications: [],
                         };
                     }
                     authorMap[displayName].citCount++;
                     authorMap[displayName].papers.push(cit.title);
+                    // Track which parent publication this citation refers to
+                    if (pub.title && !authorMap[displayName].citedPublications.includes(pub.title)) {
+                        authorMap[displayName].citedPublications.push(pub.title);
+                    }
                     // Update institution/country if we get better data
                     if (profile.institution && !authorMap[displayName].institution) {
                         authorMap[displayName].institution = profile.institution;
@@ -188,10 +193,14 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
                         institution: profile.institution || geo.institution || '',
                         country: geo.country || '',
                         papers: [],
+                        citedPublications: [],
                     };
                 }
                 authorMap[displayName].citCount++;
                 authorMap[displayName].papers.push(cit.title);
+                if (pub.title && !authorMap[displayName].citedPublications.includes(pub.title)) {
+                    authorMap[displayName].citedPublications.push(pub.title);
+                }
                 if (profile.institution && !authorMap[displayName].institution) {
                     authorMap[displayName].institution = profile.institution;
                 }

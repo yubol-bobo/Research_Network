@@ -248,8 +248,13 @@ function renderCitingTable() {
 
     const maxCount = data[0]?.citCount || 1;
 
-    tbody.innerHTML = data.map((d, i) => `
-        <tr>
+    tbody.innerHTML = data.map((d, i) => {
+        const pubs = d.citedPublications || [];
+        const tooltipText = pubs.length > 0
+            ? pubs.map(p => `• ${escapeHtml(p)}`).join('\n')
+            : '';
+        return `
+        <tr class="${pubs.length > 0 ? 'has-tooltip' : ''}" ${pubs.length > 0 ? `data-cited-pubs="${escapeAttr(JSON.stringify(pubs))}"` : ''}>
             <td class="td-rank">${i + 1}</td>
             <td class="td-name">${d.name}</td>
             <td class="td-bar">
@@ -261,6 +266,71 @@ function renderCitingTable() {
             <td class="td-num">${d.authorCitations ? d.authorCitations.toLocaleString() : '—'}</td>
             <td class="td-text">${cleanInstitution(d.institution) || '—'}</td>
             <td class="td-text">${d.country || '—'}</td>
-        </tr>
-    `).join('');
+        </tr>`;
+    }).join('');
+
+    // Wire tooltip hover events
+    wireTooltips(tbody);
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function escapeAttr(str) {
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+/** Create and manage hover tooltip showing cited parent publications */
+function wireTooltips(tbody) {
+    let tooltip = document.getElementById('scholar-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'scholar-tooltip';
+        tooltip.className = 'scholar-tooltip';
+        document.body.appendChild(tooltip);
+    }
+
+    tbody.querySelectorAll('tr.has-tooltip').forEach(row => {
+        row.addEventListener('mouseenter', (e) => {
+            const pubs = JSON.parse(row.dataset.citedPubs || '[]');
+            if (pubs.length === 0) return;
+
+            const name = row.querySelector('.td-name')?.textContent || '';
+            tooltip.innerHTML = `
+                <div class="tooltip-header">Publications cited by ${escapeHtml(name)}</div>
+                <ul class="tooltip-list">
+                    ${pubs.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
+                </ul>
+            `;
+            tooltip.style.display = 'block';
+            positionTooltip(tooltip, row);
+        });
+
+        row.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    });
+}
+
+function positionTooltip(tooltip, row) {
+    const rect = row.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+
+    // Position above the row, centered horizontally
+    let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+    let top = rect.top - tooltipRect.height - 8;
+
+    // If tooltip would go above viewport, show below
+    if (top < 8) {
+        top = rect.bottom + 8;
+    }
+    // Keep within viewport horizontally
+    if (left < 8) left = 8;
+    if (left + tooltipRect.width > window.innerWidth - 8) {
+        left = window.innerWidth - tooltipRect.width - 8;
+    }
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
 }
