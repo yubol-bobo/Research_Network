@@ -263,3 +263,80 @@ IMPORTANT: Taiwan is part of China. Always use "China" for institutions in Taiwa
 
     return geoData;
 }
+
+/**
+ * Clean institution names using LLM — extract just the university/organization name.
+ * e.g. "PhD student, Department of CS, The Chinese University of Hong Kong"
+ *    → "The Chinese University of Hong Kong"
+ *
+ * @param {Object} scholarProfiles - { scholarId: { fullName, institution, ... } }
+ * @param {Object} config - { llmProvider, llmKey, llmModel }
+ * @param {Function} onProgress
+ * @returns {Object} updated scholarProfiles with cleaned institution names
+ */
+export async function cleanInstitutions(scholarProfiles, config, onProgress) {
+    // Collect unique raw institutions
+    const rawInstitutions = new Set();
+    for (const profile of Object.values(scholarProfiles)) {
+        if (profile.institution && profile.institution.length > 0) {
+            rawInstitutions.add(profile.institution);
+        }
+    }
+
+    if (rawInstitutions.size === 0) return scholarProfiles;
+
+    const uniqueList = [...rawInstitutions];
+    const cleanMap = {}; // raw → cleaned
+
+    // Batch in groups of 30
+    const batchSize = 30;
+    const totalBatches = Math.ceil(uniqueList.length / batchSize);
+
+    for (let b = 0; b < totalBatches; b++) {
+        const batch = uniqueList.slice(b * batchSize, (b + 1) * batchSize);
+        const pct = Math.round((b / totalBatches) * 100);
+        onProgress(`Cleaning institution names (${b + 1}/${totalBatches})...`, pct);
+
+        const prompt = `Extract ONLY the university or organization name from each institution string below. Remove titles (PhD student, Professor, etc.), departments, and descriptions. Keep just the institution/university name.
+
+Examples:
+- "PhD student, Department of Computer Science and Engineering, The Chinese University of Hong Kong" → "The Chinese University of Hong Kong"
+- "PhD Candidate of Computer Science, University of California, Santa Cruz" → "University of California, Santa Cruz"
+- "Associate Professor, School of Computing, National University of Singapore" → "National University of Singapore"
+- "Research Scientist at Google DeepMind" → "Google DeepMind"
+- "Postdoc @ ENS-PSL & CNRS-LATTICE" → "ENS-PSL & CNRS-LATTICE"
+- "Professor and Head of CSE department, Qatar University" → "Qatar University"
+- "Founder & CEO, DeepWisdom" → "DeepWisdom"
+- "Master of Statistics, The University of Hong Kong" → "The University of Hong Kong"
+- "Carnegie Mellon University" → "Carnegie Mellon University"
+
+Return ONLY a JSON object mapping each input string to the cleaned institution name:
+${JSON.stringify(Object.fromEntries(batch.map((inst, i) => [String(i + 1), inst])), null, 1)}
+
+Respond with JSON: { "1": "cleaned name", "2": "cleaned name", ... }`;
+
+        try {
+            const resp = await callLLM(config.llmProvider, config.llmKey, config.llmModel, prompt);
+            const parsed = JSON.parse(resp.replace(/```json?\n?/g, '').replace(/```/g, '').trim());
+
+            for (const [idx, cleaned] of Object.entries(parsed)) {
+                const rawInst = batch[parseInt(idx) - 1];
+                if (rawInst && cleaned) {
+                    cleanMap[rawInst] = cleaned;
+                }
+            }
+        } catch (e) {
+            console.warn(`Institution cleaning batch ${b + 1} failed:`, e);
+        }
+    }
+
+    // Apply cleaned names to profiles
+    const updated = { ...scholarProfiles };
+    for (const [sid, profile] of Object.entries(updated)) {
+        if (profile.institution && cleanMap[profile.institution]) {
+            updated[sid] = { ...profile, institution: cleanMap[profile.institution] };
+        }
+    }
+
+    return updated;
+}

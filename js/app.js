@@ -5,7 +5,7 @@ import { fetchScholarData, parseCoAuthors, parseCitingAuthors, fetchAuthorCitati
 import { exportNetworkJSON, importNetworkJSON, mergePublications, buildCacheMap } from './cache.js';
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
-import { analyzePapers, extractCitationGeo } from './llm.js';
+import { analyzePapers, extractCitationGeo, cleanInstitutions } from './llm.js';
 import { aggregateGeoData, initGlobe, destroyGlobe } from './globe.js';
 import { renderScholarView } from './scholar-view.js';
 
@@ -318,6 +318,18 @@ btnRefresh.addEventListener('click', async () => {
                 currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
             } catch (e) {
                 console.warn('LLM geo extraction failed:', e);
+            }
+
+            // LLM institution name cleaning
+            if (Object.keys(currentScholarProfiles).length > 0) {
+                try {
+                    showLoading('Cleaning institution names...', 92);
+                    currentScholarProfiles = await cleanInstitutions(
+                        currentScholarProfiles, cfg, (msg, pct) => showLoading(msg, pct)
+                    );
+                } catch (e) {
+                    console.warn('Institution cleaning failed:', e);
+                }
             }
         }
 

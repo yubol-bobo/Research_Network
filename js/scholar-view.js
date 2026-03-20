@@ -8,6 +8,92 @@ let citingFilter = '';
 let fetchCitationsCallback = null;
 
 /**
+ * Clean an institution string to show only the university/organization name.
+ * Strips titles, degrees, departments, etc.
+ */
+function cleanInstitution(raw) {
+    if (!raw || raw === '—') return raw;
+    if (/^unknown/i.test(raw)) return '—';
+
+    // Patterns to strip from the beginning
+    const prefixes = [
+        /^(Distinguished |Emeritus |Adjunct |Visiting |Honorary |Senior |Junior |Lead |Principal |Chief |Staff |Research )*/i,
+        /^(Full |Associate |Assistant )?(Professor|Prof\.|Lecturer|Instructor|Fellow|Scientist|Researcher|Engineer|Director|Dean|Chair|Head)/i,
+        /^(Postdoc|Post-doc|Postdoctoral (researcher|fellow|associate))/i,
+        /^(PhD|Ph\.?D\.?|Doctoral|Master'?s?|MSc|MS|MA|MBA|MPhil|BS|BSc|BA) ?(student|candidate|researcher)?/i,
+        /^(Research (Scientist|Engineer|Associate|Fellow|Assistant|Director))/i,
+        /^(AI |ML |NLP |Software |Data )?(Scientist|Engineer|Researcher|Developer)/i,
+        /^(Founder|Co-?founder|CEO|CTO|COO|VP|President|Manager)/i,
+        /^(of |in |at |@ )?(Computer Science|Electrical Engineering|Mathematics|Statistics|Physics|Chemistry|Biology|Medicine|Economics|Psychology|Linguistics)/i,
+    ];
+
+    // Try splitting by common separators and finding the institution part
+    // Common patterns: "Title, Dept, University" or "Title @ University" or "Title at University"
+    let cleaned = raw;
+
+    // Handle "@ University" or "Title@Company" pattern
+    // Take the LAST @-separated institution if multiple exist
+    const atParts = cleaned.split(/(?:,\s*)?(?:@|(?:\bat\b))\s*/i).filter(Boolean);
+    if (atParts.length > 1) {
+        cleaned = atParts[atParts.length - 1].trim();
+    }
+
+    // Split by comma and work backwards to find the institution
+    const parts = cleaned.split(',').map(p => p.trim());
+    if (parts.length > 1) {
+        // Walk from the end; find the first part that looks like an institution name
+        let instStart = -1;
+        for (let i = parts.length - 1; i >= 0; i--) {
+            const part = parts[i].trim();
+            // Skip if it looks like a title/role
+            if (/^(PhD|Ph\.?D|Professor|Prof\.|Postdoc|Post-?doc|Research|Assistant|Associate|Senior|Junior|Distinguished|Visiting|Director|Fellow|Lecturer|Student|Candidate|Engineer|Scientist|Master|Doctoral|Founder|CEO|CTO|Co-?founder|AI |ML |NLP |Software |Data )/i.test(part)) {
+                continue;
+            }
+            // Skip if it's a department-only reference
+            if (/^(Department|Dept|School|Faculty|College|Division|Center|Centre|Lab|Group|Institute|Program) (of|for|in) /i.test(part)) {
+                continue;
+            }
+            // Skip if very short or looks like a degree
+            if (part.length < 3) continue;
+            if (/^(MS|MSc|MA|MBA|BS|BSc|BA|MPhil|CSE|ECE|EE|CS|SE)\b/i.test(part) && part.length < 15) continue;
+
+            // Check if this part contains "University", "Institute", "College" etc — strong signal
+            if (/University|Institut|College|Polytechnic|School of|Academy|Labs?$|Inc\.|Corp|Google|Microsoft|Meta|Amazon|DeepMind|OpenAI|NVIDIA/i.test(part)) {
+                instStart = i;
+                break;
+            }
+
+            // Otherwise accept it as a potential institution
+            instStart = i;
+            break;
+        }
+
+        if (instStart >= 0) {
+            // Check if the part before instStart is "University of X" that continues with location
+            // e.g. ["University of California", "Santa Cruz"] should stay together
+            if (instStart > 0) {
+                const prev = parts[instStart - 1].trim();
+                if (/University of|Institut[eo]? (of|de|für)|Universit[éyà]/i.test(prev)) {
+                    instStart = instStart - 1;
+                }
+            }
+            cleaned = parts.slice(instStart).join(', ').trim();
+        }
+    }
+
+    // Clean up remaining title prefixes
+    cleaned = cleaned
+        .replace(/^(and |& )?(Head|Director|Chair|Dean|Professor|Fellow|Member) (of |at |in )*/i, '')
+        .replace(/^\s*[,;]\s*/, '')
+        .trim();
+
+    // If we ended up with something too short or empty, return original
+    if (cleaned.length < 3) return raw;
+
+    return cleaned;
+}
+
+/**
  * Render the Scholar view with collaborators and citing authors.
  */
 export function renderScholarView(container, collaborators, citingAuthors, onFetchCitations) {
@@ -173,7 +259,7 @@ function renderCitingTable() {
                 </div>
             </td>
             <td class="td-num">${d.authorCitations ? d.authorCitations.toLocaleString() : '—'}</td>
-            <td class="td-text">${d.institution || '—'}</td>
+            <td class="td-text">${cleanInstitution(d.institution) || '—'}</td>
             <td class="td-text">${d.country || '—'}</td>
         </tr>
     `).join('');
