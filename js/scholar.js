@@ -6,10 +6,36 @@ function scraperUrl(targetUrl, apiKey) {
     return `${SCRAPER_BASE}?api_key=${encodeURIComponent(apiKey)}&url=${encodeURIComponent(targetUrl)}&render=false`;
 }
 
-async function fetchPage(url, apiKey) {
-    const resp = await fetch(scraperUrl(url, apiKey));
-    if (!resp.ok) throw new Error(`ScraperAPI error ${resp.status}: ${resp.statusText}`);
-    return await resp.text();
+async function fetchPage(url, apiKey, maxRetries = 3) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const resp = await fetch(scraperUrl(url, apiKey));
+            if (resp.status === 429) {
+                // Rate limited — wait longer before retry
+                const wait = 5000 * attempt;
+                console.warn(`Rate limited (429), waiting ${wait / 1000}s before retry ${attempt}/${maxRetries}`);
+                await delay(wait);
+                continue;
+            }
+            if (!resp.ok) throw new Error(`ScraperAPI error ${resp.status}: ${resp.statusText}`);
+            const html = await resp.text();
+            // Check for Scholar's "try again later" block
+            if (html.includes("can\u0027t perform the operation now") || html.includes("unusual traffic")) {
+                if (attempt < maxRetries) {
+                    const wait = 4000 * attempt;
+                    console.warn(`Scholar blocked, waiting ${wait / 1000}s before retry ${attempt}/${maxRetries}`);
+                    await delay(wait);
+                    continue;
+                }
+            }
+            return html;
+        } catch (e) {
+            if (attempt === maxRetries) throw e;
+            const wait = 3000 * attempt;
+            console.warn(`Fetch failed, waiting ${wait / 1000}s before retry ${attempt}/${maxRetries}: ${e.message}`);
+            await delay(wait);
+        }
+    }
 }
 
 function parseHTML(html) {
@@ -54,18 +80,26 @@ function parsePublications(doc) {
  */
 export function parseCoAuthors(publications, researcherName) {
     const coauthorMap = {};
-    const researcherParts = researcherName.toLowerCase().split(/\s+/);
+    const researcherLower = (researcherName || '').toLowerCase().trim();
+    const researcherParts = researcherLower ? researcherLower.split(/\s+/) : [];
 
     for (const pub of publications) {
         if (!pub.authors) continue;
         const names = pub.authors.split(',').map(n => n.trim()).filter(Boolean);
 
         for (const name of names) {
-            // Skip the researcher themselves (fuzzy match)
-            const nameLower = name.toLowerCase();
-            const isResearcher = researcherParts.every(p => nameLower.includes(p))
-                || nameLower === researcherName.toLowerCase();
-            if (isResearcher) continue;
+            // Skip the researcher themselves (fuzzy match, only if name is set)
+            if (researcherParts.length > 0) {
+                const nameLower = name.toLowerCase();
+                // Check if abbreviated name matches (e.g., "Y Li" matches "Yubo Li")
+                const nameParts = nameLower.split(/\s+/);
+                const lastNameMatch = nameParts.length > 0 && researcherParts.includes(nameParts[nameParts.length - 1]);
+                const firstInitialMatch = nameParts.length > 0 && researcherParts.some(p => p.startsWith(nameParts[0]));
+                const isResearcher = researcherParts.every(p => nameLower.includes(p))
+                    || nameLower === researcherLower
+                    || (lastNameMatch && firstInitialMatch);
+                if (isResearcher) continue;
+            }
 
             // Skip ellipsis
             if (name === '...' || name === '…') continue;
@@ -89,8 +123,9 @@ export function parseCoAuthors(publications, researcherName) {
  */
 /**
  * @param {boolean} firstAuthorOnly - if true, only count first author; if false, count all authors
+ * @param {Object} scholarProfiles - { scholarId: { fullName, totalCitations, institution } }
  */
-export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly = true) {
+export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly = true, scholarProfiles = {}) {
     const authorMap = {};
 
     for (let pi = 0; pi < publications.length; pi++) {
@@ -99,52 +134,93 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
 
         for (let ci = 0; ci < pub.citations.length; ci++) {
             const cit = pub.citations[ci];
-            if (!cit.authors && !cit.fullAuthors) continue;
-
             const geo = geoData[`${pi}_${ci}`] || {};
 
-            // Prefer full author names over abbreviated ones
+            // New format: use authorList if available (from Selenium scraper)
+            if (cit.authorList && cit.authorList.length > 0) {
+                const authors = firstAuthorOnly
+                    ? cit.authorList.filter(a => a.isFirstAuthor).slice(0, 1)
+                    : cit.authorList;
+
+                // If no first author flagged, use first entry
+                const effectiveAuthors = authors.length > 0 ? authors : [cit.authorList[0]];
+
+                for (const author of effectiveAuthors) {
+                    const sid = author.scholarId || '';
+                    const profile = sid ? (scholarProfiles[sid] || {}) : {};
+                    // Use full name from profile if available, otherwise abbreviated
+                    const displayName = profile.fullName || author.name;
+                    if (!displayName) continue;
+
+                    if (!authorMap[displayName]) {
+                        authorMap[displayName] = {
+                            name: displayName,
+                            citCount: 0,
+                            authorCitations: profile.totalCitations || 0,
+                            scholarId: sid,
+                            institution: profile.institution || geo.institution || '',
+                            country: geo.country || '',
+                            isFirstAuthor: author.isFirstAuthor || false,
+                            papers: [],
+                        };
+                    }
+                    authorMap[displayName].citCount++;
+                    authorMap[displayName].papers.push(cit.title);
+                    // Update institution/country if we get better data
+                    if (profile.institution && !authorMap[displayName].institution) {
+                        authorMap[displayName].institution = profile.institution;
+                    }
+                    if (profile.totalCitations && !authorMap[displayName].authorCitations) {
+                        authorMap[displayName].authorCitations = profile.totalCitations;
+                    }
+                    if (geo.country && !authorMap[displayName].country) {
+                        authorMap[displayName].country = geo.country;
+                    }
+                }
+                continue;
+            }
+
+            // Legacy format: parse from author strings
+            if (!cit.authors && !cit.fullAuthors) continue;
+
             const authorString = cit.fullAuthors || cit.authors || '';
-            // Get author names to process — filter out non-name entries
             const allNames = authorString.split(',').map(n => n.trim()).filter(n => {
                 if (!n || n === '...' || n === '…') return false;
-                // Filter out years (e.g. "2025", "2026")
                 if (/^\d{4}$/.test(n)) return false;
-                // Filter out entries containing venue/journal text
                 if (/arXiv|preprint|proceedings|journal|conference|IEEE|ACM|springer|elsevier|wiley/i.test(n)) return false;
-                // Must look like a name: at least one letter
                 if (!/[a-zA-Z]/.test(n)) return false;
-                // Filter out very long entries (likely venue text, not names)
                 if (n.length > 40) return false;
                 return true;
             });
             const names = firstAuthorOnly ? allNames.slice(0, 1) : allNames;
-
             const profiles = cit.authorProfiles || {};
 
             for (const name of names) {
-                if (!authorMap[name]) {
-                    authorMap[name] = {
-                        name,
+                const sid = profiles[name] || '';
+                const profile = sid ? (scholarProfiles[sid] || {}) : {};
+                const displayName = profile.fullName || name;
+
+                if (!authorMap[displayName]) {
+                    authorMap[displayName] = {
+                        name: displayName,
                         citCount: 0,
-                        authorCitations: 0,
-                        scholarId: profiles[name] || '',
-                        institution: geo.institution || '',
+                        authorCitations: profile.totalCitations || 0,
+                        scholarId: sid,
+                        institution: profile.institution || geo.institution || '',
                         country: geo.country || '',
                         papers: [],
                     };
                 }
-                authorMap[name].citCount++;
-                authorMap[name].papers.push(cit.title);
-                // Keep scholar profile ID if found
-                if (profiles[name] && !authorMap[name].scholarId) {
-                    authorMap[name].scholarId = profiles[name];
+                authorMap[displayName].citCount++;
+                authorMap[displayName].papers.push(cit.title);
+                if (profile.institution && !authorMap[displayName].institution) {
+                    authorMap[displayName].institution = profile.institution;
                 }
-                if (geo.institution && !authorMap[name].institution) {
-                    authorMap[name].institution = geo.institution;
+                if (profile.totalCitations && !authorMap[displayName].authorCitations) {
+                    authorMap[displayName].authorCitations = profile.totalCitations;
                 }
-                if (geo.country && !authorMap[name].country) {
-                    authorMap[name].country = geo.country;
+                if (geo.country && !authorMap[displayName].country) {
+                    authorMap[displayName].country = geo.country;
                 }
             }
         }
@@ -170,7 +246,8 @@ function parseCitations(doc) {
     // Use the most specific selector to avoid duplicate matches
     const results = doc.querySelectorAll('.gs_r.gs_or.gs_scl');
     for (const r of results) {
-        const titleEl = r.querySelector('.gs_rt a, .gs_rt');
+        const titleLink = r.querySelector('.gs_rt a');
+        const titleEl = titleLink || r.querySelector('.gs_rt');
         const authorEl = r.querySelector('.gs_a');
 
         if (!titleEl) continue;
@@ -223,28 +300,31 @@ function parseCitations(doc) {
 }
 
 /**
- * Fetch the full author list from a citing paper's Google Scholar page.
- * Scholar paper pages show full names in meta tags or the paper detail.
+ * Fetch the full author list from a citing paper's page.
+ * Tries meta tags from publisher sites, then Scholar detail page fields.
  */
 async function fetchFullAuthors(paperUrl, apiKey) {
     if (!paperUrl) return '';
+    // Normalize relative Scholar URLs
+    const url = paperUrl.startsWith('/') ? `https://scholar.google.com${paperUrl}` : paperUrl;
     try {
-        const html = await fetchPage(paperUrl, apiKey);
+        const html = await fetchPage(url, apiKey);
         const doc = parseHTML(html);
 
-        // Method 1: meta tag (most reliable)
-        const metaAuthors = doc.querySelector('meta[name="citation_authors"], meta[name="citation_author"]');
-        if (metaAuthors) {
-            return metaAuthors.getAttribute('content')?.trim() || '';
+        // Method 1: single "citation_authors" meta tag (comma-separated)
+        const metaPlural = doc.querySelector('meta[name="citation_authors"]');
+        if (metaPlural) {
+            const content = metaPlural.getAttribute('content')?.trim();
+            if (content) return content;
         }
 
-        // Method 2: multiple citation_author meta tags
+        // Method 2: multiple "citation_author" meta tags (one per author)
         const authorMetas = doc.querySelectorAll('meta[name="citation_author"]');
         if (authorMetas.length > 0) {
             return Array.from(authorMetas).map(m => m.getAttribute('content')?.trim()).filter(Boolean).join(', ');
         }
 
-        // Method 3: the #gsc_oci_table on Scholar paper detail pages
+        // Method 3: Scholar paper detail page (#gsc_oci_table)
         const fields = doc.querySelectorAll('#gsc_oci_table .gs_scl');
         for (const field of fields) {
             const label = field.querySelector('.gsc_oci_field')?.textContent?.trim();
@@ -255,7 +335,7 @@ async function fetchFullAuthors(paperUrl, apiKey) {
 
         return '';
     } catch (e) {
-        console.warn(`Failed to fetch full authors from ${paperUrl}:`, e);
+        console.warn(`Failed to fetch full authors from ${url}:`, e);
         return '';
     }
 }
@@ -285,7 +365,7 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
         if (pubs.length === 0) break;
         allPubs = allPubs.concat(pubs);
         pageUrl = getNextPageUrl(doc, scholarId, (pageNum) * 100);
-        if (pageUrl) await delay(1000); // rate limit
+        if (pageUrl) await delay(2000); // rate limit
     }
 
     onProgress(`Found ${allPubs.length} publications. Fetching citations...`, 20);
@@ -336,7 +416,7 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
                         // Base cited-by URL may already have params
                         const baseUrl = pub.citedByUrl.split('&start=')[0];
                         citPageUrl = `${baseUrl}&start=${startParam}`;
-                        await delay(1200);
+                        await delay(2500);
                     } else {
                         citPageUrl = null; // fewer than 10 results = last page
                     }
@@ -345,7 +425,7 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
                 console.warn(`Failed to fetch citations for "${pub.title}":`, e);
                 if (!pub.citations) pub.citations = [];
             }
-            await delay(1200); // rate limit between citation fetches
+            await delay(2500); // rate limit between citation fetches
         } else {
             pub.citations = [];
         }

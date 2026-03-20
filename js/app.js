@@ -19,6 +19,8 @@ let currentGlobeStats = null;
 let currentThemes = {};      // { pubTitle: { theme, color } }
 let currentSummaries = {};   // { pubTitle: summary }
 let currentAuthorCitations = {}; // { authorName: totalCitations }
+let currentScholarProfiles = {}; // { scholarId: { fullName, totalCitations, institution } }
+let currentResearcherName = '';  // from snapshot or config
 let currentView = 'network'; // 'network' | 'globe'
 
 // ── DOM Refs ──
@@ -76,15 +78,16 @@ async function autoLoadSnapshot() {
             currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
         }
 
-        // Restore themes, summaries, and author citations if present
+        // Restore themes, summaries, author citations, and scholar profiles if present
         const themes = data.themes || {};
         const summaries = data.summaries || {};
         if (data.authorCitations) currentAuthorCitations = data.authorCitations;
+        if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
 
         // Build network
         const cfg = loadConfig();
-        const name = data.researcher || cfg.researcherName || 'Researcher';
-        currentNetwork = buildNetwork(name, currentPublications, themes, summaries);
+        currentResearcherName = data.researcher || cfg.researcherName || 'Researcher';
+        currentNetwork = buildNetwork(currentResearcherName, currentPublications, themes, summaries);
 
         emptyState.style.display = 'none';
         btnExport.disabled = false;
@@ -269,19 +272,27 @@ btnRefresh.addEventListener('click', async () => {
     }
 
     try {
-        const existingPubs = cachedImportData?.publications || currentPublications;
-        const cacheMap = buildCacheMap(existingPubs);
-
         showLoading('Starting...', 0);
 
-        const publications = await fetchScholarData(
-            cfg.scholarId,
-            cfg.scraperKey,
-            (msg, pct, detail) => showLoading(msg, pct, detail),
-            cacheMap
-        );
+        let publications;
 
-        currentPublications = mergePublications(existingPubs, publications);
+        if (cfg.scrapeMethod === 'selenium') {
+            // Selenium mode: call local Python server
+            publications = await fetchViaSeleniumServer(cfg);
+        } else {
+            // ScraperAPI mode: browser-based scraping
+            const existingPubs = cachedImportData?.publications || currentPublications;
+            const cacheMap = buildCacheMap(existingPubs);
+            publications = await fetchScholarData(
+                cfg.scholarId,
+                cfg.scraperKey,
+                (msg, pct, detail) => showLoading(msg, pct, detail),
+                cacheMap
+            );
+            publications = mergePublications(existingPubs, publications);
+        }
+
+        currentPublications = publications;
         updateStats(currentPublications);
 
         // LLM analysis — themes + summaries
@@ -326,6 +337,51 @@ btnRefresh.addEventListener('click', async () => {
     }
 });
 
+// ── Selenium Server Fetch ──
+async function fetchViaSeleniumServer(cfg) {
+    const serverUrl = cfg.seleniumUrl || 'http://localhost:5555';
+
+    // Check server is running
+    showLoading('Connecting to scraper server...', 5);
+    try {
+        const status = await fetch(`${serverUrl}/status`);
+        if (!status.ok) throw new Error('Server not reachable');
+    } catch (e) {
+        throw new Error(
+            `Cannot connect to scraper server at ${serverUrl}.\n\n` +
+            'Start it with: python scraper/server.py\n\n' +
+            'Or switch to ScraperAPI mode in Settings.'
+        );
+    }
+
+    // Trigger scrape
+    showLoading('Scraping Google Scholar via Selenium (this may take a few minutes)...', 10);
+    const resp = await fetch(`${serverUrl}/scrape`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            scholarId: cfg.scholarId,
+            headless: true,
+            fetchFullAuthors: true,
+        }),
+    });
+
+    if (!resp.ok) {
+        const err = await resp.json().catch(() => ({ error: resp.statusText }));
+        throw new Error(`Scraper error: ${err.error || resp.statusText}`);
+    }
+
+    showLoading('Processing results...', 90);
+    const data = await resp.json();
+
+    // The server returns the full network.json structure
+    // Extract scholar profiles and author citations if present
+    if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
+    if (data.authorCitations) currentAuthorCitations = data.authorCitations;
+
+    return data.publications || [];
+}
+
 // ── Export ──
 btnExport.addEventListener('click', () => {
     const cfg = loadConfig();
@@ -336,6 +392,7 @@ btnExport.addEventListener('click', () => {
         themes: currentThemes || {},
         summaries: currentSummaries || {},
         authorCitations: currentAuthorCitations || {},
+        scholarProfiles: currentScholarProfiles || {},
     }, cfg.scholarId);
 });
 
@@ -358,8 +415,9 @@ btnImport.addEventListener('click', async () => {
         currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
     }
 
-    // Restore author citations if present
+    // Restore author citations and scholar profiles if present
     if (data.authorCitations) currentAuthorCitations = data.authorCitations;
+    if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
 
     // Rebuild network from imported data
     currentNetwork = buildNetwork(
@@ -495,15 +553,17 @@ function renderScholarData() {
     scholarEmpty.style.display = 'none';
 
     const cfg = loadConfig();
-    const researcherName = cfg.researcherName || '';
+    const researcherName = currentResearcherName || cfg.researcherName || '';
 
     const firstAuthorOnly = authorModeSelect.value === 'first';
     const collaborators = parseCoAuthors(currentPublications, researcherName);
-    const citingAuthors = parseCitingAuthors(currentPublications, currentGeoData || {}, firstAuthorOnly);
+    const citingAuthors = parseCitingAuthors(
+        currentPublications, currentGeoData || {}, firstAuthorOnly, currentScholarProfiles
+    );
 
-    // Apply cached author citation counts
+    // Apply cached author citation counts (backward compat for old data without profiles)
     for (const author of citingAuthors) {
-        if (currentAuthorCitations[author.name]) {
+        if (!author.authorCitations && currentAuthorCitations[author.name]) {
             author.authorCitations = currentAuthorCitations[author.name];
         }
     }
