@@ -211,8 +211,10 @@ function renderCollaboratorsTable() {
 
     const maxCount = data[0]?.paperCount || 1;
 
-    tbody.innerHTML = data.map((d, i) => `
-        <tr>
+    tbody.innerHTML = data.map((d, i) => {
+        const pubs = d.papers || [];
+        return `
+        <tr class="${pubs.length > 0 ? 'has-tooltip' : ''}" ${pubs.length > 0 ? `data-cited-pubs="${escapeAttr(JSON.stringify(pubs))}"` : ''} data-collab-name="${escapeAttr(d.name)}">
             <td class="td-rank">${i + 1}</td>
             <td class="td-name">${d.name}</td>
             <td class="td-bar">
@@ -221,8 +223,10 @@ function renderCollaboratorsTable() {
                     <span class="bar-value">${d.paperCount}</span>
                 </div>
             </td>
-        </tr>
-    `).join('');
+        </tr>`;
+    }).join('');
+
+    wireTooltips(tbody, 'collaborator');
 }
 
 function renderCitingTable() {
@@ -281,8 +285,8 @@ function escapeAttr(str) {
     return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-/** Create and manage hover tooltip showing cited parent publications */
-function wireTooltips(tbody) {
+/** Create and manage hover tooltip showing cited/collaborated publications */
+function wireTooltips(tbody, type = 'citing') {
     let tooltip = document.getElementById('scholar-tooltip');
     if (!tooltip) {
         tooltip = document.createElement('div');
@@ -297,8 +301,11 @@ function wireTooltips(tbody) {
             if (pubs.length === 0) return;
 
             const name = row.querySelector('.td-name')?.textContent || '';
+            const headerText = type === 'collaborator'
+                ? `Papers collaborated with ${escapeHtml(name)}`
+                : `Publications cited by ${escapeHtml(name)}`;
             tooltip.innerHTML = `
-                <div class="tooltip-header">Publications cited by ${escapeHtml(name)}</div>
+                <div class="tooltip-header">${headerText}</div>
                 <ul class="tooltip-list">
                     ${pubs.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
                 </ul>
