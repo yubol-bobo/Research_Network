@@ -324,44 +324,63 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
  */
 export async function fetchAuthorCitations(authors, apiKey, onProgress) {
     const results = {};
-    // Only fetch for authors with a Scholar profile ID
-    const withProfiles = authors.filter(a => a.scholarId);
-    const total = withProfiles.length;
+    const total = authors.length;
 
     if (total === 0) {
-        onProgress('No author profile links found. Re-scrape citations first (Refresh).', 100);
-        await delay(2000);
+        onProgress('No authors to look up.', 100);
+        await delay(1000);
         return results;
     }
 
     for (let i = 0; i < total; i++) {
-        const author = withProfiles[i];
+        const author = authors[i];
         const pct = Math.round((i / total) * 100);
-        onProgress(`Fetching profile for ${truncate(author.name, 25)} (${i + 1}/${total})`, pct);
+        onProgress(`Looking up ${truncate(author.name, 25)} (${i + 1}/${total})`, pct);
 
         try {
-            // Fetch the author's Scholar profile page directly
-            const profileUrl = `https://scholar.google.com/citations?user=${author.scholarId}&hl=en`;
-            const html = await fetchPage(profileUrl, apiKey);
-            const doc = parseHTML(html);
+            if (author.scholarId) {
+                // Direct profile fetch if we have the Scholar ID
+                const profileUrl = `https://scholar.google.com/citations?user=${author.scholarId}&hl=en`;
+                const html = await fetchPage(profileUrl, apiKey);
+                const doc = parseHTML(html);
+                const totalCit = parseProfileCitations(doc);
+                if (totalCit > 0) results[author.name] = totalCit;
+            } else {
+                // Search for author by name on Google Scholar profiles
+                const searchUrl = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${encodeURIComponent(author.name)}&hl=en`;
+                const html = await fetchPage(searchUrl, apiKey);
+                const doc = parseHTML(html);
 
-            // Total citations from the profile stats table
-            // The stats table has cells: Citations, h-index, i10-index (All / Since 5yr)
-            const statCells = doc.querySelectorAll('#gsc_rsb_st td.gsc_rsb_std');
-            if (statCells.length > 0) {
-                const totalCit = parseInt(statCells[0]?.textContent?.replace(/,/g, '')) || 0;
-                if (totalCit > 0) {
-                    results[author.name] = totalCit;
+                // Find the first matching profile
+                const profileEl = doc.querySelector('.gsc_1usr');
+                if (profileEl) {
+                    // Extract citation count directly from search results
+                    const citEl = profileEl.querySelector('.gs_ai_cby');
+                    if (citEl) {
+                        const citMatch = citEl.textContent.match(/(\d[\d,]*)/);
+                        if (citMatch) {
+                            const totalCit = parseInt(citMatch[1].replace(/,/g, '')) || 0;
+                            if (totalCit > 0) results[author.name] = totalCit;
+                        }
+                    }
                 }
             }
         } catch (e) {
-            console.warn(`Failed to fetch profile for ${author.name}:`, e);
+            console.warn(`Failed to look up ${author.name}:`, e);
         }
 
-        await delay(1000); // rate limit
+        await delay(800); // rate limit
     }
 
     return results;
+}
+
+function parseProfileCitations(doc) {
+    const statCells = doc.querySelectorAll('#gsc_rsb_st td.gsc_rsb_std');
+    if (statCells.length > 0) {
+        return parseInt(statCells[0]?.textContent?.replace(/,/g, '')) || 0;
+    }
+    return 0;
 }
 
 function truncate(str, len) {

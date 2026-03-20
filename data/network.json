@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": "2026-03-19T13:41:13.706Z",
+  "exportedAt": "2026-03-20T00:44:01.869Z",
   "scholarId": "hgN6B6kAAAAJ",
   "researcher": "Yubo Li",
   "publications": [
@@ -834,8 +834,8 @@
       "institution": "Northeastern University"
     },
     "5_1": {
-      "country": "India",
-      "institution": "Indian Institute of Technology Madras"
+      "country": "United States",
+      "institution": "University of Southern California"
     },
     "6_0": {
       "country": "United States",
@@ -850,8 +850,8 @@
       "institution": "Anna University"
     },
     "6_3": {
-      "country": "Thailand",
-      "institution": "Mahidol University"
+      "country": "China",
+      "institution": "Peking University"
     },
     "6_4": {
       "country": "United States",
@@ -871,7 +871,7 @@
     },
     "7_1": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Harbin Institute of Technology"
     },
     "7_2": {
       "country": "United Kingdom",
@@ -891,7 +891,7 @@
     },
     "7_6": {
       "country": "China",
-      "institution": "Zhejiang University"
+      "institution": "Tsinghua University"
     },
     "7_7": {
       "country": "United States",
@@ -907,23 +907,23 @@
     },
     "7_10": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Zhejiang University"
     },
     "7_11": {
       "country": "China",
-      "institution": "Renmin University of China"
+      "institution": "Fudan University"
     },
     "7_12": {
       "country": "China",
-      "institution": "University of Science and Technology of China"
+      "institution": "Huazhong University of Science and Technology"
     },
     "7_13": {
       "country": "United States",
       "institution": "University of Washington"
     },
     "7_14": {
-      "country": "Italy",
-      "institution": "University of Milan"
+      "country": "United States",
+      "institution": "Northeastern University"
     },
     "7_15": {
       "country": "China",
@@ -939,7 +939,7 @@
     },
     "7_18": {
       "country": "China",
-      "institution": "Beihang University"
+      "institution": "Renmin University of China"
     },
     "7_19": {
       "country": "China",
@@ -955,7 +955,7 @@
     },
     "7_22": {
       "country": "France",
-      "institution": "Huawei Noah's Ark Lab"
+      "institution": "Huawei Technologies France"
     },
     "7_23": {
       "country": "China",
@@ -966,8 +966,8 @@
       "institution": "Tsinghua University"
     },
     "7_25": {
-      "country": "United States",
-      "institution": "University of California, Berkeley"
+      "country": "China",
+      "institution": "Tsinghua University"
     },
     "7_26": {
       "country": "Finland",
@@ -975,11 +975,11 @@
     },
     "7_27": {
       "country": "South Korea",
-      "institution": "Korea Advanced Institute of Science and Technology"
+      "institution": "KAIST"
     },
     "7_28": {
       "country": "China",
-      "institution": "The Chinese University of Hong Kong"
+      "institution": "National Taiwan University"
     },
     "7_29": {
       "country": "France",
@@ -991,7 +991,7 @@
     },
     "7_31": {
       "country": "India",
-      "institution": "Indian Institute of Technology Bombay"
+      "institution": "IIT Bombay"
     },
     "7_32": {
       "country": "China",
@@ -1003,7 +1003,7 @@
     },
     "7_34": {
       "country": "China",
-      "institution": "Zhejiang University"
+      "institution": "Tsinghua University"
     },
     "7_35": {
       "country": "China",
@@ -1031,7 +1031,7 @@
     },
     "7_41": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Peking University"
     },
     "7_42": {
       "country": "United States",
@@ -1039,7 +1039,7 @@
     },
     "7_43": {
       "country": "China",
-      "institution": "Renmin University of China"
+      "institution": "Tsinghua University"
     },
     "7_44": {
       "country": "China",
@@ -1047,11 +1047,11 @@
     },
     "7_45": {
       "country": "China",
-      "institution": "Renmin University of China"
+      "institution": "Tsinghua University"
     },
     "7_46": {
       "country": "China",
-      "institution": "Peking University"
+      "institution": "Zhejiang University"
     },
     "7_47": {
       "country": "Brazil",
@@ -1075,11 +1075,11 @@
     },
     "7_52": {
       "country": "China",
-      "institution": "Peking University"
+      "institution": "Tsinghua University"
     },
     "7_53": {
       "country": "India",
-      "institution": "Indian Institute of Science"
+      "institution": "Indian Institute of Management Bangalore"
     },
     "7_54": {
       "country": "United States",
@@ -1091,11 +1091,11 @@
     },
     "7_56": {
       "country": "United States",
-      "institution": "Harvard University"
+      "institution": "Harvard Medical School"
     },
     "7_57": {
       "country": "China",
-      "institution": "Zhejiang University"
+      "institution": "Sun Yat-sen University"
     },
     "7_58": {
       "country": "China",
@@ -1151,7 +1151,7 @@
     },
     "8_10": {
       "country": "United States",
-      "institution": "University of Michigan"
+      "institution": "Carnegie Mellon University"
     },
     "9_0": {
       "country": "United States",
@@ -1188,11 +1188,11 @@
       "color": "#6366f1"
     },
     "Beyond single-turn: A survey on multi-turn interactions with large language models": {
-      "theme": "NLP",
+      "theme": "Natural Language Processing",
       "color": "#a855f7"
     },
     "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
-      "theme": "NLP",
+      "theme": "Natural Language Processing",
       "color": "#a855f7"
     },
     "Consistency of Large Reasoning Models Under Multi-Turn Attacks": {
@@ -1203,30 +1203,30 @@
       "theme": "Cybersecurity",
       "color": "#06b6d4"
     },
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
+      "theme": "Artificial Intelligence",
+      "color": "#22c55e"
+    },
     "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
-      "theme": "Human-Computer Interaction",
+      "theme": "Artificial Intelligence",
       "color": "#22c55e"
     },
     "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": {
-      "theme": "Human-Computer Interaction",
-      "color": "#22c55e"
-    },
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
       "theme": "Artificial Intelligence",
-      "color": "#eab308"
+      "color": "#22c55e"
     }
   },
   "summaries": {
-    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This paper likely proposes an interpretable clinical prediction model that uses a temporal-feature cross-attention mechanism to reveal how patient variables and their timing jointly drive predictions.",
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper likely introduces SkillsBench, a benchmark for systematically evaluating how effectively reusable agent skills perform across a wide range of tasks and settings.",
-    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper likely studies whether large reasoning models maintain stable answers and behavior when subjected to adversarial multi-turn conversations designed to induce inconsistency.",
-    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper likely applies survival analysis to measure how long large language models remain robust before breaking under repeated or escalating adversarial attacks.",
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This paper likely proposes an interpretable clinical prediction framework using a temporal-feature cross-attention mechanism to reveal how patient variables and their timing jointly drive model predictions.",
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper likely introduces SkillsBench, a benchmark for systematically evaluating how effectively reusable agent skills generalize and perform across a wide range of tasks and environments.",
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper likely studies whether large reasoning models maintain stable answers and behavior when subjected to adversarial manipulations over multiple conversational turns.",
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper likely applies survival analysis to measure how long large language models remain robust before becoming inconsistent or vulnerable under repeated adversarial attacks.",
     "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This paper likely presents a method for tracing how clinical features influence one another over time in predictive models, improving interpretability of longitudinal healthcare predictions.",
-    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This paper likely argues that AI alignment should be viewed as a two-way process in which both humans and AI systems adapt to each other cognitively rather than as one-sided control.",
-    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This paper likely develops a predictive framework for end-stage renal disease outcomes by integrating multiple data sources to improve accuracy and clinical usefulness.",
-    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This paper likely surveys the emerging literature on multi-turn interactions with large language models, covering capabilities, challenges, evaluation methods, and applications beyond single-turn prompting.",
-    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper likely evaluates whether large language models remain consistent or change their responses across sequential interactions, highlighting factors that make them stable or unreliable over time.",
-    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper likely explores explainable AI methods for predicting end-stage renal disease from administrative claims data, with an emphasis on making model decisions interpretable to clinicians.",
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This paper likely argues that AI alignment should be viewed as a two-way process in which both humans and AI systems adapt to each other's cognitive patterns and goals.",
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This paper likely develops a predictive model for end-stage renal disease outcomes by integrating multiple data sources to improve accuracy and clinical usefulness.",
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This paper likely surveys research on multi-turn interactions with large language models, covering dialogue dynamics, memory, planning, evaluation, and emerging challenges beyond single-turn prompting.",
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper likely evaluates whether large language models remain consistent in their responses, preferences, or reasoning across sequential conversational interactions.",
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper likely explores explainable AI methods for predicting end-stage renal disease from administrative claims data, with an emphasis on making risk predictions more interpretable for healthcare use.",
     "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This paper likely surveys how confidence estimates are represented and used in large language models for tasks such as calibration, decision-making, control, and uncertainty-aware interaction."
   },
   "authorCitations": {}
