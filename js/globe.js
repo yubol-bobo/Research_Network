@@ -1,6 +1,8 @@
 // ── 3D Globe Visualization using globe.gl ──
 // Countries light up based on citation count (brighter = more citations)
 
+import { cleanInstitution } from './scholar-view.js';
+
 let globeInstance = null;
 let geoJsonData = null; // cached country polygons
 
@@ -40,6 +42,112 @@ function buildAliasMap() {
 }
 
 const aliasMap = buildAliasMap();
+
+/**
+ * Build geo data from scholarProfiles + publications (Selenium-scraped data).
+ * This replaces the LLM-based geoData with verified data from Scholar profiles.
+ *
+ * @param {Array} publications - publications with citations[].authorList
+ * @param {Object} scholarProfiles - { scholarId: { fullName, institution, totalCitations } }
+ * @param {boolean} firstAuthorOnly - if true, only count first author per citation
+ * @returns {Object} geoData in { "pubIdx_citIdx": { country, institution } } format
+ */
+export function buildGeoFromProfiles(publications, scholarProfiles, firstAuthorOnly = true) {
+    const geoData = {};
+
+    // We need to infer country from institution.
+    // Use a simple mapping of known institution → country patterns.
+    const countryPatterns = [
+        // US
+        [/Carnegie Mellon|Stanford|MIT\b|Harvard|Berkeley|Caltech|Princeton|Yale|Columbia|Cornell|University of (California|Michigan|Washington|Pennsylvania|Illinois|Texas|Wisconsin|Virginia|Maryland|Florida|Georgia|Colorado|Arizona|Oregon|Minnesota|Indiana|Iowa|Massachusetts|North Carolina|South Carolina)|Georgia Tech|Johns Hopkins|Duke|Northwestern|Rice|Emory|Vanderbilt|Brown|Dartmouth|Penn State|Ohio State|Purdue|Michigan State|Arizona State|USC\b|UCLA|UCSB|UCSD|UCSC|UC Davis|UC Irvine|Case Western|Stony Brook|Rutgers|NYU\b|Boston|Rochester|Syracuse|Drexel|Tulane|Lehigh|CMU|UIUC|UMass|UConn|UMD|UVA|UNC\b|UT Austin|UT Dallas|SUNY|Northeastern University|IBM Research|Google|Microsoft|Meta|Amazon|OpenAI|NVIDIA|Apple|Adobe|DeepMind|Salesforce|Intel\b|Qualcomm|Oracle/i, 'United States'],
+        // China
+        [/Tsinghua|Peking University|Fudan|Zhejiang|Shang\s*hai|Nanjing|Wuhan|Huazhong|Sun Yat|Harbin|USTC|CAS\b|Chinese Academy|Beihang|Beijing|Renmin|Sichuan|Jilin|Tongji|Xiamen|Nankai|Southeast University|Central South|SJTU|HUST|Zhengzhou|Shandong|Tianjin|Dalian|Xidian|Northwestern Polytechnical|Southwest Jiaotong|Tencent|Baidu|Alibaba|ByteDance|Huawei|Xiaomi|JD\b|DiDi|SenseTime|Megvii|CUHK\b/i, 'China'],
+        // UK
+        [/Oxford|Cambridge|Imperial College|UCL\b|University College of London|Edinburgh|Manchester|Bristol|Warwick|Glasgow|Leeds|Sheffield|Southampton|Birmingham|Liverpool|Nottingham|Queen Mary|King.s College|LSE|London School|St Andrews|Durham|Exeter|Bath|York|Sussex|Surrey|Lancaster|Leicester|Aberdeen|Heriot|Newcastle|Reading|Cardiff|Swansea|DeepMind London/i, 'United Kingdom'],
+        // Switzerland (before Germany — ETH is Swiss, not German)
+        [/ETH\b|EPFL|Zurich|Geneva|Basel|Bern|Lausanne|IDIAP/i, 'Switzerland'],
+        // Germany
+        [/Munich|TU Berlin|Heidelberg|Bonn|Freiburg|Hamburg|Frankfurt|Stuttgart|Leipzig|Göttingen|Tübingen|RWTH|Karlsruhe|TU Darmstadt|Saarland|Max Planck|Fraunhofer|Humboldt|Dresden|Siemens/i, 'Germany'],
+        // Canada
+        [/Toronto|McGill|UBC|Waterloo|Montreal|Alberta|Ottawa|Calgary|Simon Fraser|McMaster|Queen.s University.*Canada|Dalhousie|Manitoba|Saskatchewan|Laval|Victoria.*Canada|Mila\b|Vector Institute|CIFAR/i, 'Canada'],
+        // France
+        [/Sorbonne|ENS\b|Ecole Polytechnique|INRIA|CNRS|Paris|Grenoble|Lyon|Toulouse|Marseille|Strasbourg|Bordeaux|Lille|Nantes|CentraleSupélec|Télécom|Sciences Po|HEC|INSEAD/i, 'France'],
+        // Japan
+        [/Tokyo|Kyoto|Osaka|Tohoku|Nagoya|Hokkaido|Kyushu|Waseda|Keio|Tsukuba|NAIST|NICT|RIKEN|ATR|NTT|Sony|Hitachi|NEC.*Japan|Fujitsu/i, 'Japan'],
+        // South Korea
+        [/Seoul|KAIST|POSTECH|Korea University|Yonsei|Hanyang|Sungkyunkwan|Ewha|Sogang|Samsung|LG\b|Naver|Kakao|SK\b.*Korea/i, 'South Korea'],
+        // India
+        [/IIT\b|IISc|IIIT|Indian Institute|Indian Statistical|Jawaharlal|Delhi|Mumbai|Bangalore|Hyderabad|Chennai|Kolkata|Pune|BITS Pilani|NIT\b|Tata|Infosys|Wipro|TCS\b/i, 'India'],
+        // Australia
+        [/Sydney|Melbourne|Queensland|Monash|ANU\b|Australian National|UNSW|CSIRO|Adelaide|Western Australia|Macquarie|Griffith|Deakin|Curtin|Tasmania|Wollongong/i, 'Australia'],
+        // Singapore
+        [/National University of Singapore|NUS\b|NTU.*Singapore|Nanyang|SUTD|Singapore Management|A\*STAR/i, 'Singapore'],
+        // Netherlands
+        [/Amsterdam|Delft|Utrecht|Leiden|Eindhoven|Groningen|Twente|Erasmus|Tilburg|Radboud|Wageningen|Philips/i, 'Netherlands'],
+        // Israel
+        [/Technion|Hebrew University|Tel Aviv|Weizmann|Ben-?Gurion|Haifa|Bar-?Ilan/i, 'Israel'],
+        // Italy
+        [/Milan|Rome|Turin|Bologna|Padua|Pisa|Florence|Sapienza|Politecnico|Bocconi|Trento/i, 'Italy'],
+        // Spain
+        [/Barcelona|Madrid|Valencia|Seville|Granada|Salamanca|Santiago|Basque/i, 'Spain'],
+        // Sweden
+        [/KTH|Stockholm|Uppsala|Lund|Gothenburg|Chalmers|Linköping/i, 'Sweden'],
+        // Denmark
+        [/Copenhagen|Aarhus|DTU|Aalborg/i, 'Denmark'],
+        // Finland
+        [/Helsinki|Aalto|Turku|Tampere|Oulu/i, 'Finland'],
+        // Brazil
+        [/São Paulo|USP|UNICAMP|UFRJ|PUC.*Rio|Federal University|Campinas/i, 'Brazil'],
+        // Hong Kong
+        [/Hong Kong|HKUST|HKU\b|CUHK|City University of Hong Kong|Hong Kong Polytechnic|Lingnan|Baptist.*Hong Kong/i, 'China'],
+        // Taiwan → China
+        [/National Taiwan|NTHU|NCTU|NTU.*Taiwan|Academia Sinica|Tsing Hua.*Taiwan/i, 'China'],
+        // Qatar
+        [/Qatar|Doha|HBKU|Hamad Bin/i, 'Qatar'],
+        // Saudi Arabia
+        [/KAUST|King Abdullah|King Saud|King Fahd|KFUPM|Saudi/i, 'Saudi Arabia'],
+        // UAE
+        [/MBZUAI|NYU Abu Dhabi|Khalifa|Mohamed bin Zayed/i, 'United Arab Emirates'],
+    ];
+
+    function inferCountry(institution) {
+        if (!institution) return '';
+        for (const [pattern, country] of countryPatterns) {
+            if (pattern.test(institution)) return country;
+        }
+        return '';
+    }
+
+    for (let pi = 0; pi < publications.length; pi++) {
+        const pub = publications[pi];
+        for (let ci = 0; ci < (pub.citations || []).length; ci++) {
+            const cit = pub.citations[ci];
+            const authorList = cit.authorList || [];
+
+            // Pick authors based on mode
+            const authors = firstAuthorOnly
+                ? authorList.filter(a => a.isFirstAuthor).slice(0, 1)
+                : authorList;
+            const effectiveAuthors = authors.length > 0 ? authors : (authorList.length > 0 ? [authorList[0]] : []);
+
+            // Use the first author with a profile for geo info
+            for (const author of effectiveAuthors) {
+                const sid = author.scholarId || '';
+                const profile = sid ? (scholarProfiles[sid] || {}) : {};
+                const institution = profile.institution || '';
+                const country = inferCountry(institution);
+
+                if (country || institution) {
+                    const cleanedInst = cleanInstitution(institution) || institution;
+                    geoData[`${pi}_${ci}`] = { country, institution: cleanedInst === '—' ? '' : cleanedInst };
+                    break; // one geo entry per citation
+                }
+            }
+        }
+    }
+
+    return geoData;
+}
 
 /**
  * Aggregate geo data into country-level counts.

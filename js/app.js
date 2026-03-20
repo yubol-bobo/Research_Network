@@ -6,7 +6,7 @@ import { exportNetworkJSON, importNetworkJSON, mergePublications, buildCacheMap 
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
 import { analyzePapers, extractCitationGeo, cleanInstitutions } from './llm.js';
-import { aggregateGeoData, initGlobe, destroyGlobe } from './globe.js';
+import { aggregateGeoData, buildGeoFromProfiles, initGlobe, destroyGlobe } from './globe.js';
 import { renderScholarView } from './scholar-view.js';
 
 // ── State ──
@@ -71,20 +71,25 @@ async function autoLoadSnapshot() {
         currentPublications = data.publications;
         updateStats(currentPublications);
 
-        // Restore geo data
-        if (data.geoData && Object.keys(data.geoData).length > 0) {
-            currentGeoData = data.geoData;
-            const agg = aggregateGeoData(currentGeoData);
-            currentGlobePoints = agg.points;
-            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
-        }
-
-        // Restore themes, summaries, author citations, and scholar profiles if present
+        // Restore themes, summaries, author citations, and scholar profiles
         const themes = data.themes || {};
         const summaries = data.summaries || {};
         if (data.authorCitations) currentAuthorCitations = data.authorCitations;
         if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
         if (data.profileInfo) currentProfileInfo = data.profileInfo;
+
+        // Build geo data: prefer scholarProfiles (verified) over LLM geoData
+        if (data.scholarProfiles && Object.keys(data.scholarProfiles).length > 0) {
+            currentGeoData = buildGeoFromProfiles(currentPublications, data.scholarProfiles);
+            const agg = aggregateGeoData(currentGeoData);
+            currentGlobePoints = agg.points;
+            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
+        } else if (data.geoData && Object.keys(data.geoData).length > 0) {
+            currentGeoData = data.geoData;
+            const agg = aggregateGeoData(currentGeoData);
+            currentGlobePoints = agg.points;
+            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
+        }
 
         // Build network
         const cfg = loadConfig();

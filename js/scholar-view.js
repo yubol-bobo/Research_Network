@@ -11,7 +11,7 @@ let fetchCitationsCallback = null;
  * Clean an institution string to show only the university/organization name.
  * Strips titles, degrees, departments, etc.
  */
-function cleanInstitution(raw) {
+export function cleanInstitution(raw) {
     if (!raw || raw === '—') return raw;
     if (/^unknown/i.test(raw)) return '—';
 
