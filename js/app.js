@@ -20,6 +20,7 @@ let currentThemes = {};      // { pubTitle: { theme, color } }
 let currentSummaries = {};   // { pubTitle: summary }
 let currentAuthorCitations = {}; // { authorName: totalCitations }
 let currentScholarProfiles = {}; // { scholarId: { fullName, totalCitations, institution } }
+let currentProfileInfo = {};     // { coauthors: [{ name, affiliation, scholarId }] }
 let currentResearcherName = '';  // from snapshot or config
 let currentView = 'network'; // 'network' | 'globe'
 
@@ -83,6 +84,7 @@ async function autoLoadSnapshot() {
         const summaries = data.summaries || {};
         if (data.authorCitations) currentAuthorCitations = data.authorCitations;
         if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
+        if (data.profileInfo) currentProfileInfo = data.profileInfo;
 
         // Build network
         const cfg = loadConfig();
@@ -556,7 +558,7 @@ function renderScholarData() {
     const researcherName = currentResearcherName || cfg.researcherName || '';
 
     const firstAuthorOnly = authorModeSelect.value === 'first';
-    const collaborators = parseCoAuthors(currentPublications, researcherName);
+    const collaborators = parseCoAuthors(currentPublications, researcherName, currentProfileInfo, currentScholarProfiles);
     const citingAuthors = parseCitingAuthors(
         currentPublications, currentGeoData || {}, firstAuthorOnly, currentScholarProfiles
     );

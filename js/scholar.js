@@ -78,10 +78,24 @@ function parsePublications(doc) {
  * @param {string} researcherName
  * @returns {Array} sorted by paperCount desc: { name, paperCount, papers[] }
  */
-export function parseCoAuthors(publications, researcherName) {
+/**
+ * @param {Object} profileInfo - { coauthors: [{ name, affiliation, scholarId }] }
+ * @param {Object} scholarProfiles - { scholarId: { fullName, totalCitations, institution } }
+ */
+export function parseCoAuthors(publications, researcherName, profileInfo = {}, scholarProfiles = {}) {
     const coauthorMap = {};
     const researcherLower = (researcherName || '').toLowerCase().trim();
     const researcherParts = researcherLower ? researcherLower.split(/\s+/) : [];
+
+    // Build a lookup: abbreviated name → full name from profileInfo.coauthors + scholarProfiles
+    const fullNameLookup = {};  // "R Krishnan" → "Ramayya Krishnan"
+    // From profileInfo coauthors (most reliable for the researcher's own co-authors)
+    for (const ca of (profileInfo.coauthors || [])) {
+        if (ca.name && ca.scholarId) {
+            // Map scholarId to full name
+            fullNameLookup[ca.scholarId] = ca.name;
+        }
+    }
 
     for (const pub of publications) {
         if (!pub.authors) continue;
@@ -91,7 +105,6 @@ export function parseCoAuthors(publications, researcherName) {
             // Skip the researcher themselves (fuzzy match, only if name is set)
             if (researcherParts.length > 0) {
                 const nameLower = name.toLowerCase();
-                // Check if abbreviated name matches (e.g., "Y Li" matches "Yubo Li")
                 const nameParts = nameLower.split(/\s+/);
                 const lastNameMatch = nameParts.length > 0 && researcherParts.includes(nameParts[nameParts.length - 1]);
                 const firstInitialMatch = nameParts.length > 0 && researcherParts.some(p => p.startsWith(nameParts[0]));
@@ -104,15 +117,55 @@ export function parseCoAuthors(publications, researcherName) {
             // Skip ellipsis
             if (name === '...' || name === '…') continue;
 
-            if (!coauthorMap[name]) {
-                coauthorMap[name] = { name, paperCount: 0, papers: [] };
+            // Try to resolve abbreviated name to full name
+            const displayName = resolveFullName(name, profileInfo, scholarProfiles) || name;
+
+            if (!coauthorMap[displayName]) {
+                coauthorMap[displayName] = { name: displayName, paperCount: 0, papers: [] };
             }
-            coauthorMap[name].paperCount++;
-            coauthorMap[name].papers.push(pub.title);
+            coauthorMap[displayName].paperCount++;
+            coauthorMap[displayName].papers.push(pub.title);
         }
     }
 
     return Object.values(coauthorMap).sort((a, b) => b.paperCount - a.paperCount);
+}
+
+/**
+ * Resolve an abbreviated name (e.g. "R Krishnan") to a full name
+ * using profileInfo coauthors and scholarProfiles.
+ */
+function resolveFullName(abbrevName, profileInfo = {}, scholarProfiles = {}) {
+    const parts = abbrevName.trim().split(/\s+/);
+    if (parts.length < 2) return null;
+
+    const lastName = parts[parts.length - 1].toLowerCase();
+    const firstPart = parts[0].toLowerCase();
+
+    // Check profileInfo coauthors first (most accurate for own co-authors)
+    for (const ca of (profileInfo.coauthors || [])) {
+        const caParts = ca.name.split(/\s+/);
+        if (caParts.length < 2) continue;
+        const caLast = caParts[caParts.length - 1].toLowerCase();
+        const caFirst = caParts[0].toLowerCase();
+        if (caLast === lastName && caFirst.startsWith(firstPart)) {
+            return ca.name;
+        }
+    }
+
+    // Check scholarProfiles
+    for (const profile of Object.values(scholarProfiles)) {
+        if (!profile.fullName) continue;
+        const pParts = profile.fullName.split(/\s+/);
+        if (pParts.length < 2) continue;
+        const pLast = pParts[pParts.length - 1].toLowerCase();
+        const pFirst = pParts[0].toLowerCase();
+        if (pLast === lastName && pFirst.startsWith(firstPart)) {
+            return profile.fullName;
+        }
+    }
+
+    return null;
 }
 
 /**
