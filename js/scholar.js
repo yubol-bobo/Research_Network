@@ -48,8 +48,11 @@ export function parseCoAuthors(publications, researcherName, profileInfo = {}, s
             // Try to resolve abbreviated name to full name
             const displayName = resolveFullName(name, profileInfo, scholarProfiles) || name;
 
+            // Try to find scholarId for this collaborator
+            const scholarId = findScholarId(displayName, name, profileInfo, scholarProfiles);
+
             if (!coauthorMap[displayName]) {
-                coauthorMap[displayName] = { name: displayName, paperCount: 0, papers: [] };
+                coauthorMap[displayName] = { name: displayName, paperCount: 0, papers: [], scholarId: scholarId || '' };
             }
             coauthorMap[displayName].paperCount++;
             coauthorMap[displayName].papers.push(pub.title);
@@ -57,6 +60,39 @@ export function parseCoAuthors(publications, researcherName, profileInfo = {}, s
     }
 
     return Object.values(coauthorMap).sort((a, b) => b.paperCount - a.paperCount);
+}
+
+/**
+ * Find the Google Scholar ID for a given author name.
+ */
+function findScholarId(displayName, originalName, profileInfo = {}, scholarProfiles = {}) {
+    const nameLower = displayName.toLowerCase();
+    // Check profileInfo coauthors
+    for (const ca of (profileInfo.coauthors || [])) {
+        if (ca.scholarId && ca.name && ca.name.toLowerCase() === nameLower) {
+            return ca.scholarId;
+        }
+    }
+    // Check scholarProfiles by fullName match
+    for (const [sid, profile] of Object.entries(scholarProfiles)) {
+        if (profile.fullName && profile.fullName.toLowerCase() === nameLower) {
+            return sid;
+        }
+    }
+    // Fuzzy: check if last name + first initial match
+    const parts = nameLower.split(/\s+/);
+    if (parts.length >= 2) {
+        const lastName = parts[parts.length - 1];
+        const firstPart = parts[0];
+        for (const ca of (profileInfo.coauthors || [])) {
+            if (!ca.scholarId || !ca.name) continue;
+            const caParts = ca.name.toLowerCase().split(/\s+/);
+            if (caParts.length >= 2 && caParts[caParts.length - 1] === lastName && caParts[0].startsWith(firstPart)) {
+                return ca.scholarId;
+            }
+        }
+    }
+    return null;
 }
 
 /**

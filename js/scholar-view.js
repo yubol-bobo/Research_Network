@@ -216,7 +216,7 @@ function renderCollaboratorsTable() {
         return `
         <tr class="${pubs.length > 0 ? 'has-tooltip' : ''}" ${pubs.length > 0 ? `data-cited-pubs="${escapeAttr(JSON.stringify(pubs))}"` : ''} data-collab-name="${escapeAttr(d.name)}">
             <td class="td-rank">${i + 1}</td>
-            <td class="td-name">${d.name}</td>
+            <td class="td-name">${scholarLink(d.name, d.scholarId)}</td>
             <td class="td-bar">
                 <div class="bar-cell">
                     <div class="bar-fill" style="width:${(d.paperCount / maxCount) * 100}%"></div>
@@ -260,7 +260,7 @@ function renderCitingTable() {
         return `
         <tr class="${pubs.length > 0 ? 'has-tooltip' : ''}" ${pubs.length > 0 ? `data-cited-pubs="${escapeAttr(JSON.stringify(pubs))}"` : ''}>
             <td class="td-rank">${i + 1}</td>
-            <td class="td-name">${d.name}</td>
+            <td class="td-name">${scholarLink(d.name, d.scholarId)}</td>
             <td class="td-bar">
                 <div class="bar-cell">
                     <div class="bar-fill" style="width:${(d.citCount / maxCount) * 100}%"></div>
@@ -275,6 +275,14 @@ function renderCitingTable() {
 
     // Wire tooltip hover events
     wireTooltips(tbody);
+}
+
+/** Render author name as a clickable Google Scholar link if scholarId exists */
+function scholarLink(name, scholarId) {
+    if (scholarId) {
+        return `<a href="https://scholar.google.com/citations?user=${escapeAttr(scholarId)}" target="_blank" rel="noopener" class="scholar-link">${escapeHtml(name)}</a>`;
+    }
+    return escapeHtml(name);
 }
 
 function escapeHtml(str) {

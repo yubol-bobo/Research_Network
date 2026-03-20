@@ -763,6 +763,15 @@ body {
     width: 40px;
 }
 .td-name { font-weight: 500; }
+.scholar-link {
+    color: var(--accent3);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+.scholar-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
 .td-num { text-align: right; font-weight: 600; color: var(--accent); font-size: 13px; }
 .td-text { color: var(--text-muted); font-size: 12px; }
 
