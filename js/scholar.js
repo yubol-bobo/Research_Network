@@ -99,12 +99,14 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
 
         for (let ci = 0; ci < pub.citations.length; ci++) {
             const cit = pub.citations[ci];
-            if (!cit.authors) continue;
+            if (!cit.authors && !cit.fullAuthors) continue;
 
             const geo = geoData[`${pi}_${ci}`] || {};
 
+            // Prefer full author names over abbreviated ones
+            const authorString = cit.fullAuthors || cit.authors || '';
             // Get author names to process — filter out non-name entries
-            const allNames = cit.authors.split(',').map(n => n.trim()).filter(n => {
+            const allNames = authorString.split(',').map(n => n.trim()).filter(n => {
                 if (!n || n === '...' || n === '…') return false;
                 // Filter out years (e.g. "2025", "2026")
                 if (/^\d{4}$/.test(n)) return false;
@@ -215,9 +217,47 @@ function parseCitations(doc) {
             }
         }
 
-        citations.push({ title, authors, year, link, venue, publisher, authorProfiles });
+        citations.push({ title, authors, year, link, venue, publisher, authorProfiles, fullAuthors: '' });
     }
     return citations;
+}
+
+/**
+ * Fetch the full author list from a citing paper's Google Scholar page.
+ * Scholar paper pages show full names in meta tags or the paper detail.
+ */
+async function fetchFullAuthors(paperUrl, apiKey) {
+    if (!paperUrl) return '';
+    try {
+        const html = await fetchPage(paperUrl, apiKey);
+        const doc = parseHTML(html);
+
+        // Method 1: meta tag (most reliable)
+        const metaAuthors = doc.querySelector('meta[name="citation_authors"], meta[name="citation_author"]');
+        if (metaAuthors) {
+            return metaAuthors.getAttribute('content')?.trim() || '';
+        }
+
+        // Method 2: multiple citation_author meta tags
+        const authorMetas = doc.querySelectorAll('meta[name="citation_author"]');
+        if (authorMetas.length > 0) {
+            return Array.from(authorMetas).map(m => m.getAttribute('content')?.trim()).filter(Boolean).join(', ');
+        }
+
+        // Method 3: the #gsc_oci_table on Scholar paper detail pages
+        const fields = doc.querySelectorAll('#gsc_oci_table .gs_scl');
+        for (const field of fields) {
+            const label = field.querySelector('.gsc_oci_field')?.textContent?.trim();
+            if (label === 'Authors' || label === 'Inventors') {
+                return field.querySelector('.gsc_oci_value')?.textContent?.trim() || '';
+            }
+        }
+
+        return '';
+    } catch (e) {
+        console.warn(`Failed to fetch full authors from ${paperUrl}:`, e);
+        return '';
+    }
 }
 
 /**
@@ -256,12 +296,13 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
         const pub = allPubs[i];
         const pct = 20 + Math.round((i / total) * 70);
 
-        // Skip if already cached AND citations are fully fetched
+        // Skip if already cached AND citations are fully fetched AND have full author names
         if (cachedPubs[pub.title]) {
             const cached = cachedPubs[pub.title];
             const cachedCitCount = (cached.citations || []).length;
-            // Re-fetch if cached citations are incomplete (less than expected)
-            if (cachedCitCount >= pub.citationCount || pub.citationCount === 0) {
+            const hasFullAuthors = (cached.citations || []).every(c => c.fullAuthors);
+            // Re-fetch if cached citations are incomplete or missing full authors
+            if ((cachedCitCount >= pub.citationCount || pub.citationCount === 0) && hasFullAuthors) {
                 pub.citations = cached.citations || [];
                 onProgress(`Skipping cached: ${truncate(pub.title, 50)}`, pct, `${i + 1}/${total}`);
                 continue;
@@ -310,6 +351,34 @@ export async function fetchScholarData(scholarId, apiKey, onProgress, cachedPubs
         }
     }
 
+    // Fetch full author names for all citations that don't have them yet
+    onProgress('Fetching full author names for citing papers...', 92);
+    let fetchedCount = 0;
+    let totalCitations = 0;
+    for (const pub of allPubs) {
+        for (const cit of (pub.citations || [])) {
+            if (!cit.fullAuthors && cit.link) totalCitations++;
+        }
+    }
+
+    for (let i = 0; i < allPubs.length; i++) {
+        const pub = allPubs[i];
+        for (let ci = 0; ci < (pub.citations || []).length; ci++) {
+            const cit = pub.citations[ci];
+            if (cit.fullAuthors || !cit.link) continue; // already have full names or no link
+
+            fetchedCount++;
+            const pctBase = 92 + Math.round((fetchedCount / Math.max(totalCitations, 1)) * 7);
+            onProgress(`Fetching authors (${fetchedCount}/${totalCitations}): ${truncate(cit.title, 40)}`, pctBase);
+
+            const fullAuthors = await fetchFullAuthors(cit.link, apiKey);
+            if (fullAuthors) {
+                cit.fullAuthors = fullAuthors;
+            }
+            await delay(800);
+        }
+    }
+
     onProgress('Done!', 100);
     return allPubs;
 }
@@ -346,8 +415,11 @@ export async function fetchAuthorCitations(authors, apiKey, onProgress) {
                 const totalCit = parseProfileCitations(doc);
                 if (totalCit > 0) results[author.name] = totalCit;
             } else {
-                // Search for author by name on Google Scholar profiles
-                const searchUrl = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${encodeURIComponent(author.name)}&hl=en`;
+                // Search for author by name (+ institution if available) on Google Scholar profiles
+                const searchQuery = author.institution
+                    ? `${author.name} ${author.institution}`
+                    : author.name;
+                const searchUrl = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${encodeURIComponent(searchQuery)}&hl=en`;
                 const html = await fetchPage(searchUrl, apiKey);
                 const doc = parseHTML(html);
 

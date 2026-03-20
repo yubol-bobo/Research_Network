@@ -201,7 +201,7 @@ export async function extractCitationGeo(publications, config, onProgress) {
             allCitations.push({
                 key: `${pi}_${ci}`,
                 title: cit.title,
-                authors: cit.authors || '',
+                authors: cit.fullAuthors || cit.authors || '',
                 venue: cit.venue || '',
                 publisher: cit.publisher || '',
             });
