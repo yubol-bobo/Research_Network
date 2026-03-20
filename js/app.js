@@ -14,6 +14,7 @@ let currentPublications = [];
 let currentNetwork = null;
 let cachedImportData = null;
 let currentGeoData = null;   // raw { "pubIdx_citIdx": { country, institution } }
+let currentLlmGeoData = {};  // base LLM geo data (first-author keyed, pi_ci format)
 let currentGlobePoints = null; // aggregated points for globe
 let currentGlobeStats = null;
 let currentThemes = {};      // { pubTitle: { theme, color } }
@@ -78,18 +79,21 @@ async function autoLoadSnapshot() {
         if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
         if (data.profileInfo) currentProfileInfo = data.profileInfo;
 
-        // Build geo data: prefer scholarProfiles (verified) over LLM geoData
-        if (data.scholarProfiles && Object.keys(data.scholarProfiles).length > 0) {
-            currentGeoData = buildGeoFromProfiles(currentPublications, data.scholarProfiles);
-            const agg = aggregateGeoData(currentGeoData);
-            currentGlobePoints = agg.points;
-            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
-        } else if (data.geoData && Object.keys(data.geoData).length > 0) {
-            currentGeoData = data.geoData;
-            const agg = aggregateGeoData(currentGeoData);
-            currentGlobePoints = agg.points;
-            currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
+        // Store base LLM geo data (filtered to valid keys)
+        const llmGeo = data.geoData || {};
+        const validKeys = new Set();
+        for (let pi = 0; pi < currentPublications.length; pi++) {
+            for (let ci = 0; ci < (currentPublications[pi].citations || []).length; ci++) {
+                validKeys.add(`${pi}_${ci}`);
+            }
         }
+        currentLlmGeoData = {};
+        for (const [key, val] of Object.entries(llmGeo)) {
+            if (validKeys.has(key)) currentLlmGeoData[key] = val;
+        }
+
+        // Build globe data for current author mode
+        rebuildGlobeData();
 
         // Build network
         const cfg = loadConfig();
@@ -103,6 +107,61 @@ async function autoLoadSnapshot() {
         console.log(`Loaded snapshot: ${currentPublications.length} publications`);
     } catch (e) {
         // No snapshot or failed to load — silent, user will configure manually
+    }
+}
+
+/**
+ * Rebuild globe geo data based on current author mode (first author vs all authors).
+ * Merges LLM base data with profile-inferred data.
+ */
+function rebuildGlobeData() {
+    const firstAuthorOnly = authorModeSelect.value === 'first';
+
+    // Build profile-based geo data for current author mode
+    const profileGeo = (Object.keys(currentScholarProfiles).length > 0)
+        ? buildGeoFromProfiles(currentPublications, currentScholarProfiles, firstAuthorOnly)
+        : {};
+
+    if (firstAuthorOnly) {
+        // First author mode: keys are pi_ci — merge LLM base + profile overlay
+        currentGeoData = {};
+        for (const [key, val] of Object.entries(currentLlmGeoData)) {
+            currentGeoData[key] = val;
+        }
+        for (const [key, val] of Object.entries(profileGeo)) {
+            if (val.country) {
+                currentGeoData[key] = val;
+            } else if (!currentGeoData[key]) {
+                currentGeoData[key] = val;
+            }
+        }
+    } else {
+        // All authors mode: keys are pi_ci_ai — profile data is primary
+        // Start with profile geo (multi-country per citation)
+        currentGeoData = { ...profileGeo };
+
+        // For citations where profiles didn't provide a country, fall back to LLM data
+        const profileCitationsWithCountry = new Set();
+        for (const [k, v] of Object.entries(profileGeo)) {
+            if (v.country) {
+                const parts = k.split('_');
+                profileCitationsWithCountry.add(`${parts[0]}_${parts[1]}`);
+            }
+        }
+        for (const [key, val] of Object.entries(currentLlmGeoData)) {
+            if (!profileCitationsWithCountry.has(key) && val.country) {
+                currentGeoData[key] = val;
+            }
+        }
+    }
+
+    if (Object.keys(currentGeoData).length > 0) {
+        const agg = aggregateGeoData(currentGeoData);
+        currentGlobePoints = agg.points;
+        currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
+    } else {
+        currentGlobePoints = null;
+        currentGlobeStats = null;
     }
 }
 
@@ -618,9 +677,21 @@ async function onFetchAuthorCitations(authors) {
 
 // ── Author Mode Toggle ──
 authorModeSelect.addEventListener('change', () => {
+    // Rebuild globe data for new author mode
+    rebuildGlobeData();
+
     if (currentView === 'scholar') {
         renderScholarData();
     } else if (currentView === 'globe') {
-        renderRankings();
+        // Re-render globe with new data
+        destroyGlobe();
+        if (currentGlobePoints && currentGlobePoints.length > 0) {
+            globeEmpty.style.display = 'none';
+            initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
+            renderRankings();
+        } else {
+            globeEmpty.style.display = 'flex';
+            rankingsSection.style.display = 'none';
+        }
     }
 });
