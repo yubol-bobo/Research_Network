@@ -82,15 +82,14 @@ def random_delay(base: float, jitter: float = 2.0):
 
 
 def check_blocked(driver) -> bool:
+    """Check if Scholar has blocked us (CAPTCHA or error page). Does NOT sleep."""
     try:
         page_text = driver.page_source.lower()
         if "unusual traffic" in page_text or "captcha" in page_text or "sorry" in page_text[:500]:
-            print("  [BLOCKED] Google Scholar detected unusual traffic!")
-            print("  Waiting 30 seconds before retrying...")
-            time.sleep(30)
             return True
     except Exception:
-        pass
+        # Window may have been closed/redirected
+        return True
     return False
 
 
@@ -598,20 +597,36 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
     page = 0
     max_pages = max(1, (expected_count // 10) + 2)
     current_url = cited_by_url
+    max_retries = 3
 
     while page < max_pages:
         page += 1
-        driver.get(current_url)
-        random_delay(PAGE_LOAD_WAIT, 2.0)
 
-        if check_blocked(driver):
-            driver.get(current_url)
-            random_delay(PAGE_LOAD_WAIT + 5, 3.0)
-            if check_blocked(driver):
-                print("  [BLOCKED] Still blocked after retry, stopping citation fetch")
+        for attempt in range(max_retries):
+            try:
+                driver.get(current_url)
+                random_delay(PAGE_LOAD_WAIT, 2.0)
+
+                if check_blocked(driver):
+                    wait_time = 30 * (attempt + 1)  # 30s, 60s, 90s
+                    print(f"    [BLOCKED] Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
+                    time.sleep(wait_time)
+                    continue
+
+                page_citations = scrape_cited_by_page(driver)
+                break  # success
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    print(f"    [ERROR] {e}, retrying...")
+                    time.sleep(10)
+                    continue
+                page_citations = []
                 break
+        else:
+            # All retries exhausted
+            print(f"    [BLOCKED] All retries exhausted, stopping citation fetch")
+            break
 
-        page_citations = scrape_cited_by_page(driver)
         if not page_citations:
             break
 
@@ -654,6 +669,8 @@ def scrape_author_profile(driver, scholar_id: str) -> Dict[str, Any]:
         random_delay(PAGE_LOAD_WAIT, 2.0)
 
         if check_blocked(driver):
+            print(f"    [BLOCKED] Waiting 30s before retry...")
+            time.sleep(30)
             driver.get(url)
             random_delay(PAGE_LOAD_WAIT + 5, 3.0)
             if check_blocked(driver):
@@ -860,13 +877,28 @@ def scrape_scholar(
             print(f"  [{i+1}/{len(publications)}] {pub['title'][:60]} — fetching {pub['citationCount']} citations...")
             citations = scrape_all_citations(driver, pub["citedByUrl"], pub["citationCount"])
 
-            # Fall back to cache if blocked
-            if len(citations) == 0 and pub["citationCount"] > 0 and pub["title"] in cache:
+            # Merge with cache: keep cached citations + add any new ones
+            if pub["title"] in cache:
                 cached_cits = cache[pub["title"]].get("citations", [])
                 if cached_cits:
-                    pub["citations"] = cached_cits
-                    total_citations += len(cached_cits)
-                    print(f"    → blocked, using {len(cached_cits)} cached citations")
+                    # Build set of cached titles for dedup
+                    cached_titles = {c["title"].lower().strip() for c in cached_cits}
+                    new_cits = [c for c in citations if c["title"].lower().strip() not in cached_titles]
+
+                    if len(citations) == 0:
+                        # Fully blocked — use cache as-is
+                        pub["citations"] = cached_cits
+                        print(f"    → blocked, using {len(cached_cits)} cached citations")
+                    elif new_cits:
+                        # Got some results — merge new with cached
+                        pub["citations"] = cached_cits + new_cits
+                        print(f"    → got {len(citations)} ({len(new_cits)} new + {len(cached_cits)} cached)")
+                    else:
+                        # All scraped citations already in cache
+                        pub["citations"] = cached_cits
+                        print(f"    → {len(cached_cits)} citations (no new ones)")
+
+                    total_citations += len(pub["citations"])
                     random_delay(BETWEEN_PUB_WAIT, 3.0)
                     continue
 
