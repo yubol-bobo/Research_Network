@@ -44,11 +44,8 @@ Your Scholar ID is in your Google Scholar profile URL:
 # Install uv (if not already installed)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Install dependencies & run (reads SCHOLAR_ID from .env)
+# Run the scraper (reads SCHOLAR_ID from .env)
 uv run python scraper/scholar_scraper.py
-
-# Or pass Scholar ID directly
-uv run python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
 ```
 
 `uv run` auto-creates a virtualenv and installs dependencies on first run — no manual `pip install` needed.

@@ -6,10 +6,12 @@ Scrapes a Google Scholar profile and all citing papers using Selenium.
 Supports incremental updates: compares existing data with current Scholar page
 and only fetches new/changed publications and citations.
 
+Configuration: set SCHOLAR_ID in .env file.
+
 Usage:
-    python scraper/scholar_scraper.py <scholar_id>
-    python scraper/scholar_scraper.py hgN6B6kAAAAJ
-    python scraper/scholar_scraper.py hgN6B6kAAAAJ --headless
+    uv run python scraper/scholar_scraper.py
+    uv run python scraper/scholar_scraper.py --headless
+    uv run python scraper/scholar_scraper.py --classify
 """
 
 import argparse
@@ -1156,12 +1158,6 @@ def main():
         description="Scrape Google Scholar profile for Research Network"
     )
     parser.add_argument(
-        "scholar_id",
-        nargs="?",
-        default=os.environ.get("SCHOLAR_ID", ""),
-        help="Google Scholar user ID (or set SCHOLAR_ID in .env)",
-    )
-    parser.add_argument(
         "--output", "-o",
         default=None,
         help="Output JSON file path (default: data/network.json)",
@@ -1174,16 +1170,17 @@ def main():
     parser.add_argument(
         "--classify",
         action="store_true",
-        help="Classify publications into themes using LLM (requires LLM_API_KEY in .env)",
+        help="Classify publications into themes using LLM (requires API key in .env)",
     )
 
     args = parser.parse_args()
 
+    # Scholar ID must be set in .env
+    args.scholar_id = os.environ.get("SCHOLAR_ID", "")
     if not args.scholar_id:
-        print("Error: No Scholar ID provided.")
-        print("Either pass it as an argument or set SCHOLAR_ID in .env")
-        print("  python scraper/scholar_scraper.py <scholar_id>")
-        print("  or: echo 'SCHOLAR_ID=hgN6B6kAAAAJ' >> .env")
+        print("Error: SCHOLAR_ID not set.")
+        print("Add it to your .env file:")
+        print("  SCHOLAR_ID=hgN6B6kAAAAJ")
         sys.exit(1)
 
     # Determine output path
