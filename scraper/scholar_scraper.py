@@ -1220,9 +1220,21 @@ def main():
 
     # Optional: Classify publications using LLM
     if args.classify:
-        llm_key = os.environ.get("LLM_API_KEY", "")
-        llm_provider = os.environ.get("LLM_PROVIDER", "openai")
-        llm_model = os.environ.get("LLM_MODEL", "")
+        # Support multiple env var naming conventions
+        llm_key = (os.environ.get("OPENAI_API_KEY", "")
+                   or os.environ.get("ANTHROPIC_API_KEY", "")
+                   or os.environ.get("GEMINI_API_KEY", "")
+                   or os.environ.get("LLM_API_KEY", ""))
+        # Auto-detect provider from which key is set
+        if os.environ.get("OPENAI_API_KEY"):
+            llm_provider = "openai"
+        elif os.environ.get("ANTHROPIC_API_KEY"):
+            llm_provider = "claude"
+        elif os.environ.get("GEMINI_API_KEY"):
+            llm_provider = "gemini"
+        else:
+            llm_provider = os.environ.get("LLM_PROVIDER", "openai")
+        llm_model = os.environ.get("model", "") or os.environ.get("LLM_MODEL", "")
 
         if not llm_key:
             print("\n[!] --classify requires LLM_API_KEY in .env")
