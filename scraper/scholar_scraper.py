@@ -82,13 +82,19 @@ def random_delay(base: float, jitter: float = 2.0):
 
 
 def check_blocked(driver) -> bool:
-    """Check if Scholar has blocked us (CAPTCHA or error page). Does NOT sleep."""
+    """
+    Check if Scholar has blocked us (CAPTCHA or error page).
+    If blocked, pauses 60 seconds for the user to solve the CAPTCHA manually
+    in the browser window, then returns True so the caller can retry.
+    """
     try:
         page_text = driver.page_source.lower()
         if "unusual traffic" in page_text or "captcha" in page_text or "sorry" in page_text[:500]:
+            print("  [BLOCKED] CAPTCHA detected! Solve it in the browser window.")
+            print("  Waiting 60 seconds for you to complete it...")
+            time.sleep(60)
             return True
     except Exception:
-        # Window may have been closed/redirected
         return True
     return False
 
@@ -597,35 +603,25 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
     page = 0
     max_pages = max(1, (expected_count // 10) + 2)
     current_url = cited_by_url
-    max_retries = 3
-
     while page < max_pages:
         page += 1
 
-        for attempt in range(max_retries):
-            try:
+        try:
+            driver.get(current_url)
+            random_delay(PAGE_LOAD_WAIT, 2.0)
+
+            if check_blocked(driver):
+                # User had 60s to solve CAPTCHA, retry the same page
                 driver.get(current_url)
                 random_delay(PAGE_LOAD_WAIT, 2.0)
-
                 if check_blocked(driver):
-                    wait_time = 30 * (attempt + 1)  # 30s, 60s, 90s
-                    print(f"    [BLOCKED] Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
-                    time.sleep(wait_time)
-                    continue
+                    print("    [BLOCKED] Still blocked after CAPTCHA wait, stopping")
+                    break
 
-                page_citations = scrape_cited_by_page(driver)
-                break  # success
-            except Exception as e:
-                if attempt < max_retries - 1:
-                    print(f"    [ERROR] {e}, retrying...")
-                    time.sleep(10)
-                    continue
-                page_citations = []
-                break
-        else:
-            # All retries exhausted
-            print(f"    [BLOCKED] All retries exhausted, stopping citation fetch")
-            break
+            page_citations = scrape_cited_by_page(driver)
+        except Exception as e:
+            print(f"    [ERROR] {e}")
+            page_citations = []
 
         if not page_citations:
             break
