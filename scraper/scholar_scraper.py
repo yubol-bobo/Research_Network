@@ -914,6 +914,10 @@ def scrape_scholar(
             if profile.get("fullName") and profile.get("totalCitations", 0) > 0:
                 author_citations[profile["fullName"]] = profile["totalCitations"]
 
+        # Preserve existing themes/summaries
+        themes = existing_data.get("themes", {}) if existing_data else {}
+        summaries = existing_data.get("summaries", {}) if existing_data else {}
+
         # Build output
         output = {
             "version": 1,
@@ -925,8 +929,8 @@ def scrape_scholar(
             "scholarProfiles": scholar_profiles,
             "authorCitations": author_citations,
             "geoData": geo_data,
-            "themes": existing_data.get("themes", {}) if existing_data else {},
-            "summaries": existing_data.get("summaries", {}) if existing_data else {},
+            "themes": themes,
+            "summaries": summaries,
         }
 
         return output
@@ -934,6 +938,191 @@ def scrape_scholar(
     finally:
         driver.quit()
         print("\nBrowser closed.")
+
+
+# ── LLM Classification ──
+
+THEME_COLORS = [
+    "#6366f1",  # indigo
+    "#a855f7",  # purple
+    "#06b6d4",  # cyan
+    "#22c55e",  # green
+    "#f59e0b",  # amber
+    "#ef4444",  # red
+    "#ec4899",  # pink
+    "#8b5cf6",  # violet
+    "#14b8a6",  # teal
+    "#f97316",  # orange
+]
+
+
+def classify_publications_llm(
+    publications: List[Dict],
+    existing_themes: Dict,
+    existing_summaries: Dict,
+    llm_key: str,
+    llm_provider: str = "openai",
+    llm_model: str = "",
+) -> tuple:
+    """
+    Use LLM to classify publications into research themes and generate summaries.
+    Only processes publications that don't already have themes/summaries.
+    Returns (themes, summaries) dicts keyed by publication title.
+    """
+    # Find publications needing classification
+    titles_needing_themes = []
+    for pub in publications:
+        if pub["title"] not in existing_themes:
+            titles_needing_themes.append(pub["title"])
+
+    titles_needing_summaries = []
+    for pub in publications:
+        if pub["title"] not in existing_summaries:
+            titles_needing_summaries.append(pub["title"])
+
+    if not titles_needing_themes and not titles_needing_summaries:
+        print("  All publications already classified, skipping LLM call")
+        return existing_themes, existing_summaries
+
+    # Build the prompt with all publication titles
+    all_titles = [pub["title"] for pub in publications]
+    existing_theme_names = list(set(
+        t["theme"] for t in existing_themes.values() if isinstance(t, dict) and "theme" in t
+    ))
+
+    prompt = f"""You are a research paper classifier. Given these publication titles, do two things:
+
+1. CLASSIFY each paper into a broad research theme (3-7 themes total).
+   {"Use these existing themes where appropriate: " + ", ".join(existing_theme_names) if existing_theme_names else "Create appropriate theme names like: Healthcare, NLP, Computer Vision, Reinforcement Learning, etc."}
+
+2. SUMMARIZE each paper in one sentence (what it likely does/proposes, based on the title).
+
+Publication titles:
+{chr(10).join(f"{i+1}. {t}" for i, t in enumerate(all_titles))}
+
+Respond in this exact JSON format (no markdown, no code blocks):
+{{
+  "themes": {{
+    "Paper Title Here": "Theme Name",
+    ...
+  }},
+  "summaries": {{
+    "Paper Title Here": "One sentence summary.",
+    ...
+  }}
+}}
+
+IMPORTANT: Include ALL {len(all_titles)} papers. Use the exact paper titles as keys."""
+
+    # Call LLM
+    response_text = call_llm(prompt, llm_key, llm_provider, llm_model)
+    if not response_text:
+        print("  [WARN] LLM returned empty response")
+        return existing_themes, existing_summaries
+
+    # Parse response
+    try:
+        # Strip markdown code blocks if present
+        cleaned = response_text.strip()
+        if cleaned.startswith("```"):
+            cleaned = re.sub(r"^```(?:json)?\s*\n?", "", cleaned)
+            cleaned = re.sub(r"\n?```\s*$", "", cleaned)
+
+        result = json.loads(cleaned)
+
+        # Assign colors to themes
+        theme_names = list(set(result.get("themes", {}).values()))
+        theme_color_map = {}
+        for i, name in enumerate(theme_names):
+            theme_color_map[name] = THEME_COLORS[i % len(THEME_COLORS)]
+
+        # Build themes dict
+        themes = dict(existing_themes)
+        for title, theme_name in result.get("themes", {}).items():
+            if title not in themes:
+                themes[title] = {
+                    "theme": theme_name,
+                    "color": theme_color_map.get(theme_name, "#6366f1"),
+                }
+
+        # Build summaries dict
+        summaries = dict(existing_summaries)
+        for title, summary in result.get("summaries", {}).items():
+            if title not in summaries:
+                summaries[title] = summary
+
+        new_themes = len(themes) - len(existing_themes)
+        new_summaries = len(summaries) - len(existing_summaries)
+        print(f"  Added {new_themes} new themes, {new_summaries} new summaries")
+        print(f"  Theme categories: {', '.join(theme_names)}")
+
+        return themes, summaries
+
+    except json.JSONDecodeError as e:
+        print(f"  [WARN] Failed to parse LLM response: {e}")
+        print(f"  Response: {response_text[:200]}...")
+        return existing_themes, existing_summaries
+
+
+def call_llm(prompt: str, api_key: str, provider: str = "openai", model: str = "") -> str:
+    """Call an LLM API and return the response text."""
+    import urllib.request
+    import urllib.error
+
+    if provider == "openai":
+        url = "https://api.openai.com/v1/chat/completions"
+        model = model or "gpt-4o-mini"
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        }
+        body = json.dumps({
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.3,
+        }).encode()
+
+    elif provider == "claude":
+        url = "https://api.anthropic.com/v1/messages"
+        model = model or "claude-sonnet-4-20250514"
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+        }
+        body = json.dumps({
+            "model": model,
+            "max_tokens": 4096,
+            "messages": [{"role": "user", "content": prompt}],
+        }).encode()
+
+    elif provider == "gemini":
+        model = model or "gemini-pro"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        headers = {"Content-Type": "application/json"}
+        body = json.dumps({
+            "contents": [{"parts": [{"text": prompt}]}],
+        }).encode()
+
+    else:
+        print(f"  [WARN] Unknown LLM provider: {provider}")
+        return ""
+
+    try:
+        req = urllib.request.Request(url, data=body, headers=headers)
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode())
+
+        if provider == "openai":
+            return data["choices"][0]["message"]["content"]
+        elif provider == "claude":
+            return data["content"][0]["text"]
+        elif provider == "gemini":
+            return data["candidates"][0]["content"]["parts"][0]["text"]
+
+    except Exception as e:
+        print(f"  [WARN] LLM API call failed: {e}")
+        return ""
 
 
 def main():
@@ -950,6 +1139,27 @@ def main():
         "--headless",
         action="store_true",
         help="Run Chrome in headless mode (no browser window)",
+    )
+    parser.add_argument(
+        "--classify",
+        action="store_true",
+        help="Classify publications into themes using LLM",
+    )
+    parser.add_argument(
+        "--llm-key",
+        default=os.environ.get("LLM_API_KEY", ""),
+        help="LLM API key (or set LLM_API_KEY env var)",
+    )
+    parser.add_argument(
+        "--llm-provider",
+        default="openai",
+        choices=["openai", "claude", "gemini"],
+        help="LLM provider (default: openai)",
+    )
+    parser.add_argument(
+        "--llm-model",
+        default="",
+        help="LLM model override (default: auto-select per provider)",
     )
 
     args = parser.parse_args()
@@ -985,6 +1195,24 @@ def main():
         headless=args.headless,
         existing_data=existing_data,
     )
+
+    # Optional: Classify publications using LLM
+    if args.classify:
+        if not args.llm_key:
+            print("\n[!] --classify requires an LLM API key.")
+            print("    Use --llm-key YOUR_KEY or set LLM_API_KEY environment variable")
+        else:
+            print(f"\n[LLM] Classifying publications using {args.llm_provider}...")
+            themes, summaries = classify_publications_llm(
+                data["publications"],
+                data.get("themes", {}),
+                data.get("summaries", {}),
+                args.llm_key,
+                args.llm_provider,
+                args.llm_model,
+            )
+            data["themes"] = themes
+            data["summaries"] = summaries
 
     # Save
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
