@@ -1,0 +1,10 @@
+[project]
+name = "research-network"
+version = "0.1.0"
+description = "Visualize the impact of your academic research"
+requires-python = ">=3.11"
+dependencies = [
+    "selenium>=4.15.0",
+    "webdriver-manager>=4.0.0",
+]
+

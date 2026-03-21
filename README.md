@@ -41,14 +41,17 @@ Your Scholar ID is in your Google Scholar profile URL:
 ### 3. Install & Run the Scraper
 
 ```bash
-pip install -r scraper/requirements.txt
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Run (reads SCHOLAR_ID from .env)
-python scraper/scholar_scraper.py
+# Install dependencies & run (reads SCHOLAR_ID from .env)
+uv run python scraper/scholar_scraper.py
 
 # Or pass Scholar ID directly
-python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
+uv run python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
 ```
+
+`uv run` auto-creates a virtualenv and installs dependencies on first run — no manual `pip install` needed.
 
 This will:
 1. Open Chrome and scrape your Google Scholar profile
@@ -61,10 +64,10 @@ This will:
 
 ```bash
 # Headless mode (no browser window)
-python scraper/scholar_scraper.py --headless
+uv run python scraper/scholar_scraper.py --headless
 
-# With LLM classification (themes + summaries, requires LLM_API_KEY in .env)
-python scraper/scholar_scraper.py --classify
+# With LLM classification (themes + summaries, requires API key in .env)
+uv run python scraper/scholar_scraper.py --classify
 ```
 
 ### 4. Enable GitHub Pages
@@ -93,7 +96,7 @@ The scraper supports **incremental updates** — it compares with existing data 
 
 ```bash
 # Just re-run the scraper
-python scraper/scholar_scraper.py
+uv run python scraper/scholar_scraper.py
 
 # Then push
 git add data/network.json && git commit -m "Update research data" && git push
@@ -188,8 +191,9 @@ Research_Network/
 │   ├── scholar-view.js     # Scholar rankings + tooltips
 │   └── countries.js        # Country → coordinates mapping
 ├── scraper/
-│   ├── scholar_scraper.py  # Selenium scraper (run locally)
-│   └── requirements.txt    # Python dependencies
+│   └── scholar_scraper.py  # Selenium scraper (run locally)
+├── pyproject.toml          # Python dependencies (managed by uv)
+├── uv.lock                 # Lockfile for reproducible installs
 ├── data/
 │   └── network.json        # Generated data (auto-loaded by web app)
 └── README.md
@@ -201,4 +205,5 @@ Research_Network/
 - [D3.js v7](https://d3js.org/) — force-directed graph
 - [globe.gl](https://globe.gl/) — 3D globe visualization
 - [Selenium](https://www.selenium.dev/) — Google Scholar scraping
+- [uv](https://docs.astral.sh/uv/) — fast Python package manager
 - OpenAI / Claude / Gemini — optional publication classification
