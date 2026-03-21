@@ -6,60 +6,78 @@ Visualize the impact of your academic research — see your publications, citati
 
 ## Quick Start
 
-### Step 1: Fork or Clone
+### 1. Fork & Clone
 
 ```bash
-# Option A: Fork this repo on GitHub (click "Fork" button), then clone your fork
+# Fork this repo on GitHub (click "Fork" button), then clone your fork
 git clone https://github.com/YOUR_USERNAME/Research_Network.git
-
-# Option B: Clone directly
-git clone https://github.com/yubol-bobo/Research_Network.git
 cd Research_Network
 ```
 
-### Step 2: Enable GitHub Pages
-
-1. Go to your repo on GitHub
-2. Click **Settings** > **Pages** (left sidebar)
-3. Under **Source**, select **GitHub Actions**
-4. The included workflow (`.github/workflows/deploy.yml`) auto-deploys on every push
-
-### Step 3: Scrape Your Data
-
-Uses a local Python + Selenium scraper to control Chrome. No API keys needed for scraping.
+### 2. Set Up `.env`
 
 ```bash
-# Install dependencies
+cp .env.example .env
+```
+
+Edit `.env` with your info:
+
+```env
+# Required
+SCHOLAR_ID=YOUR_SCHOLAR_ID
+
+# Optional — for publication classification
+LLM_PROVIDER=openai
+LLM_API_KEY=sk-xxx
+LLM_MODEL=
+```
+
+Your Scholar ID is in your Google Scholar profile URL:
+`scholar.google.com/citations?user=`**YOUR_ID**
+
+> `.env` is gitignored — your keys never leave your machine.
+
+### 3. Install & Run the Scraper
+
+```bash
 pip install -r scraper/requirements.txt
 
-# Run the scraper (opens Chrome, scrapes your Scholar profile)
+# Run (reads SCHOLAR_ID from .env)
+python scraper/scholar_scraper.py
+
+# Or pass Scholar ID directly
 python scraper/scholar_scraper.py YOUR_SCHOLAR_ID
-
-# Skip full author fetch (faster)
-python scraper/scholar_scraper.py YOUR_SCHOLAR_ID --no-full-authors
-
-# Headless mode (no browser window)
-python scraper/scholar_scraper.py YOUR_SCHOLAR_ID --headless
 ```
 
-This saves the result to `data/network.json` automatically. The scraper caches previous results — re-running only fetches new citations.
+This will:
+1. Open Chrome and scrape your Google Scholar profile
+2. Collect all publications and their citing papers
+3. Fetch author profiles (full names, institutions, citations)
+4. Infer countries from institutions (no LLM needed)
+5. Save everything to `data/network.json`
 
-**Using the web UI Refresh button:**
+**Options:**
 
 ```bash
-# Start the local scraper server
-python scraper/server.py
+# Headless mode (no browser window)
+python scraper/scholar_scraper.py --headless
 
-# Then open the web app and click Refresh
-# The app calls the local server which runs Selenium
+# With LLM classification (themes + summaries, requires LLM_API_KEY in .env)
+python scraper/scholar_scraper.py --classify
 ```
 
-### Step 4: Push and Deploy
+### 4. Enable GitHub Pages
+
+1. Go to your repo on GitHub → **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. The included `.github/workflows/deploy.yml` auto-deploys on every push
+
+### 5. Push & Deploy
 
 ```bash
 git add data/network.json
-git commit -m "Add research network data"
-git push origin main
+git commit -m "Update research data"
+git push
 ```
 
 Your site goes live at: `https://YOUR_USERNAME.github.io/Research_Network/`
@@ -68,21 +86,29 @@ Anyone who opens the link sees your results — no keys or setup needed.
 
 ---
 
-## Configuration
+## Updating Your Data
 
-| Setting | Where to Get It | Required? | Cost |
-|---------|----------------|-----------|------|
-| **Google Scholar ID** | Your profile URL: `scholar.google.com/citations?user=`**YOUR_ID** | Yes | Free |
-| **Selenium** (Python) | `pip install selenium webdriver-manager` | Yes | Free |
-| **LLM API Key** | [OpenAI](https://platform.openai.com/), [Anthropic](https://console.anthropic.com/), or [Google AI](https://aistudio.google.com/) | Optional | Pay-per-use |
+The scraper supports **incremental updates** — it compares with existing data and only fetches what's new:
 
-> **Are my API keys safe?** Yes. All keys entered in the web UI are stored in your browser's `localStorage` — they never touch the repo, the server, or GitHub.
+```bash
+# Just re-run the scraper
+python scraper/scholar_scraper.py
+
+# Then push
+git add data/network.json && git commit -m "Update research data" && git push
+```
+
+It will:
+- Detect new publications automatically
+- Fetch citations only for publications with new citing papers
+- Reuse cached data for unchanged publications
+- Fetch profiles only for new Scholar IDs
 
 ---
 
 ## Three Views
 
-Toggle between views using the **Network / Globe / Scholar** buttons in the header.
+Toggle between views using the **Network / Globe / Scholar** buttons.
 
 ### Network View
 Interactive force-directed graph of your research network.
@@ -90,76 +116,52 @@ Interactive force-directed graph of your research network.
 - **Center node** = You
 - **Level 1** = Your publications (sized by citation count, colored by research theme)
 - **Level 2** = Papers that cite yours
-
-| Action | What it does |
-|--------|-------------|
-| Hover a node | See title, year, citations, summary |
-| Click a publication | Expand/collapse its citing papers |
-| Drag a node | Rearrange the layout |
-| Scroll wheel | Zoom in/out |
-
-**Filters**: year range, recent/most-cited top K, keyword search, show/hide citations.
+- Click a publication to expand/collapse its citations
+- Hover for details (title, year, citations, summary)
+- Filter by year range, top K, keyword search
 
 ### Globe View
 3D rotating globe showing where your citations come from.
 
-- Countries with citations **light up** — brighter = more citations
-- **Hover** a country → see citation count and top institutions
-- Globe **pauses** when you hover a cited country
-- **Scroll down** for ranked leaderboards (top countries + top institutions)
+- Countries **light up** — brighter = more citations
+- **Hover** a country to see citation count and top institutions
+- Scroll down for **ranked leaderboards** (top countries + top institutions)
+- Toggle **First Author / All Authors** mode
 
 ### Scholar View
 Ranking tables for collaborators and citing authors.
 
-- **Collaborators** — your co-authors extracted from publication metadata
-- **Citing Authors** — researchers who cite your work, with institution, country, and total citation count
-- Toggle between **First Author** and **All Authors** mode
-- Click **Fetch Citations** to look up each author's total citation count via their Scholar profile
+- **Collaborators** — co-authors ranked by papers together
+- **Citing Authors** — who cites your work, with institution, country, total citations
+- **Hover** any row to see which publications they collaborated on / cited
+- **Click** a name to visit their Google Scholar profile (if available)
+- Toggle **First Author / All Authors** mode
 
 ---
 
-## Saving & Sharing Results
+## Configuration (`.env`)
 
-### Export/Import
-- After scraping → click **Export** → saves a `.json` snapshot
-- Click **Import** → reload a previous snapshot
-- Re-scraping only fetches new data not in the cache
+| Variable | Description | Required? |
+|----------|------------|-----------|
+| `SCHOLAR_ID` | Your Google Scholar user ID | Yes |
+| `LLM_PROVIDER` | `openai`, `claude`, or `gemini` | Only for `--classify` |
+| `LLM_API_KEY` | Your LLM API key | Only for `--classify` |
+| `LLM_MODEL` | Model override (default: auto per provider) | No |
 
-### Share with Others (No Keys Needed)
-1. Run the scraper or click Refresh
-2. Export the JSON (or it's already at `data/network.json`)
-3. Commit and push:
-   ```bash
-   git add data/network.json
-   git commit -m "Update research network data"
-   git push
-   ```
-4. Share your GitHub Pages URL — visitors see everything instantly
+The `--classify` flag uses an LLM to:
+- **Classify** publications into research themes (Healthcare, NLP, CV, etc.)
+- **Summarize** each paper in one sentence
 
----
-
-## LLM Features (Optional)
-
-If you configure an LLM API key (OpenAI, Claude, or Gemini), the app adds:
-
-- **Research theme clustering** — groups publications into broad themes (Healthcare, NLP, CV, RL, etc.)
-- **Paper summaries** — one-line descriptions for each publication
-- **Citation geolocation** — extracts country + institution from citing paper metadata
-
-These are optional. The network graph, globe, and scholar views all work without an LLM key.
+Everything else (scraping, geo inference, author profiles) works without an LLM.
 
 ---
 
 ## Running Locally
 
 ```bash
-# Serve the web app
-cd Research_Network
+# Serve the web app locally
 python3 -m http.server 8080
 # Open http://localhost:8080
-
-# (Optional) Run the scraper server for web-based Refresh
-python scraper/server.py
 ```
 
 ---
@@ -170,26 +172,24 @@ python scraper/server.py
 Research_Network/
 ├── .github/workflows/
 │   └── deploy.yml          # GitHub Actions → GitHub Pages
-├── index.html              # Main page
+├── .env.example            # Template for local config
+├── .env                    # Your local config (gitignored)
+├── index.html              # Main page (read-only viewer)
 ├── css/
 │   └── style.css           # Dark theme styles
 ├── js/
-│   ├── app.js              # Main entry, wires everything together
-│   ├── config.js           # Settings modal + localStorage
-│   ├── scholar.js          # Google Scholar data parsing & aggregation
-│   ├── llm.js              # LLM calls (OpenAI / Claude / Gemini)
+│   ├── app.js              # Main entry, loads data + renders views
+│   ├── scholar.js          # Citation/co-author parsing & aggregation
 │   ├── network.js          # Builds node-link data structure
 │   ├── graph.js            # D3.js force-directed graph
-│   ├── globe.js            # 3D globe with country highlighting
-│   ├── scholar-view.js     # Scholar rankings view
-│   ├── countries.js        # Country → coordinates mapping
-│   └── cache.js            # JSON export/import + merge
+│   ├── globe.js            # 3D globe + country inference engine
+│   ├── scholar-view.js     # Scholar rankings + tooltips
+│   └── countries.js        # Country → coordinates mapping
 ├── scraper/
 │   ├── scholar_scraper.py  # Selenium scraper (run locally)
-│   ├── server.py           # Local server for web-based Refresh
 │   └── requirements.txt    # Python dependencies
 ├── data/
-│   └── network.json        # Pre-generated snapshot (auto-loaded)
+│   └── network.json        # Generated data (auto-loaded by web app)
 └── README.md
 ```
 
@@ -198,5 +198,5 @@ Research_Network/
 - Pure HTML/CSS/JS — no build step, no framework
 - [D3.js v7](https://d3js.org/) — force-directed graph
 - [globe.gl](https://globe.gl/) — 3D globe visualization
-- [Selenium](https://www.selenium.dev/) — local Google Scholar scraping
-- OpenAI / Claude / Gemini — paper analysis + geolocation inference
+- [Selenium](https://www.selenium.dev/) — Google Scholar scraping
+- OpenAI / Claude / Gemini — optional publication classification
