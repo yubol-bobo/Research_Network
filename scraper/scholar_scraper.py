@@ -3,12 +3,13 @@
 Google Scholar Selenium Scraper for Research Network
 
 Scrapes a Google Scholar profile and all citing papers using Selenium.
-Outputs JSON in the format expected by the Research Network web app.
+Supports incremental updates: compares existing data with current Scholar page
+and only fetches new/changed publications and citations.
 
 Usage:
-    python scholar_scraper.py <scholar_id> [--output data/network.json]
-    python scholar_scraper.py hgN6B6kAAAAJ
-    python scholar_scraper.py hgN6B6kAAAAJ --headless
+    python scraper/scholar_scraper.py <scholar_id>
+    python scraper/scholar_scraper.py hgN6B6kAAAAJ
+    python scraper/scholar_scraper.py hgN6B6kAAAAJ --headless
 """
 
 import argparse
@@ -39,9 +40,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ── Constants ──
 SCHOLAR_BASE = "https://scholar.google.com"
 PAGE_LOAD_WAIT = 5
-BETWEEN_REQUEST_WAIT = 4  # seconds between requests to Scholar
-BETWEEN_PUB_WAIT = 5      # seconds between different publications' cited-by pages
-MAX_SHOW_MORE_CLICKS = 20  # safety limit
+BETWEEN_REQUEST_WAIT = 4
+BETWEEN_PUB_WAIT = 5
+MAX_SHOW_MORE_CLICKS = 20
 
 
 def create_driver(headless: bool = False) -> webdriver.Chrome:
@@ -69,7 +70,6 @@ def create_driver(headless: bool = False) -> webdriver.Chrome:
 
 
 def extract_number(text: str) -> int:
-    """Extract integer from text, return 0 if not found."""
     if not text:
         return 0
     cleaned = re.sub(r"[^\d]", "", text.strip())
@@ -77,12 +77,10 @@ def extract_number(text: str) -> int:
 
 
 def random_delay(base: float, jitter: float = 2.0):
-    """Sleep for base + random jitter seconds."""
     time.sleep(base + random.uniform(0, jitter))
 
 
 def check_blocked(driver) -> bool:
-    """Check if Scholar has blocked us (CAPTCHA or error page)."""
     try:
         page_text = driver.page_source.lower()
         if "unusual traffic" in page_text or "captcha" in page_text or "sorry" in page_text[:500]:
@@ -93,6 +91,290 @@ def check_blocked(driver) -> bool:
     except Exception:
         pass
     return False
+
+
+# ── Country Inference Engine (ported from globe.js) ──
+
+INSTITUTION_PATTERNS = [
+    # US
+    (r'Carnegie Mellon|Stanford|MIT\b|Harvard|Berkeley|Caltech|Princeton|Yale|Columbia|Cornell|University of (California|Michigan|Washington|Pennsylvania|Illinois|Texas|Wisconsin|Virginia|Maryland|Florida|Georgia|Colorado|Arizona|Oregon|Minnesota|Indiana|Iowa|Massachusetts|North Carolina|South Carolina|Chicago|Pittsburgh|Rochester|Notre Dame|Southern California|Central Florida|Utah|Kentucky|Kansas|Nebraska|Hawaii|Tennessee|Missouri|Oklahoma|Cincinnati|Delaware|Nevada|New Mexico|Vermont|Connecticut|Rhode Island|New Hampshire|Maine|Montana|Idaho|Wyoming|Alabama|Mississippi|Arkansas|Louisiana|West Virginia)|Georgia (Tech|Institute)|Johns Hopkins|Duke|Northwestern|Rice|Emory|Vanderbilt|Brown|Dartmouth|Penn(sylvania)? State|Ohio State|Purdue|Michigan State|Arizona State|USC\b|UCLA|UCSB|UCSD|UCSC|UC Davis|UC Irvine|Case Western|Stony Brook|Rutgers|NYU\b|Boston University|Rochester|Syracuse|Drexel|Tulane|Lehigh|CMU\b|UIUC|UMass|UConn|UMD\b|UVA\b|UNC\b|UT Austin|UT Dallas|SUNY|Northeastern University|Georgetown|Wake Forest|Tufts|Brandeis|George Washington|American University|Temple|Villanova|Fordham|IBM Research|Google|Microsoft|Meta\b|Amazon|OpenAI|NVIDIA|Apple\b|Adobe|Salesforce|Intel\b|Qualcomm|Oracle', 'United States'),
+    # China
+    (r'Tsinghua|Peking University|Fudan|Zhejiang|Shang\s*hai|Nanjing|Wuhan|Huazhong|Sun Yat|Harbin|USTC|ECNU|East China|CAS\b|Chinese Academy|Science and Technology of China|Beihang|Beijing|Renmin|Sichuan|Jilin|Tongji|Xiamen|Nankai|Southeast University|Central South|SJTU|HUST|Zhengzhou|Shandong|Tianjin|Dalian|Xidian|Northwestern Polytechnical|Southwest Jiaotong|Tencent|Baidu|Alibaba|ByteDance|Huawei|Xiaomi|JD\b|DiDi|SenseTime|Megvii|CUHK\b|Hong Kong|HKUST|HKU\b|Lingnan|National Taiwan|NTHU|NCTU|Academia Sinica', 'China'),
+    # UK
+    (r'Oxford|Cambridge|Imperial College|UCL\b|University College of London|Edinburgh|Manchester|Bristol|Warwick|Glasgow|Leeds|Sheffield|Southampton|Birmingham|Liverpool|Nottingham|Queen Mary|King.s College|LSE|London School|St Andrews|Durham|Exeter|Bath|York|Sussex|Surrey|Lancaster|Leicester|Aberdeen|Heriot|Newcastle|Reading|Cardiff|Swansea|Hertfordshire|Kent|Essex|Cranfield|Brunel|Plymouth|Portsmouth|Stirling|Strathclyde|Dundee|Aston|Keele|Bangor|Ulster|Brighton|Coventry', 'United Kingdom'),
+    # Switzerland
+    (r'ETH\b|EPFL|Zurich|Zürich|Geneva|Basel|Bern|Lausanne|IDIAP', 'Switzerland'),
+    # Germany
+    (r'Munich|TU Berlin|Heidelberg|Bonn|Freiburg|Hamburg|Frankfurt|Stuttgart|Leipzig|Göttingen|Tübingen|RWTH|Karlsruhe|TU Darmstadt|Saarland|Max Planck|Fraunhofer|Humboldt|Dresden|Siemens|Siegen|Mannheim|Bielefeld|Potsdam|Konstanz|Rostock|Jena|Mainz|Würzburg', 'Germany'),
+    # Canada
+    (r'Toronto|McGill|UBC\b|Waterloo|Montreal|Montréal|Alberta|Ottawa|Calgary|Simon Fraser|McMaster|Dalhousie|Manitoba|Saskatchewan|Laval|Mila\b|Vector Institute|CIFAR|Concordia', 'Canada'),
+    # France
+    (r'Sorbonne|ENS\b|Ecole Polytechnique|INRIA|CNRS|Paris|Grenoble|Lyon|Toulouse|Marseille|Strasbourg|Bordeaux|Lille|Nantes|CentraleSupélec|Télécom|Sciences Po|HEC\b|INSEAD', 'France'),
+    # Japan
+    (r'Tokyo|Kyoto|Osaka|Tohoku|Nagoya|Hokkaido|Kyushu|Waseda|Keio|Tsukuba|NAIST|NICT|RIKEN|NTT\b|Sony|Hitachi|Fujitsu', 'Japan'),
+    # South Korea
+    (r'Seoul|KAIST|POSTECH|Korea University|Yonsei|Hanyang|Sungkyunkwan|Ewha|Sogang|Samsung|Naver|Kakao', 'South Korea'),
+    # India
+    (r'IIT\b|IISc|IIIT|Indian Institute|Indian Statistical|Jawaharlal|BITS Pilani|NIT\b|Tata\b|Infosys|Wipro|TCS\b|Rangasamy|VIT\b|SRM\b|Manipal|Amity|KIIT|Jadavpur|Anna University', 'India'),
+    # Australia
+    (r'Sydney|Melbourne|Queensland|Monash|ANU\b|Australian National|UNSW|CSIRO|Adelaide|Western Australia|Macquarie|Griffith|Deakin|Curtin|Tasmania|Wollongong', 'Australia'),
+    # Singapore
+    (r'National University of Singapore|NUS\b|NTU.*Singapore|Nanyang|SUTD|Singapore Management|A\*STAR', 'Singapore'),
+    # Netherlands
+    (r'Amsterdam|Delft|Utrecht|Leiden|Eindhoven|Groningen|Twente|Erasmus|Tilburg|Radboud|Wageningen', 'Netherlands'),
+    # Israel
+    (r'Technion|Hebrew University|Tel Aviv|Weizmann|Ben-?Gurion|Bar-?Ilan', 'Israel'),
+    # Italy
+    (r'Sapienza|Politecnico|Bocconi|Trento', 'Italy'),
+    # Spain
+    (r'Salamanca|Basque', 'Spain'),
+    # Sweden
+    (r'KTH\b|Chalmers|Linköping', 'Sweden'),
+    # Denmark
+    (r'DTU\b|Aalborg', 'Denmark'),
+    # Finland
+    (r'Aalto', 'Finland'),
+    # Brazil
+    (r'USP\b|UNICAMP|UFRJ|PUC.*Rio', 'Brazil'),
+    # Qatar
+    (r'HBKU|Hamad Bin', 'Qatar'),
+    # Saudi Arabia
+    (r'KAUST|King Abdullah|King Saud|King Fahd|KFUPM', 'Saudi Arabia'),
+    # UAE
+    (r'MBZUAI|NYU Abu Dhabi|Khalifa|Mohamed bin Zayed', 'United Arab Emirates'),
+]
+
+# Country names (direct mention in institution string)
+COUNTRY_NAMES = [
+    ('United States', 'United States'), ('United Kingdom', 'United Kingdom'),
+    ('South Korea', 'South Korea'), ('North Korea', 'North Korea'),
+    ('South Africa', 'South Africa'), ('New Zealand', 'New Zealand'),
+    ('Saudi Arabia', 'Saudi Arabia'), ('Sri Lanka', 'Sri Lanka'),
+    ('Costa Rica', 'Costa Rica'), ('Puerto Rico', 'United States'),
+    ('Czech Republic', 'Czech Republic'),
+    ('Hong Kong', 'China'), ('Macau', 'China'), ('Macao', 'China'),
+    ('Taiwan', 'China'),
+    ('USA', 'United States'), ('U.S.A', 'United States'), ('U.S.', 'United States'),
+    ('U.K.', 'United Kingdom'),
+    ('UAE', 'United Arab Emirates'),
+    ('P.R. China', 'China'), ('PR China', 'China'), ('PRC', 'China'),
+    ('Afghanistan', 'Afghanistan'), ('Albania', 'Albania'), ('Algeria', 'Algeria'),
+    ('Argentina', 'Argentina'), ('Armenia', 'Armenia'), ('Australia', 'Australia'),
+    ('Austria', 'Austria'), ('Azerbaijan', 'Azerbaijan'),
+    ('Bahrain', 'Bahrain'), ('Bangladesh', 'Bangladesh'), ('Belarus', 'Belarus'),
+    ('Belgium', 'Belgium'), ('Bolivia', 'Bolivia'), ('Bosnia', 'Bosnia and Herzegovina'),
+    ('Botswana', 'Botswana'), ('Brazil', 'Brazil'), ('Brunei', 'Brunei'),
+    ('Bulgaria', 'Bulgaria'), ('Cambodia', 'Cambodia'), ('Cameroon', 'Cameroon'),
+    ('Canada', 'Canada'), ('Chile', 'Chile'), ('China', 'China'),
+    ('Colombia', 'Colombia'), ('Croatia', 'Croatia'), ('Cuba', 'Cuba'),
+    ('Cyprus', 'Cyprus'), ('Czechia', 'Czech Republic'),
+    ('Denmark', 'Denmark'),
+    ('Ecuador', 'Ecuador'), ('Egypt', 'Egypt'), ('Estonia', 'Estonia'),
+    ('Ethiopia', 'Ethiopia'), ('Finland', 'Finland'), ('France', 'France'),
+    ('Georgia', 'Georgia'), ('Germany', 'Germany'), ('Ghana', 'Ghana'),
+    ('Greece', 'Greece'), ('Guatemala', 'Guatemala'),
+    ('Hungary', 'Hungary'), ('Iceland', 'Iceland'), ('India', 'India'),
+    ('Indonesia', 'Indonesia'), ('Iran', 'Iran'), ('Iraq', 'Iraq'),
+    ('Ireland', 'Ireland'), ('Israel', 'Israel'), ('Italy', 'Italy'),
+    ('Jamaica', 'Jamaica'), ('Japan', 'Japan'), ('Jordan', 'Jordan'),
+    ('Kazakhstan', 'Kazakhstan'), ('Kenya', 'Kenya'), ('Kuwait', 'Kuwait'),
+    ('Kyrgyzstan', 'Kyrgyzstan'),
+    ('Latvia', 'Latvia'), ('Lebanon', 'Lebanon'), ('Libya', 'Libya'),
+    ('Lithuania', 'Lithuania'), ('Luxembourg', 'Luxembourg'),
+    ('Malaysia', 'Malaysia'), ('Mexico', 'Mexico'), ('Moldova', 'Moldova'),
+    ('Mongolia', 'Mongolia'), ('Montenegro', 'Montenegro'), ('Morocco', 'Morocco'),
+    ('Myanmar', 'Myanmar'), ('Nepal', 'Nepal'), ('Netherlands', 'Netherlands'),
+    ('Nigeria', 'Nigeria'), ('Norway', 'Norway'),
+    ('Oman', 'Oman'), ('Pakistan', 'Pakistan'), ('Palestine', 'Palestine'),
+    ('Panama', 'Panama'), ('Paraguay', 'Paraguay'), ('Peru', 'Peru'),
+    ('Philippines', 'Philippines'), ('Poland', 'Poland'), ('Portugal', 'Portugal'),
+    ('Qatar', 'Qatar'), ('Romania', 'Romania'), ('Russia', 'Russia'),
+    ('Rwanda', 'Rwanda'),
+    ('Senegal', 'Senegal'), ('Serbia', 'Serbia'), ('Singapore', 'Singapore'),
+    ('Slovakia', 'Slovakia'), ('Slovenia', 'Slovenia'), ('Somalia', 'Somalia'),
+    ('Spain', 'Spain'), ('Sudan', 'Sudan'), ('Sweden', 'Sweden'),
+    ('Switzerland', 'Switzerland'), ('Syria', 'Syria'),
+    ('Thailand', 'Thailand'), ('Tunisia', 'Tunisia'), ('Turkey', 'Turkey'),
+    ('Türkiye', 'Turkey'),
+    ('Uganda', 'Uganda'), ('Ukraine', 'Ukraine'),
+    ('Uruguay', 'Uruguay'), ('Uzbekistan', 'Uzbekistan'),
+    ('Venezuela', 'Venezuela'), ('Vietnam', 'Vietnam'), ('Viet Nam', 'Vietnam'),
+    ('Yemen', 'Yemen'), ('Zambia', 'Zambia'), ('Zimbabwe', 'Zimbabwe'),
+    ('Korean', 'South Korea'), ('Japanese', 'Japan'), ('Chinese', 'China'),
+    ('Brazilian', 'Brazil'), ('Mexican', 'Mexico'), ('Russian', 'Russia'),
+    ('Turkish', 'Turkey'), ('Polish', 'Poland'), ('Swedish', 'Sweden'),
+    ('Norwegian', 'Norway'), ('Danish', 'Denmark'), ('Finnish', 'Finland'),
+    ('Scottish', 'United Kingdom'), ('Welsh', 'United Kingdom'),
+]
+
+CITY_PATTERNS = [
+    (r'\bMilan\b|Rome\b|Turin\b|Bologna\b|Padua\b|Pisa\b|Florence\b', 'Italy'),
+    (r'\bBarcelona\b|Madrid\b|Valencia\b|Seville\b|Granada\b', 'Spain'),
+    (r'\bStockholm\b|Uppsala\b|Lund\b|Gothenburg\b', 'Sweden'),
+    (r'\bCopenhagen\b|Aarhus\b', 'Denmark'),
+    (r'\bHelsinki\b|Turku\b|Tampere\b|Oulu\b', 'Finland'),
+    (r'\bSão Paulo\b|Campinas\b|Rio de Janeiro\b', 'Brazil'),
+    (r'\bBangkok\b|Chiang Mai\b|Chulalongkorn', 'Thailand'),
+    (r'\bLagos\b|Ibadan\b|Abuja\b', 'Nigeria'),
+    (r'\bNairobi\b|Mombasa\b', 'Kenya'),
+    (r'\bCape Town\b|Johannesburg\b|Pretoria\b|Stellenbosch\b|Witwatersrand', 'South Africa'),
+    (r'\bDublin\b|Trinity College Dublin|University College Dublin', 'Ireland'),
+    (r'\bLisbon\b|Porto\b|Coimbra\b', 'Portugal'),
+    (r'\bVienna\b|Graz\b|Innsbruck\b', 'Austria'),
+    (r'\bWarsaw\b|Kraków\b|Krakow\b|Wroclaw\b|Gdansk\b|Poznan\b', 'Poland'),
+    (r'\bPrague\b|Brno\b', 'Czech Republic'),
+    (r'\bBudapest\b|Debrecen\b', 'Hungary'),
+    (r'\bBucharest\b|Cluj\b', 'Romania'),
+    (r'\bAthens\b|Thessaloniki\b', 'Greece'),
+    (r'\bBelgrade\b|Novi Sad\b', 'Serbia'),
+    (r'\bZagreb\b', 'Croatia'),
+    (r'\bLjubljana\b', 'Slovenia'),
+    (r'\bBratislava\b|Košice\b', 'Slovakia'),
+    (r'\bTallinn\b|Tartu\b', 'Estonia'),
+    (r'\bRiga\b', 'Latvia'),
+    (r'\bVilnius\b|Kaunas\b', 'Lithuania'),
+    (r'\bOslo\b|Bergen\b|Trondheim\b|NTNU\b', 'Norway'),
+    (r'\bKuala Lumpur\b|Malaya\b', 'Malaysia'),
+    (r'\bJakarta\b|Bandung\b|Gadjah Mada', 'Indonesia'),
+    (r'\bManila\b|Ateneo\b|De La Salle', 'Philippines'),
+    (r'\bHanoi\b|Ho Chi Minh', 'Vietnam'),
+    (r'\bDelhi\b|Mumbai\b|Bangalore\b|Bengaluru\b|Hyderabad\b|Chennai\b|Kolkata\b|Pune\b', 'India'),
+    (r'\bDoha\b', 'Qatar'),
+    (r'\bDubai\b|Abu Dhabi\b', 'United Arab Emirates'),
+    (r'\bRiyadh\b|Jeddah\b', 'Saudi Arabia'),
+    (r'\bTehran\b|Isfahan\b|Sharif\b', 'Iran'),
+    (r'\bAnkara\b|Istanbul\b|Izmir\b|Boğaziçi|Bilkent|Koç University', 'Turkey'),
+    (r'\bCairo\b|Alexandria\b', 'Egypt'),
+    (r'\bMoscow\b|Saint Petersburg\b|Novosibirsk\b|Skolkovo\b|Skoltech', 'Russia'),
+    (r'\bKyiv\b|Kiev\b|Kharkiv\b|Lviv\b', 'Ukraine'),
+    (r'\bSantiago\b.*Chile|Pontificia Universidad Católica de Chile', 'Chile'),
+    (r'\bBuenos Aires\b', 'Argentina'),
+    (r'\bBogotá\b|Bogota\b|Medellín\b|Medellin\b', 'Colombia'),
+    (r'\bLima\b.*Peru|Pontificia Universidad Católica del Perú', 'Peru'),
+    (r'\bMexico City\b|Ciudad de México\b|UNAM\b|Tecnológico de Monterrey|Monterrey\b', 'Mexico'),
+]
+
+# Pre-compile all patterns
+_COMPILED_INSTITUTION = [(re.compile(p, re.IGNORECASE), c) for p, c in INSTITUTION_PATTERNS]
+_COMPILED_COUNTRY_NAMES = [(re.compile(r'\b' + re.escape(n) + r'\b', re.IGNORECASE), c) for n, c in COUNTRY_NAMES]
+_COMPILED_CITY = [(re.compile(p, re.IGNORECASE), c) for p, c in CITY_PATTERNS]
+
+
+def infer_country(institution: str) -> str:
+    """Infer country from an institution string using three-tier approach."""
+    if not institution:
+        return ''
+    for pattern, country in _COMPILED_INSTITUTION:
+        if pattern.search(institution):
+            return country
+    for pattern, country in _COMPILED_COUNTRY_NAMES:
+        if pattern.search(institution):
+            return country
+    for pattern, country in _COMPILED_CITY:
+        if pattern.search(institution):
+            return country
+    return ''
+
+
+def clean_institution(raw: str) -> str:
+    """Clean institution string to show only the university/organization name."""
+    if not raw or raw == '—':
+        return raw
+    if re.match(r'^unknown', raw, re.IGNORECASE):
+        return '—'
+
+    cleaned = raw
+
+    # Handle "@ University" pattern
+    at_parts = re.split(r'(?:,\s*)?(?:@|(?:\bat\b))\s*', cleaned, flags=re.IGNORECASE)
+    at_parts = [p for p in at_parts if p.strip()]
+    if len(at_parts) > 1:
+        cleaned = at_parts[-1].strip()
+
+    # Split by comma and find institution part
+    parts = [p.strip() for p in cleaned.split(',')]
+    if len(parts) > 1:
+        inst_start = -1
+        for i in range(len(parts) - 1, -1, -1):
+            part = parts[i].strip()
+            # Skip title/role parts
+            if re.match(r'^(PhD|Ph\.?D|Professor|Prof\.|Postdoc|Post-?doc|Research|Assistant|Associate|Senior|Junior|Distinguished|Visiting|Director|Fellow|Lecturer|Student|Candidate|Engineer|Scientist|Master|Doctoral|Founder|CEO|CTO|Co-?founder|AI |ML |NLP |Software |Data )', part, re.IGNORECASE):
+                continue
+            if re.match(r'^(Department|Dept|School|Faculty|College|Division|Center|Centre|Lab|Group|Institute|Program) (of|for|in) ', part, re.IGNORECASE):
+                continue
+            if len(part) < 3:
+                continue
+            if re.match(r'^(MS|MSc|MA|MBA|BS|BSc|BA|MPhil|CSE|ECE|EE|CS|SE)\b', part, re.IGNORECASE) and len(part) < 15:
+                continue
+            # Strong institution signal
+            if re.search(r'University|Institut|College|Polytechnic|School of|Academy|Labs?$|Inc\.|Corp|Google|Microsoft|Meta|Amazon|DeepMind|OpenAI|NVIDIA', part, re.IGNORECASE):
+                inst_start = i
+                break
+            inst_start = i
+            break
+
+        if inst_start >= 0:
+            if inst_start > 0:
+                prev = parts[inst_start - 1].strip()
+                if re.search(r'University of|Institut[eo]? (of|de|für)|Universit[éyà]', prev, re.IGNORECASE):
+                    inst_start -= 1
+            cleaned = ', '.join(parts[inst_start:]).strip()
+
+    # Clean remaining prefixes
+    cleaned = re.sub(r'^(and |& )?(Head|Director|Chair|Dean|Professor|Fellow|Member) (of |at |in )*', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'^\s*[,;]\s*', '', cleaned).strip()
+
+    if len(cleaned) < 3:
+        return raw
+    return cleaned
+
+
+def build_geo_data(publications: List[Dict], scholar_profiles: Dict[str, Dict]) -> Dict[str, Dict]:
+    """
+    Build geo data from scholarProfiles for all citations.
+    Returns { "pubIdx_citIdx": { country, institution } }
+    """
+    geo_data = {}
+
+    for pi, pub in enumerate(publications):
+        for ci, cit in enumerate(pub.get("citations", [])):
+            author_list = cit.get("authorList", [])
+
+            # Try first author first, then any author
+            first_authors = [a for a in author_list if a.get("isFirstAuthor")]
+            effective = first_authors[:1] if first_authors else (author_list[:1] if author_list else [])
+
+            for author in effective:
+                sid = author.get("scholarId", "")
+                if not sid:
+                    continue
+                profile = scholar_profiles.get(sid, {})
+                institution = profile.get("institution", "")
+                country = infer_country(institution)
+                if country or institution:
+                    cleaned_inst = clean_institution(institution)
+                    if cleaned_inst == '—':
+                        cleaned_inst = ''
+                    geo_data[f"{pi}_{ci}"] = {"country": country, "institution": cleaned_inst}
+                    break
+
+            # If no geo from first author, try all authors
+            if f"{pi}_{ci}" not in geo_data:
+                for author in author_list:
+                    sid = author.get("scholarId", "")
+                    if not sid:
+                        continue
+                    profile = scholar_profiles.get(sid, {})
+                    institution = profile.get("institution", "")
+                    country = infer_country(institution)
+                    if country or institution:
+                        cleaned_inst = clean_institution(institution)
+                        if cleaned_inst == '—':
+                            cleaned_inst = ''
+                        geo_data[f"{pi}_{ci}"] = {"country": country, "institution": cleaned_inst}
+                        break
+
+    return geo_data
 
 
 # ── Profile Scraping ──
@@ -112,7 +394,6 @@ def scrape_profile_info(driver) -> Dict[str, Any]:
     except NoSuchElementException:
         info["affiliation"] = ""
 
-    # Citation metrics
     try:
         table = driver.find_element(By.ID, "gsc_rsb_st")
         rows = table.find_elements(By.TAG_NAME, "tr")
@@ -130,7 +411,6 @@ def scrape_profile_info(driver) -> Dict[str, Any]:
     except NoSuchElementException:
         pass
 
-    # Co-authors from sidebar
     info["coauthors"] = []
     try:
         coauthor_section = driver.find_element(By.ID, "gsc_rsb_co")
@@ -158,7 +438,6 @@ def scrape_profile_info(driver) -> Dict[str, Any]:
 
 
 def load_all_publications(driver):
-    """Click 'SHOW MORE' until all publications are loaded."""
     attempts = 0
     while attempts < MAX_SHOW_MORE_CLICKS:
         try:
@@ -174,7 +453,6 @@ def load_all_publications(driver):
 
 
 def scrape_publications(driver) -> List[Dict[str, Any]]:
-    """Extract all publications from the profile page."""
     pubs = []
     rows = driver.find_elements(By.CSS_SELECTOR, "#gsc_a_b .gsc_a_tr")
 
@@ -190,8 +468,6 @@ def scrape_publications(driver) -> List[Dict[str, Any]]:
                 f"{SCHOLAR_BASE}{href}" if href else ""
             )
 
-            # Citation count and cited-by link
-            # .gsc_a_ac is itself an <a> when there are citations, or a <td> when 0
             try:
                 cited_el = row.find_element(By.CSS_SELECTOR, ".gsc_a_ac")
                 citation_count = extract_number(cited_el.text)
@@ -203,14 +479,12 @@ def scrape_publications(driver) -> List[Dict[str, Any]]:
                 citation_count = 0
                 cited_by_url = ""
 
-            # Year
             try:
                 year_el = row.find_element(By.CLASS_NAME, "gsc_a_y")
                 year = extract_number(year_el.text)
             except NoSuchElementException:
                 year = 0
 
-            # Authors (gray line)
             gray_els = row.find_elements(By.CLASS_NAME, "gs_gray")
             authors_str = gray_els[0].text.strip() if gray_els else ""
 
@@ -229,49 +503,15 @@ def scrape_publications(driver) -> List[Dict[str, Any]]:
     return pubs
 
 
-# ── Paper Detail Page (full author names for user's own publications) ──
-
-
-def scrape_paper_detail(driver, article_url: str) -> Dict[str, str]:
-    """Visit a Scholar paper detail page and extract full info."""
-    result = {"fullAuthors": "", "venue": "", "description": ""}
-    if not article_url:
-        return result
-
-    try:
-        driver.get(article_url)
-        time.sleep(PAGE_LOAD_WAIT)
-
-        fields = driver.find_elements(By.CSS_SELECTOR, "#gsc_oci_table .gs_scl")
-        for field in fields:
-            try:
-                label = field.find_element(By.CLASS_NAME, "gsc_oci_field").text.strip()
-                value = field.find_element(By.CLASS_NAME, "gsc_oci_value").text.strip()
-                if label in ("Authors", "Inventors"):
-                    result["fullAuthors"] = value
-                elif label in ("Journal", "Conference", "Book"):
-                    result["venue"] = value
-                elif label == "Description":
-                    result["description"] = value
-            except NoSuchElementException:
-                continue
-    except Exception as e:
-        print(f"  [WARN] Could not scrape paper detail: {e}")
-
-    return result
-
-
 # ── Cited-By Scraping ──
 
 
 def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
-    """Parse all citation entries on the current cited-by search results page."""
     citations = []
     results = driver.find_elements(By.CSS_SELECTOR, ".gs_r.gs_or.gs_scl")
 
     for r in results:
         try:
-            # Title and link
             try:
                 title_a = r.find_element(By.CSS_SELECTOR, ".gs_rt a")
                 title = re.sub(r"\[.*?\]\s*", "", title_a.text).strip()
@@ -287,7 +527,6 @@ def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
             if not title:
                 continue
 
-            # Author info line: "Authors - Venue, Year - Publisher"
             try:
                 author_el = r.find_element(By.CSS_SELECTOR, ".gs_a")
                 author_text = author_el.text.strip()
@@ -302,14 +541,10 @@ def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
             year_match = re.search(r"(\d{4})", author_text)
             year = int(year_match.group(1)) if year_match else 0
 
-            # Extract author profile links (Scholar user IDs) and track order
             author_profiles = {}
-            author_list = []  # ordered list of all authors with metadata
+            author_list = []
             try:
-                # Split the author string to get all author names in order
                 raw_authors = [a.strip() for a in authors.split(",") if a.strip()]
-
-                # Get clickable author links
                 profile_anchors = author_el.find_elements(
                     By.CSS_SELECTOR, 'a[href*="/citations?user="]'
                 )
@@ -322,9 +557,7 @@ def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
                         profile_map[a_name] = user_match.group(1)
                         author_profiles[a_name] = user_match.group(1)
 
-                # Build ordered author list with first-author flag
                 for idx, name in enumerate(raw_authors):
-                    # Clean trailing ellipsis
                     clean_name = name.rstrip("…").strip()
                     if not clean_name:
                         continue
@@ -340,13 +573,13 @@ def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
             citations.append({
                 "title": title,
                 "authors": authors,
-                "fullAuthors": "",  # will be filled from profile scraping
+                "fullAuthors": "",
                 "year": year,
                 "link": link,
                 "venue": venue,
                 "publisher": publisher,
                 "authorProfiles": author_profiles,
-                "authorList": author_list,  # ordered, with isFirstAuthor flag
+                "authorList": author_list,
             })
 
         except (NoSuchElementException, StaleElementReferenceException):
@@ -356,15 +589,13 @@ def scrape_cited_by_page(driver) -> List[Dict[str, Any]]:
 
 
 def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List[Dict[str, Any]]:
-    """Paginate through all 'Cited by' pages and collect all citations."""
     if not cited_by_url or expected_count == 0:
         return []
 
     all_citations = []
     seen_titles = set()
     page = 0
-    max_pages = max(1, (expected_count // 10) + 2)  # safety margin
-
+    max_pages = max(1, (expected_count // 10) + 2)
     current_url = cited_by_url
 
     while page < max_pages:
@@ -372,7 +603,6 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
         driver.get(current_url)
         random_delay(PAGE_LOAD_WAIT, 2.0)
 
-        # Check for blocking
         if check_blocked(driver):
             driver.get(current_url)
             random_delay(PAGE_LOAD_WAIT + 5, 3.0)
@@ -384,7 +614,6 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
         if not page_citations:
             break
 
-        # Deduplicate
         new_count = 0
         for cit in page_citations:
             key = cit["title"].lower().strip()
@@ -396,7 +625,6 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
         if new_count == 0:
             break
 
-        # Check for next page
         if len(page_citations) >= 10:
             start_param = page * 10
             base_url = cited_by_url.split("&start=")[0]
@@ -412,13 +640,6 @@ def scrape_all_citations(driver, cited_by_url: str, expected_count: int) -> List
 
 
 def scrape_author_profile(driver, scholar_id: str) -> Dict[str, Any]:
-    """
-    Visit a Scholar author's profile page and extract:
-    - Full name
-    - Total citations
-    - Institution/affiliation
-    - Country (from affiliation if visible)
-    """
     result = {
         "fullName": "",
         "totalCitations": 0,
@@ -437,19 +658,16 @@ def scrape_author_profile(driver, scholar_id: str) -> Dict[str, Any]:
             if check_blocked(driver):
                 return result
 
-        # Full name
         try:
             result["fullName"] = driver.find_element(By.ID, "gsc_prf_in").text.strip()
         except NoSuchElementException:
             pass
 
-        # Institution
         try:
             result["institution"] = driver.find_element(By.CSS_SELECTOR, ".gsc_prf_il").text.strip()
         except NoSuchElementException:
             pass
 
-        # Total citations from the stats table
         try:
             table = driver.find_element(By.ID, "gsc_rsb_st")
             rows = table.find_elements(By.TAG_NAME, "tr")
@@ -474,13 +692,7 @@ def fetch_all_author_profiles(
     publications: List[Dict],
     existing_profiles: Dict[str, Dict],
 ) -> Dict[str, Dict]:
-    """
-    Collect all unique Scholar IDs from citing papers' authorList,
-    then visit each profile to get full name + total citations + institution.
-    Returns a dict: { scholarId: { fullName, totalCitations, institution, scholarId } }
-    """
-    # Collect all unique Scholar IDs and track first-author status
-    scholar_ids = {}  # scholarId -> { abbrevName, isFirstAuthor (of any citing paper) }
+    scholar_ids = {}
     for pub in publications:
         for cit in pub.get("citations", []):
             for author in cit.get("authorList", []):
@@ -491,10 +703,8 @@ def fetch_all_author_profiles(
                         "isFirstAuthor": author["isFirstAuthor"],
                     }
                 elif sid and author["isFirstAuthor"]:
-                    # Mark as first author if they are first author of ANY citing paper
                     scholar_ids[sid]["isFirstAuthor"] = True
 
-    # Filter out already-fetched profiles
     to_fetch = {
         sid: info for sid, info in scholar_ids.items()
         if sid not in existing_profiles or not existing_profiles[sid].get("fullName")
@@ -502,7 +712,7 @@ def fetch_all_author_profiles(
 
     print(f"  Found {len(scholar_ids)} unique Scholar IDs, {len(to_fetch)} need fetching")
 
-    profiles = dict(existing_profiles)  # start with existing
+    profiles = dict(existing_profiles)
 
     for i, (sid, info) in enumerate(to_fetch.items()):
         print(f"  [{i+1}/{len(to_fetch)}] Fetching profile: {info['abbrevName']} ({sid})...")
@@ -517,45 +727,55 @@ def fetch_all_author_profiles(
     return profiles
 
 
-# ── Full Author Name Fetching (from paper links) ──
+# ── Incremental Comparison ──
 
 
-def fetch_full_authors_from_link(driver, paper_url: str) -> str:
-    """Visit a paper's page and try to extract full author names."""
-    if not paper_url:
-        return ""
+def compare_with_existing(
+    existing_data: Dict,
+    current_pubs: List[Dict],
+) -> Dict[str, Any]:
+    """
+    Compare current Scholar page publications with existing data.
+    Returns info about what needs updating.
+    """
+    if not existing_data or "publications" not in existing_data:
+        return {
+            "is_fresh": True,
+            "new_pubs": [p["title"] for p in current_pubs],
+            "changed_pubs": [],
+            "unchanged_pubs": [],
+        }
 
-    try:
-        driver.get(paper_url)
-        time.sleep(PAGE_LOAD_WAIT)
+    existing_map = {}
+    for pub in existing_data["publications"]:
+        existing_map[pub["title"]] = pub
 
-        # Method 1: meta tags (works on arXiv, ACM, IEEE, Springer, etc.)
-        meta_plural = driver.find_elements(By.CSS_SELECTOR, 'meta[name="citation_authors"]')
-        if meta_plural:
-            content = meta_plural[0].get_attribute("content")
-            if content and content.strip():
-                return content.strip()
+    new_pubs = []
+    changed_pubs = []
+    unchanged_pubs = []
 
-        meta_singles = driver.find_elements(By.CSS_SELECTOR, 'meta[name="citation_author"]')
-        if meta_singles:
-            authors = [m.get_attribute("content").strip() for m in meta_singles if m.get_attribute("content")]
-            if authors:
-                return ", ".join(authors)
+    for pub in current_pubs:
+        title = pub["title"]
+        if title not in existing_map:
+            new_pubs.append(title)
+        else:
+            old = existing_map[title]
+            old_cit_count = old.get("citationCount", 0)
+            new_cit_count = pub.get("citationCount", 0)
+            old_fetched = len(old.get("citations", []))
 
-        # Method 2: Scholar paper detail page
-        fields = driver.find_elements(By.CSS_SELECTOR, "#gsc_oci_table .gs_scl")
-        for field in fields:
-            try:
-                label = field.find_element(By.CLASS_NAME, "gsc_oci_field").text.strip()
-                if label in ("Authors", "Inventors"):
-                    return field.find_element(By.CLASS_NAME, "gsc_oci_value").text.strip()
-            except NoSuchElementException:
-                continue
+            # Changed if: citation count increased, or we haven't fetched citations yet
+            if new_cit_count > old_cit_count or (new_cit_count > 0 and old_fetched == 0):
+                changed_pubs.append(title)
+            else:
+                unchanged_pubs.append(title)
 
-        return ""
-    except Exception as e:
-        print(f"    [WARN] Failed to fetch authors from {paper_url}: {e}")
-        return ""
+    return {
+        "is_fresh": False,
+        "new_pubs": new_pubs,
+        "changed_pubs": changed_pubs,
+        "unchanged_pubs": unchanged_pubs,
+    }
 
 
 # ── Main Scraping Flow ──
@@ -564,15 +784,16 @@ def fetch_full_authors_from_link(driver, paper_url: str) -> str:
 def scrape_scholar(
     scholar_id: str,
     headless: bool = False,
-    fetch_full_authors: bool = True,
     existing_data: Optional[Dict] = None,
 ) -> Dict[str, Any]:
     """
-    Full scraping pipeline:
+    Full scraping pipeline with incremental update support.
     1. Load profile, get info
-    2. Load all publications
-    3. For each pub with citations, scrape all cited-by pages
-    4. Optionally fetch full author names for citing papers
+    2. Load all publications, compare with existing
+    3. For new/changed pubs, scrape citations
+    4. Fetch author profiles for new Scholar IDs
+    5. Build geo data from profiles
+    6. Save everything
     """
     print(f"{'='*60}")
     print(f"Scraping Google Scholar profile: {scholar_id}")
@@ -589,11 +810,10 @@ def scrape_scholar(
     try:
         # Step 1: Load profile page
         profile_url = f"{SCHOLAR_BASE}/citations?user={scholar_id}&hl=en"
-        print(f"[1/4] Loading profile: {profile_url}")
+        print(f"[1/5] Loading profile: {profile_url}")
         driver.get(profile_url)
         time.sleep(PAGE_LOAD_WAIT)
 
-        # Extract profile info
         profile_info = scrape_profile_info(driver)
         researcher_name = profile_info.get("name", "Researcher")
         print(f"  Name: {researcher_name}")
@@ -602,36 +822,44 @@ def scrape_scholar(
         print(f"  H-index: {profile_info.get('h_index', 'N/A')}")
         print(f"  Co-authors: {len(profile_info.get('coauthors', []))}")
 
-        # Step 2: Load all publications
-        print(f"\n[2/4] Loading all publications...")
+        # Step 2: Load all publications and compare
+        print(f"\n[2/5] Loading all publications...")
         load_all_publications(driver)
         publications = scrape_publications(driver)
-        print(f"  Found {len(publications)} publications")
+        print(f"  Found {len(publications)} publications on Scholar page")
 
-        # Step 3: Fetch citations for each publication
-        print(f"\n[3/4] Fetching citations for each publication...")
+        comparison = compare_with_existing(existing_data, publications)
+
+        if comparison["is_fresh"]:
+            print(f"  → Fresh scrape (no existing data)")
+        else:
+            print(f"  → {len(comparison['new_pubs'])} new publications")
+            print(f"  → {len(comparison['changed_pubs'])} publications with new citations")
+            print(f"  → {len(comparison['unchanged_pubs'])} unchanged publications")
+
+        # Step 3: Fetch citations (only for new/changed)
+        print(f"\n[3/5] Fetching citations...")
         total_citations = 0
+        needs_update = set(comparison["new_pubs"] + comparison["changed_pubs"])
+
         for i, pub in enumerate(publications):
             if pub["citationCount"] == 0:
                 print(f"  [{i+1}/{len(publications)}] {pub['title'][:60]} — 0 citations, skipping")
                 continue
 
-            # Check cache
-            if pub["title"] in cache:
+            # Use cache for unchanged publications
+            if pub["title"] not in needs_update and pub["title"] in cache:
                 cached = cache[pub["title"]]
-                cached_cits = cached.get("citations", [])
-                has_full = all(c.get("fullAuthors") for c in cached_cits) if cached_cits else False
-                if len(cached_cits) >= pub["citationCount"] and has_full:
-                    pub["citations"] = cached_cits
-                    total_citations += len(cached_cits)
-                    print(f"  [{i+1}/{len(publications)}] {pub['title'][:60]} — {len(cached_cits)} cached ✓")
-                    continue
+                pub["citations"] = cached.get("citations", [])
+                total_citations += len(pub["citations"])
+                print(f"  [{i+1}/{len(publications)}] {pub['title'][:60]} — {len(pub['citations'])} cached ✓")
+                continue
 
+            # Scrape citations
             print(f"  [{i+1}/{len(publications)}] {pub['title'][:60]} — fetching {pub['citationCount']} citations...")
             citations = scrape_all_citations(driver, pub["citedByUrl"], pub["citationCount"])
 
-            # If scraping returned 0 but we expect citations, Scholar may have blocked us
-            # Fall back to cached citations if available
+            # Fall back to cache if blocked
             if len(citations) == 0 and pub["citationCount"] > 0 and pub["title"] in cache:
                 cached_cits = cache[pub["title"]].get("citations", [])
                 if cached_cits:
@@ -644,44 +872,43 @@ def scrape_scholar(
             pub["citations"] = citations
             total_citations += len(citations)
             print(f"    → got {len(citations)} citations")
-
             random_delay(BETWEEN_PUB_WAIT, 3.0)
 
         print(f"\n  Total citing papers collected: {total_citations}")
 
-        # Step 4: Fetch Scholar profiles for citing authors
-        # This gets verified full names, total citations, and institutions
-        # by visiting clickable author links directly on Scholar
+        # Step 4: Fetch Scholar profiles
         existing_profiles = existing_data.get("scholarProfiles", {}) if existing_data else {}
-        scholar_profiles = {}
+        print(f"\n[4/5] Fetching Scholar profiles for citing authors...")
+        scholar_profiles = fetch_all_author_profiles(driver, publications, existing_profiles)
 
-        if fetch_full_authors:
-            print(f"\n[4/5] Fetching Scholar profiles for citing authors...")
-            scholar_profiles = fetch_all_author_profiles(
-                driver, publications, existing_profiles
-            )
+        # Backfill fullAuthors
+        for pub in publications:
+            for cit in pub.get("citations", []):
+                if cit.get("fullAuthors"):
+                    continue
+                full_names = []
+                for author in cit.get("authorList", []):
+                    sid = author.get("scholarId", "")
+                    if sid and sid in scholar_profiles and scholar_profiles[sid].get("fullName"):
+                        full_names.append(scholar_profiles[sid]["fullName"])
+                    else:
+                        full_names.append(author["name"])
+                if full_names:
+                    cit["fullAuthors"] = ", ".join(full_names)
 
-            # Backfill fullAuthors on citations using profile data
-            print(f"\n[5/5] Backfilling full author names from profiles...")
-            for pub in publications:
-                for cit in pub.get("citations", []):
-                    if cit.get("fullAuthors"):
-                        continue  # already have full names
-                    # Build full author string from authorList + profiles
-                    full_names = []
-                    for author in cit.get("authorList", []):
-                        sid = author.get("scholarId", "")
-                        if sid and sid in scholar_profiles and scholar_profiles[sid].get("fullName"):
-                            full_names.append(scholar_profiles[sid]["fullName"])
-                        else:
-                            full_names.append(author["name"])
-                    if full_names:
-                        cit["fullAuthors"] = ", ".join(full_names)
-        else:
-            print(f"\n[4/5] Skipping author profile fetch (--no-full-authors)")
-            print(f"[5/5] Skipping backfill")
+        # Step 5: Build geo data from profiles
+        print(f"\n[5/5] Building geo data from Scholar profiles...")
+        geo_data = build_geo_data(publications, scholar_profiles)
+        print(f"  Mapped {len(geo_data)} citations to countries/institutions")
 
-        # Build authorCitations from scholar profiles
+        # Count countries
+        countries = set()
+        for entry in geo_data.values():
+            if entry.get("country"):
+                countries.add(entry["country"])
+        print(f"  Found {len(countries)} unique countries: {', '.join(sorted(countries))}")
+
+        # Build authorCitations
         author_citations = {}
         for sid, profile in scholar_profiles.items():
             if profile.get("fullName") and profile.get("totalCitations", 0) > 0:
@@ -697,7 +924,7 @@ def scrape_scholar(
             "publications": publications,
             "scholarProfiles": scholar_profiles,
             "authorCitations": author_citations,
-            "geoData": existing_data.get("geoData", {}) if existing_data else {},
+            "geoData": geo_data,
             "themes": existing_data.get("themes", {}) if existing_data else {},
             "summaries": existing_data.get("summaries", {}) if existing_data else {},
         }
@@ -717,22 +944,12 @@ def main():
     parser.add_argument(
         "--output", "-o",
         default=None,
-        help="Output JSON file path (default: data/<scholar_id>_network.json)",
+        help="Output JSON file path (default: data/network.json)",
     )
     parser.add_argument(
         "--headless",
         action="store_true",
         help="Run Chrome in headless mode (no browser window)",
-    )
-    parser.add_argument(
-        "--no-full-authors",
-        action="store_true",
-        help="Skip fetching full author names (faster but less data)",
-    )
-    parser.add_argument(
-        "--existing",
-        default=None,
-        help="Path to existing network.json to use as cache and preserve geo/theme data",
     )
 
     args = parser.parse_args()
@@ -746,30 +963,26 @@ def main():
     else:
         output_path = os.path.join(project_dir, "data", "network.json")
 
-    # Load existing data if specified
+    # Load existing data for incremental update
     existing_data = None
-    if args.existing:
-        try:
-            with open(args.existing, "r", encoding="utf-8") as f:
-                existing_data = json.load(f)
-            print(f"Loaded existing data from {args.existing}")
-        except Exception as e:
-            print(f"Warning: Could not load existing data: {e}")
-
-    # Also try loading the output file as cache if no --existing specified
-    if not existing_data and os.path.exists(output_path):
+    if os.path.exists(output_path):
         try:
             with open(output_path, "r", encoding="utf-8") as f:
                 existing_data = json.load(f)
-            print(f"Using existing output file as cache: {output_path}")
-        except Exception:
-            pass
+            print(f"Found existing data: {output_path}")
+            existing_pubs = len(existing_data.get("publications", []))
+            existing_cits = sum(
+                len(p.get("citations", []))
+                for p in existing_data.get("publications", [])
+            )
+            print(f"  {existing_pubs} publications, {existing_cits} citing papers")
+        except Exception as e:
+            print(f"Warning: Could not load existing data: {e}")
 
     # Scrape
     data = scrape_scholar(
         scholar_id=args.scholar_id,
         headless=args.headless,
-        fetch_full_authors=not args.no_full_authors,
         existing_data=existing_data,
     )
 
@@ -778,17 +991,19 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+    total_cits = sum(len(p.get('citations', [])) for p in data['publications'])
+    geo_mapped = len(data.get('geoData', {}))
+
     print(f"\n{'='*60}")
     print(f"DONE! Output saved to: {output_path}")
     print(f"{'='*60}")
     print(f"  Researcher: {data['researcher']}")
     print(f"  Publications: {len(data['publications'])}")
-    total_cits = sum(len(p.get('citations', [])) for p in data['publications'])
-    print(f"  Total citing papers collected: {total_cits}")
-    print(f"\nTo use in the web app:")
-    print(f"  1. Copy to data/network.json (if not already there)")
-    print(f"  2. Push to GitHub")
-    print(f"  3. Visitors see your analysis at your GitHub Pages URL")
+    print(f"  Total citing papers: {total_cits}")
+    print(f"  Geo-mapped citations: {geo_mapped}")
+    print(f"  Scholar profiles: {len(data.get('scholarProfiles', {}))}")
+    print(f"\nTo update your public site:")
+    print(f"  git add data/network.json && git commit -m 'Update research data' && git push")
 
 
 if __name__ == "__main__":

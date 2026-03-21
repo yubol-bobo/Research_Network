@@ -5,7 +5,6 @@ let collaboratorsData = [];
 let citingAuthorsData = [];
 let collaboratorsFilter = '';
 let citingFilter = '';
-let fetchCitationsCallback = null;
 
 /**
  * Clean an institution string to show only the university/organization name.
@@ -96,10 +95,9 @@ export function cleanInstitution(raw) {
 /**
  * Render the Scholar view with collaborators and citing authors.
  */
-export function renderScholarView(container, collaborators, citingAuthors, onFetchCitations) {
+export function renderScholarView(container, collaborators, citingAuthors) {
     collaboratorsData = collaborators;
     citingAuthorsData = citingAuthors;
-    fetchCitationsCallback = onFetchCitations;
     collaboratorsFilter = '';
     citingFilter = '';
 
@@ -128,7 +126,6 @@ export function renderScholarView(container, collaborators, citingAuthors, onFet
                 <div class="scholar-section-header">
                     <h2>Citing Authors</h2>
                     <span class="scholar-count">${citingAuthors.length} authors</span>
-                    <button class="btn btn-sm btn-fetch-citations" id="btnFetchCitations" title="Fetch real citation counts from Google Scholar via Selenium">Fetch Citations</button>
                     <input type="text" class="scholar-search" id="searchCiting" placeholder="Search citing authors...">
                 </div>
                 <div class="scholar-table-wrap">
@@ -153,13 +150,6 @@ export function renderScholarView(container, collaborators, citingAuthors, onFet
     // Render initial data
     renderCollaboratorsTable();
     renderCitingTable();
-
-    // Wire Fetch Citations button
-    document.getElementById('btnFetchCitations').addEventListener('click', () => {
-        if (fetchCitationsCallback && citingAuthorsData.length > 0) {
-            fetchCitationsCallback(citingAuthorsData);
-        }
-    });
 
     // Wire search
     document.getElementById('searchCollaborators').addEventListener('input', (e) => {

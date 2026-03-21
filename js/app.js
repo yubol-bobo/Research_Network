@@ -1,29 +1,26 @@
 // ── Main Application Entry ──
+// Read-only viewer: loads data/network.json and renders three views.
 
-import { loadConfig, validateConfig, initSettingsModal } from './config.js';
 import { parseCoAuthors, parseCitingAuthors } from './scholar.js';
-import { exportNetworkJSON, importNetworkJSON } from './cache.js';
 import { buildNetwork, filterNetwork, computeStats } from './network.js';
 import { initGraph, renderGraph, destroyGraph } from './graph.js';
-import { analyzePapers, extractCitationGeo, cleanInstitutions } from './llm.js';
 import { aggregateGeoData, buildGeoFromProfiles, initGlobe, destroyGlobe } from './globe.js';
 import { renderScholarView } from './scholar-view.js';
 
 // ── State ──
 let currentPublications = [];
 let currentNetwork = null;
-let cachedImportData = null;
-let currentGeoData = null;   // raw { "pubIdx_citIdx": { country, institution } }
-let currentLlmGeoData = {};  // base LLM geo data (first-author keyed, pi_ci format)
-let currentGlobePoints = null; // aggregated points for globe
+let currentGeoData = null;
+let currentLlmGeoData = {};
+let currentGlobePoints = null;
 let currentGlobeStats = null;
-let currentThemes = {};      // { pubTitle: { theme, color } }
-let currentSummaries = {};   // { pubTitle: summary }
-let currentAuthorCitations = {}; // { authorName: totalCitations }
-let currentScholarProfiles = {}; // { scholarId: { fullName, totalCitations, institution } }
-let currentProfileInfo = {};     // { coauthors: [{ name, affiliation, scholarId }] }
-let currentResearcherName = '';  // from snapshot or config
-let currentView = 'network'; // 'network' | 'globe'
+let currentThemes = {};
+let currentSummaries = {};
+let currentAuthorCitations = {};
+let currentScholarProfiles = {};
+let currentProfileInfo = {};
+let currentResearcherName = '';
+let currentView = 'network';
 
 // ── DOM Refs ──
 const graphContainer = document.getElementById('graphContainer');
@@ -34,15 +31,7 @@ const globeEmpty = document.getElementById('globeEmpty');
 const rankingsSection = document.getElementById('rankingsSection');
 const scholarContainer = document.getElementById('scholarContainer');
 const scholarEmpty = document.getElementById('scholarEmpty');
-const loadingOverlay = document.getElementById('loadingOverlay');
-const loadingText = document.getElementById('loadingText');
-const loadingDetail = document.getElementById('loadingDetail');
-const progressFill = document.getElementById('progressFill');
 const tooltip = document.getElementById('tooltip');
-
-const btnRefresh = document.getElementById('btnRefresh');
-const btnExport = document.getElementById('btnExport');
-const btnImport = document.getElementById('btnImport');
 
 const btnApplyFilter = document.getElementById('btnApplyFilter');
 const btnClearFilter = document.getElementById('btnClearFilter');
@@ -51,17 +40,15 @@ const filterYearTo = document.getElementById('filterYearTo');
 const filterTopKMode = document.getElementById('filterTopKMode');
 const filterTopKValue = document.getElementById('filterTopKValue');
 const filterSearch = document.getElementById('filterSearch');
-
 const filterShowCitations = document.getElementById('filterShowCitations');
 const viewToggle = document.getElementById('viewToggle');
 const authorModeSelect = document.getElementById('authorMode');
 
 // ── Init ──
-initSettingsModal();
 initGraph(graphContainer);
 autoLoadSnapshot();
 
-// ── Auto-load snapshot from data/network.json ──
+// ── Auto-load data/network.json ──
 async function autoLoadSnapshot() {
     try {
         const resp = await fetch('data/network.json');
@@ -72,14 +59,14 @@ async function autoLoadSnapshot() {
         currentPublications = data.publications;
         updateStats(currentPublications);
 
-        // Restore themes, summaries, author citations, and scholar profiles
-        const themes = data.themes || {};
-        const summaries = data.summaries || {};
+        // Restore all metadata
+        currentThemes = data.themes || {};
+        currentSummaries = data.summaries || {};
         if (data.authorCitations) currentAuthorCitations = data.authorCitations;
         if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
         if (data.profileInfo) currentProfileInfo = data.profileInfo;
 
-        // Store base LLM geo data (filtered to valid keys)
+        // Store base geo data (filtered to valid keys)
         const llmGeo = data.geoData || {};
         const validKeys = new Set();
         for (let pi = 0; pi < currentPublications.length; pi++) {
@@ -92,38 +79,33 @@ async function autoLoadSnapshot() {
             if (validKeys.has(key)) currentLlmGeoData[key] = val;
         }
 
-        // Build globe data for current author mode
+        // Build globe data
         rebuildGlobeData();
 
         // Build network
-        const cfg = loadConfig();
-        currentResearcherName = data.researcher || cfg.researcherName || 'Researcher';
-        currentNetwork = buildNetwork(currentResearcherName, currentPublications, themes, summaries);
+        currentResearcherName = data.researcher || 'Researcher';
+        currentNetwork = buildNetwork(currentResearcherName, currentPublications, currentThemes, currentSummaries);
 
         emptyState.style.display = 'none';
-        btnExport.disabled = false;
         renderCurrentNetwork();
 
-        console.log(`Loaded snapshot: ${currentPublications.length} publications`);
+        console.log(`Loaded: ${currentPublications.length} publications, ${Object.keys(currentScholarProfiles).length} profiles`);
     } catch (e) {
-        // No snapshot or failed to load — silent, user will configure manually
+        console.warn('No data/network.json found. Run the scraper first.');
     }
 }
 
 /**
- * Rebuild globe geo data based on current author mode (first author vs all authors).
- * Merges LLM base data with profile-inferred data.
+ * Rebuild globe geo data based on current author mode.
  */
 function rebuildGlobeData() {
     const firstAuthorOnly = authorModeSelect.value === 'first';
 
-    // Build profile-based geo data for current author mode
     const profileGeo = (Object.keys(currentScholarProfiles).length > 0)
         ? buildGeoFromProfiles(currentPublications, currentScholarProfiles, firstAuthorOnly)
         : {};
 
     if (firstAuthorOnly) {
-        // First author mode: keys are pi_ci — merge LLM base + profile overlay
         currentGeoData = {};
         for (const [key, val] of Object.entries(currentLlmGeoData)) {
             currentGeoData[key] = val;
@@ -136,11 +118,7 @@ function rebuildGlobeData() {
             }
         }
     } else {
-        // All authors mode: keys are pi_ci_ai — profile data is primary
-        // Start with profile geo (multi-country per citation)
         currentGeoData = { ...profileGeo };
-
-        // For citations where profiles didn't provide a country, fall back to LLM data
         const profileCitationsWithCountry = new Set();
         for (const [k, v] of Object.entries(profileGeo)) {
             if (v.country) {
@@ -174,11 +152,9 @@ viewToggle.addEventListener('click', (e) => {
 
     currentView = view;
 
-    // Update toggle buttons
     viewToggle.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Hide all views
     graphContainer.style.display = 'none';
     globeWrapper.style.display = 'none';
     scholarContainer.style.display = 'none';
@@ -207,17 +183,7 @@ viewToggle.addEventListener('click', (e) => {
     }
 });
 
-// ── Loading UI ──
-function showLoading(text, pct, detail) {
-    loadingOverlay.style.display = 'flex';
-    loadingText.textContent = text || 'Loading...';
-    progressFill.style.width = `${pct || 0}%`;
-    loadingDetail.textContent = detail || '';
-}
-function hideLoading() {
-    loadingOverlay.style.display = 'none';
-}
-
+// ── Stats ──
 function updateStats(publications) {
     const stats = computeStats(publications);
     document.getElementById('statPubs').textContent = `📄 ${stats.totalPubs}`;
@@ -274,30 +240,12 @@ function toggleCitations(pubNode) {
 }
 
 // ── Render ──
-// ── Render whichever view is currently active ──
-function renderActiveView() {
-    btnExport.disabled = !currentPublications || currentPublications.length === 0;
-
-    if (currentView === 'network') {
-        renderCurrentNetwork();
-    } else if (currentView === 'globe') {
-        if (currentGlobePoints && currentGlobePoints.length > 0) {
-            globeEmpty.style.display = 'none';
-            initGlobe(globeContainer, currentGlobePoints, currentGlobeStats);
-            renderRankings();
-        }
-    } else if (currentView === 'scholar') {
-        renderScholarData();
-    }
-}
-
 function renderCurrentNetwork() {
     if (!currentNetwork || currentNetwork.nodes.length === 0) {
         emptyState.style.display = 'flex';
         return;
     }
     emptyState.style.display = 'none';
-    btnExport.disabled = false;
 
     renderGraph(currentNetwork, {
         onTooltip: showTooltip,
@@ -326,176 +274,6 @@ function applyFiltersAndRender() {
         onToggleCitations: toggleCitations,
     });
 }
-
-// ── Refresh ──
-btnRefresh.addEventListener('click', async () => {
-    const cfg = loadConfig();
-    const missing = validateConfig(cfg);
-    if (missing.length > 0) {
-        alert(`Please configure: ${missing.join(', ')}`);
-        document.getElementById('btnSettings').click();
-        return;
-    }
-
-    try {
-        showLoading('Starting...', 0);
-
-        let publications;
-
-        // Selenium mode: call local Python server
-        publications = await fetchViaSeleniumServer(cfg);
-
-        currentPublications = publications;
-        updateStats(currentPublications);
-
-        // LLM analysis — themes + summaries
-        let summaries = {};
-        let themes = {};
-        if (cfg.llmKey) {
-            try {
-                const analysis = await analyzePapers(currentPublications, cfg, (msg, pct) => showLoading(msg, pct));
-                summaries = analysis.summaries;
-                themes = analysis.themes;
-            } catch (e) {
-                console.warn('LLM analysis failed, continuing without:', e);
-            }
-
-            // LLM geo extraction
-            try {
-                showLoading('Extracting citation geolocation...', 85);
-                currentGeoData = await extractCitationGeo(currentPublications, cfg, (msg, pct) => showLoading(msg, pct));
-                const agg = aggregateGeoData(currentGeoData);
-                currentGlobePoints = agg.points;
-                currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
-            } catch (e) {
-                console.warn('LLM geo extraction failed:', e);
-            }
-
-            // LLM institution name cleaning
-            if (Object.keys(currentScholarProfiles).length > 0) {
-                try {
-                    showLoading('Cleaning institution names...', 92);
-                    currentScholarProfiles = await cleanInstitutions(
-                        currentScholarProfiles, cfg, (msg, pct) => showLoading(msg, pct)
-                    );
-                } catch (e) {
-                    console.warn('Institution cleaning failed:', e);
-                }
-            }
-        }
-
-        // Save themes/summaries for export
-        currentThemes = themes;
-        currentSummaries = summaries;
-
-        // Build network
-        currentNetwork = buildNetwork(cfg.researcherName, currentPublications, themes, summaries);
-
-        hideLoading();
-
-        renderActiveView();
-
-    } catch (err) {
-        hideLoading();
-        console.error('Refresh failed:', err);
-        alert(`Error: ${err.message}`);
-    }
-});
-
-// ── Selenium Server Fetch ──
-async function fetchViaSeleniumServer(cfg) {
-    const serverUrl = cfg.seleniumUrl || 'http://localhost:5555';
-
-    // Check server is running
-    showLoading('Connecting to scraper server...', 5);
-    try {
-        const status = await fetch(`${serverUrl}/status`);
-        if (!status.ok) throw new Error('Server not reachable');
-    } catch (e) {
-        throw new Error(
-            `Cannot connect to scraper server at ${serverUrl}.\n\n` +
-            'Start it with: python scraper/server.py\n\n' +
-            'Run: python scraper/server.py'
-        );
-    }
-
-    // Trigger scrape
-    showLoading('Scraping Google Scholar via Selenium (this may take a few minutes)...', 10);
-    const resp = await fetch(`${serverUrl}/scrape`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            scholarId: cfg.scholarId,
-            headless: true,
-            fetchFullAuthors: true,
-        }),
-    });
-
-    if (!resp.ok) {
-        const err = await resp.json().catch(() => ({ error: resp.statusText }));
-        throw new Error(`Scraper error: ${err.error || resp.statusText}`);
-    }
-
-    showLoading('Processing results...', 90);
-    const data = await resp.json();
-
-    // The server returns the full network.json structure
-    // Extract scholar profiles and author citations if present
-    if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
-    if (data.authorCitations) currentAuthorCitations = data.authorCitations;
-
-    return data.publications || [];
-}
-
-// ── Export ──
-btnExport.addEventListener('click', () => {
-    const cfg = loadConfig();
-    exportNetworkJSON({
-        researcher: cfg.researcherName,
-        publications: currentPublications,
-        geoData: currentGeoData || {},
-        themes: currentThemes || {},
-        summaries: currentSummaries || {},
-        authorCitations: currentAuthorCitations || {},
-        scholarProfiles: currentScholarProfiles || {},
-    }, cfg.scholarId);
-});
-
-// ── Import ──
-btnImport.addEventListener('click', async () => {
-    const data = await importNetworkJSON();
-    if (!data) return;
-
-    cachedImportData = data;
-    currentPublications = data.publications || [];
-    const cfg = loadConfig();
-
-    updateStats(currentPublications);
-
-    // Restore geo data if present
-    if (data.geoData && Object.keys(data.geoData).length > 0) {
-        currentGeoData = data.geoData;
-        const agg = aggregateGeoData(currentGeoData);
-        currentGlobePoints = agg.points;
-        currentGlobeStats = { countryCount: agg.countryCount, totalMapped: agg.totalMapped };
-    }
-
-    // Restore author citations and scholar profiles if present
-    if (data.authorCitations) currentAuthorCitations = data.authorCitations;
-    if (data.scholarProfiles) currentScholarProfiles = data.scholarProfiles;
-
-    // Rebuild network from imported data
-    currentNetwork = buildNetwork(
-        data.researcher || cfg.researcherName || 'Researcher',
-        currentPublications,
-        {},
-        {}
-    );
-
-    emptyState.style.display = 'none';
-
-    renderActiveView();
-});
 
 // ── Filters ──
 btnApplyFilter.addEventListener('click', applyFiltersAndRender);
@@ -546,7 +324,6 @@ function renderRankings() {
     const topK = parseInt(rankTopKInput.value) || 10;
     rankingsSection.style.display = 'block';
 
-    // Aggregate by country
     const countryCounts = {};
     const institutionCounts = {};
 
@@ -563,7 +340,6 @@ function renderRankings() {
         }
     }
 
-    // Sort and take top K
     const topCountries = Object.entries(countryCounts)
         .map(([name, count]) => ({ name, count }))
         .sort((a, b) => b.count - a.count)
@@ -574,7 +350,6 @@ function renderRankings() {
         .sort((a, b) => b.count - a.count)
         .slice(0, topK);
 
-    // Render countries
     const maxCountry = topCountries[0]?.count || 1;
     document.getElementById('rankCountries').innerHTML = topCountries.map((item, i) => `
         <div class="ranking-row">
@@ -589,7 +364,6 @@ function renderRankings() {
         </div>
     `).join('');
 
-    // Render institutions
     const maxInst = topInstitutions[0]?.count || 1;
     document.getElementById('rankInstitutions').innerHTML = topInstitutions.map((item, i) => `
         <div class="ranking-row">
@@ -617,40 +391,29 @@ function renderScholarData() {
     }
     scholarEmpty.style.display = 'none';
 
-    const cfg = loadConfig();
-    const researcherName = currentResearcherName || cfg.researcherName || '';
-
     const firstAuthorOnly = authorModeSelect.value === 'first';
-    const collaborators = parseCoAuthors(currentPublications, researcherName, currentProfileInfo, currentScholarProfiles);
+    const collaborators = parseCoAuthors(currentPublications, currentResearcherName, currentProfileInfo, currentScholarProfiles);
     const citingAuthors = parseCitingAuthors(
         currentPublications, currentGeoData || {}, firstAuthorOnly, currentScholarProfiles
     );
 
-    // Apply cached author citation counts (backward compat for old data without profiles)
+    // Apply cached author citation counts
     for (const author of citingAuthors) {
         if (!author.authorCitations && currentAuthorCitations[author.name]) {
             author.authorCitations = currentAuthorCitations[author.name];
         }
     }
 
-    renderScholarView(scholarContainer, collaborators, citingAuthors, onFetchAuthorCitations);
-}
-
-async function onFetchAuthorCitations(authors) {
-    // Citation counts are already available from Scholar profiles scraped via Selenium.
-    // This button is kept for backward compatibility but no longer needs a separate fetch.
-    alert('Citation counts are already fetched from Scholar profiles during scraping. Re-run Refresh to update.');
+    renderScholarView(scholarContainer, collaborators, citingAuthors);
 }
 
 // ── Author Mode Toggle ──
 authorModeSelect.addEventListener('change', () => {
-    // Rebuild globe data for new author mode
     rebuildGlobeData();
 
     if (currentView === 'scholar') {
         renderScholarData();
     } else if (currentView === 'globe') {
-        // Re-render globe with new data
         destroyGlobe();
         if (currentGlobePoints && currentGlobePoints.length > 0) {
             globeEmpty.style.display = 'none';
