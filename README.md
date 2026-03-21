@@ -26,17 +26,19 @@ Edit `.env` with your info:
 # Required
 SCHOLAR_ID=YOUR_SCHOLAR_ID
 
-# Optional — for publication classification (set the key for your provider)
+# LLM API key (required — set one, provider is auto-detected)
 OPENAI_API_KEY=sk-xxx
 # ANTHROPIC_API_KEY=sk-ant-xxx
 # GEMINI_API_KEY=AIza-xxx
+
+# Model override (optional)
 model=gpt-4o-mini
 ```
 
-Your Scholar ID is in your Google Scholar profile URL:
-`scholar.google.com/citations?user=`**YOUR_ID**
+- **Scholar ID**: found in your Google Scholar profile URL: `scholar.google.com/citations?user=`**YOUR_ID**
+- **LLM API key**: set **one** of the three — the provider is auto-detected
 
-> `.env` is gitignored — your keys never leave your machine. The LLM provider is auto-detected from which API key you set.
+> `.env` is gitignored — your keys never leave your machine.
 
 ### 3. Install & Run the Scraper
 
@@ -54,17 +56,15 @@ This will:
 1. Open Chrome and scrape your Google Scholar profile
 2. Collect all publications and their citing papers
 3. Fetch author profiles (full names, institutions, citations)
-4. Infer countries from institutions (no LLM needed)
-5. Save everything to `data/network.json`
+4. Infer countries from institutions
+5. Classify publications into research themes via LLM
+6. Save everything to `data/network.json`
 
 **Options:**
 
 ```bash
 # Headless mode (no browser window)
 uv run python scraper/scholar_scraper.py --headless
-
-# With LLM classification (themes + summaries, requires API key in .env)
-uv run python scraper/scholar_scraper.py --classify
 ```
 
 ### 4. Enable GitHub Pages
@@ -145,16 +145,16 @@ Ranking tables for collaborators and citing authors.
 | Variable | Description | Required? |
 |----------|------------|-----------|
 | `SCHOLAR_ID` | Your Google Scholar user ID | Yes |
-| `OPENAI_API_KEY` | OpenAI API key | Only for `--classify` |
-| `ANTHROPIC_API_KEY` | Anthropic (Claude) API key | Only for `--classify` |
-| `GEMINI_API_KEY` | Google Gemini API key | Only for `--classify` |
+| `OPENAI_API_KEY` | OpenAI API key | Yes (one of three) |
+| `ANTHROPIC_API_KEY` | Anthropic (Claude) API key | Yes (one of three) |
+| `GEMINI_API_KEY` | Google Gemini API key | Yes (one of three) |
 | `model` | Model override (default: auto per provider) | No |
 
-Set **one** API key — the provider is auto-detected. The `--classify` flag uses the LLM to:
+Set **one** API key — the provider is auto-detected. The LLM is used to:
 - **Classify** publications into research themes (Healthcare, NLP, CV, etc.)
 - **Summarize** each paper in one sentence
 
-Everything else (scraping, geo inference, author profiles) works without an LLM.
+Classification runs automatically — only new/unclassified publications are sent to the LLM.
 
 ---
 

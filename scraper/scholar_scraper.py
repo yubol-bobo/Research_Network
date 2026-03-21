@@ -6,12 +6,11 @@ Scrapes a Google Scholar profile and all citing papers using Selenium.
 Supports incremental updates: compares existing data with current Scholar page
 and only fetches new/changed publications and citations.
 
-Configuration: set SCHOLAR_ID in .env file.
+Configuration: set SCHOLAR_ID and an LLM API key in .env file.
 
 Usage:
     uv run python scraper/scholar_scraper.py
     uv run python scraper/scholar_scraper.py --headless
-    uv run python scraper/scholar_scraper.py --classify
 """
 
 import argparse
@@ -1167,11 +1166,6 @@ def main():
         action="store_true",
         help="Run Chrome in headless mode (no browser window)",
     )
-    parser.add_argument(
-        "--classify",
-        action="store_true",
-        help="Classify publications into themes using LLM (requires API key in .env)",
-    )
 
     args = parser.parse_args()
 
@@ -1181,6 +1175,15 @@ def main():
         print("Error: SCHOLAR_ID not set.")
         print("Add it to your .env file:")
         print("  SCHOLAR_ID=hgN6B6kAAAAJ")
+        sys.exit(1)
+
+    # LLM API key must be set in .env for classification
+    llm_key = (os.environ.get("OPENAI_API_KEY", "")
+               or os.environ.get("ANTHROPIC_API_KEY", "")
+               or os.environ.get("GEMINI_API_KEY", ""))
+    if not llm_key:
+        print("Error: No LLM API key found in .env")
+        print("Classification requires one of: OPENAI_API_KEY, ANTHROPIC_API_KEY, or GEMINI_API_KEY")
         sys.exit(1)
 
     # Determine output path
@@ -1215,39 +1218,29 @@ def main():
         existing_data=existing_data,
     )
 
-    # Optional: Classify publications using LLM
-    if args.classify:
-        # Support multiple env var naming conventions
-        llm_key = (os.environ.get("OPENAI_API_KEY", "")
-                   or os.environ.get("ANTHROPIC_API_KEY", "")
-                   or os.environ.get("GEMINI_API_KEY", "")
-                   or os.environ.get("LLM_API_KEY", ""))
-        # Auto-detect provider from which key is set
-        if os.environ.get("OPENAI_API_KEY"):
-            llm_provider = "openai"
-        elif os.environ.get("ANTHROPIC_API_KEY"):
-            llm_provider = "claude"
-        elif os.environ.get("GEMINI_API_KEY"):
-            llm_provider = "gemini"
-        else:
-            llm_provider = os.environ.get("LLM_PROVIDER", "openai")
-        llm_model = os.environ.get("model", "") or os.environ.get("LLM_MODEL", "")
+    # Classify publications using LLM (auto-detects provider from .env keys)
+    llm_key = (os.environ.get("OPENAI_API_KEY", "")
+               or os.environ.get("ANTHROPIC_API_KEY", "")
+               or os.environ.get("GEMINI_API_KEY", ""))
+    if os.environ.get("OPENAI_API_KEY"):
+        llm_provider = "openai"
+    elif os.environ.get("ANTHROPIC_API_KEY"):
+        llm_provider = "claude"
+    else:
+        llm_provider = "gemini"
+    llm_model = os.environ.get("model", "") or os.environ.get("LLM_MODEL", "")
 
-        if not llm_key:
-            print("\n[!] --classify requires LLM_API_KEY in .env")
-            print("    Add to .env: LLM_API_KEY=sk-xxx")
-        else:
-            print(f"\n[LLM] Classifying publications using {llm_provider}...")
-            themes, summaries = classify_publications_llm(
-                data["publications"],
-                data.get("themes", {}),
-                data.get("summaries", {}),
-                llm_key,
-                llm_provider,
-                llm_model,
-            )
-            data["themes"] = themes
-            data["summaries"] = summaries
+    print(f"\n[LLM] Classifying publications using {llm_provider}...")
+    themes, summaries = classify_publications_llm(
+        data["publications"],
+        data.get("themes", {}),
+        data.get("summaries", {}),
+        llm_key,
+        llm_provider,
+        llm_model,
+    )
+    data["themes"] = themes
+    data["summaries"] = summaries
 
     # Save
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
