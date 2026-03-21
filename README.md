@@ -26,16 +26,17 @@ Edit `.env` with your info:
 # Required
 SCHOLAR_ID=YOUR_SCHOLAR_ID
 
-# Optional — for publication classification
-LLM_PROVIDER=openai
-LLM_API_KEY=sk-xxx
-LLM_MODEL=
+# Optional — for publication classification (set the key for your provider)
+OPENAI_API_KEY=sk-xxx
+# ANTHROPIC_API_KEY=sk-ant-xxx
+# GEMINI_API_KEY=AIza-xxx
+model=gpt-4o-mini
 ```
 
 Your Scholar ID is in your Google Scholar profile URL:
 `scholar.google.com/citations?user=`**YOUR_ID**
 
-> `.env` is gitignored — your keys never leave your machine.
+> `.env` is gitignored — your keys never leave your machine. The LLM provider is auto-detected from which API key you set.
 
 ### 3. Install & Run the Scraper
 
@@ -144,11 +145,12 @@ Ranking tables for collaborators and citing authors.
 | Variable | Description | Required? |
 |----------|------------|-----------|
 | `SCHOLAR_ID` | Your Google Scholar user ID | Yes |
-| `LLM_PROVIDER` | `openai`, `claude`, or `gemini` | Only for `--classify` |
-| `LLM_API_KEY` | Your LLM API key | Only for `--classify` |
-| `LLM_MODEL` | Model override (default: auto per provider) | No |
+| `OPENAI_API_KEY` | OpenAI API key | Only for `--classify` |
+| `ANTHROPIC_API_KEY` | Anthropic (Claude) API key | Only for `--classify` |
+| `GEMINI_API_KEY` | Google Gemini API key | Only for `--classify` |
+| `model` | Model override (default: auto per provider) | No |
 
-The `--classify` flag uses an LLM to:
+Set **one** API key — the provider is auto-detected. The `--classify` flag uses the LLM to:
 - **Classify** publications into research themes (Healthcare, NLP, CV, etc.)
 - **Summarize** each paper in one sentence
 
