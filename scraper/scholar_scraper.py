@@ -1125,11 +1125,42 @@ def call_llm(prompt: str, api_key: str, provider: str = "openai", model: str = "
         return ""
 
 
+def load_env():
+    """Load .env file from project root into os.environ."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(script_dir)
+    env_path = os.path.join(project_dir, ".env")
+
+    if not os.path.exists(env_path):
+        return
+
+    with open(env_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" in line:
+                key, _, value = line.partition("=")
+                key = key.strip()
+                value = value.strip()
+                # Don't override existing env vars
+                if key and key not in os.environ:
+                    os.environ[key] = value
+
+
 def main():
+    # Load .env before parsing args
+    load_env()
+
     parser = argparse.ArgumentParser(
         description="Scrape Google Scholar profile for Research Network"
     )
-    parser.add_argument("scholar_id", help="Google Scholar user ID (e.g., hgN6B6kAAAAJ)")
+    parser.add_argument(
+        "scholar_id",
+        nargs="?",
+        default=os.environ.get("SCHOLAR_ID", ""),
+        help="Google Scholar user ID (or set SCHOLAR_ID in .env)",
+    )
     parser.add_argument(
         "--output", "-o",
         default=None,
@@ -1143,26 +1174,17 @@ def main():
     parser.add_argument(
         "--classify",
         action="store_true",
-        help="Classify publications into themes using LLM",
-    )
-    parser.add_argument(
-        "--llm-key",
-        default=os.environ.get("LLM_API_KEY", ""),
-        help="LLM API key (or set LLM_API_KEY env var)",
-    )
-    parser.add_argument(
-        "--llm-provider",
-        default="openai",
-        choices=["openai", "claude", "gemini"],
-        help="LLM provider (default: openai)",
-    )
-    parser.add_argument(
-        "--llm-model",
-        default="",
-        help="LLM model override (default: auto-select per provider)",
+        help="Classify publications into themes using LLM (requires LLM_API_KEY in .env)",
     )
 
     args = parser.parse_args()
+
+    if not args.scholar_id:
+        print("Error: No Scholar ID provided.")
+        print("Either pass it as an argument or set SCHOLAR_ID in .env")
+        print("  python scraper/scholar_scraper.py <scholar_id>")
+        print("  or: echo 'SCHOLAR_ID=hgN6B6kAAAAJ' >> .env")
+        sys.exit(1)
 
     # Determine output path
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -1198,18 +1220,22 @@ def main():
 
     # Optional: Classify publications using LLM
     if args.classify:
-        if not args.llm_key:
-            print("\n[!] --classify requires an LLM API key.")
-            print("    Use --llm-key YOUR_KEY or set LLM_API_KEY environment variable")
+        llm_key = os.environ.get("LLM_API_KEY", "")
+        llm_provider = os.environ.get("LLM_PROVIDER", "openai")
+        llm_model = os.environ.get("LLM_MODEL", "")
+
+        if not llm_key:
+            print("\n[!] --classify requires LLM_API_KEY in .env")
+            print("    Add to .env: LLM_API_KEY=sk-xxx")
         else:
-            print(f"\n[LLM] Classifying publications using {args.llm_provider}...")
+            print(f"\n[LLM] Classifying publications using {llm_provider}...")
             themes, summaries = classify_publications_llm(
                 data["publications"],
                 data.get("themes", {}),
                 data.get("summaries", {}),
-                args.llm_key,
-                args.llm_provider,
-                args.llm_model,
+                llm_key,
+                llm_provider,
+                llm_model,
             )
             data["themes"] = themes
             data["summaries"] = summaries
