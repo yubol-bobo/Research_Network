@@ -9,8 +9,9 @@ and only fetches new/changed publications and citations.
 Configuration: set SCHOLAR_ID and an LLM API key in .env file.
 
 Usage:
-    uv run python scraper/scholar_scraper.py
-    uv run python scraper/scholar_scraper.py --headless
+    uv run python scraper/scholar_scraper.py           # Incremental update (only new/changed)
+    uv run python scraper/scholar_scraper.py --full     # Full re-scrape from scratch
+    uv run python scraper/scholar_scraper.py --headless # Run without browser window
 """
 
 import argparse
@@ -1431,6 +1432,11 @@ def main():
         action="store_true",
         help="Run Chrome in headless mode (no browser window)",
     )
+    parser.add_argument(
+        "--full",
+        action="store_true",
+        help="Full re-scrape: ignore cached data and collect everything fresh",
+    )
 
     args = parser.parse_args()
 
@@ -1462,7 +1468,9 @@ def main():
 
     # Load existing data for incremental update
     existing_data = None
-    if os.path.exists(output_path):
+    if args.full:
+        print("Full re-scrape mode: ignoring cached data")
+    elif os.path.exists(output_path):
         try:
             with open(output_path, "r", encoding="utf-8") as f:
                 existing_data = json.load(f)
