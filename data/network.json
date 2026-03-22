@@ -48,11 +48,11 @@
       "citations": [
         {
           "title": "A survey on recent advances in llm-based multi-turn dialogue systems",
-          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo…",
+          "authors": "Z Yi, J Ouyang, Z Xu, Y Liu, T Liao, H Luo\u2026",
           "fullAuthors": "Zihao Yi, J Ouyang, Zhe Xu, Y Liu, T Liao, Haohao Luo",
           "year": 2025,
           "link": "https://dl.acm.org/doi/abs/10.1145/3771090",
-          "venue": "ACM Computing …, 2025",
+          "venue": "ACM Computing \u2026, 2025",
           "publisher": "dl.acm.org",
           "authorProfiles": {
             "Z Yi": "dKgIWGsAAAAJ",
@@ -94,11 +94,11 @@
         },
         {
           "title": "Large language models meet nlp: A survey",
-          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li…",
+          "authors": "L Qin, Q Chen, X Feng, Y Wu, Y Zhang, Y Li\u2026",
           "fullAuthors": "L Qin, Qiguang Chen, Xiachong Feng, Yang Wu, Yongheng Zhang, Y Li",
           "year": 2026,
           "link": "https://link.springer.com/article/10.1007/s11704-025-50472-3",
-          "venue": "Frontiers of Computer …, 2026",
+          "venue": "Frontiers of Computer \u2026, 2026",
           "publisher": "Springer",
           "authorProfiles": {
             "Q Chen": "8j8AfF0AAAAJ",
@@ -141,11 +141,11 @@
         },
         {
           "title": "The state of multilingual llm safety research: From measuring the language gap to mitigating it",
-          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach…",
-          "fullAuthors": "Zheng-Xin Yong, Beyza Ermiş, Marzieh Fadaee, Stephen H. Bach",
+          "authors": "ZX Yong, B Ermis, M Fadaee, S Bach\u2026",
+          "fullAuthors": "Zheng-Xin Yong, Beyza Ermi\u015f, Marzieh Fadaee, Stephen H. Bach",
           "year": 2025,
           "link": "https://aclanthology.org/2025.emnlp-main.800/",
-          "venue": "Proceedings of the …, 2025",
+          "venue": "Proceedings of the \u2026, 2025",
           "publisher": "aclanthology.org",
           "authorProfiles": {
             "ZX Yong": "z6bOk-AAAAAJ",
@@ -182,7 +182,7 @@
           "fullAuthors": "Jiayuan Zhu, Jiazhen Pan, yuyuan liu, Fenglin Liu, Junde Wu",
           "year": 2025,
           "link": "https://aclanthology.org/2025.emnlp-main.142/",
-          "venue": "Proceedings of the 2025 …, 2025",
+          "venue": "Proceedings of the 2025 \u2026, 2025",
           "publisher": "aclanthology.org",
           "authorProfiles": {
             "J Zhu": "QWLgcogAAAAJ",
@@ -221,11 +221,11 @@
         },
         {
           "title": "From problem-solving to teaching problem-solving: Aligning llms with pedagogy using reinforcement learning",
-          "authors": "D Dinucu-Jianu, J Macina, N Daheim…",
+          "authors": "D Dinucu-Jianu, J Macina, N Daheim\u2026",
           "fullAuthors": "David Dinucu-Jianu, Jakub Macina, Nico Daheim",
           "year": 2025,
           "link": "https://aclanthology.org/2025.emnlp-main.15/",
-          "venue": "Proceedings of the …, 2025",
+          "venue": "Proceedings of the \u2026, 2025",
           "publisher": "aclanthology.org",
           "authorProfiles": {
             "D Dinucu-Jianu": "ToA2UL4AAAAJ",
@@ -252,11 +252,11 @@
         },
         {
           "title": "Firm or fickle? evaluating large language models consistency in sequential interactions",
-          "authors": "Y Li, Y Miao, X Ding, R Krishnan…",
+          "authors": "Y Li, Y Miao, X Ding, R Krishnan\u2026",
           "fullAuthors": "Yubo Li, Yidi Miao, Xueying Ding, Ramayya Krishnan",
           "year": 2025,
           "link": "https://aclanthology.org/2025.findings-acl.347/",
-          "venue": "Findings of the …, 2025",
+          "venue": "Findings of the \u2026, 2025",
           "publisher": "aclanthology.org",
           "authorProfiles": {
             "Y Li": "hgN6B6kAAAAJ",
@@ -289,11 +289,11 @@
         },
         {
           "title": "Get experience from practice: Llm agents with record & replay",
-          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong…",
-          "fullAuthors": "Erhu Feng, W Zhou, Z Liu, Le Chen, Dong Du（杜冬冬）",
+          "authors": "E Feng, W Zhou, Z Liu, L Chen, Y Dong\u2026",
+          "fullAuthors": "Erhu Feng, W Zhou, Z Liu, Le Chen, Dong Du\uff08\u675c\u51ac\u51ac\uff09",
           "year": 2025,
           "link": "https://arxiv.org/abs/2505.17716",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "E Feng": "e_no1Q0AAAAJ",
@@ -330,11 +330,11 @@
         },
         {
           "title": "Conformal information pursuit for interactively guiding large language models",
-          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani…",
+          "authors": "KHR Chan, Y Ge, E Dobriban, H Hassani\u2026",
           "fullAuthors": "Kwan Ho Ryan Chan, Yuyan Ge, Edgar Dobriban, Hamed Hassani",
           "year": 2025,
           "link": "https://arxiv.org/abs/2507.03279",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "KHR Chan": "3K09heEAAAAJ",
@@ -367,11 +367,11 @@
         },
         {
           "title": "GraphIF: Enhancing Multi-Turn Instruction Following for Large Language Models with Relation Graph Prompt",
-          "authors": "Z Li, C Lin, L Zheng, WD Wei, J Liang…",
+          "authors": "Z Li, C Lin, L Zheng, WD Wei, J Liang\u2026",
           "fullAuthors": "zhenhe li, Can Lin, L Zheng, WD Wei, junli liang",
           "year": 2026,
           "link": "https://ojs.aaai.org/index.php/AAAI/article/view/40457",
-          "venue": "Proceedings of the AAAI …, 2026",
+          "venue": "Proceedings of the AAAI \u2026, 2026",
           "publisher": "ojs.aaai.org",
           "authorProfiles": {
             "Z Li": "6pJ8O2YAAAAJ",
@@ -438,15 +438,15 @@
         },
         {
           "title": "Bed-llm: Intelligent information gathering with llms and bayesian experimental design",
-          "authors": "D Choudhury, S Williamson, A Goliński, N Miao…",
-          "fullAuthors": "D Choudhury, Sinead Williamson, Adam Goliński, Ning Miao",
+          "authors": "D Choudhury, S Williamson, A Goli\u0144ski, N Miao\u2026",
+          "fullAuthors": "D Choudhury, Sinead Williamson, Adam Goli\u0144ski, Ning Miao",
           "year": 2025,
           "link": "https://arxiv.org/abs/2508.21184",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Williamson": "Lt9LpLMAAAAJ",
-            "A Goliński": "MnDZag8AAAAJ",
+            "A Goli\u0144ski": "MnDZag8AAAAJ",
             "N Miao": "EODL2AIAAAAJ"
           },
           "authorList": [
@@ -461,7 +461,7 @@
               "scholarId": "Lt9LpLMAAAAJ"
             },
             {
-              "name": "A Goliński",
+              "name": "A Goli\u0144ski",
               "isFirstAuthor": false,
               "scholarId": "MnDZag8AAAAJ"
             },
@@ -474,11 +474,11 @@
         },
         {
           "title": "Visual multi-agent system: Mitigating hallucination snowballing via visual flow",
-          "authors": "X Yu, C Xu, G Zhang, Y He, Z Chen, Z Xue…",
-          "fullAuthors": "X Yu, Chengming Xu, Jiangning Zhang (张江宁), Y He, Z Chen, Z Xue",
+          "authors": "X Yu, C Xu, G Zhang, Y He, Z Chen, Z Xue\u2026",
+          "fullAuthors": "X Yu, Chengming Xu, Jiangning Zhang (\u5f20\u6c5f\u5b81), Y He, Z Chen, Z Xue",
           "year": 2025,
           "link": "https://arxiv.org/abs/2509.21789",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "C Xu": "pjcYzvYAAAAJ",
@@ -519,11 +519,11 @@
         },
         {
           "title": "ClarifyMT-Bench: Benchmarking and Improving Multi-Turn Clarification for Conversational Large Language Models",
-          "authors": "S Luo, Y Huang, M Li, S Meng, F Liu, Z Hu…",
+          "authors": "S Luo, Y Huang, M Li, S Meng, F Liu, Z Hu\u2026",
           "fullAuthors": "S Luo, Y Huang, Mukai Li, S Meng, Fengyuan Liu, Z Hu",
           "year": 2025,
           "link": "https://arxiv.org/abs/2512.21120",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "M Li": "BizedOAAAAAJ",
@@ -601,11 +601,11 @@
         },
         {
           "title": "Beyond One-Way Influence: Bidirectional Opinion Dynamics in Multi-Turn Human-LLM Interactions",
-          "authors": "Y Jiang, L Guo, Y Wu, A Caliskan, T Mitra…",
+          "authors": "Y Jiang, L Guo, Y Wu, A Caliskan, T Mitra\u2026",
           "fullAuthors": "Yuyang Jiang, Longjie Guo, Yuchen Wu, Aylin Caliskan, Tanushree Mitra",
           "year": 2025,
           "link": "https://arxiv.org/abs/2510.20039",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "Y Jiang": "o1q6F2MAAAAJ",
@@ -663,11 +663,11 @@
         },
         {
           "title": "Higher Satisfaction, Lower Cost: A Technical Report on How LLMs Revolutionize Meituan's Intelligent Interaction Systems",
-          "authors": "X Cheng, K Zeng, Z Cao, L Dai, W Gao, F Han…",
+          "authors": "X Cheng, K Zeng, Z Cao, L Dai, W Gao, F Han\u2026",
           "fullAuthors": "X Cheng, K Zeng, Z Cao, L Dai, W Gao, F Han",
           "year": 2025,
           "link": "https://arxiv.org/abs/2510.13291",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {},
           "authorList": [
@@ -705,11 +705,11 @@
         },
         {
           "title": "MTRAG-UN: A Benchmark for Open Challenges in Multi-Turn RAG Conversations",
-          "authors": "S Rosenthal, Y Katsis, V Shah, L He, L Popa…",
+          "authors": "S Rosenthal, Y Katsis, V Shah, L He, L Popa\u2026",
           "fullAuthors": "Sara Rosenthal, Yannis Katsis, Vraj Shah, Lihong He, Lucian Popa",
           "year": 2026,
           "link": "https://arxiv.org/abs/2602.23184",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Rosenthal": "vM8t8zwAAAAJ",
@@ -748,11 +748,11 @@
         },
         {
           "title": "Bidirectional Intention Inference Enhances LLMs' Defense Against Multi-Turn Jailbreak Attacks",
-          "authors": "H Tong, D Zhao, G Shen, X He, D Lin, F Zhao…",
+          "authors": "H Tong, D Zhao, G Shen, X He, D Lin, F Zhao\u2026",
           "fullAuthors": "H Tong, Dongcheng Zhao, Guobin Shen, Xiang He, D Lin, feifei zhao",
           "year": 2025,
           "link": "https://arxiv.org/abs/2509.22732",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "D Zhao": "2E9Drq8AAAAJ",
@@ -835,7 +835,7 @@
           "fullAuthors": "Z Xi, Z Jiang, Y Bao, Z Xu, S Deng",
           "year": 2026,
           "link": "https://ojs.aaai.org/index.php/AAAI/article/view/42394",
-          "venue": "… of the AAAI Conference on Artificial …, 2026",
+          "venue": "\u2026 of the AAAI Conference on Artificial \u2026, 2026",
           "publisher": "ojs.aaai.org",
           "authorProfiles": {},
           "authorList": [
@@ -909,11 +909,11 @@
         },
         {
           "title": "Tokenomics: Quantifying Where Tokens Are Used in Agentic Software Engineering",
-          "authors": "M Salim, J Latendresse, SH Khatoonabadi…",
+          "authors": "M Salim, J Latendresse, SH Khatoonabadi\u2026",
           "fullAuthors": "Mohamad Salim, Jasmine Latendresse, Hassan Khatoonabadi",
           "year": 2026,
           "link": "https://arxiv.org/abs/2601.14470",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "M Salim": "GT0cnakAAAAJ",
@@ -940,11 +940,11 @@
         },
         {
           "title": "KVCompose: Efficient Structured KV Cache Compression with Composite Tokens",
-          "authors": "D Akulov, M Sana, A De Domenico, TS Salem…",
+          "authors": "D Akulov, M Sana, A De Domenico, TS Salem\u2026",
           "fullAuthors": "D Akulov, Mohamed SANA, Antonio De Domenico, TS Salem",
           "year": 2025,
           "link": "https://arxiv.org/abs/2509.05165",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "M Sana": "zj8nInsAAAAJ",
@@ -1004,11 +1004,11 @@
         },
         {
           "title": "PromptBridge: Cross-Model Prompt Transfer for Large Language Models",
-          "authors": "Y Wang, Q Liu, Z Wang, Z Li, W Wei, Y Liu…",
+          "authors": "Y Wang, Q Liu, Z Wang, Z Li, W Wei, Y Liu\u2026",
           "fullAuthors": "Yaxuan Wang, Quan Liu, Zhenting Wang, Zichao Li, W Wei, Y Liu",
           "year": 2025,
           "link": "https://arxiv.org/abs/2512.01420",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "Y Wang": "2J96C48AAAAJ",
@@ -1051,11 +1051,11 @@
         },
         {
           "title": "Unlocking the Power of Multi-Agent LLM for Reasoning: From Lazy Agents to Deliberation",
-          "authors": "Z Zhang, X Li, Y Lin, H Liu, R Chandradevan…",
+          "authors": "Z Zhang, X Li, Y Lin, H Liu, R Chandradevan\u2026",
           "fullAuthors": "Zhiwei Zhang, Xiaomin Li, Yudi Lin, Hui Liu, Ramraj Chandradevan",
           "year": 2025,
           "link": "https://arxiv.org/abs/2511.02303",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "Z Zhang": "bT8RwQMAAAAJ",
@@ -1118,11 +1118,11 @@
         },
         {
           "title": "MultiCube-RAG for Multi-hop Question Answering",
-          "authors": "J Shi, W Hu, R Tian, B Jin, W Kweon, SK Kang…",
+          "authors": "J Shi, W Hu, R Tian, B Jin, W Kweon, SK Kang\u2026",
           "fullAuthors": "Jimeng Shi, W Hu, R Tian, Bowen Jin, Wonbin Kweon, SeongKu Kang",
           "year": 2026,
           "link": "https://arxiv.org/abs/2602.15898",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "J Shi": "rnNnv8cAAAAJ",
@@ -1169,7 +1169,7 @@
           "fullAuthors": "Yupei Wang, Renfen Hu",
           "year": 2025,
           "link": "https://aclanthology.org/anthology-files/anthology-files/pdf/findings/2025.findings-emnlp.992.pdf",
-          "venue": "Findings of the Association for …, 2025",
+          "venue": "Findings of the Association for \u2026, 2025",
           "publisher": "aclanthology.org",
           "authorProfiles": {
             "STKMY Wang": "FgMlDCcAAAAJ",
@@ -1190,11 +1190,11 @@
         },
         {
           "title": "Markovian Generation Chains in Large Language Models",
-          "authors": "M Geng, A Mohamed, G Shang, M Vazirgiannis…",
+          "authors": "M Geng, A Mohamed, G Shang, M Vazirgiannis\u2026",
           "fullAuthors": "Mingmeng Geng, Amr Mohamed, Guokan Shang, Michalis Vazirgiannis",
           "year": 2026,
           "link": "https://arxiv.org/abs/2603.11228",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "M Geng": "TjlwEe0AAAAJ",
@@ -1256,7 +1256,7 @@
           "fullAuthors": "Shubham Kulkarni, Alexander Lyzhov, Shiva Chaitanya, P Joshi",
           "year": 2026,
           "link": "https://arxiv.org/abs/2601.08690",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Kulkarni": "_H0VkbYAAAAJ",
@@ -1288,11 +1288,11 @@
         },
         {
           "title": "The Path to Conversational AI Tutors: Integrating Tutoring Best Practices and Targeted Technologies to Produce Scalable AI Agents",
-          "authors": "K Vanacore, RS Baker, AH Closser…",
+          "authors": "K Vanacore, RS Baker, AH Closser\u2026",
           "fullAuthors": "Kirk Vanacore, Ryan Baker, Avery Harrison Closser",
           "year": 2026,
           "link": "https://arxiv.org/abs/2602.19303",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "K Vanacore": "eTCfIVkAAAAJ",
@@ -1319,11 +1319,11 @@
         },
         {
           "title": "InfoPO: Information-Driven Policy Optimization for User-Centric Agents",
-          "authors": "F Kong, J Zhang, M Deng, C Wu, Y Luo…",
+          "authors": "F Kong, J Zhang, M Deng, C Wu, Y Luo\u2026",
           "fullAuthors": "Fanqi Kong, Jiayi Zhang, Mingyi Deng, Chenglin Wu, Yuyu Luo",
           "year": 2026,
           "link": "https://arxiv.org/abs/2603.00656",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "F Kong": "Aj13PkAAAAAJ",
@@ -1362,11 +1362,11 @@
         },
         {
           "title": "UCO: A Multi-Turn Interactive Reinforcement Learning Method for Adaptive Teaching with Large Language Models",
-          "authors": "S Wei, M Zhang, X Lin, B Jiang, K Kuang…",
-          "fullAuthors": "Shouang Wei（魏首昂）, Min Zhang, Xin Lin, Bo Jiang（江波）, K Kuang",
+          "authors": "S Wei, M Zhang, X Lin, B Jiang, K Kuang\u2026",
+          "fullAuthors": "Shouang Wei\uff08\u9b4f\u9996\u6602\uff09, Min Zhang, Xin Lin, Bo Jiang\uff08\u6c5f\u6ce2\uff09, K Kuang",
           "year": 2025,
           "link": "https://arxiv.org/abs/2511.08873",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Wei": "aYC2IeEAAAAJ",
@@ -1408,7 +1408,7 @@
           "fullAuthors": "Junda Wang, Zonghai Yao, L Li, J Qian, Zhichao Yang, hong yu",
           "year": 2025,
           "link": "https://arxiv.org/abs/2508.20996",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "J Wang": "3ZhGCvkAAAAJ",
@@ -1451,11 +1451,11 @@
         },
         {
           "title": "Rethinking Text-to-SQL: Dynamic Multi-turn SQL Interaction for Real-world Database Exploration",
-          "authors": "L Sun, T Guo, H Liang, Y Li, Q Cai, J Wei, B Yu…",
+          "authors": "L Sun, T Guo, H Liang, Y Li, Q Cai, J Wei, B Yu\u2026",
           "fullAuthors": "Linzhuang Sun, Tianyu Guo, Hao Liang, Y Li, Q Cai, Jingxuan Wei, B Yu",
           "year": 2025,
           "link": "https://arxiv.org/abs/2510.26495",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "L Sun": "n5r9GdEAAAAJ",
@@ -1533,11 +1533,11 @@
         },
         {
           "title": "CALM-IT: Generating Realistic Long-Form Motivational Interviewing Dialogues with Dual-Actor Conversational Dynamics Tracking",
-          "authors": "VC Nguyen, NY Nguyen, KA Candan, M Conlon…",
+          "authors": "VC Nguyen, NY Nguyen, KA Candan, M Conlon\u2026",
           "fullAuthors": "Viet Cuong Nguyen, NY Nguyen, KA Candan, M Conlon",
           "year": 2026,
           "link": "https://arxiv.org/abs/2601.10085",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "VC Nguyen": "_rJQUCEAAAAJ"
@@ -1567,11 +1567,11 @@
         },
         {
           "title": "LUMINA: Long-horizon Understanding for Multi-turn Interactive Agents",
-          "authors": "A Rakhsha, T Hehn, P Mazzaglia, FV Massoli…",
+          "authors": "A Rakhsha, T Hehn, P Mazzaglia, FV Massoli\u2026",
           "fullAuthors": "Amin Rakhsha, Thomas Hehn, Pietro Mazzaglia, Fabio Valerio Massoli",
           "year": 2026,
           "link": "https://arxiv.org/abs/2601.16649",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "A Rakhsha": "Uqpl3zwAAAAJ",
@@ -1634,11 +1634,11 @@
         },
         {
           "title": "LeCoDe: A Benchmark Dataset for Interactive Legal Consultation Dialogue Evaluation",
-          "authors": "W Yuan, K Song, Z Jiang, J Cao, Y Zhang, J Lin…",
+          "authors": "W Yuan, K Song, Z Jiang, J Cao, Y Zhang, J Lin\u2026",
           "fullAuthors": "Weikang Yuan, Kaisong Song, Zhuoren Jiang, junjie cao, Y Zhang, Jun Lin",
           "year": 2025,
           "link": "https://arxiv.org/abs/2505.19667",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "W Yuan": "I0hMjKwAAAAJ",
@@ -1701,11 +1701,11 @@
         },
         {
           "title": "On Information Self-Locking in Reinforcement Learning for Active Reasoning of LLM agents",
-          "authors": "D Zou, Y Chen, F Feng, M Li, P Li, Y Gong…",
+          "authors": "D Zou, Y Chen, F Feng, M Li, P Li, Y Gong\u2026",
           "fullAuthors": "Deyu Zou, Y Chen, F Feng, M Li, P Li, Y Gong",
           "year": 2026,
           "link": "https://arxiv.org/abs/2603.12109",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "D Zou": "_uhje9IAAAAJ"
@@ -1745,11 +1745,11 @@
         },
         {
           "title": "MCCE: A Framework for Multi-LLM Collaborative Co-Evolution",
-          "authors": "N Ran, Z Li, Y Wang, Q Ran, X Zhang, S Feng…",
+          "authors": "N Ran, Z Li, Y Wang, Q Ran, X Zhang, S Feng\u2026",
           "fullAuthors": "Nian Ran, Z Li, Y Wang, Q Ran, X Zhang, S Feng",
           "year": 2025,
           "link": "https://arxiv.org/abs/2510.06270",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "N Ran": "thRhmcoAAAAJ"
@@ -1789,11 +1789,11 @@
         },
         {
           "title": ": Reducing Belief Deviation in Reinforcement Learning for Active Reasoning",
-          "authors": "D Zou, Y Chen, J Wang, H Yang, M Li, J Cheng…",
+          "authors": "D Zou, Y Chen, J Wang, H Yang, M Li, J Cheng\u2026",
           "fullAuthors": "Deyu Zou, Yongqiang Chen, J Wang, H Yang, Mufei Li, J Cheng",
           "year": 2025,
           "link": "https://arxiv.org/abs/2510.12264",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "D Zou": "_uhje9IAAAAJ",
@@ -1871,7 +1871,7 @@
           "fullAuthors": "Aline Rodrigheri Ioste, Sarajane Marques Peres, M Finger",
           "year": 2026,
           "link": "https://journals-sol.sbc.org.br/index.php/jbcs/article/view/5961",
-          "venue": "Journal of the Brazilian …, 2026",
+          "venue": "Journal of the Brazilian \u2026, 2026",
           "publisher": "journals-sol.sbc.org.br",
           "authorProfiles": {
             "A Ioste": "3FYJLjMAAAAJ",
@@ -1901,7 +1901,7 @@
           "fullAuthors": "N Li, X Wei, N Zhang, Z Wei",
           "year": 2025,
           "link": "https://ieeexplore.ieee.org/abstract/document/11198124/",
-          "venue": "2025 21st International …, 2025",
+          "venue": "2025 21st International \u2026, 2025",
           "publisher": "ieeexplore.ieee.org",
           "authorProfiles": {},
           "authorList": [
@@ -1933,7 +1933,7 @@
           "fullAuthors": "Karthik Govardhanan",
           "year": 2025,
           "link": "https://ieeexplore.ieee.org/abstract/document/11318523/?casa_token=JPFRAmy551wAAAAA:lmupMRfcOo6c_p5BX5MavY-panWYdfEXu9HF1lyHRpMh6T9aqysrAyEHZyJnmTXAK3dltgy5",
-          "venue": "2025 9th SLAAI International Conference on …, 2025",
+          "venue": "2025 9th SLAAI International Conference on \u2026, 2025",
           "publisher": "ieeexplore.ieee.org",
           "authorProfiles": {
             "K Govardhanan": "XxhEpK0AAAAJ"
@@ -1948,7 +1948,7 @@
         },
         {
           "title": "The Art of Repair in Human-Agent Conversations: A Taxonomy of Repair Strategies by Users and LLM-Based Conversational Agents",
-          "authors": "G Stevens, D Korus-Du, A Boden, P Tolmie, D Randall…",
+          "authors": "G Stevens, D Korus-Du, A Boden, P Tolmie, D Randall\u2026",
           "fullAuthors": "Gunnar Stevens, Delong Korus-Du, Alexander Boden, Peter Tolmie, D Randall",
           "year": 2025,
           "link": "https://www.researchsquare.com/article/rs-7301450/latest",
@@ -1994,7 +1994,7 @@
           "fullAuthors": "H Wang",
           "year": 2025,
           "link": "https://dl.acm.org/doi/abs/10.1145/3773365.3773548",
-          "venue": "Proceedings of the 2025 8th International Conference …, 2025",
+          "venue": "Proceedings of the 2025 8th International Conference \u2026, 2025",
           "publisher": "dl.acm.org",
           "authorProfiles": {},
           "authorList": [
@@ -2051,7 +2051,7 @@
           "fullAuthors": "PK Satyanarayana",
           "year": 2025,
           "link": "https://www.researchlakejournals.com/index.php/AAIML/article/view/559",
-          "venue": "International Journal of Automation …, 2025",
+          "venue": "International Journal of Automation \u2026, 2025",
           "publisher": "researchlakejournals.com",
           "authorProfiles": {},
           "authorList": [
@@ -2137,11 +2137,11 @@
         },
         {
           "title": "Examining the Vulnerability of Multi-Agent Medical Systems to Human Interventions for Clinical Reasoning",
-          "authors": "B Liu, D Mehta, R Malhotra, A Zobian, YY Tan…",
+          "authors": "B Liu, D Mehta, R Malhotra, A Zobian, YY Tan\u2026",
           "fullAuthors": "B Liu, Dillon Mehta, R Malhotra, A Zobian, YY Tan",
           "year": 2025,
           "link": "https://openreview.net/forum?id=1rngmK4d2c",
-          "venue": "NeurIPS 2025 Workshop …",
+          "venue": "NeurIPS 2025 Workshop \u2026",
           "publisher": "openreview.net",
           "authorProfiles": {
             "D Mehta": "tNUbaMQAAAAJ"
@@ -2251,7 +2251,7 @@
           ]
         },
         {
-          "title": "FROM POLICY TO PRACTICE: RESEARCH DIRECTIONS FOR TRUSTWORTHY AND RESPONSIBLE AI “BY DESIGN”",
+          "title": "FROM POLICY TO PRACTICE: RESEARCH DIRECTIONS FOR TRUSTWORTHY AND RESPONSIBLE AI \u201cBY DESIGN\u201d",
           "authors": "R Krishnan, JP Lalor, N Prat, A Abbasi",
           "fullAuthors": "Ramayya Krishnan, John Lalor, Nicolas PRAT, Ahmed Abbasi",
           "year": 0,
@@ -2299,11 +2299,11 @@
       "citations": [
         {
           "title": "Beyond single-turn: A survey on multi-turn interactions with large language models",
-          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan…",
+          "authors": "Y Li, X Shen, X Yao, X Ding, Y Miao, R Krishnan\u2026",
           "fullAuthors": "Yubo Li, Xiaobin Shen, Xinyu Yao, Xueying Ding, Yidi Miao, Ramayya Krishnan",
           "year": 2025,
           "link": "https://arxiv.org/abs/2504.04717",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "Y Li": "hgN6B6kAAAAJ",
@@ -2352,7 +2352,7 @@
           "fullAuthors": "Shomik Jain, Charlotte Park, M Viana, Ashia C. Wilson, Dana Calacci",
           "year": 2025,
           "link": "https://arxiv.org/abs/2509.12517",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Jain": "KXHdjLoAAAAJ",
@@ -2416,7 +2416,7 @@
         {
           "title": "Communication Enhances LLMs' Stability in Strategic Thinking",
           "authors": "N Lore, B Heydari",
-          "fullAuthors": "Nunzio Lorè, Babak Heydari",
+          "fullAuthors": "Nunzio Lor\u00e8, Babak Heydari",
           "year": 2602,
           "link": "https://arxiv.org/abs/2602.06081",
           "venue": "arXiv preprint arXiv:2602.06081, 2026",
@@ -2525,11 +2525,11 @@
         },
         {
           "title": "Modeling and Predicting Multi-Turn Answer Instability in Large Language Models",
-          "authors": "J He, R Ramachandran, N Ramachandran…",
+          "authors": "J He, R Ramachandran, N Ramachandran\u2026",
           "fullAuthors": "J He, R Ramachandran, N Ramachandran",
           "year": 2025,
           "link": "https://arxiv.org/abs/2511.10688",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {},
           "authorList": [
@@ -2552,11 +2552,11 @@
         },
         {
           "title": "Representational Stability of Truth in Large Language Models",
-          "authors": "S Dies, C Maynard, G Savcisens…",
+          "authors": "S Dies, C Maynard, G Savcisens\u2026",
           "fullAuthors": "Samantha Dies, Courtney Maynard, Germans Savcisens",
           "year": 2025,
           "link": "https://arxiv.org/abs/2511.19166",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "S Dies": "z0iDXqcAAAAJ",
@@ -2583,11 +2583,11 @@
         },
         {
           "title": "ML Compass: Navigating Capability, Cost, and Compliance Trade-offs in AI Model Deployment",
-          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez…",
+          "authors": "V Digalakis Jr, R Krishnan, GM Fernandez\u2026",
           "fullAuthors": "Vassilis Digalakis Jr, R Krishnan, GM Fernandez",
           "year": 2025,
           "link": "https://arxiv.org/abs/2512.23487",
-          "venue": "arXiv preprint arXiv …, 2025",
+          "venue": "arXiv preprint arXiv \u2026, 2025",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "V Digalakis Jr": "6yf89q0AAAAJ"
@@ -2703,7 +2703,7 @@
           "fullAuthors": "Katherine E Brown, Sharon E Davis (Edwards)",
           "year": 2026,
           "link": "https://academic.oup.com/jamia/article-abstract/33/2/509/8341616",
-          "venue": "Journal of the American Medical …, 2026",
+          "venue": "Journal of the American Medical \u2026, 2026",
           "publisher": "academic.oup.com",
           "authorProfiles": {
             "KE Brown": "bSUe-OgAAAAJ",
@@ -2803,11 +2803,11 @@
         },
         {
           "title": "Interdisciplinary development and application of computational methods in informatics for clinical applications",
-          "authors": "D Albers, K Cato, A Layton…",
+          "authors": "D Albers, K Cato, A Layton\u2026",
           "fullAuthors": "DJ Albers, Kenrick D Cato, Anita Layton",
           "year": 2026,
           "link": "https://academic.oup.com/jamia/article-abstract/33/1/1/8408480",
-          "venue": "Journal of the American …, 2026",
+          "venue": "Journal of the American \u2026, 2026",
           "publisher": "academic.oup.com",
           "authorProfiles": {
             "D Albers": "5EqKofQAAAAJ",
@@ -2838,7 +2838,7 @@
           "fullAuthors": "A Long, C Huang, T Li, Y Shi, C Zhang",
           "year": 2025,
           "link": "https://www.sciencedirect.com/science/article/pii/S1687157X25001374",
-          "venue": "Journal of Genetic Engineering …, 2025",
+          "venue": "Journal of Genetic Engineering \u2026, 2025",
           "publisher": "Elsevier",
           "authorProfiles": {},
           "authorList": [
@@ -2895,8 +2895,8 @@
         },
         {
           "title": "Design and Implementation of an Early Detection System for Chronical Kidney Disease Using Machine Learning Techniques",
-          "authors": "MS Khan¹, R Srivastava, MO Khan, F Ahamad",
-          "fullAuthors": "MS Khan¹, R Srivastava, MO Khan, F Ahamad",
+          "authors": "MS Khan\u00b9, R Srivastava, MO Khan, F Ahamad",
+          "fullAuthors": "MS Khan\u00b9, R Srivastava, MO Khan, F Ahamad",
           "year": 2026,
           "link": "https://www.academia.edu/download/132038959/1449_pdf.pdf",
           "venue": "2026",
@@ -2904,7 +2904,7 @@
           "authorProfiles": {},
           "authorList": [
             {
-              "name": "MS Khan¹",
+              "name": "MS Khan\u00b9",
               "isFirstAuthor": true,
               "scholarId": ""
             },
@@ -2941,7 +2941,7 @@
           "fullAuthors": "Yubo Li, R Padman",
           "year": 2026,
           "link": "https://academic.oup.com/jamia/article-abstract/33/1/26/8223429",
-          "venue": "Journal of the American Medical Informatics …, 2026",
+          "venue": "Journal of the American Medical Informatics \u2026, 2026",
           "publisher": "academic.oup.com",
           "authorProfiles": {
             "Y Li": "hgN6B6kAAAAJ"
@@ -2961,11 +2961,11 @@
         },
         {
           "title": "Machine Learning Prediction of Progression to Dialysis in Patients With Polycystic Kidney Disease: Population-Based Retrospective Cohort Study",
-          "authors": "CH Chang, M Chen, MH Tsai, YC Huang…",
-          "fullAuthors": "CH Chang, Mingchih Chen (陳銘芷), MH Tsai, YC Huang",
+          "authors": "CH Chang, M Chen, MH Tsai, YC Huang\u2026",
+          "fullAuthors": "CH Chang, Mingchih Chen (\u9673\u9298\u82b7), MH Tsai, YC Huang",
           "year": 2026,
           "link": "https://medinform.jmir.org/2026/1/e80343",
-          "venue": "JMIR Medical …, 2026",
+          "venue": "JMIR Medical \u2026, 2026",
           "publisher": "medinform.jmir.org",
           "authorProfiles": {
             "M Chen": "Juvx9-EAAAAJ"
@@ -3059,11 +3059,11 @@
       "citations": [
         {
           "title": "SoK: Agentic Skills--Beyond Tool Use in LLM Agents",
-          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang…",
+          "authors": "Y Jiang, D Li, H Deng, B Ma, X Wang, Q Wang\u2026",
           "fullAuthors": "Yanna JIANG, DELONG LI, Haiyu Deng, Baihe Ma, Xu Wang, Qin WANG",
           "year": 2026,
           "link": "https://arxiv.org/abs/2602.20867",
-          "venue": "arXiv preprint arXiv …, 2026",
+          "venue": "arXiv preprint arXiv \u2026, 2026",
           "publisher": "arxiv.org",
           "authorProfiles": {
             "Y Jiang": "fPq-0HgAAAAJ",
@@ -3108,7 +3108,7 @@
         },
         {
           "title": "stMCP: Spatial Transcriptomics with a Model Context Protocol Server",
-          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi…",
+          "authors": "JJ Smith, X Wang, M McPheeters, MA Widjaja-Adhi\u2026",
           "fullAuthors": "Jordan Smith, X Wang, Matthew T McPheeters, Dr. Made Airanthi Kusuma Widjaja-Adhi",
           "year": 2026,
           "link": "https://www.biorxiv.org/content/10.64898/2026.03.11.710153.abstract",
@@ -3249,7 +3249,7 @@
           "fullAuthors": "Karthik Srikumar",
           "year": 0,
           "link": "https://openreview.net/forum?id=BvImRZyNf5",
-          "venue": "Workshop on Human-aware Embodied AI (HEAI)-IROS …",
+          "venue": "Workshop on Human-aware Embodied AI (HEAI)-IROS \u2026",
           "publisher": "openreview.net",
           "authorProfiles": {
             "K Srikumar": "LVpeXcQAAAAJ"
@@ -3391,7 +3391,7 @@
       "scholarId": "z6bOk-AAAAAJ"
     },
     "v2cMiCAAAAAJ": {
-      "fullName": "Beyza Ermiş",
+      "fullName": "Beyza Ermi\u015f",
       "totalCitations": 1595,
       "institution": "Cohere Labs",
       "scholarId": "v2cMiCAAAAAJ"
@@ -3453,7 +3453,7 @@
     "n6wJfqUAAAAJ": {
       "fullName": "Nico Daheim",
       "totalCitations": 747,
-      "institution": "TU Darmstadt, ETH Zürich, ELLIS",
+      "institution": "TU Darmstadt, ETH Z\u00fcrich, ELLIS",
       "scholarId": "n6wJfqUAAAAJ"
     },
     "hgN6B6kAAAAJ": {
@@ -3493,7 +3493,7 @@
       "scholarId": "v-Snl_EAAAAJ"
     },
     "NSzZlzoAAAAJ": {
-      "fullName": "Dong Du（杜冬冬）",
+      "fullName": "Dong Du\uff08\u675c\u51ac\u51ac\uff09",
       "totalCitations": 1461,
       "institution": "Shanghai Jiao Tong University",
       "scholarId": "NSzZlzoAAAAJ"
@@ -3559,7 +3559,7 @@
       "scholarId": "Lt9LpLMAAAAJ"
     },
     "MnDZag8AAAAJ": {
-      "fullName": "Adam Goliński",
+      "fullName": "Adam Goli\u0144ski",
       "totalCitations": 949,
       "institution": "Apple",
       "scholarId": "MnDZag8AAAAJ"
@@ -3577,7 +3577,7 @@
       "scholarId": "pjcYzvYAAAAJ"
     },
     "2hA4X9wAAAAJ": {
-      "fullName": "Jiangning Zhang (张江宁)",
+      "fullName": "Jiangning Zhang (\u5f20\u6c5f\u5b81)",
       "totalCitations": 6561,
       "institution": "Youtu Lab, Tencent | Zhejiang University",
       "scholarId": "2hA4X9wAAAAJ"
@@ -3979,7 +3979,7 @@
       "scholarId": "FAjYJkQAAAAJ"
     },
     "aYC2IeEAAAAJ": {
-      "fullName": "Shouang Wei（魏首昂）",
+      "fullName": "Shouang Wei\uff08\u9b4f\u9996\u6602\uff09",
       "totalCitations": 20,
       "institution": "ECNU",
       "scholarId": "aYC2IeEAAAAJ"
@@ -3997,7 +3997,7 @@
       "scholarId": "qtMWgYsAAAAJ"
     },
     "HbVihN8AAAAJ": {
-      "fullName": "Bo Jiang（江波）",
+      "fullName": "Bo Jiang\uff08\u6c5f\u6ce2\uff09",
       "totalCitations": 1225,
       "institution": "East China Normal University",
       "scholarId": "HbVihN8AAAAJ"
@@ -4101,7 +4101,7 @@
     "9Kh0clsAAAAJ": {
       "fullName": "junjie cao",
       "totalCitations": 139,
-      "institution": "阿里巴巴",
+      "institution": "\u963f\u91cc\u5df4\u5df4",
       "scholarId": "9Kh0clsAAAAJ"
     },
     "DvAsN5QAAAAJ": {
@@ -4149,7 +4149,7 @@
     "U-gxPjwAAAAJ": {
       "fullName": "Sarajane Marques Peres",
       "totalCitations": 1851,
-      "institution": "Associate Professor at University of São Paulo, Brazil",
+      "institution": "Associate Professor at University of S\u00e3o Paulo, Brazil",
       "scholarId": "U-gxPjwAAAAJ"
     },
     "XxhEpK0AAAAJ": {
@@ -4179,7 +4179,7 @@
     "3_Ua2scAAAAJ": {
       "fullName": "Peter Tolmie",
       "totalCitations": 6521,
-      "institution": "Principal Research Scientist, Wirtschaftsinformatik und Neue Medien, Universität Siegen",
+      "institution": "Principal Research Scientist, Wirtschaftsinformatik und Neue Medien, Universit\u00e4t Siegen",
       "scholarId": "3_Ua2scAAAAJ"
     },
     "hY8aLqAAAAAJ": {
@@ -4273,7 +4273,7 @@
       "scholarId": "NOxLJQUAAAAJ"
     },
     "_J8qJqoAAAAJ": {
-      "fullName": "Nunzio Lorè",
+      "fullName": "Nunzio Lor\u00e8",
       "totalCitations": 159,
       "institution": "Northeastern University",
       "scholarId": "_J8qJqoAAAAJ"
@@ -4387,9 +4387,9 @@
       "scholarId": "Ln5Ksv0AAAAJ"
     },
     "Juvx9-EAAAAJ": {
-      "fullName": "Mingchih Chen (陳銘芷)",
+      "fullName": "Mingchih Chen (\u9673\u9298\u82b7)",
       "totalCitations": 2676,
-      "institution": "輔仁大學商學研究所",
+      "institution": "\u8f14\u4ec1\u5927\u5b78\u5546\u5b78\u7814\u7a76\u6240",
       "scholarId": "Juvx9-EAAAAJ"
     },
     "fPq-0HgAAAAJ": {
@@ -4480,7 +4480,7 @@
     "Yang Wu": 781,
     "Yongheng Zhang": 296,
     "Zheng-Xin Yong": 8414,
-    "Beyza Ermiş": 1595,
+    "Beyza Ermi\u015f": 1595,
     "Marzieh Fadaee": 3983,
     "Stephen H. Bach": 11806,
     "Jiayuan Zhu": 933,
@@ -4497,7 +4497,7 @@
     "Ramayya Krishnan": 11090,
     "Erhu Feng": 309,
     "Le Chen": 56,
-    "Dong Du（杜冬冬）": 1461,
+    "Dong Du\uff08\u675c\u51ac\u51ac\uff09": 1461,
     "Kwan Ho Ryan Chan": 741,
     "Yuyan Ge": 137,
     "Edgar Dobriban": 5959,
@@ -4508,10 +4508,10 @@
     "Mark Dras": 4833,
     "Usman Naseem": 5197,
     "Sinead Williamson": 1547,
-    "Adam Goliński": 949,
+    "Adam Goli\u0144ski": 949,
     "Ning Miao": 744,
     "Chengming Xu": 1644,
-    "Jiangning Zhang (张江宁)": 6561,
+    "Jiangning Zhang (\u5f20\u6c5f\u5b81)": 6561,
     "Mukai Li": 3445,
     "Fengyuan Liu": 232,
     "Xiang Liu": 973,
@@ -4578,10 +4578,10 @@
     "Mingyi Deng": 6,
     "Chenglin Wu": 4199,
     "Yuyu Luo": 4654,
-    "Shouang Wei（魏首昂）": 20,
+    "Shouang Wei\uff08\u9b4f\u9996\u6602\uff09": 20,
     "Min Zhang": 1142,
     "Xin Lin": 3025,
-    "Bo Jiang（江波）": 1225,
+    "Bo Jiang\uff08\u6c5f\u6ce2\uff09": 1225,
     "Junda Wang": 410,
     "Zonghai Yao": 861,
     "Zhichao Yang": 1225,
@@ -4625,7 +4625,7 @@
     "Dana Calacci": 1062,
     "Linh Huynh": 103,
     "Danielle McNamara": 52469,
-    "Nunzio Lorè": 159,
+    "Nunzio Lor\u00e8": 159,
     "Babak Heydari": 2728,
     "Dmitrii Gimmelberg": 14,
     "Iveta Ludviga": 479,
@@ -4644,7 +4644,7 @@
     "DJ Albers": 6145,
     "Kenrick D Cato": 4418,
     "Anita Layton": 8808,
-    "Mingchih Chen (陳銘芷)": 2676,
+    "Mingchih Chen (\u9673\u9298\u82b7)": 2676,
     "Yanna JIANG": 138,
     "DELONG LI": 1,
     "Haiyu Deng": 61,
@@ -4934,7 +4934,7 @@
     },
     "3_1": {
       "country": "",
-      "institution": "輔仁大學商學研究所"
+      "institution": "\u8f14\u4ec1\u5927\u5b78\u5546\u5b78\u7814\u7a76\u6240"
     },
     "3_2": {
       "country": "United States",
@@ -5033,6 +5033,63 @@
       "institution": "Unknown"
     }
   },
-  "themes": {},
-  "summaries": {}
+  "themes": {
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": {
+      "theme": "LLM Multi-Turn Interaction and Consistency",
+      "color": "#ec4899"
+    },
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": {
+      "theme": "LLM Multi-Turn Interaction and Consistency",
+      "color": "#ec4899"
+    },
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": {
+      "theme": "Clinical Predictive Modeling for ESRD",
+      "color": "#8b5cf6"
+    },
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": {
+      "theme": "Clinical Predictive Modeling for ESRD",
+      "color": "#8b5cf6"
+    },
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
+      "theme": "AI Agents and Benchmarking",
+      "color": "#6366f1"
+    },
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
+      "theme": "Human-AI Alignment and Control",
+      "color": "#10b981"
+    },
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": {
+      "theme": "LLM Robustness and Adversarial Reliability",
+      "color": "#f59e0b"
+    },
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": {
+      "theme": "Interpretable Clinical Predictive Modeling",
+      "color": "#ef4444"
+    },
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": {
+      "theme": "LLM Robustness and Adversarial Reliability",
+      "color": "#f59e0b"
+    },
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": {
+      "theme": "Interpretable Clinical Predictive Modeling",
+      "color": "#ef4444"
+    },
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
+      "theme": "Human-AI Alignment and Control",
+      "color": "#10b981"
+    }
+  },
+  "summaries": {
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This survey reviews how large language models behave in multi-turn settings, covering capabilities, challenges, evaluation methods, and open problems beyond single-turn prompting.",
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper studies how consistently large language models maintain their answers or behavior across sequential interactions and likely proposes metrics or experiments for measuring such stability.",
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This work aims to improve prediction of end-stage renal disease outcomes by integrating multiple data sources into a unified predictive modeling framework.",
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper develops an interpretable ESRD prediction approach using administrative claims data and explainable AI methods to make model decisions more transparent.",
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper introduces a benchmark for evaluating how effectively reusable agent skills transfer and perform across a wide range of tasks.",
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This work reframes AI alignment as a two-way adaptation process in which both humans and AI systems adjust cognitively to achieve better mutual alignment.",
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper analyzes how long large language models remain consistent under adversarial pressure, using survival analysis to quantify robustness over the course of attacks.",
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This work proposes a clinical prediction model with a temporal-feature cross-attention mechanism designed to improve both predictive performance and interpretability.",
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper evaluates whether large reasoning models can preserve coherent and stable reasoning when subjected to adversarial attacks across multiple conversational turns.",
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This paper presents a method for tracing how temporal patterns and feature interactions jointly influence predictions in clinical models.",
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This survey examines how confidence estimates are used in large language models for control-related purposes such as calibration, decision-making, abstention, and oversight."
+  }
 }
