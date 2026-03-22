@@ -808,8 +808,17 @@ body {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow);
-    pointer-events: none;
+    pointer-events: auto;
     font-size: 12px;
+}
+.tooltip-list a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.tooltip-list a:hover {
+    color: #818cf8;
+    text-decoration: underline;
 }
 .tooltip-header {
     font-weight: 600;

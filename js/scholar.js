@@ -55,7 +55,9 @@ export function parseCoAuthors(publications, researcherName, profileInfo = {}, s
                 coauthorMap[displayName] = { name: displayName, paperCount: 0, papers: [], scholarId: scholarId || '' };
             }
             coauthorMap[displayName].paperCount++;
-            coauthorMap[displayName].papers.push(pub.title);
+            if (!coauthorMap[displayName].papers.some(p => p.title === pub.title)) {
+                coauthorMap[displayName].papers.push({ title: pub.title, link: pub.articleUrl || '' });
+            }
         }
     }
 
@@ -181,10 +183,12 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
                         };
                     }
                     authorMap[displayName].citCount++;
-                    authorMap[displayName].papers.push(cit.title);
+                    if (!authorMap[displayName].papers.some(p => p.title === cit.title)) {
+                        authorMap[displayName].papers.push({ title: cit.title, link: cit.link || '' });
+                    }
                     // Track which parent publication this citation refers to
-                    if (pub.title && !authorMap[displayName].citedPublications.includes(pub.title)) {
-                        authorMap[displayName].citedPublications.push(pub.title);
+                    if (pub.title && !authorMap[displayName].citedPublications.some(p => p.title === pub.title)) {
+                        authorMap[displayName].citedPublications.push({ title: pub.title, link: pub.articleUrl || '' });
                     }
                     // Update institution/country if we get better data
                     if (profile.institution && !authorMap[displayName].institution) {
@@ -233,9 +237,11 @@ export function parseCitingAuthors(publications, geoData = {}, firstAuthorOnly =
                     };
                 }
                 authorMap[displayName].citCount++;
-                authorMap[displayName].papers.push(cit.title);
-                if (pub.title && !authorMap[displayName].citedPublications.includes(pub.title)) {
-                    authorMap[displayName].citedPublications.push(pub.title);
+                if (!authorMap[displayName].papers.some(p => p.title === cit.title)) {
+                    authorMap[displayName].papers.push({ title: cit.title, link: cit.link || '' });
+                }
+                if (pub.title && !authorMap[displayName].citedPublications.some(p => p.title === pub.title)) {
+                    authorMap[displayName].citedPublications.push({ title: pub.title, link: pub.articleUrl || '' });
                 }
                 if (profile.institution && !authorMap[displayName].institution) {
                     authorMap[displayName].institution = profile.institution;

@@ -244,11 +244,11 @@ function renderCitingTable() {
 
     tbody.innerHTML = data.map((d, i) => {
         const pubs = d.citedPublications || [];
-        const tooltipText = pubs.length > 0
-            ? pubs.map(p => `• ${escapeHtml(p)}`).join('\n')
-            : '';
+        const papers = d.papers || [];
+        const tooltipData = { pubs, papers };
+        const hasTooltip = pubs.length > 0 || papers.length > 0;
         return `
-        <tr class="${pubs.length > 0 ? 'has-tooltip' : ''}" ${pubs.length > 0 ? `data-cited-pubs="${escapeAttr(JSON.stringify(pubs))}"` : ''}>
+        <tr class="${hasTooltip ? 'has-tooltip' : ''}" ${hasTooltip ? `data-cited-pubs="${escapeAttr(JSON.stringify(tooltipData))}"` : ''}>
             <td class="td-rank">${i + 1}</td>
             <td class="td-name">${scholarLink(d.name, d.scholarId)}</td>
             <td class="td-bar">
@@ -283,6 +283,15 @@ function escapeAttr(str) {
     return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+/** Render a paper item as a clickable link or plain text */
+function renderPaperItem(p) {
+    if (typeof p === 'string') return `<li>${escapeHtml(p)}</li>`;
+    if (p.link) {
+        return `<li><a href="${escapeAttr(p.link)}" target="_blank" rel="noopener">${escapeHtml(p.title)}</a></li>`;
+    }
+    return `<li>${escapeHtml(p.title)}</li>`;
+}
+
 /** Create and manage hover tooltip showing cited/collaborated publications */
 function wireTooltips(tbody, type = 'citing') {
     let tooltip = document.getElementById('scholar-tooltip');
@@ -293,28 +302,54 @@ function wireTooltips(tbody, type = 'citing') {
         document.body.appendChild(tooltip);
     }
 
-    tbody.querySelectorAll('tr.has-tooltip').forEach(row => {
-        row.addEventListener('mouseenter', (e) => {
-            const pubs = JSON.parse(row.dataset.citedPubs || '[]');
-            if (pubs.length === 0) return;
+    let hideTimeout = null;
 
-            const name = row.querySelector('.td-name')?.textContent || '';
-            const headerText = type === 'collaborator'
-                ? `Papers collaborated with ${escapeHtml(name)}`
-                : `Publications cited by ${escapeHtml(name)}`;
-            tooltip.innerHTML = `
-                <div class="tooltip-header">${headerText}</div>
-                <ul class="tooltip-list">
-                    ${pubs.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
-                </ul>
+    function showTooltip(row) {
+        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+
+        const raw = JSON.parse(row.dataset.citedPubs || '[]');
+        const name = row.querySelector('.td-name')?.textContent || '';
+
+        let html = '';
+        if (type === 'collaborator') {
+            const items = Array.isArray(raw) ? raw : (raw.pubs || []);
+            if (items.length === 0) return;
+            html = `
+                <div class="tooltip-header">Papers collaborated with ${escapeHtml(name)}</div>
+                <ul class="tooltip-list">${items.map(renderPaperItem).join('')}</ul>
             `;
-            tooltip.style.display = 'block';
-            positionTooltip(tooltip, row);
-        });
+        } else {
+            const pubs = raw.pubs || raw;
+            const papers = raw.papers || [];
+            if ((!Array.isArray(pubs) || pubs.length === 0) && papers.length === 0) return;
 
-        row.addEventListener('mouseleave', () => {
-            tooltip.style.display = 'none';
-        });
+            html = `<div class="tooltip-header">Cited your publications:</div>
+                <ul class="tooltip-list">${(Array.isArray(pubs) ? pubs : []).map(renderPaperItem).join('')}</ul>`;
+
+            if (papers.length > 0) {
+                html += `<div class="tooltip-header" style="margin-top:6px;">Their citing papers:</div>
+                    <ul class="tooltip-list">${papers.map(renderPaperItem).join('')}</ul>`;
+            }
+        }
+
+        tooltip.innerHTML = html;
+        tooltip.style.display = 'block';
+        positionTooltip(tooltip, row);
+    }
+
+    function scheduleHide() {
+        hideTimeout = setTimeout(() => { tooltip.style.display = 'none'; }, 200);
+    }
+
+    // Keep tooltip visible when hovering over it
+    tooltip.addEventListener('mouseenter', () => {
+        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+    });
+    tooltip.addEventListener('mouseleave', () => { scheduleHide(); });
+
+    tbody.querySelectorAll('tr.has-tooltip').forEach(row => {
+        row.addEventListener('mouseenter', () => showTooltip(row));
+        row.addEventListener('mouseleave', () => scheduleHide());
     });
 }
 
