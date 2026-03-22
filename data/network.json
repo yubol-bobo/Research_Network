@@ -5035,61 +5035,61 @@
   },
   "themes": {
     "Beyond single-turn: A survey on multi-turn interactions with large language models": {
-      "theme": "LLM Multi-Turn Interaction and Consistency",
-      "color": "#ec4899"
+      "theme": "LLM",
+      "color": "#ef4444"
     },
     "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": {
-      "theme": "LLM Multi-Turn Interaction and Consistency",
-      "color": "#ec4899"
+      "theme": "LLM",
+      "color": "#ef4444"
     },
     "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": {
-      "theme": "Clinical Predictive Modeling for ESRD",
-      "color": "#8b5cf6"
-    },
-    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": {
-      "theme": "Clinical Predictive Modeling for ESRD",
-      "color": "#8b5cf6"
-    },
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
-      "theme": "AI Agents and Benchmarking",
-      "color": "#6366f1"
-    },
-    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
-      "theme": "Human-AI Alignment and Control",
+      "theme": "Healthcare",
       "color": "#10b981"
     },
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": {
+      "theme": "Healthcare",
+      "color": "#10b981"
+    },
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
+      "theme": "LLM",
+      "color": "#ef4444"
+    },
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
+      "theme": "HCI",
+      "color": "#6366f1"
+    },
     "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": {
-      "theme": "LLM Robustness and Adversarial Reliability",
+      "theme": "Security",
       "color": "#f59e0b"
     },
     "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": {
-      "theme": "Interpretable Clinical Predictive Modeling",
-      "color": "#ef4444"
+      "theme": "Healthcare",
+      "color": "#10b981"
     },
     "Consistency of Large Reasoning Models Under Multi-Turn Attacks": {
-      "theme": "LLM Robustness and Adversarial Reliability",
-      "color": "#f59e0b"
-    },
-    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": {
-      "theme": "Interpretable Clinical Predictive Modeling",
+      "theme": "LLM",
       "color": "#ef4444"
     },
-    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
-      "theme": "Human-AI Alignment and Control",
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": {
+      "theme": "Healthcare",
       "color": "#10b981"
+    },
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
+      "theme": "LLM",
+      "color": "#ef4444"
     }
   },
   "summaries": {
-    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This survey reviews how large language models behave in multi-turn settings, covering capabilities, challenges, evaluation methods, and open problems beyond single-turn prompting.",
-    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper studies how consistently large language models maintain their answers or behavior across sequential interactions and likely proposes metrics or experiments for measuring such stability.",
-    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This work aims to improve prediction of end-stage renal disease outcomes by integrating multiple data sources into a unified predictive modeling framework.",
-    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper develops an interpretable ESRD prediction approach using administrative claims data and explainable AI methods to make model decisions more transparent.",
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper introduces a benchmark for evaluating how effectively reusable agent skills transfer and perform across a wide range of tasks.",
-    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This work reframes AI alignment as a two-way adaptation process in which both humans and AI systems adjust cognitively to achieve better mutual alignment.",
-    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper analyzes how long large language models remain consistent under adversarial pressure, using survival analysis to quantify robustness over the course of attacks.",
-    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This work proposes a clinical prediction model with a temporal-feature cross-attention mechanism designed to improve both predictive performance and interpretability.",
-    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper evaluates whether large reasoning models can preserve coherent and stable reasoning when subjected to adversarial attacks across multiple conversational turns.",
-    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This paper presents a method for tracing how temporal patterns and feature interactions jointly influence predictions in clinical models.",
-    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This survey examines how confidence estimates are used in large language models for control-related purposes such as calibration, decision-making, abstention, and oversight."
+    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This survey reviews methods, challenges, and evaluation settings for multi-turn interactions with large language models.",
+    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper likely studies how consistently large language models behave across sequential or multi-step interactions.",
+    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This paper likely proposes a predictive model that combines multiple data sources to improve outcome prediction for end-stage renal disease patients.",
+    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This work likely develops an interpretable ESRD prediction system using administrative claims data and explainable AI methods.",
+    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper likely introduces a benchmark for evaluating how reusable and effective agent skills are across a range of tasks.",
+    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This work likely reframes AI alignment as a two-way adaptation process between humans and AI systems rather than a one-sided objective.",
+    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper likely measures how long large language models remain consistent under adversarial pressure using survival analysis.",
+    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This paper likely proposes a more interpretable clinical prediction model using cross-attention over temporal and feature dimensions.",
+    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper likely evaluates whether large reasoning models maintain stable reasoning and answers when subjected to multi-turn adversarial attacks.",
+    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This work likely introduces a method for tracing temporal and feature-level dependencies to better explain clinical predictive models.",
+    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This survey likely reviews how confidence estimates are represented and used to guide control, decision-making, and reliability in large language models."
   }
 }

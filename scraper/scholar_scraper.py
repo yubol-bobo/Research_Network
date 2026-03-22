@@ -1259,8 +1259,11 @@ def classify_publications_llm(
 
     prompt = f"""You are a research paper classifier. Given these publication titles, do two things:
 
-1. CLASSIFY each paper into a broad research theme (3-7 themes total).
-   {"Use these existing themes where appropriate: " + ", ".join(existing_theme_names) if existing_theme_names else "Create appropriate theme names like: Healthcare, NLP, Computer Vision, Reinforcement Learning, etc."}
+1. CLASSIFY each paper into a HIGH-LEVEL research field (use 1-2 word labels).
+   Use broad, standard CS/research field names like: LLM, NLP, CV, RL, Healthcare, Robotics, HCI, Security, Systems, Econ, OR, etc.
+   Do NOT use specific/descriptive labels like "LLM Robustness and Adversarial Reliability" — just use "LLM".
+   Do NOT use more than 2 words per theme. Keep themes at the same level of generality.
+   {"Reuse these existing themes where appropriate: " + ", ".join(existing_theme_names) if existing_theme_names else ""}
 
 2. SUMMARIZE each paper in one sentence (what it likely does/proposes, based on the title).
 
