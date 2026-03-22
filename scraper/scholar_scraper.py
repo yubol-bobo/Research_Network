@@ -383,6 +383,80 @@ def build_geo_data(publications: List[Dict], scholar_profiles: Dict[str, Dict]) 
     return geo_data
 
 
+def fill_unmapped_geo_llm(publications: List[Dict], geo_data: Dict, api_key: str, provider: str, model: str) -> Dict:
+    """
+    Use LLM to infer country/institution for citations that have no geo data.
+    These are citations where no author has a Scholar profile.
+    """
+    unmapped = []
+    for pi, pub in enumerate(publications):
+        for ci, cit in enumerate(pub.get("citations", [])):
+            key = f"{pi}_{ci}"
+            if key not in geo_data:
+                authors = cit.get("fullAuthors", "") or ", ".join(
+                    a.get("name", "") for a in cit.get("authorList", [])
+                )
+                unmapped.append({
+                    "key": key,
+                    "title": cit.get("title", ""),
+                    "authors": authors,
+                    "venue": cit.get("venue", ""),
+                })
+
+    if not unmapped:
+        return geo_data
+
+    if not api_key:
+        print(f"  No LLM API key — cannot fill {len(unmapped)} unmapped citations")
+        return geo_data
+
+    print(f"  Using LLM to infer geo for {len(unmapped)} unmapped citations...")
+
+    # Process in batches of 20
+    batch_size = 20
+    for batch_start in range(0, len(unmapped), batch_size):
+        batch = unmapped[batch_start:batch_start + batch_size]
+        entries = "\n".join(
+            f'{item["key"]}: "{item["title"]}" by {item["authors"]} ({item["venue"]})'
+            for item in batch
+        )
+
+        prompt = f"""For each academic paper below, infer the most likely country and institution of the first author.
+Use the author names, paper title, and venue as clues.
+Return ONLY a JSON object mapping each key to {{"country": "...", "institution": "..."}}.
+If you cannot determine, use {{"country": "Unknown", "institution": ""}}.
+Use standard country names (e.g., "China", "United States", "United Kingdom").
+
+Papers:
+{entries}
+
+Return ONLY the JSON object, no markdown or explanation."""
+
+        response = call_llm(prompt, api_key, provider, model)
+        if not response:
+            continue
+
+        # Parse JSON from response
+        try:
+            # Strip markdown code fences if present
+            text = response.strip()
+            if text.startswith("```"):
+                text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+                text = text.rsplit("```", 1)[0]
+            result = json.loads(text)
+
+            for key, val in result.items():
+                if isinstance(val, dict) and val.get("country") and val["country"] != "Unknown":
+                    geo_data[key] = {
+                        "country": val["country"],
+                        "institution": val.get("institution", ""),
+                    }
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f"  [WARN] Failed to parse LLM geo response: {e}")
+
+    return geo_data
+
+
 # ── Profile Scraping ──
 
 
@@ -928,7 +1002,24 @@ def scrape_scholar(
         # Step 5: Build geo data from profiles
         print(f"\n[5/5] Building geo data from Scholar profiles...")
         geo_data = build_geo_data(publications, scholar_profiles)
-        print(f"  Mapped {len(geo_data)} citations to countries/institutions")
+        total_cits_count = sum(len(p.get("citations", [])) for p in publications)
+        print(f"  Mapped {len(geo_data)}/{total_cits_count} citations from Scholar profiles")
+
+        # Fill unmapped citations using LLM
+        if len(geo_data) < total_cits_count:
+            llm_key = (os.environ.get("OPENAI_API_KEY", "")
+                       or os.environ.get("ANTHROPIC_API_KEY", "")
+                       or os.environ.get("GEMINI_API_KEY", ""))
+            if os.environ.get("OPENAI_API_KEY"):
+                llm_prov = "openai"
+            elif os.environ.get("ANTHROPIC_API_KEY"):
+                llm_prov = "claude"
+            else:
+                llm_prov = "gemini"
+            llm_mod = os.environ.get("LLM_MODEL", "") or os.environ.get("model", "")
+            geo_data = fill_unmapped_geo_llm(publications, geo_data, llm_key, llm_prov, llm_mod)
+
+        print(f"  Final: {len(geo_data)}/{total_cits_count} citations mapped")
 
         # Count countries
         countries = set()
@@ -1256,7 +1347,7 @@ def main():
         llm_provider = "claude"
     else:
         llm_provider = "gemini"
-    llm_model = os.environ.get("model", "") or os.environ.get("LLM_MODEL", "")
+    llm_model = os.environ.get("LLM_MODEL", "") or os.environ.get("model", "")
 
     print(f"\n[LLM] Classifying publications using {llm_provider}...")
     themes, summaries = classify_publications_llm(
