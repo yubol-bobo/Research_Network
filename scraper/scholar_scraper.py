@@ -383,6 +383,138 @@ def build_geo_data(publications: List[Dict], scholar_profiles: Dict[str, Dict]) 
     return geo_data
 
 
+def extract_affiliations_from_page(driver, url: str) -> str:
+    """
+    Visit a paper's link and extract the first ~2000 chars of text content.
+    This usually contains author names and their institutional affiliations.
+    """
+    if not url:
+        return ""
+
+    try:
+        driver.get(url)
+        random_delay(PAGE_LOAD_WAIT, 1.0)
+
+        if check_blocked(driver):
+            return ""
+
+        # Try to get page text — focus on the top portion which has affiliations
+        try:
+            body = driver.find_element(By.TAG_NAME, "body")
+            text = body.text[:3000]  # First 3000 chars usually covers title + authors + affiliations
+            return text
+        except Exception:
+            return ""
+
+    except Exception as e:
+        print(f"    [ERROR] Failed to load {url[:60]}: {e}")
+        return ""
+
+
+def parse_affiliation_from_text(text: str, api_key: str, provider: str, model: str) -> Dict[str, str]:
+    """
+    Use LLM to extract the first author's institution and country from paper page text.
+    """
+    if not text or not api_key:
+        return {}
+
+    prompt = f"""From this academic paper's page content, extract the FIRST AUTHOR's institution and country.
+Return ONLY a JSON object: {{"institution": "...", "country": "..."}}
+Use standard country names (e.g., "China", "United States", "United Kingdom").
+If unclear, return {{"institution": "", "country": "Unknown"}}.
+
+Page content (first portion):
+{text[:2000]}
+
+Return ONLY the JSON object, no markdown or explanation."""
+
+    response = call_llm(prompt, api_key, provider, model)
+    if not response:
+        return {}
+
+    try:
+        cleaned = response.strip()
+        if cleaned.startswith("```"):
+            cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned[3:]
+            cleaned = cleaned.rsplit("```", 1)[0]
+        result = json.loads(cleaned)
+        if isinstance(result, dict) and result.get("country") and result["country"] != "Unknown":
+            return result
+    except (json.JSONDecodeError, KeyError):
+        pass
+
+    return {}
+
+
+def fill_unmapped_from_papers(driver, publications: List[Dict], geo_data: Dict,
+                               api_key: str, provider: str, model: str) -> Dict:
+    """
+    For citations without geo data where no author has a Scholar profile,
+    visit the paper's link to extract affiliations from the page content.
+    """
+    unmapped = []
+    for pi, pub in enumerate(publications):
+        for ci, cit in enumerate(pub.get("citations", [])):
+            key = f"{pi}_{ci}"
+            if key not in geo_data and cit.get("link"):
+                has_scholar = any(a.get("scholarId") for a in cit.get("authorList", []))
+                if not has_scholar:
+                    unmapped.append((key, cit))
+
+    if not unmapped:
+        return geo_data
+
+    print(f"  Visiting {len(unmapped)} paper links to extract affiliations...")
+
+    for i, (key, cit) in enumerate(unmapped):
+        title_short = cit["title"][:50]
+        print(f"    [{i+1}/{len(unmapped)}] {title_short}...")
+
+        page_text = extract_affiliations_from_page(driver, cit["link"])
+        if not page_text:
+            print(f"      → no content")
+            continue
+
+        # First try regex-based extraction from page text
+        # Look for common affiliation patterns
+        country = ""
+        institution = ""
+
+        # Try to find institution from text directly
+        for line in page_text.split("\n"):
+            line_stripped = line.strip()
+            if not line_stripped or len(line_stripped) > 200:
+                continue
+            test_country = infer_country(line_stripped)
+            if test_country:
+                country = test_country
+                institution = clean_institution(line_stripped)
+                if institution == "—":
+                    institution = ""
+                break
+
+        if country:
+            geo_data[key] = {"country": country, "institution": institution}
+            print(f"      → {country} ({institution or 'no inst'})")
+        elif api_key:
+            # Fallback to LLM
+            result = parse_affiliation_from_text(page_text, api_key, provider, model)
+            if result.get("country") and result["country"] != "Unknown":
+                geo_data[key] = {
+                    "country": result["country"],
+                    "institution": result.get("institution", ""),
+                }
+                print(f"      → {result['country']} ({result.get('institution', '')}) [LLM]")
+            else:
+                print(f"      → could not determine")
+        else:
+            print(f"      → no pattern match, no LLM key")
+
+        random_delay(2.0, 1.0)  # Be polite to paper hosts
+
+    return geo_data
+
+
 def fill_unmapped_geo_llm(publications: List[Dict], geo_data: Dict, api_key: str, provider: str, model: str) -> Dict:
     """
     Use LLM to infer country/institution for citations that have no geo data.
@@ -1003,20 +1135,34 @@ def scrape_scholar(
         print(f"\n[5/5] Building geo data from Scholar profiles...")
         geo_data = build_geo_data(publications, scholar_profiles)
         total_cits_count = sum(len(p.get("citations", [])) for p in publications)
-        print(f"  Mapped {len(geo_data)}/{total_cits_count} citations from Scholar profiles")
 
-        # Fill unmapped citations using LLM
+        # Merge existing geo data for citations still unmapped (preserve previous LLM/paper results)
+        existing_geo = existing_data.get("geoData", {}) if existing_data else {}
+        for key, val in existing_geo.items():
+            if key not in geo_data and val.get("country"):
+                geo_data[key] = val
+
+        print(f"  Mapped {len(geo_data)}/{total_cits_count} citations from Scholar profiles + cache")
+
+        # Fill unmapped by visiting paper links (extract affiliations from page)
+        llm_key = (os.environ.get("OPENAI_API_KEY", "")
+                   or os.environ.get("ANTHROPIC_API_KEY", "")
+                   or os.environ.get("GEMINI_API_KEY", ""))
+        if os.environ.get("OPENAI_API_KEY"):
+            llm_prov = "openai"
+        elif os.environ.get("ANTHROPIC_API_KEY"):
+            llm_prov = "claude"
+        else:
+            llm_prov = "gemini"
+        llm_mod = os.environ.get("LLM_MODEL", "") or os.environ.get("model", "")
+
         if len(geo_data) < total_cits_count:
-            llm_key = (os.environ.get("OPENAI_API_KEY", "")
-                       or os.environ.get("ANTHROPIC_API_KEY", "")
-                       or os.environ.get("GEMINI_API_KEY", ""))
-            if os.environ.get("OPENAI_API_KEY"):
-                llm_prov = "openai"
-            elif os.environ.get("ANTHROPIC_API_KEY"):
-                llm_prov = "claude"
-            else:
-                llm_prov = "gemini"
-            llm_mod = os.environ.get("LLM_MODEL", "") or os.environ.get("model", "")
+            geo_data = fill_unmapped_from_papers(
+                driver, publications, geo_data, llm_key, llm_prov, llm_mod
+            )
+
+        # Last resort: LLM batch inference for any still unmapped
+        if len(geo_data) < total_cits_count:
             geo_data = fill_unmapped_geo_llm(publications, geo_data, llm_key, llm_prov, llm_mod)
 
         print(f"  Final: {len(geo_data)}/{total_cits_count} citations mapped")
