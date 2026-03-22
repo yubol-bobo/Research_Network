@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "exportedAt": "2026-03-20T08:43:29.267424",
+  "exportedAt": "2026-03-21T21:10:15.666974",
   "scholarId": "hgN6B6kAAAAJ",
   "researcher": "Yubo Li",
   "profileInfo": {
     "name": "Yubo Li",
     "affiliation": "Carnegie Mellon University",
-    "total_citations": 89,
+    "total_citations": 90,
     "h_index": 4,
     "i10_index": 2,
     "coauthors": [
@@ -362,6 +362,47 @@
               "name": "H Hassani",
               "isFirstAuthor": false,
               "scholarId": "M9V6y-0AAAAJ"
+            }
+          ]
+        },
+        {
+          "title": "GraphIF: Enhancing Multi-Turn Instruction Following for Large Language Models with Relation Graph Prompt",
+          "authors": "Z Li, C Lin, L Zheng, WD Wei, J Liang…",
+          "fullAuthors": "zhenhe li, Can Lin, L Zheng, WD Wei, junli liang",
+          "year": 2026,
+          "link": "https://ojs.aaai.org/index.php/AAAI/article/view/40457",
+          "venue": "Proceedings of the AAAI …, 2026",
+          "publisher": "ojs.aaai.org",
+          "authorProfiles": {
+            "Z Li": "6pJ8O2YAAAAJ",
+            "C Lin": "Bo15F4sAAAAJ",
+            "J Liang": "V0zkZ2cAAAAJ"
+          },
+          "authorList": [
+            {
+              "name": "Z Li",
+              "isFirstAuthor": true,
+              "scholarId": "6pJ8O2YAAAAJ"
+            },
+            {
+              "name": "C Lin",
+              "isFirstAuthor": false,
+              "scholarId": "Bo15F4sAAAAJ"
+            },
+            {
+              "name": "L Zheng",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "WD Wei",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "J Liang",
+              "isFirstAuthor": false,
+              "scholarId": "V0zkZ2cAAAAJ"
             }
           ]
         },
@@ -753,47 +794,6 @@
           ]
         },
         {
-          "title": "GraphIF: Enhancing Multi-Turn Instruction Following for Large Language Models with Relation Graph Prompt",
-          "authors": "Z Li, C Lin, L Zheng, WD Wei, J Liang…",
-          "fullAuthors": "zhenhe li, Can Lin, L Zheng, WD Wei, junli liang",
-          "year": 2025,
-          "link": "https://arxiv.org/abs/2511.10051",
-          "venue": "arXiv preprint arXiv …, 2025",
-          "publisher": "arxiv.org",
-          "authorProfiles": {
-            "Z Li": "6pJ8O2YAAAAJ",
-            "C Lin": "Bo15F4sAAAAJ",
-            "J Liang": "V0zkZ2cAAAAJ"
-          },
-          "authorList": [
-            {
-              "name": "Z Li",
-              "isFirstAuthor": true,
-              "scholarId": "6pJ8O2YAAAAJ"
-            },
-            {
-              "name": "C Lin",
-              "isFirstAuthor": false,
-              "scholarId": "Bo15F4sAAAAJ"
-            },
-            {
-              "name": "L Zheng",
-              "isFirstAuthor": false,
-              "scholarId": ""
-            },
-            {
-              "name": "WD Wei",
-              "isFirstAuthor": false,
-              "scholarId": ""
-            },
-            {
-              "name": "J Liang",
-              "isFirstAuthor": false,
-              "scholarId": "V0zkZ2cAAAAJ"
-            }
-          ]
-        },
-        {
           "title": "Alignment Without Understanding: A Message-and Conversation-Centered Approach to Understanding AI Sycophancy",
           "authors": "L Du, X Lyu, L Xie, B Feng",
           "fullAuthors": "L Du, XING LYU, Lezi Xie, Bo Feng",
@@ -826,6 +826,43 @@
               "name": "B Feng",
               "isFirstAuthor": false,
               "scholarId": "k8agezsAAAAJ"
+            }
+          ]
+        },
+        {
+          "title": "KnowPilot: Your Knowledge-Driven Copilot for Domain Tasks",
+          "authors": "Z Xi, Z Jiang, Y Bao, Z Xu, S Deng",
+          "fullAuthors": "Z Xi, Z Jiang, Y Bao, Z Xu, S Deng",
+          "year": 2026,
+          "link": "https://ojs.aaai.org/index.php/AAAI/article/view/42394",
+          "venue": "… of the AAAI Conference on Artificial …, 2026",
+          "publisher": "ojs.aaai.org",
+          "authorProfiles": {},
+          "authorList": [
+            {
+              "name": "Z Xi",
+              "isFirstAuthor": true,
+              "scholarId": ""
+            },
+            {
+              "name": "Z Jiang",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "Y Bao",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "Z Xu",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "S Deng",
+              "isFirstAuthor": false,
+              "scholarId": ""
             }
           ]
         },
@@ -1250,6 +1287,37 @@
           ]
         },
         {
+          "title": "The Path to Conversational AI Tutors: Integrating Tutoring Best Practices and Targeted Technologies to Produce Scalable AI Agents",
+          "authors": "K Vanacore, RS Baker, AH Closser…",
+          "fullAuthors": "Kirk Vanacore, Ryan Baker, Avery Harrison Closser",
+          "year": 2026,
+          "link": "https://arxiv.org/abs/2602.19303",
+          "venue": "arXiv preprint arXiv …, 2026",
+          "publisher": "arxiv.org",
+          "authorProfiles": {
+            "K Vanacore": "eTCfIVkAAAAJ",
+            "RS Baker": "hvs8PEoAAAAJ",
+            "AH Closser": "UPdBqkkAAAAJ"
+          },
+          "authorList": [
+            {
+              "name": "K Vanacore",
+              "isFirstAuthor": true,
+              "scholarId": "eTCfIVkAAAAJ"
+            },
+            {
+              "name": "RS Baker",
+              "isFirstAuthor": false,
+              "scholarId": "hvs8PEoAAAAJ"
+            },
+            {
+              "name": "AH Closser",
+              "isFirstAuthor": false,
+              "scholarId": "UPdBqkkAAAAJ"
+            }
+          ]
+        },
+        {
           "title": "InfoPO: Information-Driven Policy Optimization for User-Centric Agents",
           "authors": "F Kong, J Zhang, M Deng, C Wu, Y Luo…",
           "fullAuthors": "Fanqi Kong, Jiayi Zhang, Mingyi Deng, Chenglin Wu, Yuyu Luo",
@@ -1289,37 +1357,6 @@
               "name": "Y Luo",
               "isFirstAuthor": false,
               "scholarId": "FAjYJkQAAAAJ"
-            }
-          ]
-        },
-        {
-          "title": "The Path to Conversational AI Tutors: Integrating Tutoring Best Practices and Targeted Technologies to Produce Scalable AI Agents",
-          "authors": "K Vanacore, RS Baker, AH Closser…",
-          "fullAuthors": "Kirk Vanacore, Ryan Baker, Avery Harrison Closser",
-          "year": 2026,
-          "link": "https://arxiv.org/abs/2602.19303",
-          "venue": "arXiv preprint arXiv …, 2026",
-          "publisher": "arxiv.org",
-          "authorProfiles": {
-            "K Vanacore": "eTCfIVkAAAAJ",
-            "RS Baker": "hvs8PEoAAAAJ",
-            "AH Closser": "UPdBqkkAAAAJ"
-          },
-          "authorList": [
-            {
-              "name": "K Vanacore",
-              "isFirstAuthor": true,
-              "scholarId": "eTCfIVkAAAAJ"
-            },
-            {
-              "name": "RS Baker",
-              "isFirstAuthor": false,
-              "scholarId": "hvs8PEoAAAAJ"
-            },
-            {
-              "name": "AH Closser",
-              "isFirstAuthor": false,
-              "scholarId": "UPdBqkkAAAAJ"
             }
           ]
         },
@@ -1895,7 +1932,7 @@
           "authors": "K Govardhanan",
           "fullAuthors": "Karthik Govardhanan",
           "year": 2025,
-          "link": "https://ieeexplore.ieee.org/abstract/document/11318523/",
+          "link": "https://ieeexplore.ieee.org/abstract/document/11318523/?casa_token=JPFRAmy551wAAAAA:lmupMRfcOo6c_p5BX5MavY-panWYdfEXu9HF1lyHRpMh6T9aqysrAyEHZyJnmTXAK3dltgy5",
           "venue": "2025 9th SLAAI International Conference on …, 2025",
           "publisher": "ieeexplore.ieee.org",
           "authorProfiles": {
@@ -2026,6 +2063,33 @@
           ]
         },
         {
+          "title": "Mind the Agent: A Comprehensive Survey on Large Lan-guage Model-Based Agent Safety",
+          "authors": "G Li, TW Li, X Ning",
+          "fullAuthors": "G Li, TW Li, X Ning",
+          "year": 0,
+          "link": "https://openreview.net/forum?id=DHe0UXipKU",
+          "venue": "openreview.net",
+          "publisher": "",
+          "authorProfiles": {},
+          "authorList": [
+            {
+              "name": "G Li",
+              "isFirstAuthor": true,
+              "scholarId": ""
+            },
+            {
+              "name": "TW Li",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "X Ning",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            }
+          ]
+        },
+        {
           "title": "SOMA: Efficient Multi-turn LLM Serving via Small Language Model",
           "authors": "X Cheng, Q Wu, Z Zhou, X Zhou, T Derr, Y Dong",
           "fullAuthors": "Cheng Xueqi, Q Wu, Z Zhou, X Zhou, Tyler Derr, Yushun Dong",
@@ -2068,33 +2132,6 @@
               "name": "Y Dong",
               "isFirstAuthor": false,
               "scholarId": "_QUhuOMAAAAJ"
-            }
-          ]
-        },
-        {
-          "title": "Mind the Agent: A Comprehensive Survey on Large Lan-guage Model-Based Agent Safety",
-          "authors": "G Li, TW Li, X Ning",
-          "fullAuthors": "G Li, TW Li, X Ning",
-          "year": 0,
-          "link": "https://openreview.net/forum?id=DHe0UXipKU",
-          "venue": "openreview.net",
-          "publisher": "",
-          "authorProfiles": {},
-          "authorList": [
-            {
-              "name": "G Li",
-              "isFirstAuthor": true,
-              "scholarId": ""
-            },
-            {
-              "name": "TW Li",
-              "isFirstAuthor": false,
-              "scholarId": ""
-            },
-            {
-              "name": "X Ning",
-              "isFirstAuthor": false,
-              "scholarId": ""
             }
           ]
         },
@@ -2255,7 +2292,7 @@
     {
       "title": "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions",
       "articleUrl": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=hgN6B6kAAAAJ&citation_for_view=hgN6B6kAAAAJ:Se3iqnhoufwC",
-      "citationCount": 11,
+      "citationCount": 12,
       "year": 2025,
       "citedByUrl": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17444290637740509316",
       "authors": "Y Li, Y Miao, X Ding, R Krishnan, R Padman",
@@ -2311,8 +2348,8 @@
         },
         {
           "title": "Interaction Context Often Increases Sycophancy in LLMs",
-          "authors": "S Jain, C Park, MM Viana, A Wilson…",
-          "fullAuthors": "Shomik Jain, Charlotte Park, MM Viana, Ashia C. Wilson",
+          "authors": "S Jain, C Park, M Viana, A Wilson, D Calacci",
+          "fullAuthors": "Shomik Jain, Charlotte Park, M Viana, Ashia C. Wilson, Dana Calacci",
           "year": 2025,
           "link": "https://arxiv.org/abs/2509.12517",
           "venue": "arXiv preprint arXiv …, 2025",
@@ -2320,7 +2357,8 @@
           "authorProfiles": {
             "S Jain": "KXHdjLoAAAAJ",
             "C Park": "PFc9lJkAAAAJ",
-            "A Wilson": "sV61CtsAAAAJ"
+            "A Wilson": "sV61CtsAAAAJ",
+            "D Calacci": "g13Vo5oAAAAJ"
           },
           "authorList": [
             {
@@ -2334,7 +2372,7 @@
               "scholarId": "PFc9lJkAAAAJ"
             },
             {
-              "name": "MM Viana",
+              "name": "M Viana",
               "isFirstAuthor": false,
               "scholarId": ""
             },
@@ -2342,6 +2380,11 @@
               "name": "A Wilson",
               "isFirstAuthor": false,
               "scholarId": "sV61CtsAAAAJ"
+            },
+            {
+              "name": "D Calacci",
+              "isFirstAuthor": false,
+              "scholarId": "g13Vo5oAAAAJ"
             }
           ]
         },
@@ -2684,7 +2727,7 @@
           "authors": "S Yuan, L Guo, F Xu",
           "fullAuthors": "S Yuan, L Guo, F Xu",
           "year": 2025,
-          "link": "https://link.springer.com/article/10.1007/s11255-025-04878-4",
+          "link": "https://idp.springer.com/authorize/casa?redirect_uri=https://link.springer.com/article/10.1007/s11255-025-04878-4&casa_token=ZgdOP0h4D7MAAAAA:4VbS5aGhbLFfp4NQrc_Gf-GqSSGI05z_XxEkLMZJLIoZ8oXarNk7wtidHl61Kd3pX3KuW7JGBmtDhdoY",
           "venue": "International urology and nephrology, 2025",
           "publisher": "Springer",
           "authorProfiles": {},
@@ -2736,7 +2779,7 @@
           "authors": "T Deng, Y Xue, N Methakanjanasak",
           "fullAuthors": "T Deng, Y Xue, N Methakanjanasak",
           "year": 2025,
-          "link": "https://www.sciencedirect.com/science/article/pii/S000989812500628X",
+          "link": "https://www.sciencedirect.com/science/article/pii/S000989812500628X?casa_token=-3odloFecngAAAAA:BR0OAiazc9KwcqKrPHsKhGwNOznduD2p9_oMOIdZNss4W_Rji-IBgpoeetkHnvNHChFSnlRZfA",
           "venue": "Clinica Chimica Acta, 2025",
           "publisher": "Elsevier",
           "authorProfiles": {},
@@ -2845,6 +2888,38 @@
             },
             {
               "name": "R Padman",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            }
+          ]
+        },
+        {
+          "title": "Design and Implementation of an Early Detection System for Chronical Kidney Disease Using Machine Learning Techniques",
+          "authors": "MS Khan¹, R Srivastava, MO Khan, F Ahamad",
+          "fullAuthors": "MS Khan¹, R Srivastava, MO Khan, F Ahamad",
+          "year": 2026,
+          "link": "https://www.academia.edu/download/132038959/1449_pdf.pdf",
+          "venue": "2026",
+          "publisher": "academia.edu",
+          "authorProfiles": {},
+          "authorList": [
+            {
+              "name": "MS Khan¹",
+              "isFirstAuthor": true,
+              "scholarId": ""
+            },
+            {
+              "name": "R Srivastava",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "MO Khan",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "F Ahamad",
               "isFirstAuthor": false,
               "scholarId": ""
             }
@@ -3068,6 +3143,48 @@
           ]
         },
         {
+          "title": "Recipes for Agents: Understanding Skills and Their Open Questions",
+          "authors": "H Xing, H Zhuang, X Zhao, Y Huang, Z Tang, X Zhang",
+          "fullAuthors": "H Xing, H Zhuang, X Zhao, Y Huang, Z Tang, X Zhang",
+          "year": 0,
+          "link": "https://www.researchgate.net/profile/Hanwen-Xing-2/publication/402491994_Recipes_for_Agents_Understanding_Skills_and_Their_Open_Questions/links/69b8e8ee8c53216c011d6a61/Recipes-for-Agents-Understanding-Skills-and-Their-Open-Questions.pdf",
+          "venue": "researchgate.net",
+          "publisher": "",
+          "authorProfiles": {},
+          "authorList": [
+            {
+              "name": "H Xing",
+              "isFirstAuthor": true,
+              "scholarId": ""
+            },
+            {
+              "name": "H Zhuang",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "X Zhao",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "Y Huang",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "Z Tang",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            },
+            {
+              "name": "X Zhang",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            }
+          ]
+        },
+        {
           "title": "A Competency-Based Evaluation Framework for EHR-Integrated Clinical AI Agents",
           "authors": "D Dasa",
           "fullAuthors": "David Dasa",
@@ -3099,7 +3216,7 @@
         {
           "title": "AI's Social Forcefield: Reshaping Distributed Cognition in Human-AI Teams",
           "authors": "C Riedl, S Savage, J Zvelebilova",
-          "fullAuthors": "Riedl, Christoph, Savage, Saiph, Zvelebilova, Josie",
+          "fullAuthors": "Christoph Riedl, Saiph Savage, J Zvelebilova",
           "year": 2407,
           "link": "https://arxiv.org/abs/2407.17489",
           "venue": "arXiv preprint arXiv:2407.17489, 2024",
@@ -3107,7 +3224,24 @@
           "authorProfiles": {
             "C Riedl": "9yFBqIgAAAAJ",
             "S Savage": "GHGHYZAAAAAJ"
-          }
+          },
+          "authorList": [
+            {
+              "name": "C Riedl",
+              "isFirstAuthor": true,
+              "scholarId": "9yFBqIgAAAAJ"
+            },
+            {
+              "name": "S Savage",
+              "isFirstAuthor": false,
+              "scholarId": "GHGHYZAAAAAJ"
+            },
+            {
+              "name": "J Zvelebilova",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            }
+          ]
         },
         {
           "title": "E-UHR: An Ethical Uncertainty Handling and Response Framework for Embodied AI Co-Habitats",
@@ -3119,7 +3253,14 @@
           "publisher": "openreview.net",
           "authorProfiles": {
             "K Srikumar": "LVpeXcQAAAAJ"
-          }
+          },
+          "authorList": [
+            {
+              "name": "K Srikumar",
+              "isFirstAuthor": true,
+              "scholarId": "LVpeXcQAAAAJ"
+            }
+          ]
         }
       ]
     },
@@ -3134,7 +3275,7 @@
         {
           "title": "Consistency of Large Reasoning Models Under Multi-Turn Attacks",
           "authors": "Y Li, R Krishnan, R Padman",
-          "fullAuthors": "Li, Yubo, Krishnan, Ramayya, Padman, Rema",
+          "fullAuthors": "Yubo Li, Ramayya Krishnan, R Padman",
           "year": 2602,
           "link": "https://arxiv.org/abs/2602.13093",
           "venue": "arXiv preprint arXiv:2602.13093, 2026",
@@ -3142,7 +3283,24 @@
           "authorProfiles": {
             "Y Li": "hgN6B6kAAAAJ",
             "R Krishnan": "AkvAUzkAAAAJ"
-          }
+          },
+          "authorList": [
+            {
+              "name": "Y Li",
+              "isFirstAuthor": true,
+              "scholarId": "hgN6B6kAAAAJ"
+            },
+            {
+              "name": "R Krishnan",
+              "isFirstAuthor": false,
+              "scholarId": "AkvAUzkAAAAJ"
+            },
+            {
+              "name": "R Padman",
+              "isFirstAuthor": false,
+              "scholarId": ""
+            }
+          ]
         }
       ]
     },
@@ -3186,13 +3344,13 @@
   "scholarProfiles": {
     "dKgIWGsAAAAJ": {
       "fullName": "Zihao Yi",
-      "totalCitations": 245,
+      "totalCitations": 247,
       "institution": "Sun Yat-Sen University, Tencent Hunyuan",
       "scholarId": "dKgIWGsAAAAJ"
     },
     "SOlZ4KIAAAAJ": {
       "fullName": "Zhe Xu",
-      "totalCitations": 343,
+      "totalCitations": 344,
       "institution": "Sun Yat-sen University",
       "scholarId": "SOlZ4KIAAAAJ"
     },
@@ -3204,79 +3362,79 @@
     },
     "8j8AfF0AAAAJ": {
       "fullName": "Qiguang Chen",
-      "totalCitations": 2421,
+      "totalCitations": 2432,
       "institution": "Harbin Institute of Technology",
       "scholarId": "8j8AfF0AAAAJ"
     },
     "Wifx6goAAAAJ": {
       "fullName": "Xiachong Feng",
-      "totalCitations": 1397,
+      "totalCitations": 1400,
       "institution": "The University of Hong Kong (HKU)",
       "scholarId": "Wifx6goAAAAJ"
     },
     "uMAvnHkAAAAJ": {
       "fullName": "Yang Wu",
-      "totalCitations": 780,
+      "totalCitations": 781,
       "institution": "Huawei",
       "scholarId": "uMAvnHkAAAAJ"
     },
     "_rY0R3EAAAAJ": {
       "fullName": "Yongheng Zhang",
-      "totalCitations": 294,
+      "totalCitations": 296,
       "institution": "Central South University | Tencent Youtu Lab",
       "scholarId": "_rY0R3EAAAAJ"
     },
     "z6bOk-AAAAAJ": {
       "fullName": "Zheng-Xin Yong",
-      "totalCitations": 8405,
+      "totalCitations": 8414,
       "institution": "Brown University",
       "scholarId": "z6bOk-AAAAAJ"
     },
     "v2cMiCAAAAAJ": {
       "fullName": "Beyza Ermiş",
-      "totalCitations": 1591,
+      "totalCitations": 1595,
       "institution": "Cohere Labs",
       "scholarId": "v2cMiCAAAAAJ"
     },
     "NZqs0toAAAAJ": {
       "fullName": "Marzieh Fadaee",
-      "totalCitations": 3969,
+      "totalCitations": 3983,
       "institution": "Head of Cohere Labs",
       "scholarId": "NZqs0toAAAAJ"
     },
     "hs6pGXoAAAAJ": {
       "fullName": "Stephen H. Bach",
-      "totalCitations": 11792,
+      "totalCitations": 11806,
       "institution": "Assistant Professor of Computer Science, Brown University",
       "scholarId": "hs6pGXoAAAAJ"
     },
     "QWLgcogAAAAJ": {
       "fullName": "Jiayuan Zhu",
-      "totalCitations": 927,
+      "totalCitations": 933,
       "institution": "University of Oxford",
       "scholarId": "QWLgcogAAAAJ"
     },
     "3ajAndQAAAAJ": {
       "fullName": "Jiazhen Pan",
-      "totalCitations": 905,
+      "totalCitations": 907,
       "institution": "Technical University of Munich",
       "scholarId": "3ajAndQAAAAJ"
     },
     "SibDXFQAAAAJ": {
       "fullName": "yuyuan liu",
-      "totalCitations": 1545,
+      "totalCitations": 1548,
       "institution": "University of Oxford",
       "scholarId": "SibDXFQAAAAJ"
     },
     "AcbVE3UAAAAJ": {
       "fullName": "Fenglin Liu",
-      "totalCitations": 5098,
+      "totalCitations": 5106,
       "institution": "University of Oxford",
       "scholarId": "AcbVE3UAAAAJ"
     },
     "FZSKG-AAAAAJ": {
       "fullName": "Junde Wu",
-      "totalCitations": 4107,
+      "totalCitations": 4127,
       "institution": "University of Oxford",
       "scholarId": "FZSKG-AAAAAJ"
     },
@@ -3288,157 +3446,175 @@
     },
     "fJJTntwAAAAJ": {
       "fullName": "Jakub Macina",
-      "totalCitations": 466,
+      "totalCitations": 468,
       "institution": "ETH Zurich",
       "scholarId": "fJJTntwAAAAJ"
     },
     "n6wJfqUAAAAJ": {
       "fullName": "Nico Daheim",
-      "totalCitations": 745,
+      "totalCitations": 747,
       "institution": "TU Darmstadt, ETH Zürich, ELLIS",
       "scholarId": "n6wJfqUAAAAJ"
     },
     "hgN6B6kAAAAJ": {
       "fullName": "Yubo Li",
-      "totalCitations": 89,
+      "totalCitations": 90,
       "institution": "Carnegie Mellon University",
       "scholarId": "hgN6B6kAAAAJ"
     },
     "iSQtG3QAAAAJ": {
       "fullName": "Yidi Miao",
-      "totalCitations": 77,
+      "totalCitations": 78,
       "institution": "Carnegie Mellon University",
       "scholarId": "iSQtG3QAAAAJ"
     },
     "o9EmMaEAAAAJ": {
       "fullName": "Xueying Ding",
-      "totalCitations": 679,
+      "totalCitations": 681,
       "institution": "Ph.D. Student, Heinz College, Carnegie Mellon University",
       "scholarId": "o9EmMaEAAAAJ"
     },
     "AkvAUzkAAAAJ": {
       "fullName": "Ramayya Krishnan",
-      "totalCitations": 11087,
+      "totalCitations": 11090,
       "institution": "Carnegie Mellon University",
       "scholarId": "AkvAUzkAAAAJ"
     },
     "e_no1Q0AAAAJ": {
       "fullName": "Erhu Feng",
-      "totalCitations": 308,
+      "totalCitations": 309,
       "institution": "SHANG HAI JIAO TONG UNIVERSITY",
       "scholarId": "e_no1Q0AAAAJ"
     },
     "v-Snl_EAAAAJ": {
       "fullName": "Le Chen",
-      "totalCitations": 55,
+      "totalCitations": 56,
       "institution": "Shanghai Jiao Tong University",
       "scholarId": "v-Snl_EAAAAJ"
     },
     "NSzZlzoAAAAJ": {
       "fullName": "Dong Du（杜冬冬）",
-      "totalCitations": 1456,
+      "totalCitations": 1461,
       "institution": "Shanghai Jiao Tong University",
       "scholarId": "NSzZlzoAAAAJ"
     },
     "3K09heEAAAAJ": {
       "fullName": "Kwan Ho Ryan Chan",
-      "totalCitations": 740,
+      "totalCitations": 741,
       "institution": "University of Pennsylvania",
       "scholarId": "3K09heEAAAAJ"
     },
     "4RG4GuMAAAAJ": {
       "fullName": "Yuyan Ge",
-      "totalCitations": 136,
+      "totalCitations": 137,
       "institution": "University of Pennsylvania",
       "scholarId": "4RG4GuMAAAAJ"
     },
     "aGvH4yMAAAAJ": {
       "fullName": "Edgar Dobriban",
-      "totalCitations": 5953,
+      "totalCitations": 5959,
       "institution": "Statistics & Computer Science, University of Pennsylvania",
       "scholarId": "aGvH4yMAAAAJ"
     },
     "M9V6y-0AAAAJ": {
       "fullName": "Hamed Hassani",
-      "totalCitations": 13787,
+      "totalCitations": 13808,
       "institution": "Google & University of Pennsylvania (EE, CS, Stat)",
       "scholarId": "M9V6y-0AAAAJ"
     },
+    "6pJ8O2YAAAAJ": {
+      "fullName": "zhenhe li",
+      "totalCitations": 2,
+      "institution": "University of Science and Technology of China",
+      "scholarId": "6pJ8O2YAAAAJ"
+    },
+    "Bo15F4sAAAAJ": {
+      "fullName": "Can Lin",
+      "totalCitations": 3,
+      "institution": "Master's Student, University of Science and Technology of China",
+      "scholarId": "Bo15F4sAAAAJ"
+    },
+    "V0zkZ2cAAAAJ": {
+      "fullName": "junli liang",
+      "totalCitations": 46,
+      "institution": "ustc",
+      "scholarId": "V0zkZ2cAAAAJ"
+    },
     "r1gJsmAAAAAJ": {
       "fullName": "Mark Dras",
-      "totalCitations": 4832,
+      "totalCitations": 4833,
       "institution": "Professor of Computing, Macquarie University",
       "scholarId": "r1gJsmAAAAAJ"
     },
     "61Ou1P8AAAAJ": {
       "fullName": "Usman Naseem",
-      "totalCitations": 5190,
+      "totalCitations": 5197,
       "institution": "Lecturer (Asst. Prof.) @Macquarie University",
       "scholarId": "61Ou1P8AAAAJ"
     },
     "Lt9LpLMAAAAJ": {
       "fullName": "Sinead Williamson",
-      "totalCitations": 1545,
+      "totalCitations": 1547,
       "institution": "Apple Machine Learning Research",
       "scholarId": "Lt9LpLMAAAAJ"
     },
     "MnDZag8AAAAJ": {
       "fullName": "Adam Goliński",
-      "totalCitations": 944,
+      "totalCitations": 949,
       "institution": "Apple",
       "scholarId": "MnDZag8AAAAJ"
     },
     "EODL2AIAAAAJ": {
       "fullName": "Ning Miao",
-      "totalCitations": 743,
+      "totalCitations": 744,
       "institution": "Department of Data Science, City University of Hong Kong",
       "scholarId": "EODL2AIAAAAJ"
     },
     "pjcYzvYAAAAJ": {
       "fullName": "Chengming Xu",
-      "totalCitations": 1636,
+      "totalCitations": 1644,
       "institution": "Tencent",
       "scholarId": "pjcYzvYAAAAJ"
     },
     "2hA4X9wAAAAJ": {
       "fullName": "Jiangning Zhang (张江宁)",
-      "totalCitations": 6494,
+      "totalCitations": 6561,
       "institution": "Youtu Lab, Tencent | Zhejiang University",
       "scholarId": "2hA4X9wAAAAJ"
     },
     "BizedOAAAAAJ": {
       "fullName": "Mukai Li",
-      "totalCitations": 3428,
+      "totalCitations": 3445,
       "institution": "The University of Hong Kong",
       "scholarId": "BizedOAAAAAJ"
     },
     "7gxp6NkAAAAJ": {
       "fullName": "Fengyuan Liu",
-      "totalCitations": 227,
+      "totalCitations": 232,
       "institution": "The University of Hong Kong",
       "scholarId": "7gxp6NkAAAAJ"
     },
     "VtK5lwUAAAAJ": {
       "fullName": "Xiang Liu",
-      "totalCitations": 971,
+      "totalCitations": 973,
       "institution": "HKUST(GZ)",
       "scholarId": "VtK5lwUAAAAJ"
     },
     "cZVeQVcAAAAJ": {
       "fullName": "Hong Chen",
-      "totalCitations": 121,
+      "totalCitations": 124,
       "institution": "The Hong Kong University of Science and Technology (Guangzhou)",
       "scholarId": "cZVeQVcAAAAJ"
     },
     "dbBKbXoAAAAJ": {
       "fullName": "Xuming Hu",
-      "totalCitations": 5068,
+      "totalCitations": 5088,
       "institution": "Assistant Professor, HKUST(GZ) / HKUST",
       "scholarId": "dbBKbXoAAAAJ"
     },
     "v4rX24EAAAAJ": {
       "fullName": "Xiaowen Chu",
-      "totalCitations": 17386,
+      "totalCitations": 17401,
       "institution": "IEEE Fellow, Professor, Data Science and Analytics & Artificial Intelligence, HKUST(GZ)",
       "scholarId": "v4rX24EAAAAJ"
     },
@@ -3462,31 +3638,31 @@
     },
     "zxzZAi0AAAAJ": {
       "fullName": "Aylin Caliskan",
-      "totalCitations": 9575,
+      "totalCitations": 9584,
       "institution": "Associate Professor, University of Washington",
       "scholarId": "zxzZAi0AAAAJ"
     },
     "5q_BkVAAAAAJ": {
       "fullName": "Tanushree Mitra",
-      "totalCitations": 4274,
+      "totalCitations": 4276,
       "institution": "Associate Professor, Information School, University of Washington",
       "scholarId": "5q_BkVAAAAAJ"
     },
     "7n4yK_0AAAAJ": {
       "fullName": "Gian Maria Campedelli",
-      "totalCitations": 1429,
+      "totalCitations": 1430,
       "institution": "University of Trento & Fondazione Bruno Kessler",
       "scholarId": "7n4yK_0AAAAJ"
     },
     "vM8t8zwAAAAJ": {
       "fullName": "Sara Rosenthal",
-      "totalCitations": 7964,
+      "totalCitations": 7965,
       "institution": "IBM Research",
       "scholarId": "vM8t8zwAAAAJ"
     },
     "FNu3KVgAAAAJ": {
       "fullName": "Yannis Katsis",
-      "totalCitations": 2790,
+      "totalCitations": 2794,
       "institution": "Senior Research Scientist, IBM Research Almaden",
       "scholarId": "FNu3KVgAAAAJ"
     },
@@ -3504,51 +3680,33 @@
     },
     "1JhvxSEAAAAJ": {
       "fullName": "Lucian Popa",
-      "totalCitations": 9731,
+      "totalCitations": 9733,
       "institution": "IBM Almaden Research Center",
       "scholarId": "1JhvxSEAAAAJ"
     },
     "2E9Drq8AAAAJ": {
       "fullName": "Dongcheng Zhao",
-      "totalCitations": 1452,
+      "totalCitations": 1460,
       "institution": "CAS Center for Excellence in Brain Science and Intelligence Technology",
       "scholarId": "2E9Drq8AAAAJ"
     },
     "Sv-WdBkAAAAJ": {
       "fullName": "Guobin Shen",
-      "totalCitations": 874,
+      "totalCitations": 881,
       "institution": "Institute of Automation, Chinese Academy of Sciences",
       "scholarId": "Sv-WdBkAAAAJ"
     },
     "CwVnKnQAAAAJ": {
       "fullName": "Xiang He",
-      "totalCitations": 5911,
+      "totalCitations": 5914,
       "institution": "Guangdong Provincial Institute of Public Health",
       "scholarId": "CwVnKnQAAAAJ"
     },
     "_-3Hn-EAAAAJ": {
       "fullName": "feifei zhao",
-      "totalCitations": 836,
+      "totalCitations": 837,
       "institution": "Institute of Automation, Chinese Academy of Sciences",
       "scholarId": "_-3Hn-EAAAAJ"
-    },
-    "6pJ8O2YAAAAJ": {
-      "fullName": "zhenhe li",
-      "totalCitations": 2,
-      "institution": "University of Science and Technology of China",
-      "scholarId": "6pJ8O2YAAAAJ"
-    },
-    "Bo15F4sAAAAJ": {
-      "fullName": "Can Lin",
-      "totalCitations": 3,
-      "institution": "Master's Student, University of Science and Technology of China",
-      "scholarId": "Bo15F4sAAAAJ"
-    },
-    "V0zkZ2cAAAAJ": {
-      "fullName": "junli liang",
-      "totalCitations": 45,
-      "institution": "ustc",
-      "scholarId": "V0zkZ2cAAAAJ"
     },
     "Ydvzmb0AAAAJ": {
       "fullName": "XING LYU",
@@ -3564,7 +3722,7 @@
     },
     "k8agezsAAAAJ": {
       "fullName": "Bo Feng",
-      "totalCitations": 4896,
+      "totalCitations": 4898,
       "institution": "Professor of Communication, University of California, Davis",
       "scholarId": "k8agezsAAAAJ"
     },
@@ -3582,7 +3740,7 @@
     },
     "Zb5wT08AAAAJ": {
       "fullName": "Rong Xiao",
-      "totalCitations": 4546,
+      "totalCitations": 4548,
       "institution": "Microsoft Redmond",
       "scholarId": "Zb5wT08AAAAJ"
     },
@@ -3618,7 +3776,7 @@
     },
     "Mp1DKkYAAAAJ": {
       "fullName": "Zhenyu Zhang",
-      "totalCitations": 1278,
+      "totalCitations": 1280,
       "institution": "Associate Professor, Beijing Institute of Technology",
       "scholarId": "Mp1DKkYAAAAJ"
     },
@@ -3630,13 +3788,13 @@
     },
     "moBC7TkAAAAJ": {
       "fullName": "Quan Liu",
-      "totalCitations": 1658,
+      "totalCitations": 1661,
       "institution": "Accenture",
       "scholarId": "moBC7TkAAAAJ"
     },
     "QSYVbj8AAAAJ": {
       "fullName": "Zhenting Wang",
-      "totalCitations": 2210,
+      "totalCitations": 2226,
       "institution": "Accenture; Rutgers University",
       "scholarId": "QSYVbj8AAAAJ"
     },
@@ -3666,7 +3824,7 @@
     },
     "brfcskMAAAAJ": {
       "fullName": "Hui Liu",
-      "totalCitations": 1116,
+      "totalCitations": 1119,
       "institution": "Microsoft.com",
       "scholarId": "brfcskMAAAAJ"
     },
@@ -3690,19 +3848,19 @@
     },
     "dMwdOPkAAAAJ": {
       "fullName": "Bowen Jin",
-      "totalCitations": 3093,
+      "totalCitations": 3100,
       "institution": "University of Illinois, Urbana Champaign",
       "scholarId": "dMwdOPkAAAAJ"
     },
     "u-zOiMUAAAAJ": {
       "fullName": "Wonbin Kweon",
-      "totalCitations": 496,
+      "totalCitations": 502,
       "institution": "University of Illinois Urbana-Champaign",
       "scholarId": "u-zOiMUAAAAJ"
     },
     "fB0K-fMAAAAJ": {
       "fullName": "SeongKu Kang",
-      "totalCitations": 1402,
+      "totalCitations": 1408,
       "institution": "Korea University",
       "scholarId": "fB0K-fMAAAAJ"
     },
@@ -3726,19 +3884,19 @@
     },
     "syE1zLsAAAAJ": {
       "fullName": "Amr Mohamed",
-      "totalCitations": 13567,
+      "totalCitations": 13573,
       "institution": "Professor and Head of CSE department, Qatar University, senior member IEEE",
       "scholarId": "syE1zLsAAAAJ"
     },
     "EcBibPkAAAAJ": {
       "fullName": "Guokan Shang",
-      "totalCitations": 572,
+      "totalCitations": 574,
       "institution": "MBZUAI-IFM Paris Lab",
       "scholarId": "EcBibPkAAAAJ"
     },
     "aWGJYcMAAAAJ": {
       "fullName": "Michalis Vazirgiannis",
-      "totalCitations": 24033,
+      "totalCitations": 24045,
       "institution": "Distinguished Prof, Ecole Polytechnique & Affiliate Prof. at MBZUAI",
       "scholarId": "aWGJYcMAAAAJ"
     },
@@ -3762,7 +3920,7 @@
     },
     "5LXTi40AAAAJ": {
       "fullName": "Alexander Lyzhov",
-      "totalCitations": 873,
+      "totalCitations": 874,
       "institution": "Unknown affiliation",
       "scholarId": "5LXTi40AAAAJ"
     },
@@ -3772,6 +3930,24 @@
       "institution": "Doctor of Philosophy, Pennsylvania State University",
       "scholarId": "yKGcPP0AAAAJ"
     },
+    "eTCfIVkAAAAJ": {
+      "fullName": "Kirk Vanacore",
+      "totalCitations": 209,
+      "institution": "Cornell University",
+      "scholarId": "eTCfIVkAAAAJ"
+    },
+    "hvs8PEoAAAAJ": {
+      "fullName": "Ryan Baker",
+      "totalCitations": 40779,
+      "institution": "Adelaide University",
+      "scholarId": "hvs8PEoAAAAJ"
+    },
+    "UPdBqkkAAAAJ": {
+      "fullName": "Avery Harrison Closser",
+      "totalCitations": 380,
+      "institution": "Assistant Professor of Emerging Technologies and Learning, University of Florida",
+      "scholarId": "UPdBqkkAAAAJ"
+    },
     "Aj13PkAAAAAJ": {
       "fullName": "Fanqi Kong",
       "totalCitations": 32,
@@ -3780,7 +3956,7 @@
     },
     "VATBrqgAAAAJ": {
       "fullName": "Jiayi Zhang",
-      "totalCitations": 1235,
+      "totalCitations": 1238,
       "institution": "Hong Kong University of Science and Technology (GuangZhou)",
       "scholarId": "VATBrqgAAAAJ"
     },
@@ -3792,33 +3968,15 @@
     },
     "nYIj020AAAAJ": {
       "fullName": "Chenglin Wu",
-      "totalCitations": 4186,
+      "totalCitations": 4199,
       "institution": "Founder & CEO, DeepWisdom",
       "scholarId": "nYIj020AAAAJ"
     },
     "FAjYJkQAAAAJ": {
       "fullName": "Yuyu Luo",
-      "totalCitations": 4643,
+      "totalCitations": 4654,
       "institution": "Assistant Professor, HKUST (Guangzhou) / HKUST",
       "scholarId": "FAjYJkQAAAAJ"
-    },
-    "eTCfIVkAAAAJ": {
-      "fullName": "Kirk Vanacore",
-      "totalCitations": 208,
-      "institution": "Cornell University",
-      "scholarId": "eTCfIVkAAAAJ"
-    },
-    "hvs8PEoAAAAJ": {
-      "fullName": "Ryan Baker",
-      "totalCitations": 40756,
-      "institution": "Adelaide University",
-      "scholarId": "hvs8PEoAAAAJ"
-    },
-    "UPdBqkkAAAAJ": {
-      "fullName": "Avery Harrison Closser",
-      "totalCitations": 380,
-      "institution": "Assistant Professor of Emerging Technologies and Learning, University of Florida",
-      "scholarId": "UPdBqkkAAAAJ"
     },
     "aYC2IeEAAAAJ": {
       "fullName": "Shouang Wei（魏首昂）",
@@ -3828,19 +3986,19 @@
     },
     "5dlWxdUAAAAJ": {
       "fullName": "Min Zhang",
-      "totalCitations": 1133,
+      "totalCitations": 1142,
       "institution": "East China Normal University",
       "scholarId": "5dlWxdUAAAAJ"
     },
     "qtMWgYsAAAAJ": {
       "fullName": "Xin Lin",
-      "totalCitations": 3016,
+      "totalCitations": 3025,
       "institution": "east china normal university",
       "scholarId": "qtMWgYsAAAAJ"
     },
     "HbVihN8AAAAJ": {
       "fullName": "Bo Jiang（江波）",
-      "totalCitations": 1222,
+      "totalCitations": 1225,
       "institution": "East China Normal University",
       "scholarId": "HbVihN8AAAAJ"
     },
@@ -3852,19 +4010,19 @@
     },
     "oVYZ904AAAAJ": {
       "fullName": "Zonghai Yao",
-      "totalCitations": 859,
+      "totalCitations": 861,
       "institution": "Umass Amherst",
       "scholarId": "oVYZ904AAAAJ"
     },
     "RXXwBWIAAAAJ": {
       "fullName": "Zhichao Yang",
-      "totalCitations": 1223,
+      "totalCitations": 1225,
       "institution": "Optum AI",
       "scholarId": "RXXwBWIAAAAJ"
     },
     "TyXe64wAAAAJ": {
       "fullName": "hong yu",
-      "totalCitations": 15368,
+      "totalCitations": 15382,
       "institution": "Professor, Director, CHORDS; Professor, Miner school of computer & information sciences, UMass",
       "scholarId": "TyXe64wAAAAJ"
     },
@@ -3876,13 +4034,13 @@
     },
     "RPK3oQgAAAAJ": {
       "fullName": "Tianyu Guo",
-      "totalCitations": 3818,
+      "totalCitations": 3824,
       "institution": "Huawei Noah's Ark Lab",
       "scholarId": "RPK3oQgAAAAJ"
     },
     "HgapY3sAAAAJ": {
       "fullName": "Hao Liang",
-      "totalCitations": 695,
+      "totalCitations": 697,
       "institution": "Peking University",
       "scholarId": "HgapY3sAAAAJ"
     },
@@ -3900,7 +4058,7 @@
     },
     "Uqpl3zwAAAAJ": {
       "fullName": "Amin Rakhsha",
-      "totalCitations": 296,
+      "totalCitations": 297,
       "institution": "Ph.D. Student at University of Toronto and Vector Institute",
       "scholarId": "Uqpl3zwAAAAJ"
     },
@@ -3912,7 +4070,7 @@
     },
     "c-PYVTgAAAAJ": {
       "fullName": "Pietro Mazzaglia",
-      "totalCitations": 503,
+      "totalCitations": 504,
       "institution": "Qualcomm AI Research",
       "scholarId": "c-PYVTgAAAAJ"
     },
@@ -3930,25 +4088,25 @@
     },
     "Ms678voAAAAJ": {
       "fullName": "Kaisong Song",
-      "totalCitations": 992,
+      "totalCitations": 995,
       "institution": "DAMO academy, Alibaba Group",
       "scholarId": "Ms678voAAAAJ"
     },
     "GNkq4n8AAAAJ": {
       "fullName": "Zhuoren Jiang",
-      "totalCitations": 1427,
+      "totalCitations": 1428,
       "institution": "Zhejiang University",
       "scholarId": "GNkq4n8AAAAJ"
     },
     "9Kh0clsAAAAJ": {
       "fullName": "junjie cao",
-      "totalCitations": 138,
+      "totalCitations": 139,
       "institution": "阿里巴巴",
       "scholarId": "9Kh0clsAAAAJ"
     },
     "DvAsN5QAAAAJ": {
       "fullName": "Jun Lin",
-      "totalCitations": 337,
+      "totalCitations": 339,
       "institution": "DAMO academy, Alibaba Group",
       "scholarId": "DvAsN5QAAAAJ"
     },
@@ -3972,13 +4130,13 @@
     },
     "huQ_Ig8AAAAJ": {
       "fullName": "Yongqiang Chen",
-      "totalCitations": 1103,
+      "totalCitations": 1108,
       "institution": "The Chinese University of Hong Kong",
       "scholarId": "huQ_Ig8AAAAJ"
     },
     "lwbnLDYAAAAJ": {
       "fullName": "Mufei Li",
-      "totalCitations": 3677,
+      "totalCitations": 3687,
       "institution": "Georgia Institute of Technology",
       "scholarId": "lwbnLDYAAAAJ"
     },
@@ -4002,43 +4160,43 @@
     },
     "HPQAvPoAAAAJ": {
       "fullName": "Gunnar Stevens",
-      "totalCitations": 5380,
+      "totalCitations": 5383,
       "institution": "University of Siegen",
       "scholarId": "HPQAvPoAAAAJ"
     },
     "su3ZANoAAAAJ": {
       "fullName": "Delong Korus-Du",
-      "totalCitations": 150,
+      "totalCitations": 152,
       "institution": "University of Siegen",
       "scholarId": "su3ZANoAAAAJ"
     },
     "YfOQdDMAAAAJ": {
       "fullName": "Alexander Boden",
-      "totalCitations": 2234,
+      "totalCitations": 2235,
       "institution": "Hochschule Bonn-Rhein-Sieg",
       "scholarId": "YfOQdDMAAAAJ"
     },
     "3_Ua2scAAAAJ": {
       "fullName": "Peter Tolmie",
-      "totalCitations": 6522,
+      "totalCitations": 6521,
       "institution": "Principal Research Scientist, Wirtschaftsinformatik und Neue Medien, Universität Siegen",
       "scholarId": "3_Ua2scAAAAJ"
     },
     "hY8aLqAAAAAJ": {
       "fullName": "Cheng Xueqi",
-      "totalCitations": 38463,
+      "totalCitations": 38502,
       "institution": "Chinese Academy of Sciences",
       "scholarId": "hY8aLqAAAAAJ"
     },
     "et6IhFcAAAAJ": {
       "fullName": "Tyler Derr",
-      "totalCitations": 4698,
+      "totalCitations": 4705,
       "institution": "Vanderbilt University",
       "scholarId": "et6IhFcAAAAJ"
     },
     "_QUhuOMAAAAJ": {
       "fullName": "Yushun Dong",
-      "totalCitations": 2205,
+      "totalCitations": 2212,
       "institution": "Assistant Professor, Department of Computer Science, Florida State University",
       "scholarId": "_QUhuOMAAAAJ"
     },
@@ -4050,19 +4208,19 @@
     },
     "d7r0R14AAAAJ": {
       "fullName": "John Lalor",
-      "totalCitations": 1073,
+      "totalCitations": 1078,
       "institution": "Assistant Professor, University of Notre Dame",
       "scholarId": "d7r0R14AAAAJ"
     },
     "ErFs9noAAAAJ": {
       "fullName": "Nicolas PRAT",
-      "totalCitations": 2065,
+      "totalCitations": 2066,
       "institution": "Associate Professor of Information Systems, ESSEC Business School",
       "scholarId": "ErFs9noAAAAJ"
     },
     "2MG9-NAAAAAJ": {
       "fullName": "Ahmed Abbasi",
-      "totalCitations": 12146,
+      "totalCitations": 12147,
       "institution": "Giovanini Endowed Chair Professor, University of Notre Dame",
       "scholarId": "2MG9-NAAAAAJ"
     },
@@ -4080,7 +4238,7 @@
     },
     "KXHdjLoAAAAJ": {
       "fullName": "Shomik Jain",
-      "totalCitations": 823,
+      "totalCitations": 824,
       "institution": "MIT IDSS PhD Candidate",
       "scholarId": "KXHdjLoAAAAJ"
     },
@@ -4092,19 +4250,25 @@
     },
     "sV61CtsAAAAJ": {
       "fullName": "Ashia C. Wilson",
-      "totalCitations": 4001,
+      "totalCitations": 4006,
       "institution": "Assistant Professor at MIT",
       "scholarId": "sV61CtsAAAAJ"
     },
+    "g13Vo5oAAAAJ": {
+      "fullName": "Dana Calacci",
+      "totalCitations": 1062,
+      "institution": "Assistant Professor, Pennsylvania State University",
+      "scholarId": "g13Vo5oAAAAJ"
+    },
     "RXlY6ssAAAAJ": {
       "fullName": "Linh Huynh",
-      "totalCitations": 98,
+      "totalCitations": 103,
       "institution": "Doctoral Student, Arizona State University",
       "scholarId": "RXlY6ssAAAAJ"
     },
     "NOxLJQUAAAAJ": {
       "fullName": "Danielle McNamara",
-      "totalCitations": 52428,
+      "totalCitations": 52469,
       "institution": "Arizona State University",
       "scholarId": "NOxLJQUAAAAJ"
     },
@@ -4116,7 +4280,7 @@
     },
     "JT9g8lAAAAAJ": {
       "fullName": "Babak Heydari",
-      "totalCitations": 2726,
+      "totalCitations": 2728,
       "institution": "Northeastern University, UC Berkeley",
       "scholarId": "JT9g8lAAAAAJ"
     },
@@ -4128,7 +4292,7 @@
     },
     "SG_wQm8AAAAJ": {
       "fullName": "Iveta Ludviga",
-      "totalCitations": 476,
+      "totalCitations": 479,
       "institution": "RISEBA University of applied sciences",
       "scholarId": "SG_wQm8AAAAJ"
     },
@@ -4152,7 +4316,7 @@
     },
     "6yf89q0AAAAJ": {
       "fullName": "Vassilis Digalakis Jr",
-      "totalCitations": 436,
+      "totalCitations": 437,
       "institution": "Assistant Professor of Operations & Technology Management, Boston University",
       "scholarId": "6yf89q0AAAAJ"
     },
@@ -4164,31 +4328,31 @@
     },
     "xvq0n50AAAAJ": {
       "fullName": "Jimin Mun",
-      "totalCitations": 320,
+      "totalCitations": 324,
       "institution": "PhD Student, Carnegie Mellon University (LTI)",
       "scholarId": "xvq0n50AAAAJ"
     },
     "-y6SIhQAAAAJ": {
       "fullName": "Mona Diab",
-      "totalCitations": 26845,
+      "totalCitations": 26856,
       "institution": "Professor & Director of Language Technologies Institute, Carnegie Mellon University, ACL Fellow",
       "scholarId": "-y6SIhQAAAAJ"
     },
     "gFN4QUYAAAAJ": {
       "fullName": "Maarten Sap",
-      "totalCitations": 19743,
+      "totalCitations": 19772,
       "institution": "Carnegie Mellon University",
       "scholarId": "gFN4QUYAAAAJ"
     },
     "bSUe-OgAAAAJ": {
       "fullName": "Katherine E Brown",
-      "totalCitations": 7140,
+      "totalCitations": 7148,
       "institution": "Professor of Behaviour Change in Health, University of Hertfordshire",
       "scholarId": "bSUe-OgAAAAJ"
     },
     "E0PiP4sAAAAJ": {
       "fullName": "Sharon E Davis (Edwards)",
-      "totalCitations": 3410,
+      "totalCitations": 3413,
       "institution": "Assistant Professor, Vanderbilt University Medical Center",
       "scholarId": "E0PiP4sAAAAJ"
     },
@@ -4206,31 +4370,31 @@
     },
     "5EqKofQAAAAJ": {
       "fullName": "DJ Albers",
-      "totalCitations": 6143,
+      "totalCitations": 6145,
       "institution": "University of Colorado and Columbia University",
       "scholarId": "5EqKofQAAAAJ"
     },
     "T8lxLMsAAAAJ": {
       "fullName": "Kenrick D Cato",
-      "totalCitations": 4409,
+      "totalCitations": 4418,
       "institution": "Professor Informatics and Nurse Scientist for Pediatric Data and Analytics",
       "scholarId": "T8lxLMsAAAAJ"
     },
     "Ln5Ksv0AAAAJ": {
       "fullName": "Anita Layton",
-      "totalCitations": 8802,
+      "totalCitations": 8808,
       "institution": "Canada 150 Research Chair in Mathematical Biology and Medicine, University of Waterloo",
       "scholarId": "Ln5Ksv0AAAAJ"
     },
     "Juvx9-EAAAAJ": {
       "fullName": "Mingchih Chen (陳銘芷)",
-      "totalCitations": 2675,
+      "totalCitations": 2676,
       "institution": "輔仁大學商學研究所",
       "scholarId": "Juvx9-EAAAAJ"
     },
     "fPq-0HgAAAAJ": {
       "fullName": "Yanna JIANG",
-      "totalCitations": 134,
+      "totalCitations": 138,
       "institution": "University of Technology Sydney",
       "scholarId": "fPq-0HgAAAAJ"
     },
@@ -4242,25 +4406,25 @@
     },
     "CxPxWKUAAAAJ": {
       "fullName": "Haiyu Deng",
-      "totalCitations": 58,
+      "totalCitations": 61,
       "institution": "School of Electrical and Data Engineering, University of Technology Sydney",
       "scholarId": "CxPxWKUAAAAJ"
     },
     "AfvXcVoAAAAJ": {
       "fullName": "Baihe Ma",
-      "totalCitations": 264,
+      "totalCitations": 272,
       "institution": "University of Technology Sydney",
       "scholarId": "AfvXcVoAAAAJ"
     },
     "7iR7PS8AAAAJ": {
       "fullName": "Xu Wang",
-      "totalCitations": 2409,
+      "totalCitations": 2420,
       "institution": "School of Electrical and Data Engineering, University of Technology Sydney",
       "scholarId": "7iR7PS8AAAAJ"
     },
     "6jdTO0cAAAAJ": {
       "fullName": "Qin WANG",
-      "totalCitations": 3911,
+      "totalCitations": 3914,
       "institution": "CSIRO Data61",
       "scholarId": "6jdTO0cAAAAJ"
     },
@@ -4278,7 +4442,7 @@
     },
     "7Z8pyxUAAAAJ": {
       "fullName": "Dr. Made Airanthi Kusuma Widjaja-Adhi",
-      "totalCitations": 1555,
+      "totalCitations": 1558,
       "institution": "Case Western Reserve University",
       "scholarId": "7Z8pyxUAAAAJ"
     },
@@ -4287,264 +4451,234 @@
       "totalCitations": 2,
       "institution": "PhD Researcher in Intelligent Simulations for Healthcare Training",
       "scholarId": "MqW_Rq4AAAAJ"
+    },
+    "9yFBqIgAAAAJ": {
+      "fullName": "Christoph Riedl",
+      "totalCitations": 4628,
+      "institution": "D'Amore-McKim School of Business & Khoury College of Computer Sciences, Northeastern University",
+      "scholarId": "9yFBqIgAAAAJ"
+    },
+    "GHGHYZAAAAAJ": {
+      "fullName": "Saiph Savage",
+      "totalCitations": 3874,
+      "institution": "Northeastern University & UNAM",
+      "scholarId": "GHGHYZAAAAAJ"
+    },
+    "LVpeXcQAAAAJ": {
+      "fullName": "Karthik Srikumar",
+      "totalCitations": 2,
+      "institution": "Researcher",
+      "scholarId": "LVpeXcQAAAAJ"
     }
   },
   "authorCitations": {
-    "Zihao Yi": 245,
-    "Zhe Xu": 343,
+    "Zihao Yi": 247,
+    "Zhe Xu": 344,
     "Haohao Luo": 369,
-    "Qiguang Chen": 2421,
-    "Xiachong Feng": 1397,
-    "Yang Wu": 780,
-    "Yongheng Zhang": 294,
-    "Zheng-Xin Yong": 8405,
-    "Beyza Ermiş": 1591,
-    "Marzieh Fadaee": 3969,
-    "Stephen H. Bach": 11792,
-    "Jiayuan Zhu": 927,
-    "Jiazhen Pan": 905,
-    "yuyuan liu": 1545,
-    "Fenglin Liu": 5098,
-    "Junde Wu": 4107,
+    "Qiguang Chen": 2432,
+    "Xiachong Feng": 1400,
+    "Yang Wu": 781,
+    "Yongheng Zhang": 296,
+    "Zheng-Xin Yong": 8414,
+    "Beyza Ermiş": 1595,
+    "Marzieh Fadaee": 3983,
+    "Stephen H. Bach": 11806,
+    "Jiayuan Zhu": 933,
+    "Jiazhen Pan": 907,
+    "yuyuan liu": 1548,
+    "Fenglin Liu": 5106,
+    "Junde Wu": 4127,
     "David Dinucu-Jianu": 56,
-    "Jakub Macina": 466,
-    "Nico Daheim": 745,
-    "Yubo Li": 89,
-    "Yidi Miao": 77,
-    "Xueying Ding": 679,
-    "Ramayya Krishnan": 11087,
-    "Erhu Feng": 308,
-    "Le Chen": 55,
-    "Dong Du（杜冬冬）": 1456,
-    "Kwan Ho Ryan Chan": 740,
-    "Yuyan Ge": 136,
-    "Edgar Dobriban": 5953,
-    "Hamed Hassani": 13787,
-    "Mark Dras": 4832,
-    "Usman Naseem": 5190,
-    "Sinead Williamson": 1545,
-    "Adam Goliński": 944,
-    "Ning Miao": 743,
-    "Chengming Xu": 1636,
-    "Jiangning Zhang (张江宁)": 6494,
-    "Mukai Li": 3428,
-    "Fengyuan Liu": 227,
-    "Xiang Liu": 971,
-    "Hong Chen": 121,
-    "Xuming Hu": 5068,
-    "Xiaowen Chu": 17386,
+    "Jakub Macina": 468,
+    "Nico Daheim": 747,
+    "Yubo Li": 90,
+    "Yidi Miao": 78,
+    "Xueying Ding": 681,
+    "Ramayya Krishnan": 11090,
+    "Erhu Feng": 309,
+    "Le Chen": 56,
+    "Dong Du（杜冬冬）": 1461,
+    "Kwan Ho Ryan Chan": 741,
+    "Yuyan Ge": 137,
+    "Edgar Dobriban": 5959,
+    "Hamed Hassani": 13808,
+    "zhenhe li": 2,
+    "Can Lin": 3,
+    "junli liang": 46,
+    "Mark Dras": 4833,
+    "Usman Naseem": 5197,
+    "Sinead Williamson": 1547,
+    "Adam Goliński": 949,
+    "Ning Miao": 744,
+    "Chengming Xu": 1644,
+    "Jiangning Zhang (张江宁)": 6561,
+    "Mukai Li": 3445,
+    "Fengyuan Liu": 232,
+    "Xiang Liu": 973,
+    "Hong Chen": 124,
+    "Xuming Hu": 5088,
+    "Xiaowen Chu": 17401,
     "Yuyang Jiang": 15,
     "Longjie Guo": 16,
     "Yuchen Wu": 480,
-    "Aylin Caliskan": 9575,
-    "Tanushree Mitra": 4274,
-    "Gian Maria Campedelli": 1429,
-    "Sara Rosenthal": 7964,
-    "Yannis Katsis": 2790,
+    "Aylin Caliskan": 9584,
+    "Tanushree Mitra": 4276,
+    "Gian Maria Campedelli": 1430,
+    "Sara Rosenthal": 7965,
+    "Yannis Katsis": 2794,
     "Vraj Shah": 202,
     "Lihong He": 202,
-    "Lucian Popa": 9731,
-    "Dongcheng Zhao": 1452,
-    "Guobin Shen": 874,
-    "Xiang He": 5911,
-    "feifei zhao": 836,
-    "zhenhe li": 2,
-    "Can Lin": 3,
-    "junli liang": 45,
+    "Lucian Popa": 9733,
+    "Dongcheng Zhao": 1460,
+    "Guobin Shen": 881,
+    "Xiang He": 5914,
+    "feifei zhao": 837,
     "XING LYU": 31,
     "Lezi Xie": 9,
-    "Bo Feng": 4896,
+    "Bo Feng": 4898,
     "yifan Yang": 69,
     "Xiaotian YU": 673,
-    "Rong Xiao": 4546,
+    "Rong Xiao": 4548,
     "Mohamad Salim": 1,
     "Jasmine Latendresse": 72,
     "Hassan Khatoonabadi": 121,
     "Mohamed SANA": 487,
     "Antonio De Domenico": 5365,
-    "Zhenyu Zhang": 1278,
+    "Zhenyu Zhang": 1280,
     "Yaxuan Wang": 223,
-    "Quan Liu": 1658,
-    "Zhenting Wang": 2210,
+    "Quan Liu": 1661,
+    "Zhenting Wang": 2226,
     "Zichao Li": 402,
     "Zhiwei Zhang": 679,
     "Xiaomin Li": 206,
     "Yudi Lin": 26,
-    "Hui Liu": 1116,
+    "Hui Liu": 1119,
     "Ramraj Chandradevan": 321,
     "Petteri Teikari, PhD": 840,
     "Jimeng Shi": 358,
-    "Bowen Jin": 3093,
-    "Wonbin Kweon": 496,
-    "SeongKu Kang": 1402,
+    "Bowen Jin": 3100,
+    "Wonbin Kweon": 502,
+    "SeongKu Kang": 1408,
     "Yupei Wang": 37,
     "Renfen Hu": 1263,
     "Mingmeng Geng": 125,
-    "Amr Mohamed": 13567,
-    "Guokan Shang": 572,
-    "Michalis Vazirgiannis": 24033,
+    "Amr Mohamed": 13573,
+    "Guokan Shang": 574,
+    "Michalis Vazirgiannis": 24045,
     "Earl Woodruff": 2432,
     "Jim Hewitt": 4786,
     "Shubham Kulkarni": 65,
-    "Alexander Lyzhov": 873,
+    "Alexander Lyzhov": 874,
     "Shiva Chaitanya": 63,
-    "Fanqi Kong": 32,
-    "Jiayi Zhang": 1235,
-    "Mingyi Deng": 6,
-    "Chenglin Wu": 4186,
-    "Yuyu Luo": 4643,
-    "Kirk Vanacore": 208,
-    "Ryan Baker": 40756,
+    "Kirk Vanacore": 209,
+    "Ryan Baker": 40779,
     "Avery Harrison Closser": 380,
+    "Fanqi Kong": 32,
+    "Jiayi Zhang": 1238,
+    "Mingyi Deng": 6,
+    "Chenglin Wu": 4199,
+    "Yuyu Luo": 4654,
     "Shouang Wei（魏首昂）": 20,
-    "Min Zhang": 1133,
-    "Xin Lin": 3016,
-    "Bo Jiang（江波）": 1222,
+    "Min Zhang": 1142,
+    "Xin Lin": 3025,
+    "Bo Jiang（江波）": 1225,
     "Junda Wang": 410,
-    "Zonghai Yao": 859,
-    "Zhichao Yang": 1223,
-    "hong yu": 15368,
+    "Zonghai Yao": 861,
+    "Zhichao Yang": 1225,
+    "hong yu": 15382,
     "Linzhuang Sun": 623,
-    "Tianyu Guo": 3818,
-    "Hao Liang": 695,
+    "Tianyu Guo": 3824,
+    "Hao Liang": 697,
     "Jingxuan Wei": 373,
     "Viet Cuong Nguyen": 83,
-    "Amin Rakhsha": 296,
+    "Amin Rakhsha": 297,
     "Thomas Hehn": 198,
-    "Pietro Mazzaglia": 503,
+    "Pietro Mazzaglia": 504,
     "Fabio Valerio Massoli": 9020,
     "Weikang Yuan": 134,
-    "Kaisong Song": 992,
-    "Zhuoren Jiang": 1427,
-    "junjie cao": 138,
-    "Jun Lin": 337,
+    "Kaisong Song": 995,
+    "Zhuoren Jiang": 1428,
+    "junjie cao": 139,
+    "Jun Lin": 339,
     "Nicole Summer Hsing": 2,
     "Deyu Zou": 41,
     "Nian Ran": 19,
-    "Yongqiang Chen": 1103,
-    "Mufei Li": 3677,
+    "Yongqiang Chen": 1108,
+    "Mufei Li": 3687,
     "Aline Rodrigheri Ioste": 7,
     "Sarajane Marques Peres": 1851,
-    "Gunnar Stevens": 5380,
-    "Delong Korus-Du": 150,
-    "Alexander Boden": 2234,
-    "Peter Tolmie": 6522,
-    "Cheng Xueqi": 38463,
-    "Tyler Derr": 4698,
-    "Yushun Dong": 2205,
-    "John Lalor": 1073,
-    "Nicolas PRAT": 2065,
-    "Ahmed Abbasi": 12146,
+    "Gunnar Stevens": 5383,
+    "Delong Korus-Du": 152,
+    "Alexander Boden": 2235,
+    "Peter Tolmie": 6521,
+    "Cheng Xueqi": 38502,
+    "Tyler Derr": 4705,
+    "Yushun Dong": 2212,
+    "John Lalor": 1078,
+    "Nicolas PRAT": 2066,
+    "Ahmed Abbasi": 12147,
     "Xiaobin Shen": 73,
     "Xinyu Yao": 85,
-    "Shomik Jain": 823,
+    "Shomik Jain": 824,
     "Charlotte Park": 11,
-    "Ashia C. Wilson": 4001,
-    "Linh Huynh": 98,
-    "Danielle McNamara": 52428,
+    "Ashia C. Wilson": 4006,
+    "Dana Calacci": 1062,
+    "Linh Huynh": 103,
+    "Danielle McNamara": 52469,
     "Nunzio Lorè": 159,
-    "Babak Heydari": 2726,
+    "Babak Heydari": 2728,
     "Dmitrii Gimmelberg": 14,
-    "Iveta Ludviga": 476,
+    "Iveta Ludviga": 479,
     "Samantha Dies": 3,
     "Courtney Maynard": 1,
     "Germans Savcisens": 130,
-    "Vassilis Digalakis Jr": 436,
+    "Vassilis Digalakis Jr": 437,
     "Kshitish Ghate": 211,
-    "Jimin Mun": 320,
-    "Mona Diab": 26845,
-    "Maarten Sap": 19743,
-    "Katherine E Brown": 7140,
-    "Sharon E Davis (Edwards)": 3410,
+    "Jimin Mun": 324,
+    "Mona Diab": 26856,
+    "Maarten Sap": 19772,
+    "Katherine E Brown": 7148,
+    "Sharon E Davis (Edwards)": 3413,
     "Thangadurai Anbazhagan": 6,
     "Dr.Balamurugan Rangaswamy": 228,
-    "DJ Albers": 6143,
-    "Kenrick D Cato": 4409,
-    "Anita Layton": 8802,
-    "Mingchih Chen (陳銘芷)": 2675,
-    "Yanna JIANG": 134,
+    "DJ Albers": 6145,
+    "Kenrick D Cato": 4418,
+    "Anita Layton": 8808,
+    "Mingchih Chen (陳銘芷)": 2676,
+    "Yanna JIANG": 138,
     "DELONG LI": 1,
-    "Haiyu Deng": 58,
-    "Baihe Ma": 264,
-    "Xu Wang": 2409,
-    "Qin WANG": 3911,
+    "Haiyu Deng": 61,
+    "Baihe Ma": 272,
+    "Xu Wang": 2420,
+    "Qin WANG": 3914,
     "Jordan Smith": 3,
     "Matthew T McPheeters": 257,
-    "Dr. Made Airanthi Kusuma Widjaja-Adhi": 1555,
-    "David Dasa": 2
+    "Dr. Made Airanthi Kusuma Widjaja-Adhi": 1558,
+    "David Dasa": 2,
+    "Christoph Riedl": 4628,
+    "Saiph Savage": 3874,
+    "Karthik Srikumar": 2
   },
   "geoData": {
-    "4_0": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "4_1": {
-      "country": "United States",
-      "institution": "Stanford University"
-    },
-    "4_2": {
-      "country": "United States",
-      "institution": "Mayo Clinic"
-    },
-    "6_0": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
-    "5_0": {
-      "country": "United States",
-      "institution": "Northeastern University"
-    },
-    "5_1": {
-      "country": "United States",
-      "institution": "University of Southern California"
-    },
-    "2_0": {
-      "country": "United States",
-      "institution": "University of Mississippi Medical Center"
-    },
-    "2_1": {
-      "country": "China",
-      "institution": "Peking University"
-    },
-    "2_2": {
-      "country": "India",
-      "institution": "Anna University"
-    },
-    "2_3": {
-      "country": "China",
-      "institution": "Peking University"
-    },
-    "2_4": {
-      "country": "United States",
-      "institution": "Columbia University"
-    },
-    "2_5": {
-      "country": "China",
-      "institution": "Sun Yat-sen University"
-    },
-    "2_6": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
-    },
     "0_0": {
       "country": "China",
-      "institution": "Harbin Institute of Technology"
+      "institution": "Sun Yat-Sen University, Tencent Hunyuan"
     },
     "0_1": {
       "country": "China",
       "institution": "Harbin Institute of Technology"
     },
     "0_2": {
+      "country": "United States",
+      "institution": "Brown University"
+    },
+    "0_3": {
       "country": "United Kingdom",
       "institution": "University of Oxford"
     },
-    "0_3": {
-      "country": "China",
-      "institution": "Fudan University"
-    },
     "0_4": {
-      "country": "Germany",
-      "institution": "Heidelberg University"
+      "country": "Switzerland",
+      "institution": "ETH Zurich"
     },
     "0_5": {
       "country": "United States",
@@ -4552,221 +4686,185 @@
     },
     "0_6": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "SHANG HAI JIAO TONG UNIVERSITY"
     },
     "0_7": {
       "country": "United States",
       "institution": "University of Pennsylvania"
     },
     "0_8": {
+      "country": "China",
+      "institution": "University of Science and Technology of China"
+    },
+    "0_9": {
       "country": "Australia",
       "institution": "Macquarie University"
     },
-    "0_9": {
-      "country": "United Kingdom",
-      "institution": "University of Cambridge"
-    },
     "0_10": {
-      "country": "China",
-      "institution": "Zhejiang University"
+      "country": "United States",
+      "institution": "Apple Machine Learning Research"
     },
     "0_11": {
       "country": "China",
-      "institution": "Fudan University"
+      "institution": "Tencent"
     },
     "0_12": {
       "country": "China",
-      "institution": "Huazhong University of Science and Technology"
+      "institution": "The University of Hong Kong"
     },
     "0_13": {
-      "country": "United States",
-      "institution": "University of Washington"
+      "country": "China",
+      "institution": "HKUST(GZ)"
     },
     "0_14": {
       "country": "United States",
-      "institution": "Northeastern University"
+      "institution": "University of Chicago"
     },
     "0_15": {
-      "country": "China",
-      "institution": "Meituan"
+      "country": "Italy",
+      "institution": "University of Trento & Fondazione Bruno Kessler"
     },
-    "0_16": {
+    "0_17": {
       "country": "United States",
       "institution": "IBM Research"
     },
-    "0_17": {
-      "country": "China",
-      "institution": "Harbin Institute of Technology"
-    },
     "0_18": {
       "country": "China",
-      "institution": "Renmin University of China"
+      "institution": "CAS Center for Excellence in Brain Science and Intelligence Technology"
     },
     "0_19": {
       "country": "China",
-      "institution": "Peking University"
-    },
-    "0_20": {
-      "country": "China",
-      "institution": "Shanghai Jiao Tong University"
+      "institution": "Renmin University of China"
     },
     "0_21": {
-      "country": "United States",
-      "institution": "Microsoft Research"
+      "country": "France",
+      "institution": "Telecom ParisTech"
     },
     "0_22": {
-      "country": "France",
-      "institution": "Huawei Technologies France"
+      "country": "Canada",
+      "institution": "Concordia University"
     },
     "0_23": {
       "country": "China",
-      "institution": "Beijing Jiaotong University"
+      "institution": "Research Engineer, Ph.D. | Huawei Technologies France"
     },
     "0_24": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Beijing Institute of Technology"
     },
     "0_25": {
-      "country": "China",
-      "institution": "Tsinghua University"
+      "country": "United States",
+      "institution": "University of California, Santa Curz"
     },
     "0_26": {
-      "country": "Finland",
-      "institution": "Aalto University"
+      "country": "United States",
+      "institution": "Pennsylvania State University"
     },
     "0_27": {
-      "country": "South Korea",
-      "institution": "KAIST"
+      "country": "United Kingdom",
+      "institution": "University College of London"
     },
     "0_28": {
-      "country": "China",
-      "institution": "National Taiwan University"
+      "country": "United States",
+      "institution": "University of Illinois Urbana-Champaign"
     },
     "0_29": {
-      "country": "France",
-      "institution": "École Polytechnique"
+      "country": "",
+      "institution": ""
     },
     "0_30": {
+      "country": "France",
+      "institution": "ENS-PSL & CNRS-LATTICE"
+    },
+    "0_31": {
       "country": "Canada",
       "institution": "University of Toronto"
     },
-    "0_31": {
-      "country": "India",
-      "institution": "IIT Bombay"
-    },
     "0_32": {
-      "country": "China",
-      "institution": "Tsinghua University"
+      "country": "India",
+      "institution": "IIITH"
     },
     "0_33": {
       "country": "United States",
-      "institution": "University of Pennsylvania"
+      "institution": "Cornell University"
     },
     "0_34": {
       "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Peking University"
     },
     "0_35": {
       "country": "China",
-      "institution": "Zhejiang University"
+      "institution": "ECNU"
     },
     "0_36": {
-      "country": "China",
-      "institution": "Alibaba Group"
+      "country": "United States",
+      "institution": "University of Massachusetts Amherst"
     },
     "0_37": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "country": "China",
+      "institution": "University of Chinese Academy of Sciences"
     },
     "0_38": {
       "country": "United States",
-      "institution": "Arizona State University"
+      "institution": "Carnegie Mellon University"
     },
     "0_39": {
       "country": "United States",
-      "institution": "University of Southern California"
+      "institution": "Georgia Institute of Technology"
     },
     "0_40": {
+      "country": "Canada",
+      "institution": "University of Toronto and Vector Institute"
+    },
+    "0_41": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
-    "0_41": {
-      "country": "China",
-      "institution": "Peking University"
-    },
     "0_42": {
-      "country": "United States",
-      "institution": "Stanford University"
-    },
-    "0_43": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "0_44": {
-      "country": "China",
-      "institution": "Harbin Institute of Technology"
-    },
-    "0_45": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "0_46": {
       "country": "China",
       "institution": "Zhejiang University"
     },
-    "0_47": {
-      "country": "Brazil",
-      "institution": "University of Sao Paulo"
+    "0_43": {
+      "country": "",
+      "institution": "Arcarae"
+    },
+    "0_44": {
+      "country": "China",
+      "institution": "The Chinese University of Hong Kong"
+    },
+    "0_45": {
+      "country": "United Kingdom",
+      "institution": "University of Manchester"
+    },
+    "0_46": {
+      "country": "China",
+      "institution": "The Chinese University of Hong Kong"
     },
     "0_48": {
-      "country": "China",
-      "institution": "Beijing University of Posts and Telecommunications"
-    },
-    "0_49": {
-      "country": "India",
-      "institution": "Indian Institute of Technology Madras"
+      "country": "",
+      "institution": "AI Specialist"
     },
     "0_50": {
+      "country": "United States",
+      "institution": "Boston University"
+    },
+    "0_51": {
       "country": "Germany",
       "institution": "University of Siegen"
     },
-    "0_51": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "0_52": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
     "0_53": {
-      "country": "India",
-      "institution": "Indian Institute of Management Bangalore"
-    },
-    "0_54": {
       "country": "United States",
-      "institution": "University of California, Los Angeles"
-    },
-    "0_55": {
-      "country": "China",
-      "institution": "Tsinghua University"
+      "institution": "Umass Amherst"
     },
     "0_56": {
-      "country": "United States",
-      "institution": "Harvard Medical School"
+      "country": "China",
+      "institution": "Chinese Academy of Sciences"
     },
     "0_57": {
-      "country": "China",
-      "institution": "Sun Yat-sen University"
+      "country": "Jordan",
+      "institution": "Jordan High School"
     },
-    "0_58": {
-      "country": "China",
-      "institution": "Peking University"
-    },
-    "0_59": {
-      "country": "China",
-      "institution": "Tsinghua University"
-    },
-    "0_60": {
+    "0_61": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
@@ -4776,19 +4874,19 @@
     },
     "1_1": {
       "country": "United States",
-      "institution": "University of California, Berkeley"
+      "institution": "MIT IDSS PhD Candidate"
     },
     "1_2": {
       "country": "United States",
-      "institution": "Northeastern University"
+      "institution": "Arizona State University"
     },
     "1_3": {
-      "country": "Sweden",
-      "institution": "Stockholm School of Economics"
+      "country": "United States",
+      "institution": "Northeastern University"
     },
     "1_4": {
-      "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "country": "",
+      "institution": "RISEBA University of applied sciences"
     },
     "1_5": {
       "country": "United States",
@@ -4796,21 +4894,37 @@
     },
     "1_6": {
       "country": "United States",
-      "institution": "Georgia Institute of Technology"
-    },
-    "1_7": {
-      "country": "Denmark",
-      "institution": "Technical University of Denmark"
+      "institution": "Carnegie Mellon University"
     },
     "1_8": {
       "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "institution": "Northeastern University"
     },
     "1_9": {
       "country": "United States",
-      "institution": "Carnegie Mellon University"
+      "institution": "Boston University"
     },
     "1_10": {
+      "country": "United States",
+      "institution": "Carnegie Mellon University"
+    },
+    "1_11": {
+      "country": "United States",
+      "institution": "University of Washington"
+    },
+    "2_0": {
+      "country": "United Kingdom",
+      "institution": "University of Hertfordshire"
+    },
+    "2_2": {
+      "country": "India",
+      "institution": "K.S.Rangasamy College of Technology"
+    },
+    "2_4": {
+      "country": "United States",
+      "institution": "University of Colorado and Columbia University"
+    },
+    "2_6": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
@@ -4819,8 +4933,8 @@
       "institution": "Carnegie Mellon University"
     },
     "3_1": {
-      "country": "China",
-      "institution": "National Taiwan University Hospital"
+      "country": "",
+      "institution": "輔仁大學商學研究所"
     },
     "3_2": {
       "country": "United States",
@@ -4830,68 +4944,95 @@
       "country": "United States",
       "institution": "Carnegie Mellon University"
     },
-    "1_11": {
+    "4_0": {
+      "country": "Australia",
+      "institution": "University of Technology Sydney"
+    },
+    "4_1": {
+      "country": "United States",
+      "institution": "Case Western Reserve University"
+    },
+    "4_3": {
+      "country": "",
+      "institution": "PhD Researcher in Intelligent Simulations for Healthcare Training"
+    },
+    "5_0": {
+      "country": "United States",
+      "institution": "Northeastern University"
+    },
+    "5_1": {
+      "country": "",
+      "institution": "Researcher"
+    },
+    "6_0": {
       "country": "United States",
       "institution": "Carnegie Mellon University"
+    },
+    "0_16": {
+      "country": "China",
+      "institution": "Meituan"
+    },
+    "0_20": {
+      "country": "China",
+      "institution": "Zhejiang University"
+    },
+    "0_47": {
+      "country": "United States",
+      "institution": "Google Scholar"
+    },
+    "0_54": {
+      "country": "United States",
+      "institution": "USA"
+    },
+    "0_55": {
+      "country": "United States",
+      "institution": "Go to UIUC Spring 2025 CS598 LLM Agent Workshop homepage"
+    },
+    "0_59": {
+      "country": "United States",
+      "institution": "maintaining multi-turn fidelity while reducing memory."
+    },
+    "1_7": {
+      "country": "United States",
+      "institution": "Google Sc"
+    },
+    "2_1": {
+      "country": "United States",
+      "institution": "Access provided by Carnegie Mellon University"
+    },
+    "0_49": {
+      "country": "China",
+      "institution": "Beijing University of Posts and Telecommunications"
+    },
+    "0_52": {
+      "country": "China",
+      "institution": "Unknown"
+    },
+    "0_58": {
+      "country": "China",
+      "institution": "Peking University"
+    },
+    "0_60": {
+      "country": "China",
+      "institution": "Unknown"
+    },
+    "2_3": {
+      "country": "China",
+      "institution": "Unknown"
+    },
+    "2_5": {
+      "country": "China",
+      "institution": "Unknown"
+    },
+    "2_7": {
+      "country": "India",
+      "institution": "Unknown"
+    },
+    "4_2": {
+      "country": "China",
+      "institution": "Unknown"
     }
   },
-  "themes": {
-    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": {
-      "theme": "Healthcare",
-      "color": "#6366f1"
-    },
-    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": {
-      "theme": "Healthcare",
-      "color": "#6366f1"
-    },
-    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": {
-      "theme": "Healthcare",
-      "color": "#6366f1"
-    },
-    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": {
-      "theme": "Healthcare",
-      "color": "#6366f1"
-    },
-    "Beyond single-turn: A survey on multi-turn interactions with large language models": {
-      "theme": "Natural Language Processing",
-      "color": "#a855f7"
-    },
-    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": {
-      "theme": "Natural Language Processing",
-      "color": "#a855f7"
-    },
-    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": {
-      "theme": "Cybersecurity",
-      "color": "#06b6d4"
-    },
-    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": {
-      "theme": "Cybersecurity",
-      "color": "#06b6d4"
-    },
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": {
-      "theme": "Artificial Intelligence",
-      "color": "#22c55e"
-    },
-    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": {
-      "theme": "Artificial Intelligence",
-      "color": "#22c55e"
-    },
-    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": {
-      "theme": "Artificial Intelligence",
-      "color": "#22c55e"
-    }
-  },
-  "summaries": {
-    "No Black Box Anymore: Demystifying Clinical Predictive Modeling with Temporal-Feature Cross Attention Mechanism": "This paper likely proposes an interpretable clinical prediction framework using a temporal-feature cross-attention mechanism to reveal how patient variables and their timing jointly drive model predictions.",
-    "SkillsBench: Benchmarking how well agent skills work across diverse tasks": "This paper likely introduces SkillsBench, a benchmark for systematically evaluating how effectively reusable agent skills generalize and perform across a wide range of tasks and environments.",
-    "Consistency of Large Reasoning Models Under Multi-Turn Attacks": "This paper likely studies whether large reasoning models maintain stable answers and behavior when subjected to adversarial manipulations over multiple conversational turns.",
-    "Time-To-Inconsistency: A Survival Analysis of Large Language Model Robustness to Adversarial Attacks": "This paper likely applies survival analysis to measure how long large language models remain robust before becoming inconsistent or vulnerable under repeated adversarial attacks.",
-    "Chain-of-Influence: Tracing Interdependencies Across Time and Features in Clinical Predictive Modelings": "This paper likely presents a method for tracing how clinical features influence one another over time in predictive models, improving interpretability of longitudinal healthcare predictions.",
-    "Co-Alignment: Rethinking Alignment as Bidirectional Human-AI Cognitive Adaptation": "This paper likely argues that AI alignment should be viewed as a two-way process in which both humans and AI systems adapt to each other's cognitive patterns and goals.",
-    "Enhancing End-Stage Renal Disease Outcome Prediction: A Multisourced Data-Driven Approach": "This paper likely develops a predictive model for end-stage renal disease outcomes by integrating multiple data sources to improve accuracy and clinical usefulness.",
-    "Beyond single-turn: A survey on multi-turn interactions with large language models": "This paper likely surveys research on multi-turn interactions with large language models, covering dialogue dynamics, memory, planning, evaluation, and emerging challenges beyond single-turn prompting.",
-    "Firm or Fickle? Evaluating Large Language Models Consistency in Sequential Interactions": "This paper likely evaluates whether large language models remain consistent in their responses, preferences, or reasoning across sequential conversational interactions.",
-    "Towards Interpretable End-Stage Renal Disease (ESRD) Prediction: Utilizing Administrative Claims Data with Explainable AI Techniques": "This paper likely explores explainable AI methods for predicting end-stage renal disease from administrative claims data, with an emphasis on making risk predictions more interpretable for healthcare use.",
-    "Confidence as Control: A Survey of Confidence Utilization in Large Language Models": "This paper likely surveys how confidence estimates are represented and used in large language models for tasks such as calibration, decision-making, control, and uncertainty-aware interaction."
-  }
+  "themes": {},
+  "summaries": {}
 }
